@@ -25,21 +25,21 @@ function BookList() {
   }
   console.log(log)
 
-  // return (
-  //   <div>
-  //     {/* <Search /> */}
-  //     <div className={styles.book_list}>
-  //       {loading ? (
-  //         <Skeleton />
-  //       ) : (
-  //         books &&
-  //         books.results &&
-  //         books.results.map((book, index) => <BookCard key={`${book.pk}-${index}`} book={book} />)
-  //       )}
-        // <Pagination />
-  //     </div>
-  //   </div>
-  // );
+  return (
+    <div>
+      {/* <Search /> */}
+      <div className={styles.book_list}>
+        {loading ? (
+          <Skeleton />
+        ) : (
+          books &&
+          books.results &&
+          books.results.map((book, index) => <BookCard key={`${book.pk}-${index}`} book={book} />)
+        )}
+        <Pagination />
+      </div>
+    </div>
+  );
 }
 
 export default BookList;

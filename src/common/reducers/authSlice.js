@@ -70,13 +70,6 @@ export const fetchVerify = createAsyncThunk(
   }
 );
 
-
-const authExtraReducers = generateExtraReducers(
-    [fetchLogin.pending],
-    [fetchLogin.fulfilled],
-    [fetchLogin.rejected],
-  );
-
 const authSlice = createSlice({
   name: "auth",
   initialState: {
@@ -88,7 +81,19 @@ const authSlice = createSlice({
       state.error = action.payload;
     },
   },
-  extraReducers: generateExtraReducersFromActions(fetchLogin),
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchLogin.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(fetchLogin.fulfilled, (state) => {
+        state.loading = false;
+      })
+      .addCase(fetchLogin.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message;
+      });
+  },
 });
 
 export const { setError } = authSlice.actions;
