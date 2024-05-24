@@ -1,0 +1,16 @@
+.pagination {
+
+    display: flex;
+    position: absolute;
+
+    right: 0px;
+
+    margin-right: 10px;
+}
+
+button {
+    width: 40px;
+    padding: 5px;
+    margin: 0 10px 0 0;
+    font-weight: 900;
+}
