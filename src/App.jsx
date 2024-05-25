@@ -10,6 +10,8 @@ import Login from "./pages/auth/login/Login"; // Вход
 // import ChangePass from "./pages/auth/changepass/ChangePass"; // Смена пароля
 // import ForgotPass from "./pages/auth/forgotpass/ForgotPass"; // Забыл пароля
 
+
+// new 
 function App() {
 
   return (
@@ -18,7 +20,7 @@ function App() {
         {/* <BookList /> */}
         {/* <BookRetrieve /> */}
         {/* <BookmarkList /> */}
-        
+
         <Login />
       </div>
       {/* <Navigation /> */}
