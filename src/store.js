@@ -1,8 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit';
-import booksReducer from './pages/books/booksSlice';
-import bookRetrieveReducer from './pages/book-retrieve/bookRetrieveSlice';
-import paginationReducer from './common/components/pagination/paginationSlice';
-import bookmarkListReducer from './pages/bookmark-list/bookmarkListSlice'
+import booksReducer from './common/reducers/booksSlice';
+import bookRetrieveReducer from './common/reducers/bookRetrieveSlice';
+import paginationReducer from './common/reducers/paginationSlice';
+import bookmarkListReducer from './common/reducers/bookmarkListSlice';
 import authSlice from './common/reducers/authSlice';
 
 export const store = configureStore({
