@@ -68,6 +68,7 @@ export const fetchVerify = createAsyncThunk(
 const authSlice = createSlice({
   name: "auth",
   initialState: {
+    isAuth: false,
     loading: false,
     error: null,
   },
@@ -75,6 +76,9 @@ const authSlice = createSlice({
     setError: (state, action) => {
       state.error = action.payload;
     },
+    setIsAuth: (state, action) => {
+      state.isAuth = action.payload;
+    }
   },
   extraReducers: (builder) => {
     builder
@@ -92,5 +96,5 @@ const authSlice = createSlice({
   },
 });
 
-export const { setError } = authSlice.actions;
+export const { setError, setIsAuth } = authSlice.actions;
 export default authSlice.reducer;

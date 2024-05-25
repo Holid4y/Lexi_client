@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 const Login = () => {
   const dispatch = useDispatch();
-  const { loading, error} = useSelector((state) => state.auth);
+  const { isAuth, loading, error } = useSelector((state) => state.auth);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
@@ -15,6 +15,7 @@ const Login = () => {
 
   };
   const log = {
+    'isAuth': isAuth,
     'loading': loading, 
     'error': error,
   }

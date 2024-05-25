@@ -3,7 +3,7 @@ import { host, bookmarks } from "../../../public/urls";
 import { headers } from "../../../public/urls";
 
 export const fetchUser = createAsyncThunk(
-  "bookmarks/fetchBookmarks",
+  "user/fetchUser",
   async (_, { dispatch }) => {
     const url = new URL(host + bookmarks);
 
@@ -31,27 +31,26 @@ const userSlice = createSlice({
   name: "user",
   initialState: {
     user: null,
+    loading: false,
     error: null
   },
   reducers: {
-    bookmarkLoaded: (state, action) => {
-      state.bookmarks = action.payload;
-    },
+    
   },
   extraReducers: (builder) => {
     builder
-      .addCase(fetchBookmarks.pending, (state) => {
+      .addCase(fetchUser.pending, (state) => {
         state.loading = true;
       })
-      .addCase(fetchBookmarks.fulfilled, (state) => {
+      .addCase(fetchUser.fulfilled, (state) => {
         state.loading = false;
       })
-      .addCase(fetchBookmarks.rejected, (state, action) => {
+      .addCase(fetchUser.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;
       });
   },
 });
 
-export const { bookmarkLoaded } = userSlice.actions;
+export const {  } = userSlice.actions;
 export default userSlice.reducer;
