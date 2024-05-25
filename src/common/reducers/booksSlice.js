@@ -1,7 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { host, books } from "../../../public/urls";
 import { headers } from "../../../public/urls";
-import { generateExtraReducersFromActions } from "../../common/reducers/extraReducer";
 
 export const fetchBooks = createAsyncThunk(
   "books/fetchBooks",

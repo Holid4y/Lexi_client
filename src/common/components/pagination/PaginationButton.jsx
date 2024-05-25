@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { incrementPage, decrementPage } from "./paginationSlice";
+import { incrementPage, decrementPage } from "../../reducers/paginationSlice";
 import styles from "./styles.module.css";
 
 

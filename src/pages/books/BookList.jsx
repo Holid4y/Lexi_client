@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { fetchBooks } from "./booksSlice";
+import { fetchBooks } from "../../common/reducers/booksSlice.js";
 import styles from "./styles.module.css";
 import Pagination from "../../common/components/pagination/PaginationButton.jsx";
 import Search from "../../common/components/search/Search.jsx";
@@ -36,7 +36,7 @@ function BookList() {
           books.results &&
           books.results.map((book, index) => <BookCard key={`${book.pk}-${index}`} book={book} />)
         )}
-        <Pagination />
+        {/* <Pagination /> */}
       </div>
     </div>
   );

@@ -1,7 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { host, login, refresh, verify } from "../../../public/urls";
 import { headers } from "../../../public/urls";
-import { generateExtraReducers, generateExtraReducersFromActions } from "./extraReducer";
 
 export const fetchLogin = createAsyncThunk(
   "auth/fetchLogin",

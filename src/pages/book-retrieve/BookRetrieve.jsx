@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchBook } from "./bookRetrieveSlice";
+import { fetchBook } from "../../common/reducers/bookRetrieveSlice";
 
 
 function BookRetrieve() {
