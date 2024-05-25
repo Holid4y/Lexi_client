@@ -10,15 +10,17 @@ import Login from "./pages/auth/login/Login"; // Вход
 // import ChangePass from "./pages/auth/changepass/ChangePass"; // Смена пароля
 // import ForgotPass from "./pages/auth/forgotpass/ForgotPass"; // Забыл пароля
 
-
-// new 
 function App() {
 
   return (
     <>
       <div>
         <span>hello</span>
-        <form action="get">ff</form>
+        <form action="get">
+            {/* тут будет бесполезная форма
+            qwewqeqwe
+             */}
+        </form>
 
         {/* <BookList /> */}
         {/* <BookRetrieve /> */}
