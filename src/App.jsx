@@ -10,8 +10,6 @@ import Login from "./pages/auth/login/Login"; // Вход
 // import ChangePass from "./pages/auth/changepass/ChangePass"; // Смена пароля
 // import ForgotPass from "./pages/auth/forgotpass/ForgotPass"; // Забыл пароля
 
-
-// new 
 function App() {
 
   return (
@@ -19,7 +17,9 @@ function App() {
       <div>
         <span>hello</span>
         <form action="get">
-            {/* тут будет бесполезная форма */}
+            {/* тут будет бесполезная форма
+            qwewqeqwe
+             */}
         </form>
 
         {/* <BookList /> */}
