@@ -1,32 +1,32 @@
-import Navigation from "./common/components/navigation/Navigation";
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 // Главная страница
 import Home from "./pages/home/Home";
 
+// Авторизация
+import Login from "./pages/auth/login/Login"; // Вход
+
+// Книги
 import BookList from "./pages/books/BookList";
 import BookRetrieve from "./pages/book-retrieve/BookRetrieve";
 import BookmarkList from "./pages/bookmark-list/BookmarkList";
 
-// Авторизация
-import Login from "./pages/auth/login/Login"; // Вход
-// import Register from "./pages/auth/register/Register"; // Регистрация
-// import ChangePass from "./pages/auth/changepass/ChangePass"; // Смена пароля
-// import ForgotPass from "./pages/auth/forgotpass/ForgotPass"; // Забыл пароля
-
 function App() {
-
   return (
-    <>
-      <div>
-        <Home />
-        {/* <BookList /> */}
-        {/* <BookRetrieve /> */}
-        {/* <BookmarkList /> */}
-
-        {/* <Login /> */}
-      </div>
-      <Navigation />
-    </>
+    <Router>
+      <>
+        <div>
+          <Routes>
+            <Route exact path="/" element={<Home />} />
+            <Route path="/books" element={<BookList />} />
+            <Route path="/book/:id" element={<BookRetrieve />} />
+            <Route path="/bookmarks" element={<BookmarkList />} />
+            <Route path="/login" element={<Login />} />
+            {/* Другие маршруты */}
+          </Routes>
+        </div>
+      </>
+    </Router>
   );
 }
 

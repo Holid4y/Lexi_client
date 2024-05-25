@@ -13,6 +13,14 @@ body {
     height: 100%;
     margin: 0;
 }
+html{
+    scrollbar-width: none;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+html > html::-webkit-scrollbar {
+    display: none;
+}
 
 .body-auth{
     height: 100vh;

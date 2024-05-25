@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
+import Navigation from "../../common/components/navigation/Navigation"
 
 function Home() {
   return (
     <div class="align-items-center">
+
         <div class="container navbar-blur sticky-top mb-4 pt-4">
             <div class="row row-cols-7 g-2">
                 <div class="block_week col bg-danger"><span>пн</span></div>
@@ -14,8 +16,8 @@ function Home() {
                 <div class="block_week col"><span>вс</span></div>
             </div>
         </div>
-        <main class="container px-4">
 
+        <main class="container px-4">
             <a href="#">
                 <div class="card text-end mb-4 w-100 bg-card-dark">
                     <div class="card-body">
@@ -66,6 +68,7 @@ function Home() {
                 </div>
             </div>
         </main>
+        <Navigation />
     </div>
   );
 }
