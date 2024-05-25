@@ -18,7 +18,7 @@ function App() {
     <>
       <div>
         <span>hello</span>
-        <form action="post">ff</form>
+        <form action="get">ff</form>
 
         {/* <BookList /> */}
         {/* <BookRetrieve /> */}
