@@ -1,5 +1,8 @@
 import Navigation from "./common/components/navigation/Navigation";
 
+// Главная страница
+import Home from "./pages/home/Home";
+
 import BookList from "./pages/books/BookList";
 import BookRetrieve from "./pages/book-retrieve/BookRetrieve";
 import BookmarkList from "./pages/bookmark-list/BookmarkList";
@@ -15,7 +18,8 @@ function App() {
   return (
     <>
       <div>
-        <BookList />
+        <Home />
+        {/* <BookList /> */}
         {/* <BookRetrieve /> */}
         {/* <BookmarkList /> */}
 
