@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { fetchBooks } from "../../common/reducers/booksSlice.js";
 import Pagination from "../../common/components/pagination/PaginationButton.jsx";
-import Search from "../../common/components/search/Search.jsx";
 import BookCard from "./components/book-card/BookCard.jsx";
 import Skeleton from "./components/skeleton/Skeleton.jsx";
 
@@ -26,17 +25,18 @@ function BookList() {
 
   return (
     <div>
-      {/* <Search /> */}
-      <div>
-        {loading ? (
-          <Skeleton />
-        ) : (
-          books &&
-          books.results &&
-          books.results.map((book, index) => <BookCard key={`${book.pk}-${index}`} book={book} />)
-        )}
-        {/* <Pagination /> */}
+      <div class="container sticky-top mb-4 pt-2">
+          <nav class="navbar dark-nav p-2">
+              <form class="d-flex w-100" role="search">
+                  <input class="form-control w-100" type="search" placeholder="Search" aria-label="Search" />
+              </form>
+          </nav>
       </div>
+      <main class="container px-4">
+        {loading ? ( <Skeleton /> ) : (
+          books && books.results && books.results.map((book, index) => <BookCard key={`${book.pk}-${index}`} book={book} />)
+        )}
+      </main>
     </div>
   );
 }

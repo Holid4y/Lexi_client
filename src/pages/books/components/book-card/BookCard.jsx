@@ -1,15 +1,16 @@
 import React from "react";
-import styles from "./styles.module.css";
 
 const BookCard = ({ book }) => {
 
   return (
-    <div className={styles.book_card} >
-      <h1 className={styles.title}>{book.title}</h1>
-      <div className={styles.bottom}>
-        <span className={styles.page}>{book.page_count} стр.</span>
-        <p className={styles.author}>{book.author}</p>
-      </div>
+    <div class="card text-end mb-4 w-100 bg-card-dark">
+        <div class="card-body">
+            <h5 class="card-title text-start mb-3"><b>{book.title}</b></h5>
+            <div class="card-text card-text-lr">
+                <span><b class="fs-1">{book.page_count}</b> стр</span>
+                <span>{book.author}</span>
+            </div>
+        </div>
     </div>
   );
 };
