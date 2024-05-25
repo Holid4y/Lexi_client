@@ -19,11 +19,6 @@ function App() {
       <div>
         <span>hello</span>
 
-        
-        <p>qweqweq</p>
-        {/* qweqweq */}
-
-
         {/* <BookList /> */}
         {/* <BookRetrieve /> */}
         {/* <BookmarkList /> */}
