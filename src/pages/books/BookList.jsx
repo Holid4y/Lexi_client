@@ -6,6 +6,8 @@ import Pagination from "../../common/components/pagination/PaginationButton.jsx"
 import BookCard from "./components/book-card/BookCard.jsx";
 import Skeleton from "./components/skeleton/Skeleton.jsx";
 
+import Navigation from "../../common/components/navigation/Navigation"
+
 function BookList() {
   const dispatch = useDispatch();
   const { books, loading, error } = useSelector((state) => state.books);
@@ -24,19 +26,21 @@ function BookList() {
   console.log(log)
 
   return (
-    <div>
-      <div class="container sticky-top mb-4 pt-2">
-          <nav class="navbar dark-nav p-2">
-              <form class="d-flex w-100" role="search">
-                  <input class="form-control w-100" type="search" placeholder="Search" aria-label="Search" />
-              </form>
-          </nav>
-      </div>
-      <main class="container px-4">
-        {loading ? ( <Skeleton /> ) : (
-          books && books.results && books.results.map((book, index) => <BookCard key={`${book.pk}-${index}`} book={book} />)
-        )}
-      </main>
+    <div class="align-items-center">
+        <div class="container sticky-top mb-4 pt-2">
+            <nav class="navbar dark-nav p-2">
+                <form class="d-flex w-100" role="search">
+                    <input class="form-control w-100" type="search" placeholder="Search" aria-label="Search" />
+                </form>
+            </nav>
+        </div>
+        <main class="container px-4">
+          {loading ? ( <Skeleton /> ) : (
+            books && books.results && books.results.map((book, index) => <BookCard key={`${book.pk}-${index}`} book={book} />)
+          )}
+          {/* <Skeleton /> */}
+        </main>
+        <Navigation />
     </div>
   );
 }

@@ -3,9 +3,6 @@ import styles from "./styles.module.css";
 
 
 const Skeleton = () => {
-
-  
-
   return (
     <div className={styles.container}>
       {Array.from({ length: 3 }).map((_, index) => (
