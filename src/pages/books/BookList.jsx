@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { fetchBooks } from "../../common/reducers/booksSlice.js";
-import styles from "./styles.module.css";
 import Pagination from "../../common/components/pagination/PaginationButton.jsx";
 import Search from "../../common/components/search/Search.jsx";
 import BookCard from "./components/book-card/BookCard.jsx";
@@ -28,7 +27,7 @@ function BookList() {
   return (
     <div>
       {/* <Search /> */}
-      <div className={styles.book_list}>
+      <div>
         {loading ? (
           <Skeleton />
         ) : (

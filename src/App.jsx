@@ -15,13 +15,13 @@ function App() {
   return (
     <>
       <div>
-        {/* <BookList /> */}
+        <BookList />
         {/* <BookRetrieve /> */}
         {/* <BookmarkList /> */}
 
-        <Login />
+        {/* <Login /> */}
       </div>
-      {/* <Navigation /> */}
+      <Navigation />
     </>
   );
 }
