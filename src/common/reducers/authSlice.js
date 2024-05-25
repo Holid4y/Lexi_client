@@ -3,12 +3,10 @@ import { host, login, refresh, verify } from "../../../public/urls";
 import { headers } from "../../../public/urls";
 
 
-// bad code
 export const fetchLogin = createAsyncThunk(
   "auth/fetchLogin",
   async ({ username, password }, { dispatch }) => {
     const url = new URL(host + login);
-    console.log(headers);
     const response = await fetch(url.toString(), {
       method: "POST",
       headers: {
@@ -19,21 +17,17 @@ export const fetchLogin = createAsyncThunk(
         password,
       }),
     });
-    const data = await response.json();
-    console.log(response.status);
 
     if (response.ok) {
-      console.log(data);
-      return data;
-    }
-    if (response.status === 401) {
-      dispatch(setError(data));
+      const data = await response.json();
+      localStorage.setItem('access', data.access);
       return data;
     } else {
       throw new Error(response.statusText);
     }
   }
 );
+
 
 export const fetchRefresh = createAsyncThunk(
   "auth/fetchRefresh",
@@ -89,6 +83,7 @@ const authSlice = createSlice({
       })
       .addCase(fetchLogin.fulfilled, (state) => {
         state.loading = false;
+        state.error = null;
       })
       .addCase(fetchLogin.rejected, (state, action) => {
         state.loading = false;

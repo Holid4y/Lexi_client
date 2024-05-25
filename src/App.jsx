@@ -18,12 +18,12 @@ function App() {
   return (
     <>
       <div>
-        <Home />
+        {/* <Home /> */}
         {/* <BookList /> */}
         {/* <BookRetrieve /> */}
         {/* <BookmarkList /> */}
 
-        {/* <Login /> */}
+        <Login />
       </div>
       <Navigation />
     </>

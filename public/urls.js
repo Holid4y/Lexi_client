@@ -29,11 +29,8 @@ export function getCookie(name) {
   return cookieValue;
 }
 
-const token =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzE2NzM4Mzk5LCJpYXQiOjE3MTYxMzM1OTksImp0aSI6IjkzZWRlZDg2OTEyNzRmYTE5M2Y5MjlkZTI4Y2MzOTA5IiwidXNlcl9pZCI6MzF9.8KnGYQ5-QUhGquFakO9U_eInx4F5QcKLKLBq3pdyq48";
-
 export let headers = {
   "Content-type": "application/json",
   "X-CSRFToken": getCookie("csrftoken"),
-  Authorization: `Beare ${token}`,
+  Authorization: `Beare ${localStorage.getItem('access')}`,
 };
