@@ -3,7 +3,7 @@ import { host, login, refresh, verify } from "../../../public/urls";
 import { headers } from "../../../public/urls";
 
 
-// comment
+// bad code
 export const fetchLogin = createAsyncThunk(
   "auth/fetchLogin",
   async ({ username, password }, { dispatch }) => {
