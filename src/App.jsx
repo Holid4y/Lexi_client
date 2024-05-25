@@ -15,13 +15,6 @@ function App() {
   return (
     <>
       <div>
-        <span>hello</span>
-        <form action="get">
-            {/* тут будет бесполезная форма
-            qwewqeqwe
-             */}
-        </form>
-
         {/* <BookList /> */}
         {/* <BookRetrieve /> */}
         {/* <BookmarkList /> */}
