@@ -6,9 +6,9 @@ import BookmarkList from "./pages/bookmark-list/BookmarkList";
 
 // Авторизация
 import Login from "./pages/auth/login/Login"; // Вход
-import Register from "./pages/auth/register/Register"; // Регистрация
-import ChangePass from "./pages/auth/changepass/ChangePass"; // Смена пароля
-import ForgotPass from "./pages/auth/forgotpass/ForgotPass"; // Забыл пароля
+// import Register from "./pages/auth/register/Register"; // Регистрация
+// import ChangePass from "./pages/auth/changepass/ChangePass"; // Смена пароля
+// import ForgotPass from "./pages/auth/forgotpass/ForgotPass"; // Забыл пароля
 
 function App() {
 
