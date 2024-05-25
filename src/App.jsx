@@ -18,7 +18,9 @@ function App() {
     <>
       <div>
         <span>hello</span>
-        <form action="get">ff</form>
+        <form action="get">
+            {/* тут будет бесполезная форма */}
+        </form>
 
         {/* <BookList /> */}
         {/* <BookRetrieve /> */}
