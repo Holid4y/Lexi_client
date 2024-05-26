@@ -23,8 +23,8 @@ import BookRetrieve from "./pages/book-retrieve/BookRetrieve";
 import BookmarkList from "./pages/bookmark-list/BookmarkList";
 
 // Тесты
-import TESTV1 from "./pages/tests/playback_test/TestV1";
-import TESTV2 from "./pages/tests/recognition_test/TestV2";
+import Recognize from './pages/training/recognize/Recognize';
+import Reproduce from './pages/training/reproduce/Reproduce';
 
 function App() {
   const dispatch = useDispatch();
@@ -53,8 +53,8 @@ function App() {
             <Route path="/bookmarks" element={<BookmarkList />} />
             <Route path="/login" element={<Login />} />
 
-            <Route path="/test/v1" element={<TESTV1 />} />
-            <Route path="/test/v2" element={<TESTV2 />} />
+            <Route path="/training/recognize" element={<Recognize />} />
+            <Route path="/training/reproduce" element={<Reproduce />} />
             {/* Другие маршруты */}
           </Routes>
         </div>

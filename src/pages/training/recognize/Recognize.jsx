@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Navigation from "../../../common/components/navigation/Navigation"
 
-function TestV2() {
+function Recognize() {
   return (
     <div class="align-items-center">
 
@@ -78,4 +78,4 @@ function TestV2() {
   );
 }
 
-export default TestV2;
+export default Recognize;
