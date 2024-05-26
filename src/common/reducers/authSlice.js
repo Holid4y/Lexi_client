@@ -1,5 +1,3 @@
-import { jwtDecode } from "jwt-decode";
-
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { host, login, refresh, verify } from "../../../public/urls";
 import { headers } from "../../../public/urls";
