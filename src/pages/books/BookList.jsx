@@ -38,7 +38,6 @@ function BookList() {
           {loading ? ( <Skeleton /> ) : (
             books && books.results && books.results.map((book, index) => <BookCard key={`${book.pk}-${index}`} book={book} />)
           )}
-          {/* <Skeleton /> */}
         </main>
         <Navigation />
     </div>

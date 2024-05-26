@@ -15,6 +15,10 @@ import BookList from "./pages/books/BookList";
 import BookRetrieve from "./pages/book-retrieve/BookRetrieve";
 import BookmarkList from "./pages/bookmark-list/BookmarkList";
 
+// Тесты
+import TESTV1 from "./pages/tests/playback_test/TestV1";
+import TESTV2 from "./pages/tests/recognition_test/TestV2";
+
 function App() {
   const dispatch = useDispatch();
   const { isAuth } = useSelector(state => state.auth);
@@ -40,6 +44,9 @@ function App() {
             <Route path="/book/:id" element={<BookRetrieve />} />
             <Route path="/bookmarks" element={<BookmarkList />} />
             <Route path="/login" element={<Login />} />
+
+            <Route path="/test/v1" element={<TESTV1 />} />
+            <Route path="/test/v2" element={<TESTV2 />} />
             {/* Другие маршруты */}
           </Routes>
         </div>

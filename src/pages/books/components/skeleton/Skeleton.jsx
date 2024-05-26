@@ -1,20 +1,27 @@
 import React from "react";
-import styles from "./styles.module.css";
 
 
 const Skeleton = () => {
   return (
-    <div className={styles.container}>
-      {Array.from({ length: 3 }).map((_, index) => (
-        <div key={index} className={styles.skeleton}>
-          <div className={styles.title}>
-          </div>
-          <div className={styles.bottom}>
-            <span className={styles.page}></span>
-            <div className={styles.author}></div>
-          </div>
+    <div>
+      <div>
+        <div class="card text-end mb-4 w-100 bg-card-dark">
+            <div class="card-body">
+                <h5 class="card-title text-start mb-3 author w-100"></h5>
+                <div class="card-text card-text-lr">
+                    <span class="author w-50"></span>
+                </div>
+            </div>
         </div>
-      ))}
+        <div class="card text-end mb-4 w-100 bg-card-dark">
+            <div class="card-body">
+                <h5 class="card-title text-start mb-3 author w-100"></h5>
+                <div class="card-text card-text-lr">
+                    <span class="author w-50"></span>
+                </div>
+            </div>
+        </div>
+      </div>
     </div>
   );
 };

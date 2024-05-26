@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
-import Navigation from "../../common/components/navigation/Navigation"
-import { Link } from 'react-router-dom';
+import Navigation from "../../../common/components/navigation/Navigation"
 
-function Home() {
+function TestV1() {
   return (
     <div class="align-items-center">
 
@@ -19,65 +18,15 @@ function Home() {
         </div>
 
         <main class="container px-4">
-
-            <div class="row">
-                <div class="col-6 col-md-4">
-                    <span class="ps-2">Количество слов</span>
-                    <div class="card mb-4">
-                        <h4 class="book-text text-center py-2">136</h4>
+            <a href="#">
+                <div class="card text-end mb-4 w-100 bg-card-dark">
+                    <div class="card-body">
+                        <h4 class="card-title w-75 text-start">Тренировка слов на сегодня</h4>
+                        <h1 class="book-text">34</h1>
+                        <p class="card-text">слова на повторение</p>
                     </div>
                 </div>
-                <div class="col-6 col-md-4">
-                    <span class="ps-2">Всего текстов</span>
-                    <div class="card mb-4">
-                        <h4 class="book-text text-center py-2">12</h4>
-                    </div>
-                </div>
-                <div class="col-12 col-md-4">
-                    <a href="#" class="text-white">
-                        <span class="ps-2">Добавить книгу</span>
-                        <div class="card mb-4 w-100 border-none">
-                            <h4 class="book-text text-center py-2">+</h4>
-                        </div>
-                    </a>
-                </div>
-            </div>
-
-            <div className="row mb-4">
-                <div className="col-8 h-100">
-                    <a href="#">
-                        <div class="card text-end bg-card-dark">
-                            <div class="card-body">
-                                <h4 class="card-title w-75 text-start">Тренировка слов на сегодня</h4>
-                                <p class="text-start mb-0"><span class="book-text">34</span> воспроизведение  <span class="book-text">12</span> написание</p>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-4 d-flex flex-column justify-content-between">
-                    <a href="#">
-                        <div class="card card-text-lr">
-                            <div class="card-body text-center">
-                                <span>на воспроизведение</span>
-                            </div>
-                        </div>
-                    </a>
-                    <a href="#">
-                        <div class="card mt-auto card-text-lr">
-                            <div class="card-body text-center">
-                                <span>на написание</span>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                
-            </div>
-
-            {/* <div className="col-3">
-                    <Link to="/test/v1/" class="btn btn-primary">Тест на воспроизведение</Link>
-                    <Link to="/test/v2/" class="btn btn-primary">Тест на узнавание</Link>
-                </div> */}
-            
+            </a>
 
             <a href="#">
                 <div class="card text-end mb-4 w-100 bg-card-dark">
@@ -129,4 +78,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default TestV1;
