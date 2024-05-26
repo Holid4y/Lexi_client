@@ -1,6 +1,13 @@
+// React
+import { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+
+// Redux
 import { useDispatch, useSelector } from "react-redux";
 import { setIsAuth } from "./common/reducers/authSlice";
+
+// JWT
+import { checkAccessTokenValidity } from './common/reducers/authSlice';
 
 import Navigation from "./common/components/navigation/Navigation";
 
@@ -23,11 +30,12 @@ function App() {
   const dispatch = useDispatch();
   const { isAuth } = useSelector(state => state.auth);
 
-  let access = localStorage.getItem('access')
 
-  if (access) {
-    dispatch(setIsAuth(true))
-  }
+  
+  useEffect(() => {
+    // Вызов функции проверки срока действия access токена при загрузке приложения
+    dispatch(checkAccessTokenValidity())
+  }, []);
 
   const log = {
     'isAuth': isAuth
