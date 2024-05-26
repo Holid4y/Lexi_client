@@ -49,7 +49,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/books" element={<BookList />} />
-            <Route path="/book/:id" element={<BookRetrieve />} />
+            <Route path="/book" element={<BookRetrieve />} />
             <Route path="/bookmarks" element={<BookmarkList />} />
             <Route path="/login" element={<Login />} />
 
