@@ -27,7 +27,7 @@ export const fetchBookmarks = createAsyncThunk(
 );
 
 export const fetchBookmarksCreateUpdate = createAsyncThunk(
-  "auth/fetchLogin",
+  "bookmarks/fetchBookmarksCreateUpdate",
   async ({ bookId, targetPage }, { dispatch }) => {
     const url = new URL(host + bookmarks);
     console.log('создаю закладку')
@@ -55,7 +55,28 @@ export const fetchBookmarksCreateUpdate = createAsyncThunk(
   }
 );
 
-const bookmarkListSlice = createSlice({
+export const fetchBookmarksDelete = createAsyncThunk(
+  "bookmarks/fetchBookmarksDelete",
+  async (bookmarkId, { dispatch }) => {
+    const url = new URL(host + bookmarks + bookmarkId);
+    console.log('delete закладку')
+    const response = await fetch(url.toString(), {
+      method: "DELETE",
+      headers: {
+        ...headers,
+      },
+    });
+
+    if (response.status === 204) {
+      console.log('deleted')
+      return 
+    } else {
+      throw new Error(response.statusText);
+    }
+  }
+);
+
+const bookmarkSlice = createSlice({
   name: "bookmarks",
   initialState: {
     bookmarks: null,
@@ -82,5 +103,5 @@ const bookmarkListSlice = createSlice({
   },
 });
 
-export const { bookmarkLoaded } = bookmarkListSlice.actions;
-export default bookmarkListSlice.reducer;
+export const { bookmarkLoaded } = bookmarkSlice.actions;
+export default bookmarkSlice.reducer;

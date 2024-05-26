@@ -1,8 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit';
+
 import booksReducer from './common/reducers/booksSlice';
 import bookRetrieveReducer from './common/reducers/bookRetrieveSlice';
 import paginationReducer from './common/reducers/paginationSlice';
-import bookmarkListReducer from './common/reducers/bookmarkListSlice';
+import bookmarkReducer from './common/reducers/bookmarkSlice';
 import authReducer from './common/reducers/authSlice';
 import userReducer from './common/reducers/userSlice';
 
@@ -11,7 +12,7 @@ export const store = configureStore({
     books: booksReducer,
     book: bookRetrieveReducer,
     page: paginationReducer,
-    bookmarks: bookmarkListReducer,
+    bookmarks: bookmarkReducer,
     auth: authReducer,
     user: userReducer
   },
