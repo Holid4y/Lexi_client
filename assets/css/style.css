@@ -251,10 +251,29 @@ footer{
     background: var(--input-color);
 }
 
+.svg-background {
+    position: absolute;
+    top: 60%;
+    right: 10%;
+    transform: translateY(-50%) rotate(20deg) scale(2);
+    opacity: .2;
+}
+
+.overflow-box{
+    overflow: hidden;
+    box-sizing: border-box;
+}
+.card{
+    transition: transform .1s linear;
+}
+.card-btn:hover{
+    transform: scale(1.05);
+}
+
 .card-text-lr{
     display: flex; 
     justify-content: space-between; 
-    align-items: center;
+    /* align-items: center; */
 }
 
 .author {
