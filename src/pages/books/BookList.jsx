@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from 'react-router-dom';
 
 import { fetchBooks } from "../../common/reducers/booksSlice.js";
 import Pagination from "../../common/components/pagination/PaginationButton.jsx";
@@ -36,7 +37,11 @@ function BookList() {
         </div>
         <main class="container px-4">
           {loading ? ( <Skeleton /> ) : (
-            books && books.results && books.results.map((book, index) => <BookCard key={`${book.pk}-${index}`} book={book} />)
+            books && books.results && books.results.map((book, index) => 
+              <Link to={`/book/${book.slug}`}>
+                <BookCard key={`${book.pk}-${index}`} book={book} />
+              </Link>
+            )
           )}
         </main>
         <Navigation />

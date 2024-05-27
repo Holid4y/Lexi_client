@@ -6,15 +6,7 @@ function Recognize() {
     <div class="align-items-center">
 
         <div class="container navbar-blur sticky-top mb-4 pt-4">
-            <div class="row row-cols-7 g-2">
-                <div class="block_week col bg-danger"><span>пн</span></div>
-                <div class="block_week col bg-danger"><span>вт</span></div>
-                <div class="block_week col"><span>ср</span></div>
-                <div class="block_week col"><span>чт</span></div>
-                <div class="block_week col bg-success"><span>пт</span></div>
-                <div class="block_week col bg-success"><span>сб</span></div>
-                <div class="block_week col"><span>вс</span></div>
-            </div>
+            <span class="block_week py-4">Тренировка на узнаваемость</span>
         </div>
 
         <main class="container px-4">

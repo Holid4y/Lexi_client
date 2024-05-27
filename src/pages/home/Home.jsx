@@ -55,20 +55,20 @@ function Home() {
                     </a>
                 </div>
                 <div class="col-4 d-flex flex-column justify-content-between">
-                    <a href="#">
+                    <Link to="/training/reproduce">
                         <div class="card card-text-lr">
                             <div class="card-body text-center">
                                 <span>на воспроизведение</span>
                             </div>
                         </div>
-                    </a>
-                    <a href="#">
+                    </Link>
+                    <Link to="/training/recognize">
                         <div class="card mt-auto card-text-lr">
                             <div class="card-body text-center">
-                                <span>на написание</span>
+                                <span>на узнаваемость</span>
                             </div>
                         </div>
-                    </a>
+                    </Link>
                 </div>
                 
             </div>
