@@ -23,24 +23,20 @@ function Navigation() {
                             <tr>
                                 <th scope="col">Синонимы</th>
                                 <th scope="col">Перевод</th>
-                                <th scope="col"></th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
                                 <th scope="row">Snowy</th>
                                 <td>Белоснежный</td>
-                                <td><input class="form-check-input" type="checkbox" value="" /></td>
                             </tr>
                             <tr>
                                 <th scope="row">Whites</th>
                                 <td>Беленький</td>
-                                <td><input class="form-check-input" type="checkbox" value="" /></td>
                             </tr>
                             <tr>
                                 <th scope="row">Pale</th>
                                 <td>Бледный</td>
-                                <td><input class="form-check-input" type="checkbox" value="" /></td>
                             </tr>
                                 
                         </tbody>
