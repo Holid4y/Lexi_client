@@ -27,15 +27,15 @@ function BookList() {
   console.log(log)
 
   return (
-    <div class="align-items-center">
-        <div class="container sticky-top mb-4 pt-2">
-            <nav class="navbar dark-nav p-2">
-                <form class="d-flex w-100" role="search">
-                    <input class="form-control w-100" type="search" placeholder="Search" aria-label="Search" />
+    <div className="align-items-center">
+        <div className="container sticky-top mb-4 pt-2">
+            <nav className="navbar dark-nav p-2">
+                <form className="d-flex w-100" role="search">
+                    <input className="form-control w-100" type="search" placeholder="Search" aria-label="Search" />
                 </form>
             </nav>
         </div>
-        <main class="container px-4">
+        <main className="container px-4">
           {loading ? ( <Skeleton /> ) : (
             books && books.results && books.results.map((book, index) => 
               <Link to={`/book/${book.slug}`}>

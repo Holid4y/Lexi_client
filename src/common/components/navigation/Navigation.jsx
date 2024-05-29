@@ -5,20 +5,20 @@ import { Link } from 'react-router-dom';
 function Navigation() {
   
   return (
-    <footer class="container fixed-bottom py-2">
-        <div class="dark-nav">
-            <div id="my-block" class="toggle-block">
-                <div class="px-3 py-2">
+    <footer className="container fixed-bottom py-2">
+        <div className="dark-nav">
+            <div id="my-block" className="toggle-block">
+                <div className="px-3 py-2">
                     <div>
-                        <span class="fs-2 pe-3"><b>White</b></span>
+                        <span className="fs-2 pe-3"><b>White</b></span>
                         <span>[waɪt] прил </span>
                     </div>
                     <span>
                         <b>Белый</b>
-                        <input class="form-check-input" type="checkbox" value="" />
+                        <input className="form-check-input" type="checkbox" value="" />
                     </span>
                     <hr />
-                    <table class="table table-hover">
+                    <table className="table table-hover">
                         <thead>
                             <tr>
                                 <th scope="col">Синонимы</th>
@@ -43,22 +43,22 @@ function Navigation() {
                     </table>
                 </div>
             </div>
-            <ul class="nav justify-content-center">
-                  <li class="nav-item">
-                    <Link to="/" class="nav-link"><img src="/assets/images/home.svg" alt="" /></Link>
+            <ul className="nav justify-content-center">
+                  <li className="nav-item">
+                    <Link to="/" className="nav-link"><img src="/assets/images/home.svg" alt="" /></Link>
                     {/* реализовать активацию ссылок классом active_link */}
                   </li>
-                  <li class="nav-item">
-                    <Link to="/books" class="nav-link"><img src="/assets/images/book_mark.svg" alt="" /></Link>
+                  <li className="nav-item">
+                    <Link to="/books" className="nav-link"><img src="/assets/images/book_mark.svg" alt="" /></Link>
                   </li>
-                  <li class="nav-item">
-                    <Link to="/bookmarks" class="nav-link"><img src="/assets/images/book_test.svg" alt="" /></Link>
+                  <li className="nav-item">
+                    <Link to="/bookmarks" className="nav-link"><img src="/assets/images/book_test.svg" alt="" /></Link>
                   </li>
-                  <li class="nav-item">
-                      <a class="nav-link" href="#"><img src="/assets/images/book_add.svg" alt="" /></a>
+                  <li className="nav-item">
+                      <a className="nav-link" href="#"><img src="/assets/images/book_add.svg" alt="" /></a>
                   </li>
-                  <li class="nav-item">
-                      <a class="nav-link" href="#"><img src="/assets/images/users.svg" alt="" /></a>
+                  <li className="nav-item">
+                      <a className="nav-link" href="#"><img src="/assets/images/users.svg" alt="" /></a>
                   </li>
             </ul>
         </div>

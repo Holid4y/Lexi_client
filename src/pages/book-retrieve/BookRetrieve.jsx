@@ -108,21 +108,21 @@ function BookRetrieve() {
       {error && <p>Error: {error}</p>}
       {book && (
         <div>
-          <div class="container mb-4 pt-2">
+          <div className="container mb-4 pt-2">
               <a href="/html/book_read.html">
-                  <div class="card text-end mb-4 w-100 bg-card-dark">
-                      <div class="card-body">
-                          <div class="mb-2 card-text-lr">
-                              <h5 class="card-title text-start"><b>{book.title}</b> </h5>
-                              <input type="checkbox" class="btn-check" id="btn-check-4" autocomplete="off" />
-                              <label class="btn" for="btn-check-4">
-                                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
+                  <div className="card text-end mb-4 w-100 bg-card-dark">
+                      <div className="card-body">
+                          <div className="mb-2 card-text-lr">
+                              <h5 className="card-title text-start"><b>{book.title}</b> </h5>
+                              <input type="checkbox" className="btn-check" id="btn-check-4" autocomplete="off" />
+                              <label className="btn" for="btn-check-4">
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-heart-fill" viewBox="0 0 16 16">
                                       <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314"/>
                                   </svg>
                               </label>
                           </div>
-                          <div class="card-text card-text-lr">
-                              <span><b class="fs-1">{book.page_count}</b> стр</span>
+                          <div className="card-text card-text-lr">
+                              <span><b className="fs-1">{book.page_count}</b> стр</span>
                               <span>{book.author}</span>
                           </div>
                           
@@ -130,13 +130,13 @@ function BookRetrieve() {
                   </div>
               </a>
           </div>
-          <main class="container px-4">
+          <main className="container px-4">
                 
-              <div class="book-text-read">
-                  <p> <span class="toggle-span" onClick={() => window.toggleBlock()}>White</span> {book.book[currentPageIndex - 1]} </p>
+              <div className="book-text-read">
+                  <p> {book.book[currentPageIndex - 1]} </p>
               </div>
               
-              <div class="justify-content-center d-flex">
+              <div className="justify-content-center d-flex">
                 {renderPagination()}
               </div>
           </main>
