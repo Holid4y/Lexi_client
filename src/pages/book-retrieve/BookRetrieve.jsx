@@ -99,7 +99,22 @@ function BookRetrieve() {
           </li>
         </ul>
       );
-    };
+  };
+
+  // Одна страница из массива книги
+  const getPage = (book) => {
+    if (book) {
+      const page = book.book[currentPageIndex - 1];
+      return page
+    }
+    return []
+  }
+  
+
+  // Создание JSX элементов <p> для каждой строки
+  const paragraphs = getPage(book).map((line, index) => (
+    <p key={index}>{line}</p>
+  ));
 
   return (
     
@@ -133,7 +148,7 @@ function BookRetrieve() {
           <main className="container px-4">
                 
               <div className="book-text-read">
-                  <p> {book.book[currentPageIndex - 1]} </p>
+                {paragraphs}
               </div>
               
               <div className="justify-content-center d-flex">
