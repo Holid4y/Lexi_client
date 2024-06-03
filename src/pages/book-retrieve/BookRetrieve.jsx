@@ -6,7 +6,7 @@ import { fetchBook } from "../../common/reducers/bookRetrieveSlice";
 import { fetchBookmarksCreateUpdate } from "../../common/reducers/bookmarkSlice";
 
 import Navigation from "../../common/components/navigation/Navigation";
-import BookRetrieveHeader from "./BookRetrieveHeader";
+import BookRetrieveHeader from "./components/BookRetrieveHeader";
 
 function BookRetrieve() {
   const dispatch = useDispatch();
