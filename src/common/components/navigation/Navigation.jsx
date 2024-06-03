@@ -52,12 +52,6 @@ function Navigation() {
                     <Link to="/books" className="nav-link"><img src="/assets/images/book_mark.svg" alt="" /></Link>
                   </li>
                   <li className="nav-item">
-                    <Link to="/bookmarks" className="nav-link"><img src="/assets/images/book_test.svg" alt="" /></Link>
-                  </li>
-                  <li className="nav-item">
-                      <a className="nav-link" href="#"><img src="/assets/images/book_add.svg" alt="" /></a>
-                  </li>
-                  <li className="nav-item">
                       <a className="nav-link" href="#"><img src="/assets/images/users.svg" alt="" /></a>
                   </li>
             </ul>
