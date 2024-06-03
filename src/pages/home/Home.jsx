@@ -8,18 +8,42 @@ import { Link } from "react-router-dom";
 
 function Home() {
   const dispatch = useDispatch();
-  const { home, loading, error } = useSelector((state) => state.home);
+  const {
+    count_recognize_to_learn,
+    count_reproduce_to_learn,
+    learning_words,
+    new_words_today,
+    upload_books,
+    loading,
+    error,
+  } = useSelector((state) => state.home);
 
   useEffect(() => {
     dispatch(fetchHome());
   }, [dispatch]);
 
   const log = {
-    home: home,
+    // home: home,
     loading: loading,
     error: error,
   };
   console.log(log);
+
+  const checkResponse = (response, loading, error) => {
+    if (response) {
+      return response;
+    }
+    if (!response && !loading) {
+      return "...";
+    }
+    if (loading) {
+      return "...";
+    }
+
+    if (error) {
+      return "!";
+    }
+  };
 
   return (
     <div className="align-items-center">
@@ -54,13 +78,17 @@ function Home() {
           <div className="col-6 col-md-4">
             <span className="ps-2">Изученных слов</span>
             <div className="card mb-4">
-              <h4 className="book-text text-center py-2">{home.learning_words}</h4>
+              <h4 className="book-text text-center py-2">
+                {checkResponse(learning_words, loading, error)}
+              </h4>
             </div>
           </div>
           <div className="col-6 col-md-4">
             <span className="ps-2">Добавленных книг</span>
             <div className="card mb-4">
-              <h4 className="book-text text-center py-2">{home.upload_books}</h4>
+              <h4 className="book-text text-center py-2">
+                {checkResponse(upload_books, loading, error)}
+              </h4>
             </div>
           </div>
           <div className="col-12 col-md-4">

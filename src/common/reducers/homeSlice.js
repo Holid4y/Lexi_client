@@ -12,7 +12,7 @@ export const fetchHome = createAsyncThunk(
       headers: {
         ...headers,
       },
-    }); 
+    });
 
     const data = await response.json();
     dispatch(homeLoaded(data));
@@ -23,14 +23,22 @@ export const fetchHome = createAsyncThunk(
 const homeSlice = createSlice({
   name: "home",
   initialState: {
-    home: null,
+    count_recognize_to_learn: null,
+    count_reproduce_to_learn: null,
+    learning_words: null,
+    new_words_today: null,
+    upload_books: null,
     loading: false,
     error: null,
   },
   reducers: {
     homeLoaded: (state, action) => {
-      state.home = action.payload;
-    }
+      state.count_recognize_to_learn = action.payload.count_recognize_to_learn;
+      state.count_reproduce_to_learn = action.payload.count_reproduce_to_learn;
+      state.learning_words = action.payload.learning_words;
+      state.new_words_today = action.payload.new_words_today;
+      state.upload_books = action.payload.upload_books;
+    },
   },
   extraReducers: (builder) => {
     builder
