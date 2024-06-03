@@ -6,6 +6,7 @@ import paginationReducer from './common/reducers/paginationSlice';
 import bookmarkReducer from './common/reducers/bookmarkSlice';
 import authReducer from './common/reducers/authSlice';
 import userReducer from './common/reducers/userSlice';
+import homeReducer from './common/reducers/homeSlice'
 
 export const store = configureStore({
   reducer: {
@@ -14,7 +15,8 @@ export const store = configureStore({
     page: paginationReducer,
     bookmarks: bookmarkReducer,
     auth: authReducer,
-    user: userReducer
+    user: userReducer,
+    home: homeReducer
   },
 });
 

@@ -9,6 +9,8 @@ export const login = "jwt/create/"
 export const refresh = "jwt/refresh/"
 export const verify = "jwt/verify/"
 
+// home
+export const home = "home/"
 
 
 // Эта функция полезна для получения значения определенного cookie
