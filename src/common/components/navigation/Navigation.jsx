@@ -49,7 +49,7 @@ function Navigation() {
                     {/* реализовать активацию ссылок классом active_link */}
                   </li>
                   <li className="nav-item">
-                    <Link to="/books" className="nav-link"><img src="/assets/images/book_mark.svg" alt="" /></Link>
+                    <Link to="/bookmarks" className="nav-link"><img src="/assets/images/book_mark.svg" alt="" /></Link>
                   </li>
                   <li className="nav-item">
                       <a className="nav-link" href="#"><img src="/assets/images/users.svg" alt="" /></a>
