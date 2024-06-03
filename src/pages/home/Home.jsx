@@ -158,7 +158,7 @@ function Home() {
               <Link to="/training/reproduce">
                 <div className="card card-text-lr card-btn overflow-box">
                   <div className="card-body text-start">
-                    <span>Тест с выбором</span>
+                    <span>Тест</span>
                   </div>
                   <div className="svg-background">
                     <svg
@@ -209,7 +209,7 @@ function Home() {
               <Link to="/training/recognize">
                 <div className="card mt-auto card-text-lr card-btn overflow-box">
                   <div className="card-body text-start">
-                    <span>Тест с написанием</span>
+                    <span>Воспроизведение</span>
                   </div>
                   <div className="svg-background">
                     <svg
@@ -235,27 +235,27 @@ function Home() {
                     <Link to="/test/v2/" class="btn btn-primary">Тест на узнавание</Link>
                 </div> */}
 
-        <a href="#">
-          <div className="card text-end mb-4 w-100 bg-card-dark">
+        <Link to="/books">
+          <div className="card text-end mb-4 w-100 bg-card-dark card-btn">
             <div className="card-body">
               <h4 className="card-title w-75 text-start">
                 <b>Книги и тексты</b>
               </h4>
               <p className="card-text w-75 text-start">
                 Читайте книги и тексты. <br /> Добавляйте новые слова в свой
-                словарь
+                словарь.
               </p>
-              <p className="card-text">Читать больше</p>
+              <p className="card-text">Все книги</p>
             </div>
           </div>
-        </a>
-
-        <div className="row mb-4 g-4">
+        </Link>
+                
+        {/* <div className="row mb-4 g-4">
           <a className="col-6 col-md-4" href="#">
             <div className="card position-relative bg-card-dark card-btn">
               <div className="card-body text-center py-3">
                 Все книги
-                {/* <img src="/assets/images/books.svg" height={"40px"} alt="" /> */}
+                
               </div>
               <span className="position-absolute top-0 start-90 translate-middle badge-seccses">
                 15
@@ -266,22 +266,14 @@ function Home() {
             <div className="card position-relative bg-card-dark card-btn">
               <div className="card-body text-center py-3">
                 Все слова
-                {/* <img src="/assets/images/books.svg" height={"40px"} alt="" /> */}
+                
               </div>
               <span className="position-absolute top-0 start-90 translate-middle badge-seccses">
                 17
               </span>
             </div>
           </a>
-          <a className="col-6 col-md-4" href="#">
-            <div className="card bg-card-dark card-btn">
-              <div className="card-body text-center py-3">
-                История
-                {/* <img src="/assets/images/statistic.svg" height={"40px"} alt="" /> */}
-              </div>
-            </div>
-          </a>
-        </div>
+        </div> */}
       </main>
       <Navigation />
     </div>
