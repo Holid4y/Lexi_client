@@ -45,7 +45,7 @@ function BookmarkList() {
       {(bookmarks &&
           bookmarks.results &&
           bookmarks.results.map((bookmark, index) => (
-            <Link key={`${bookmark.pk}-${index}`} to={`/book/${bookmark.book_cover.slug}`}>
+            <Link key={`${bookmark.pk}-${index}`} to={`/book/${bookmark.book_cover.slug}/${bookmark.target_page}`}>
               <BookmarkCard bookmark={bookmark} />
             </Link>
           ))) ||
