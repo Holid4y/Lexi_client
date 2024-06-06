@@ -65,7 +65,6 @@ function Reproduce() {
                 </a>
             </div>
         </main>
-        <Navigation />
     </div>
   );
 }

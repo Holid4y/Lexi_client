@@ -65,7 +65,6 @@ function Recognize() {
                 </a>
             </div>
         </main>
-        <Navigation />
     </div>
   );
 }

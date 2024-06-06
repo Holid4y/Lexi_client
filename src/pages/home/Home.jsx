@@ -96,7 +96,6 @@ function Home() {
           </a>
         </div> */}
       </main>
-      <Navigation />
     </div>
   );
 }

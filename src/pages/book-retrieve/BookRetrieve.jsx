@@ -155,7 +155,6 @@ function BookRetrieve() {
               {renderPagination()}
             </div>
           </main>
-          <Navigation />
         </div>
       )}
     </div>

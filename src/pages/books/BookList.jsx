@@ -39,7 +39,6 @@ function BookList() {
           ))) ||
           (loading ? <Skeleton /> : <p>Error: {error}</p>)}
       </main>
-      <Navigation />
     </div>
   );
 }
