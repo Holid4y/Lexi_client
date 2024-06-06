@@ -31,6 +31,30 @@ export function getCookie(name) {
   return cookieValue;
 }
 
+/**
+ * Функция для проверки состояния ответа и возврата соответствующего значения.
+ *
+ * @param {*} response - Ответ, который необходимо проверить.
+ * @param {*} sceleton - Значение, которое нужно вернуть, если ответ отсутствует и загрузка не выполняется.
+ * @param {boolean} loading - Флаг, указывающий на выполнение загрузки.
+ * @param {*} error - Ошибка, которую нужно вернуть в случае ее возникновения.
+ * @returns {*} - Возвращает ответ, скелет, загрузку или ошибку в зависимости от состояния.
+ */
+export const renderResponse = (response, sceleton, loading, error) => {
+  if (response) {
+    return response;
+  }
+  if (!response && !loading) {
+    return sceleton;
+  }
+  if (loading) {
+    return sceleton;
+  }
+  if (error) {
+    return error;
+  }
+};
+
 export let headers = {
   "Content-type": "application/json",
   "X-CSRFToken": getCookie("csrftoken"),

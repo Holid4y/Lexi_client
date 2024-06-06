@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Navigation from "../../../common/components/navigation/Navigation"
+import Navigation from "../../../common/components/Navigation"
 
 function Recognize() {
   return (

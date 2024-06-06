@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import { fetchBook } from "../../common/reducers/bookRetrieveSlice";
 import { fetchBookmarksCreateUpdate } from "../../common/reducers/bookmarkSlice";
 
-import Navigation from "../../common/components/navigation/Navigation";
+import Navigation from "../../common/components/Navigation";
 import BookRetrieveHeader from "./components/BookRetrieveHeader";
 
 function BookRetrieve() {

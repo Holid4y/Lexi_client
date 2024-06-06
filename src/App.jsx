@@ -9,7 +9,7 @@ import { setIsAuth } from "./common/reducers/authSlice";
 // JWT
 import { checkAccessTokenValidity } from './common/reducers/authSlice';
 
-import Navigation from "./common/components/navigation/Navigation";
+import Navigation from './common/components/Navigation';
 
 // Главная страница
 import Home from "./pages/home/Home";

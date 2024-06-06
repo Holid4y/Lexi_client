@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchHome } from "../../common/reducers/homeSlice";
 
-import Navigation from "../../common/components/navigation/Navigation";
+import Navigation from "../../common/components/Navigation";
 import InfoCard from "./components/InfoCard";
 import TrainingCard from "./components/TrainingCard";
 import BooksLinkCard from "./components/BooksLinkCard";
@@ -28,27 +28,12 @@ function Home() {
   }, [dispatch]);
 
   const log = {
-    // home: home,
+    learning_words: learning_words,
     loading: loading,
     error: error,
   };
   console.log(log);
 
-  const checkResponse = (response, loading, error) => {
-    if (response) {
-      return response;
-    }
-    if (!response && !loading) {
-      return "...";
-    }
-    if (loading) {
-      return "...";
-    }
-
-    if (error) {
-      return "!";
-    }
-  };
 
   return (
     <div className="align-items-center">

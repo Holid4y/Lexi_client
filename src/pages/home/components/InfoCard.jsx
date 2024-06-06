@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
+import { renderResponse } from "../../../../public/urls";
+
 import { Link } from "react-router-dom";
 
 function InfoCard() {
@@ -8,29 +10,13 @@ function InfoCard() {
     (state) => state.home
   );
 
-  const checkResponse = (response, loading, error) => {
-    if (response) {
-      return response;
-    }
-    if (!response && !loading) {
-      return "...";
-    }
-    if (loading) {
-      return "...";
-    }
-
-    if (error) {
-      return "!";
-    }
-  };
-
   return (
     <div className="row">
       <div className="col-6 col-md-4">
         <span className="ps-2">Изученных слов</span>
         <div className="card mb-4">
           <h4 className="book-text text-center py-2">
-            {checkResponse(learning_words, loading, error)}
+            {renderResponse(learning_words, '...', loading, error)}
           </h4>
         </div>
       </div>
@@ -38,7 +24,7 @@ function InfoCard() {
         <span className="ps-2">Добавленных книг</span>
         <div className="card mb-4">
           <h4 className="book-text text-center py-2">
-            {checkResponse(upload_books, loading, error)}
+            {renderResponse(upload_books, '...', loading, error)}
           </h4>
         </div>
       </div>
