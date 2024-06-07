@@ -52,7 +52,7 @@ function Navigation() {
                     <Link to="/bookmarks" className="nav-link"><img src="/assets/images/book_mark.svg" alt="" /></Link>
                   </li>
                   <li className="nav-item">
-                      <a className="nav-link" href="#"><img src="/assets/images/users.svg" alt="" /></a>
+                    <Link to="/profile" className="nav-link"><img src="/assets/images/users.svg" alt="" /></Link>
                   </li>
             </ul>
         </div>

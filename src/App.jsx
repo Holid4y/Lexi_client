@@ -26,6 +26,8 @@ import BookmarkList from "./pages/bookmark-list/BookmarkList";
 import Recognize from './pages/training/recognize/Recognize';
 import Reproduce from './pages/training/reproduce/Reproduce';
 
+import Profile from "./pages/profile/ProfileUser";
+
 function App() {
   const dispatch = useDispatch();
   const { isAuth } = useSelector(state => state.auth);
@@ -55,6 +57,8 @@ function App() {
 
             <Route path="/training/recognize" element={<Recognize />} />
             <Route path="/training/reproduce" element={<Reproduce />} />
+
+            <Route path="/profile" element={<Profile />} />
             {/* Другие маршруты */}
           </Routes>
         </div>
