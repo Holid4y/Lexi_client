@@ -78,31 +78,7 @@ function Home() {
         <BooksLinkCard />
 
         <WorsHistory />
-                
-        <div className="row mb-4 g-4">
-          <a className="col-6 col-md-4" href="#">
-            <div className="card position-relative bg-card-dark card-btn">
-              <div className="card-body text-center py-3">
-                Все книги
-                
-              </div>
-              <span className="position-absolute top-0 start-90 translate-middle badge-seccses">
-                15
-              </span>
-            </div>
-          </a>
-          <a className="col-6 col-md-4" href="#">
-            <div className="card position-relative bg-card-dark card-btn">
-              <div className="card-body text-center py-3">
-                Все слова
-                
-              </div>
-              <span className="position-absolute top-0 start-90 translate-middle badge-seccses">
-                17
-              </span>
-            </div>
-          </a>
-        </div>
+              
       </main>
     </div>
   );
