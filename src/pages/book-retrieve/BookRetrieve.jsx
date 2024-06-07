@@ -15,14 +15,12 @@ function BookRetrieve() {
   const [currentPageIndex, setCurrentPageIndex] = useState(1);
 
   const { slug } = useParams();
-  const { page } = useParams();
 
-  
   useEffect(() => {
     if (slug) {
-      dispatch(fetchBook(slug, page));
+      dispatch(fetchBook(slug));
     }
-  }, [dispatch, slug, page]);
+  }, [dispatch, slug]);
 
   useEffect(() => {
     if (book && book.book) {
