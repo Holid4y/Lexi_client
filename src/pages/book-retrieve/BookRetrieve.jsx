@@ -5,41 +5,34 @@ import { useParams } from "react-router-dom";
 import { fetchBook } from "../../common/reducers/bookRetrieveSlice";
 import { fetchBookmarksCreateUpdate } from "../../common/reducers/bookmarkSlice";
 
-import Navigation from "../../common/components/Navigation";
 import BookRetrieveHeader from "./components/BookRetrieveHeader";
+import Pages from "./components/Pages";
 
 function BookRetrieve() {
   const dispatch = useDispatch();
-  const { book, loading, error } = useSelector((state) => state.book);
-  const currentPage = useSelector((state) => state.page);
+  const { pages, loading, error } = useSelector((state) => state.book);
   const [currentPageIndex, setCurrentPageIndex] = useState(1);
 
   const { slug, page } = useParams();
 
   useEffect(() => {
-    console.log(slug, page)
     if (slug) {
-      dispatch(fetchBook(slug));
+      // setCurrentPageIndex(page);
+      dispatch(fetchBook({ slug: slug, page: page }));
     }
-  }, [dispatch, slug]);
-
-  useEffect(() => {
-    if (book && book.book) {
-      setCurrentPageIndex(1);
-    }
-  }, [book]);
+  }, [dispatch, slug, page]);
 
   const handlePageChange = (newPageIndex) => {
     setCurrentPageIndex(newPageIndex);
   };
 
   const log = {
-    book: book,
+    pages: pages,
     loading: loading,
     error: error,
-    currentPage: currentPage,
+    currentPage: currentPageIndex,
   };
-  console.log(log);
+  // console.log(log);
 
   // ---Создание закладки---
 
@@ -129,35 +122,12 @@ function BookRetrieve() {
     );
   };
 
-  // Одна страница из массива книги
-  const getPage = (book) => {
-    if (book) {
-      const page = book.book[currentPageIndex - 1];
-      return page;
-    }
-    return [];
-  };
 
-  // Создание JSX элементов <p> для каждой строки
-  const paragraphs = getPage(book).map((line, index) => (
-    <p key={index}>{line}</p>
-  ));
 
   return (
     <div>
-      {loading && <p>Loading...</p>}
-      {error && <p>Error: {error}</p>}
-      {book && (
-        <div>
-          <BookRetrieveHeader/>
-          <main className="container px-4">
-            <div className="book-text-read">{paragraphs}</div>
-            <div className="justify-content-center d-flex">
-              {renderPagination()}
-            </div>
-          </main>
-        </div>
-      )}
+      <BookRetrieveHeader />
+      <Pages page={page}/>
     </div>
   );
 }

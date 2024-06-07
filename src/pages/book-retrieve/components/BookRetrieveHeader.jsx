@@ -1,9 +1,10 @@
 import React from "react";
 import { useSelector } from "react-redux";
 
-const BookRetrieveHeader = () => {
-  const { book } = useSelector((state) => state.book);
+import { renderResponse } from "../../../../public/urls";
 
+const BookRetrieveHeader = () => {
+  const { title, page_count, author, loading, error } = useSelector((state) => state.book);
 
   return (
     <div className="container mb-4 pt-2">
@@ -11,9 +12,9 @@ const BookRetrieveHeader = () => {
         <div className="card-body">
           <div className="mb-2 card-text-lr">
             <h5 className="card-title text-start">
-              <b>{book.title}</b>{" "}
+              <b>{renderResponse(title, '...', loading, error)}</b>
             </h5>
-            <input
+            {/* <input
               type="checkbox"
               className="btn-check"
               id="btn-check-4"
@@ -33,13 +34,13 @@ const BookRetrieveHeader = () => {
                   d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314"
                 />
               </svg>
-            </label>
+            </label> */}
           </div>
           <div className="card-text card-text-lr">
             <span>
-              <b className="fs-1">{book.page_count}</b> стр
+              <b className="fs-1">{renderResponse(page_count, '...', loading, error)}</b> стр
             </span>
-            <span>{book.author}</span>
+            <span>{renderResponse(author, '...', loading, error)}</span>
           </div>
         </div>
       </div>

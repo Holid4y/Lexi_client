@@ -4,9 +4,9 @@ import { headers } from "../../../public/urls";
 
 export const fetchBook = createAsyncThunk(
   "book/fetchBook",
-  async (slug, { dispatch }) => {
-    
-    const url = new URL(host + books + slug);
+  async (params, { dispatch }) => {
+    const { slug, page } = params
+    const url = new URL(host + books + slug + '/' + page);
     
     const response = await fetch(url.toString(), {
       method: "GET",
@@ -21,13 +21,26 @@ export const fetchBook = createAsyncThunk(
 const bookRetrieveSlice = createSlice({
   name: "book",
   initialState: {
-    book: null,
+    pk: null,
+    title: null,
+    author: null,
+    author_upload: null,
+    page_count: null,
+    slug: null,
+    pages: null,
+
     loading: false,
     error: null,
   },
   reducers: {
     bookLoaded: (state, action) => {
-      state.book = action.payload;
+      state.pk = action.payload.pk;
+      state.title = action.payload.title;
+      state.author = action.payload.author;
+      state.author_upload = action.payload.author_upload;
+      state.page_count = action.payload.page_count;
+      state.slug = action.payload.slug;
+      state.pages = action.payload.pages;
     }
   },
   extraReducers: (builder) => {

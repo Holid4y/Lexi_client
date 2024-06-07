@@ -79,7 +79,7 @@ function Home() {
 
         <WorsHistory />
                 
-        {/* <div className="row mb-4 g-4">
+        <div className="row mb-4 g-4">
           <a className="col-6 col-md-4" href="#">
             <div className="card position-relative bg-card-dark card-btn">
               <div className="card-body text-center py-3">
@@ -102,7 +102,7 @@ function Home() {
               </span>
             </div>
           </a>
-        </div> */}
+        </div>
       </main>
     </div>
   );
