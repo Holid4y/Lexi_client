@@ -11,27 +11,27 @@ function InfoCard() {
   );
 
   return (
-    <div className="row">
-      <div className="col-6 col-md-4">
-        <span className="ps-2">Изученных слов</span>
-        <div className="card mb-4">
+    <div className="row pt-2">
+      <div className="col-6 col-md-4 hover-text-opacity">
+        <span className="ps-2" id="wordsToLearn">Изученных слов</span>
+        <div className="card">
           <h4 className="book-text text-center py-2">
             {renderResponse(learning_words, '...', loading, error)}
           </h4>
         </div>
       </div>
-      <div className="col-6 col-md-4">
-        <span className="ps-2">Добавленных книг</span>
-        <div className="card mb-4">
+      <div className="col-6 col-md-4 hover-text-opacity">
+        <span className="ps-2" id="wordsToLearn">Добавленных книг</span>
+        <div className="card">
           <h4 className="book-text text-center py-2">
             {renderResponse(upload_books, '...', loading, error)}
           </h4>
         </div>
       </div>
       <div className="col-12 col-md-4">
-        <a href="#" className="text-white">
-          <span className="ps-2">Статистика</span>
-          <div className="card mb-4 w-100 border-none card-btn">
+        <a href="#" className="text-white hover-text-opacity">
+          <span className="ps-2" id="wordsToLearn">Статистика</span>
+          <div className="card w-100 border-none card-btn">
             <h4 className="book-text text-center py-2">
               <img src="/assets/images/statistic.svg" height={"40px"} alt="" />
             </h4>

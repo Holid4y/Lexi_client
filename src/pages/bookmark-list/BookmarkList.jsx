@@ -12,6 +12,7 @@ function BookmarkList() {
   const dispatch = useDispatch();
   const { bookmarks, loading, error } = useSelector(state => state.bookmarks);
   const currentPage = useSelector((state) => state.page);
+  const [searchValue, setSearchValue] = useState("");
 
   useEffect(() => {
     dispatch(fetchBookmarks());
@@ -24,6 +25,11 @@ function BookmarkList() {
     'currentPage': currentPage  
   }
   console.log(log)
+
+  // Обработчик изменения значения поиска
+  const handleSearchChange = (value) => {
+    setSearchValue(value);
+  };
 
   // ---Удаление закладки---
 
@@ -40,16 +46,18 @@ function BookmarkList() {
   };
   return (
     <div className="align-items-center">
-      <Search />
+      <Search onChange={handleSearchChange} />
       <main className="container px-4">
-      {(bookmarks &&
-          bookmarks.results &&
-          bookmarks.results.map((bookmark, index) => (
-            <Link key={`${bookmark.pk}-${index}`} to={`/book/${bookmark.book_cover.slug}/${bookmark.target_page}`}>
-              <BookmarkCard bookmark={bookmark} />
-            </Link>
-          ))) ||
-          (loading ? <Skeleton /> : <p>Error: {error}</p>)}
+        <div className="row g-4">
+          {(bookmarks && bookmarks.results && bookmarks.results
+              .filter((bookmark) => bookmark.book_cover.title.toLowerCase().includes(searchValue.toLowerCase()) ) // Фильтруем закладки по названию книги
+              .map((bookmark, index) => (
+                <Link key={`${bookmark.pk}-${index}`} to={`/book/${bookmark.book_cover.slug}/${bookmark.target_page}`} className="col-12 col-md-6">
+                  <BookmarkCard bookmark={bookmark} />
+                </Link>
+              ))) ||
+            (loading ? <Skeleton /> : <p>Error: {error}</p>)}
+        </div>
       </main>
     </div>
   )

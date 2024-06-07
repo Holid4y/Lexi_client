@@ -122,6 +122,26 @@ footer{
     height: 40px;
     margin: 0px 6px;
 }
+.block_week:hover .additional-text{
+    color: #fff;
+    background-color: #5b5e70;
+}
+.block_week:active .additional-text{
+    color: #fff;
+    background-color: #5b5e70;
+}
+/* Стили для дополнительного текста */
+.additional-text {
+    position: absolute;
+    top: 100%;
+    padding: 2px 5px;
+    border-radius: 4px;
+    text-align: center;
+    margin-top: 5px;
+    color: #20222E;
+    background-color: #20222E;
+    transition: .3s linear;
+}
 
 .bg-danger{
     box-shadow: 0px 0px 2px rgb(var(--bs-danger-rgb));
@@ -134,9 +154,6 @@ footer{
     font-size: 18px;
     color: var(--card-text-book);
 }
-.card{
-    color: var(--card-text-header);
-}
 
 .book-text{
     font-size: 40px;
@@ -144,6 +161,17 @@ footer{
     color: var(--book-text);
 }
 
+.hover-text-opacity #wordsToLearn {
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.hover-text-opacity:hover #wordsToLearn {
+    opacity: 1;
+}
+.hover-text-opacity:active #wordsToLearn {
+    opacity: 1;
+}
 .container{
     max-width: 750px;
 }
@@ -155,6 +183,7 @@ footer{
     background-color: rgb(var(--bs-danger-rgb));
     border: 0px solid rgb(var(--bs-danger-rgb));
     color: var(--bs-white);
+    z-index: 10;
 }
 
 .badge-seccses{
@@ -163,6 +192,7 @@ footer{
     background-color: rgb(var(--bs-success-rgb));
     border: 0px solid rgb(var(--bs-success-rgb));
     color: var(--bs-white);
+    z-index: 10;
 }
 
 .nav-link{
@@ -250,30 +280,40 @@ footer{
 .bg-card-dark{
     background: var(--input-color);
 }
+.bg-card-second{
+    background: #7d86be;
+}
 
 .svg-background {
     position: absolute;
-    top: 60%;
+    top: 52%;
     right: 10%;
     transform: translateY(-50%) rotate(20deg) scale(2);
-    opacity: .2;
 }
 
-.overflow-box{
+.svg-background svg{
+    opacity: .5;
+    fill: white;
+}
+
+.card {
+    transition: transform .1s linear;
+    color: var(--card-text-header);
+}
+
+.card-btn:hover {
+    transform: scale(1.025);
+}
+
+.overflow-box {
     overflow: hidden;
     box-sizing: border-box;
-}
-.card{
-    transition: transform .1s linear;
-}
-.card-btn:hover{
-    transform: scale(1.05);
 }
 
 .card-text-lr{
     display: flex; 
-    justify-content: space-between; 
-    /* align-items: center; */
+    justify-content: space-between;
+    align-items: center;
 }
 
 .author {
@@ -315,4 +355,21 @@ footer{
 
 .border-none{
     border: none;
+}
+
+.mark{
+    top: 10%;
+    left: 92%;
+    background-color: transparent;
+}
+
+.word-history {
+    max-height: 350px;
+    overflow-y: scroll;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.word-history::-webkit-scrollbar {
+    display: none;
 }

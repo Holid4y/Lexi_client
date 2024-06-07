@@ -8,7 +8,7 @@ import Navigation from "../../common/components/Navigation";
 import InfoCard from "./components/InfoCard";
 import TrainingCard from "./components/TrainingCard";
 import BooksLinkCard from "./components/BooksLinkCard";
-
+import WorsHistory from "./components/WorsHistory";
 
 
 function Home() {
@@ -41,21 +41,27 @@ function Home() {
         <div className="row row-cols-7 g-2">
           <div className="block_week col bg-danger">
             <span>пн</span>
+            <div className="additional-text">+3</div>
           </div>
           <div className="block_week col bg-danger">
             <span>вт</span>
+            <div className="additional-text">+7</div>
           </div>
           <div className="block_week col">
             <span>ср</span>
+            <div className="additional-text">+10</div>
           </div>
           <div className="block_week col">
             <span>чт</span>
+            <div className="additional-text">0</div>
           </div>
           <div className="block_week col bg-success">
             <span>пт</span>
+            <div className="additional-text">-7</div>
           </div>
           <div className="block_week col bg-success">
             <span>сб</span>
+            <div className="additional-text">+2</div>
           </div>
           <div className="block_week col">
             <span>вс</span>
@@ -70,6 +76,8 @@ function Home() {
         <TrainingCard />
 
         <BooksLinkCard />
+
+        <WorsHistory />
                 
         {/* <div className="row mb-4 g-4">
           <a className="col-6 col-md-4" href="#">

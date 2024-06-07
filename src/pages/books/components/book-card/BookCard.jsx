@@ -3,7 +3,7 @@ import React from "react";
 const BookCard = ({ book }) => {
 
   return (
-    <div className="card text-end mb-4 w-100 bg-card-dark">
+    <div className="card text-end w-100 bg-card-dark">
         <div className="card-body">
             <h5 className="card-title text-start mb-3"><b>{book.title}</b></h5>
             <div className="card-text card-text-lr">
