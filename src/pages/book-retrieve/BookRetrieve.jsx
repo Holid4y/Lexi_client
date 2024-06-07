@@ -14,9 +14,10 @@ function BookRetrieve() {
   const currentPage = useSelector((state) => state.page);
   const [currentPageIndex, setCurrentPageIndex] = useState(1);
 
-  const { slug } = useParams();
+  const { slug, page } = useParams();
 
   useEffect(() => {
+    console.log(slug, page)
     if (slug) {
       dispatch(fetchBook(slug));
     }

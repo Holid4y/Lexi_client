@@ -33,7 +33,7 @@ function BookList() {
         {(books &&
           books.results &&
           books.results.map((book, index) => (
-            <Link key={`${book.pk}-${index}`} to={`/book/${book.slug}`}>
+            <Link key={`${book.pk}-${index}`} to={`/book/${book.slug}/${1}`}>
               <BookCard book={book} />
             </Link>
           ))) ||
