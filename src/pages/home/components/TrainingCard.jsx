@@ -27,7 +27,7 @@ function TrainingCard() {
   return (
     <div className="row g-4">
       <div className="col-12 hover-text-opacity">
-          <div class="px-2 text-start">
+          <div className="px-2 text-start">
             <span id="wordsToLearn">Тренировка слов на сегодня</span>
           </div>
           <div className="card text-end bg-card-dark mb-4">

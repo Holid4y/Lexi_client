@@ -87,13 +87,13 @@
   --bs-body-color: #212529;
   --bs-body-color-rgb: 33, 37, 41;
   --bs-body-bg: #F6F5F4;
-  --btn-primary-auth: #8f99d4;
-  --box-shadow-color: #DEE3EC;
+  --btn-primary-auth: #cccccc;
+  --box-shadow-color: #cbcfd6;
   --background: linear-gradient(to bottom right, #E5E9F0, #C3D5F4);
-  --input-color: #c2cee4;
+  --input-color: #bdc2d1;
   --week-color: #C0C0C0;
-  --card-text-book: #6D8AA3;
-  --card-text-header: #5E677C;
+  --card-text-book: #a36d6d;
+  --card-text-header: #ffffff;
   --book-text: #7486F1;
   --bs-body-bg-rgb: 255, 255, 255;
   --bs-emphasis-color: #000;

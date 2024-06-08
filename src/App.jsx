@@ -25,8 +25,11 @@ import BookmarkList from "./pages/bookmark-list/BookmarkList";
 // Тесты
 import Recognize from './pages/training/recognize/Recognize';
 import Reproduce from './pages/training/reproduce/Reproduce';
+import WordList from './pages/word-list-user/WordList';
 
 import Profile from "./pages/profile/ProfileUser";
+import LvlSettings from "./pages/profile/lvlSettings";
+import Statistic from './pages/statistic-user/Statistic';
 
 function App() {
   const dispatch = useDispatch();
@@ -57,8 +60,11 @@ function App() {
 
             <Route path="/training/recognize" element={<Recognize />} />
             <Route path="/training/reproduce" element={<Reproduce />} />
+            <Route path="/word-list" element={<WordList />} />
 
             <Route path="/profile" element={<Profile />} />
+            <Route path="/statistic" element={<Statistic />} />
+            <Route path="/lvl-settings" element={<LvlSettings />} />
             {/* Другие маршруты */}
           </Routes>
         </div>
