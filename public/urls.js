@@ -17,6 +17,10 @@ export const user = "user/me/"
 export const settings = "users/settings/"
 export const dictionaryLevels = settings + "dictionary-levels/"
 
+// vocabulary
+export const vocabulary = "vocabulary/"
+export const stats = vocabulary + "stats/"
+
 
 // Эта функция полезна для получения значения определенного cookie
 // из браузера, а именно для csrf токена.
