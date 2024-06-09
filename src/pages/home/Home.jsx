@@ -32,7 +32,7 @@ function Home() {
     loading: loading,
     error: error,
   };
-  console.log(log);
+  // console.log(log);
 
 
   return (

@@ -1,51 +1,71 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 
+import { useDispatch, useSelector } from "react-redux";
+import { fetchDictionaryLevels } from "../../common/reducers/userSlice";
+
 function lvlSettings() {
+  const dispatch = useDispatch();
+  const {
+    levels,
+
+    loading,
+    error,
+  } = useSelector((state) => state.user);
+
+  useEffect(() => {
+    dispatch(fetchDictionaryLevels());
+  }, [dispatch]);
+
+  const renderLevels = () => {
+    return (
+      <>
+        {levels && levels.map((level, index) => (
+          <div className="mb-2" key={index}>
+            <label htmlFor={`lvl${index}`} className="form-label">
+              Уровень {index + 1}
+            </label>
+            <input
+              type="text"
+              className="form-control py-2-5"
+              id={`lvl${index}`}
+              value={level}
+            />
+          </div>
+        ))}
+      </>
+    );
+  };
+
   return (
     <div>
-        <div class="container sticky-top mb-4 pt-2">
-            <nav class="navbar dark-nav">
-                <div class="container-fluid">
-                    <a class="navbar-brand" href="#">Настройки уровней</a>
-                </div>
-            </nav>
+      <div class="container sticky-top mb-4 pt-2">
+        <nav class="navbar dark-nav">
+          <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+              Настройки уровней
+            </a>
+          </div>
+        </nav>
+      </div>
+
+      <main class="container px-4">
+        <small>
+          Для каждого уровня укажите перерыв (в днях) до следующего повторения
+        </small>
+
+        {(levels && renderLevels()) ||
+          (loading ? <Skeleton /> : <p>Error: {error}</p>)}
+
+        <div class="mt-3">
+          <button type="text" class="btn btn-primary py-2 w-100">
+            <span>Добавить уровень</span>
+          </button>
         </div>
-
-        <main class="container px-4">
-            <small>Для каждого уровня укажите перерыв (в днях) до следующего повторения</small>
-            <div class="mb-2 mt-3">
-                <label for="lvl1" class="form-label">Уровень 1</label>
-                <input type="text" class="form-control py-2-5" id="lvl1" value="1"/>
-            </div>
-            <div class="mb-2">
-                <label for="lvl2" class="form-label">Уровень 2</label>
-                <input type="text" class="form-control py-2-5" id="lvl2" value="3"/>
-            </div>
-            <div class="mb-2">
-                <label for="lvl3" class="form-label">Уровень 3</label>
-                <input type="text" class="form-control py-2-5" id="lvl3" value="5"/>
-            </div>
-            <div class="mb-2">
-                <label for="lvl4" class="form-label">Уровень 4</label>
-                <input type="text" class="form-control py-2-5" id="lvl4" value="10"/>
-            </div>
-            <div class="mb-5">
-                <label for="lvl5" class="form-label">Уровень 5</label>
-                <input type="text" class="form-control py-2-5" id="lvl5" value="12"/>
-            </div>
-
-
-            <div class="mt-3">
-                <button type="text" class="btn btn-primary py-2 w-100">
-                    <span>Добавить уровень</span>
-                </button>
-            </div>
-            <small>если слово на последнем уровне, то дни будут добавляться одни и те же</small>
-
-        </main>
-
-        
+        <small>
+          если слово на последнем уровне, то дни будут добавляться одни и те же
+        </small>
+      </main>
     </div>
   );
 }

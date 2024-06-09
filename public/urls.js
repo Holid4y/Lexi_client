@@ -12,6 +12,11 @@ export const verify = "jwt/verify/"
 // home
 export const home = "home/"
 
+// user
+export const user = "user/me/"
+export const settings = "users/settings/"
+export const dictionaryLevels = settings + "dictionary-levels/"
+
 
 // Эта функция полезна для получения значения определенного cookie
 // из браузера, а именно для csrf токена.
