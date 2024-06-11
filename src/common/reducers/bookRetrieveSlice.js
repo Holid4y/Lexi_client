@@ -5,12 +5,12 @@ import { headers } from "../../../public/urls";
 export const fetchBook = createAsyncThunk(
   "book/fetchBook",
   async (params, { dispatch }) => {
-    const { slug, page } = params
-    const url = new URL(host + books + slug + '/' + page);
-    
+    const { slug, page } = params;
+    const url = new URL(host + books + slug + "/" + page);
+
     const response = await fetch(url.toString(), {
       method: "GET",
-      ...headers
+      ...headers,
     });
     const data = await response.json();
     dispatch(bookLoaded(data));
@@ -28,6 +28,8 @@ const bookRetrieveSlice = createSlice({
     page_count: null,
     slug: null,
     pages: null,
+    nextPages: null,
+    prevPages: null,
 
     loading: false,
     error: null,
@@ -40,7 +42,28 @@ const bookRetrieveSlice = createSlice({
       state.author_upload = action.payload.author_upload;
       state.page_count = action.payload.page_count;
       state.slug = action.payload.slug;
-      state.pages = action.payload.pages;
+
+      if (!state.pages) {
+        state.pages = action.payload.pages;
+      } else {
+        // колхоз
+        state.nextPages = action.payload.pages;
+        state.prevPages = action.payload.pages;
+      }
+
+    },
+    writePages: (state, action) => {
+      state.prevPages = state.pages
+      state.pages = state.nextPages
+      state.nextPages = null
+      
+    },
+    writePrevPages: (state, action) => {
+      state.nextPages = state.pages
+      state.pages = state.prevPages
+      state.prevPages = null
+
+      
     }
   },
   extraReducers: (builder) => {
@@ -58,5 +81,5 @@ const bookRetrieveSlice = createSlice({
   },
 });
 
-export const { bookLoaded } = bookRetrieveSlice.actions;
+export const { bookLoaded, writePages, writePrevPages } = bookRetrieveSlice.actions;
 export default bookRetrieveSlice.reducer;
