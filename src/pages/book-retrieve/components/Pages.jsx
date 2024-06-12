@@ -2,11 +2,11 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 const Pages = ({ page }) => {
-  const { pages, loading, error } = useSelector((state) => state.book);
-
+  const { pages } = useSelector((state) => state.book);
+  console.log(pages)
   // принимает число и возвращает остаток от деления
   function remainder(num) {
-    return num % 10;
+    return num % 50;
   }
   const getPage = (pages, pageIndex) => {
     return pages[remainder(pageIndex - 1)];
@@ -14,11 +14,15 @@ const Pages = ({ page }) => {
 
   // Создание JSX элементов <p> для каждой строки
   function renderParagraphs() {
-
     if (pages) {
-      return getPage(pages, page).map((line, index) => (
-        <p key={index}>{line}</p>
-      ));
+      const currentPage = getPage(pages, page);
+      if (currentPage) {
+        return currentPage.map((line, index) => (
+          <p key={index}>{line}</p>
+        ));
+      } else {
+        return <p>Страница или книга не найдена</p>;
+      }
     }
   }
 

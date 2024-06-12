@@ -28,8 +28,7 @@ const bookRetrieveSlice = createSlice({
     page_count: null,
     slug: null,
     pages: null,
-    nextPages: null,
-    prevPages: null,
+
 
     loading: false,
     error: null,
@@ -42,28 +41,7 @@ const bookRetrieveSlice = createSlice({
       state.author_upload = action.payload.author_upload;
       state.page_count = action.payload.page_count;
       state.slug = action.payload.slug;
-
-      if (!state.pages) {
-        state.pages = action.payload.pages;
-      } else {
-        // колхоз
-        state.nextPages = action.payload.pages;
-        state.prevPages = action.payload.pages;
-      }
-
-    },
-    writePages: (state, action) => {
-      state.prevPages = state.pages
-      state.pages = state.nextPages
-      state.nextPages = null
-      
-    },
-    writePrevPages: (state, action) => {
-      state.nextPages = state.pages
-      state.pages = state.prevPages
-      state.prevPages = null
-
-      
+      state.pages = action.payload.pages;
     }
   },
   extraReducers: (builder) => {
@@ -81,5 +59,5 @@ const bookRetrieveSlice = createSlice({
   },
 });
 
-export const { bookLoaded, writePages, writePrevPages } = bookRetrieveSlice.actions;
+export const { bookLoaded } = bookRetrieveSlice.actions;
 export default bookRetrieveSlice.reducer;

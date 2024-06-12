@@ -4,74 +4,44 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 
-import {
-  fetchBook,
-  writePages,
-  writePrevPages,
-} from "../../common/reducers/bookRetrieveSlice";
+import { fetchBook } from "../../common/reducers/bookRetrieveSlice";
 import { fetchBookmarksCreateUpdate } from "../../common/reducers/bookmarkSlice";
 
 import BookRetrieveHeader from "./components/BookRetrieveHeader";
 import Pages from "./components/Pages";
+import PaginationButton from "./components/PaginationButton";
 
 function BookRetrieve() {
   const dispatch = useDispatch();
-  const { pages, nextPages, prevPages, loading, error } = useSelector(
+  const { pages, page_count, loading, error } = useSelector(
     (state) => state.book
   );
   const [isNext, setIsNext] = useState(true);
-
   const { slug, page } = useParams();
 
   useEffect(() => {
-    if (isNext) {
-      // если четная 10 страница,
-      // то делает запрос на сервер
-      if (page % 10 == 0) {
-        console.log("fetch");
-        dispatch(fetchBook({ slug: slug, page: page }));
-      }
-
-      // на одну страницу раньше, обновляет буферную страницу
-      // на текущую
-      if ((parseInt(page) - 1) % 10 == 0) {
-        console.log("write");
-        dispatch(writePages());
-      }
-    } else {
-      // если четная 10 страница,
-      // то делает запрос на сервер
-      if (page % 10 == 1) {
-        console.log("fetch prev");
-        dispatch(fetchBook({ slug: slug, page: page - 2 }));
-      }
-      if (parseInt(page) % 10 == 0) {
-        console.log("write prev");
-        dispatch(writePrevPages());
-      }
-    }
-
-    // если на 11, то загрузаю prevPages
-    // если на 10, то делаю writePages()
-  }, [dispatch, page]);
-
-  useEffect(() => {
-    // если нет страниц
+    // если store пустой
     // то делает запрос на сервер
     if (!pages) {
       console.log("fetch");
       dispatch(fetchBook({ slug: slug, page: page }));
     }
-  }, [dispatch]);
 
-  const log = {
-    prevPages: prevPages,
-    pages: pages,
-    nextPages: nextPages,
-    // loading: loading,
-    // error: error,
-  };
-  console.log(log);
+    // если четная 50 страница,
+    // то делает запрос на сервер
+    if (isNext) {
+      if ((page - 1) % 50 == 0) {
+        console.log("fetch");
+        dispatch(fetchBook({ slug: slug, page: page }));
+      }
+    } else {
+      if (page % 50 == 0) {
+        console.log("fetch prev");
+        dispatch(fetchBook({ slug: slug, page: page - 1 }));
+      }
+    }
+  }, [dispatch, page]);
+
 
   // ---Создание закладки---
 
@@ -160,34 +130,24 @@ function BookRetrieve() {
       </ul>
     );
   };
-  function changeDirection(direction) {
-    setIsNext(direction);
-  }
 
   return (
     <div>
       <BookRetrieveHeader />
-      <Pages page={page} />
-      <Link to={`/book/${slug}/${parseInt(page) - 1}`}>
-        <button
-          style={{ position: "fixed", bottom: 74 + "px" }}
-          type="button"
-          className="btn btn-primary"
-          onClick={() => setIsNext(false)}
-        >
-          Prev
-        </button>
-      </Link>
-      <Link to={`/book/${slug}/${parseInt(page) + 1}`}>
-        <button
-          style={{ position: "fixed", bottom: 74 + "px", right: 0 + "px" }}
-          type="button"
-          className="btn btn-primary"
-          onClick={() => setIsNext(true)}
-        >
-          Next
-        </button>
-      </Link>
+
+      {loading ? (
+        <p>Loading...</p>
+      ) : (
+        <>
+          {pages && <Pages page={page} />}
+          <PaginationButton
+            page={page}
+            page_count={page_count}
+            slug={slug}
+            setIsNext={setIsNext}
+          />
+        </>
+      )}
     </div>
   );
 }
