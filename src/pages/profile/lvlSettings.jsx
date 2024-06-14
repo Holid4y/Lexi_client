@@ -1,14 +1,12 @@
 import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
-import { fetchDictionaryLevels } from "../../common/reducers/userSlice";
+import { fetchDictionaryLevels, fetchPutDictionaryLevels, updateLevels, addLevel, deleteLevel } from "../../common/reducers/userSlice";
 
 function lvlSettings() {
   const dispatch = useDispatch();
   const {
     levels,
-
     loading,
     error,
   } = useSelector((state) => state.user);
@@ -16,6 +14,27 @@ function lvlSettings() {
   useEffect(() => {
     dispatch(fetchDictionaryLevels());
   }, [dispatch]);
+
+  function handleLevelChange(index, event) {
+    let payload = {
+      levels: levels.map((level, i) =>
+        i === index ? Math.max(1, parseInt(event.target.value)) : level
+      ),
+    }
+    dispatch(updateLevels(payload));
+  }
+
+  function handleAddLevel() {
+    const lastLevel = levels[levels.length - 1]
+    dispatch(addLevel({ level: Math.round(lastLevel * 1.5)}));
+  }
+  function handleDeleteLevel(targetLevel) {
+    dispatch(deleteLevel({ level: targetLevel }));
+  }
+
+  function handleSave() {
+    dispatch(fetchPutDictionaryLevels(levels))
+  }
 
   const renderLevels = () => {
     return (
@@ -25,11 +44,13 @@ function lvlSettings() {
             <label htmlFor={`lvl${index}`} className="form-label">
               Уровень {index + 1}
             </label>
+            {index >= 4 && <button onClick={() => handleDeleteLevel(index)} type="button">удалить</button>}
             <input
-              type="text"
+              type="number"
               className="form-control py-2-5"
               id={`lvl${index}`}
               value={level}
+              onChange={(event) => handleLevelChange(index, event)}
             />
           </div>
         ))}
@@ -39,27 +60,34 @@ function lvlSettings() {
 
   return (
     <div>
-      <div class="container sticky-top mb-4 pt-2">
-        <nav class="navbar dark-nav">
-          <div class="container-fluid">
-            <a class="navbar-brand" href="#">
+      <div className="container sticky-top mb-4 pt-2">
+        <nav className="navbar dark-nav">
+          <div className="container-fluid">
+            <a className="navbar-brand" href="#">
               Настройки уровней
             </a>
           </div>
         </nav>
       </div>
 
-      <main class="container px-4">
+      <main className="container px-4">
         <small>
           Для каждого уровня укажите перерыв (в днях) до следующего повторения
         </small>
 
         {(levels && renderLevels()) ||
-          (loading ? <Skeleton /> : <p>Error: {error}</p>)}
-
-        <div class="mt-3">
-          <button type="text" class="btn btn-primary py-2 w-100">
+          (loading ? <p>Loading...</p>: <p>Error: {error}</p>)}
+        <div className="mt-3">
+          <button type="text" className="btn btn-primary py-2 w-100" onClick={handleAddLevel}>
             <span>Добавить уровень</span>
+          </button>
+        </div>
+        <div className="mt-3">
+          {levels && loading ? (
+            <small className="bg-success">сохранение</small>
+          ) : null}
+          <button type="text" className="btn btn-primary py-2 w-100" onClick={handleSave}>
+            <span>Сохранить</span>
           </button>
         </div>
         <small>

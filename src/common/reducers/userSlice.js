@@ -16,9 +16,8 @@ export const fetchUser = createAsyncThunk(
       });
       const data = await response.json();
       dispatch(bookmarkLoaded(data));
-      console.log(data)
+      console.log(data);
       return data;
-       
     } catch (error) {
       if (error.message === "Unauthorized") {
         console.log("Ошибка 401: Unauthorized");
@@ -41,7 +40,6 @@ export const fetchSettings = createAsyncThunk(
       const data = await response.json();
       dispatch(settingsLoaded(data));
       return data;
-       
     } catch (error) {
       if (error.message === "Unauthorized") {
         console.log("Ошибка 401: Unauthorized");
@@ -65,7 +63,6 @@ export const fetchPatchSettings = createAsyncThunk(
       const data = await response.json();
       // dispatch(settingsLoaded(data));
       return data;
-       
     } catch (error) {
       if (error.message === "Unauthorized") {
         console.log("Ошибка 401: Unauthorized");
@@ -89,7 +86,6 @@ export const fetchDictionaryLevels = createAsyncThunk(
       const data = await response.json();
       dispatch(dictionaryLevelsLoaded(data));
       return data;
-       
     } catch (error) {
       if (error.message === "Unauthorized") {
         console.log("Ошибка 401: Unauthorized");
@@ -97,6 +93,31 @@ export const fetchDictionaryLevels = createAsyncThunk(
     }
   }
 );
+
+export const fetchPutDictionaryLevels = createAsyncThunk(
+  "user/fetchPutDictionaryLevels",
+  async (data, { dispatch }) => {
+    const url = new URL(host + dictionaryLevels);
+
+    try {
+      const response = await fetch(url.toString(), {
+        method: "PUT",
+        headers: {
+          ...headers,
+        },
+        body: JSON.stringify(data),
+      });
+      const result = await response.json();
+      dispatch(dictionaryLevelsLoaded(result));
+      return result;
+    } catch (error) {
+      if (error.message === "Unauthorized") {
+        console.log("Ошибка 401: Unauthorized");
+      }
+    }
+  }
+);
+
 
 const userSlice = createSlice({
   name: "user",
@@ -110,10 +131,10 @@ const userSlice = createSlice({
     dark_theme: false,
     number_of_false_set: 4,
     // dictionaryLevels
-    levels: [],
+    levels: null,
     // other
     loading: false,
-    error: null
+    error: null,
   },
   reducers: {
     settingsLoaded: (state, action) => {
@@ -125,7 +146,16 @@ const userSlice = createSlice({
     },
     dictionaryLevelsLoaded: (state, action) => {
       state.levels = action.payload.levels;
-    }
+    },
+    updateLevels: (state, action) => {
+      state.levels = action.payload.levels;
+    },
+    addLevel: (state, action) => {
+      state.levels.push(action.payload.level);
+    },
+    deleteLevel: (state, action) => {
+      state.levels.splice(action.payload.level, 1);
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -138,9 +168,43 @@ const userSlice = createSlice({
       .addCase(fetchUser.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;
+      })
+
+      .addCase(fetchSettings.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(fetchSettings.fulfilled, (state) => {
+        state.loading = false;
+      })
+      .addCase(fetchSettings.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message;
+      })
+
+      .addCase(fetchDictionaryLevels.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(fetchDictionaryLevels.fulfilled, (state) => {
+        state.loading = false;
+      })
+      .addCase(fetchDictionaryLevels.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message;
+      })
+
+      .addCase(fetchPutDictionaryLevels.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(fetchPutDictionaryLevels.fulfilled, (state) => {
+        state.loading = false;
+      })
+      .addCase(fetchPutDictionaryLevels.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message;
       });
   },
 });
 
-export const { settingsLoaded, dictionaryLevelsLoaded } = userSlice.actions;
+export const { settingsLoaded, dictionaryLevelsLoaded, updateLevels, addLevel, deleteLevel } =
+  userSlice.actions;
 export default userSlice.reducer;
