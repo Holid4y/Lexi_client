@@ -51,10 +51,8 @@ function BookmarkList() {
         <div className="row g-4">
           {(bookmarks && bookmarks.results && bookmarks.results
               .filter((bookmark) => bookmark.book_cover.title.toLowerCase().includes(searchValue.toLowerCase()) ) // Фильтруем закладки по названию книги
-              .map((bookmark, index) => (
-                <Link key={`${bookmark.pk}-${index}`} to={`/book/${bookmark.book_cover.slug}/${bookmark.target_page}`} className="col-12 col-md-6">
-                  <BookmarkCard bookmark={bookmark} />
-                </Link>
+              .map((bookmark, index) => (              
+                  <BookmarkCard bookmark={bookmark} key={index}/>         
               ))) ||
             (loading ? <Skeleton /> : <p>Error: {error}</p>)}
         </div>
