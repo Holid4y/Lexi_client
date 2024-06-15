@@ -134,7 +134,7 @@ function BookRetrieve() {
 
   return (
     <div>
-      <BookRetrieveHeader />
+      <BookRetrieveHeader page={page}/>
 
       {loading ? (
         <p>Loading...</p>
