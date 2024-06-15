@@ -47,10 +47,11 @@ export function getCookie(name) {
  * @param {*} sceleton - Значение, которое нужно вернуть, если ответ отсутствует и загрузка не выполняется.
  * @param {boolean} loading - Флаг, указывающий на выполнение загрузки.
  * @param {*} error - Ошибка, которую нужно вернуть в случае ее возникновения.
+ * @param {*} finaly - Ответ, который будет при отсудствии response
  * @returns {*} - Возвращает ответ, скелет, загрузку или ошибку в зависимости от состояния.
  */
-export const renderResponse = (response, sceleton, loading, error) => {
-  if (response) {
+export const renderResponse = (response, sceleton, loading, error, finaly) => {
+  if (response != null) {
     return response;
   }
   if (!response && !loading) {
