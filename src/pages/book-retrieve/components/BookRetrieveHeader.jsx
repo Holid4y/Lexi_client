@@ -63,7 +63,7 @@ const BookRetrieveHeader = ({ page }) => {
           </div>
           <div className="card-text card-text-lr">
             <span>
-              <b className="fs-1">{renderResponse(page_count, '...', loading, error)}</b> стр
+              <b className="fs-1">{page}/{renderResponse(page_count, '...', loading, error)}</b> стр
             </span>
             <span>{renderResponse(author, '...', loading, error)}</span>
           </div>
