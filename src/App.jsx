@@ -42,10 +42,6 @@ function App() {
     dispatch(checkAccessTokenValidity())
   }, []);
 
-  // const log = {
-  //   'isAuth': isAuth
-  // }
-  // console.log(log)
 
   return (
     <Router>

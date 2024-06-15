@@ -25,12 +25,6 @@ function BookList() {
     setSearchValue(value);
   };
 
-  const log = {
-    books: books,
-    loading: loading,
-    error: error,
-  };
-  console.log(log);
 
   return (
     <div className="align-items-center">

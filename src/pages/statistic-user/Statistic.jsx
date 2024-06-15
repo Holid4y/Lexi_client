@@ -20,13 +20,6 @@ function Statistic() {
     dispatch(fetchVocabularyStats());
   }, [dispatch]);
   
-  const log = {
-    recognize: recognize,
-    reproduce: reproduce,
-    loading: loading,
-    error: error,
-  };
-  //   console.log(log)
 
   return (
     <div>

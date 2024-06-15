@@ -18,13 +18,6 @@ function BookmarkList() {
     dispatch(fetchBookmarks());
   }, [dispatch]);
 
-  const log = {
-    'bookmarks': bookmarks, 
-    'loading': loading, 
-    'error': error,
-    'currentPage': currentPage  
-  }
-  console.log(log)
 
   // Обработчик изменения значения поиска
   const handleSearchChange = (value) => {

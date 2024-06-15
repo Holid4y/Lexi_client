@@ -27,12 +27,6 @@ function Home() {
     dispatch(fetchHome());
   }, [dispatch]);
 
-  const log = {
-    learning_words: learning_words,
-    loading: loading,
-    error: error,
-  };
-  // console.log(log);
 
 
   return (

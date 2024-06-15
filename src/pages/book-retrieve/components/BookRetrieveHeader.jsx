@@ -11,7 +11,6 @@ const BookRetrieveHeader = ({ page }) => {
   const [isBookmarked, setIsBookmarked] = useState(false);
 
   useEffect(() => {
-    console.log(bookmark)
     if (bookmark){
       setIsBookmarked(true);
     } else {
@@ -28,12 +27,10 @@ const BookRetrieveHeader = ({ page }) => {
         targetPage: page,
       }
       dispatch(fetchBookmarksCreateUpdate(data))
-      console.log('update')
     } 
   }, [dispatch, page]);
 
   const handleIconClick = (bookmarkId, bookId, targetPage) => {
-    console.log(bookmarkId, bookId, targetPage)
     if (isBookmarked){
         setIsBookmarked(false);
         dispatch(fetchBookmarksDelete(bookmarkId))

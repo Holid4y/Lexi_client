@@ -14,12 +14,6 @@ const Login = () => {
     dispatch(fetchLogin({ username: username, password: password }));
 
   };
-  const log = {
-    'isAuth': isAuth,
-    'loading': loading, 
-    'error': error,
-  }
-  console.log(log)
 
   return (
     <div className='body-auth'>

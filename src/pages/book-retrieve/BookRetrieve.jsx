@@ -24,19 +24,16 @@ function BookRetrieve() {
     // то делает запрос на сервер
     if (isNext & page != 1) {
       if ((page - 1) % 50 == 0) {
-        console.log("fetch next");
         dispatch(fetchBook({ slug: slug, page: page }));
       }
     } else {
       if (page % 50 == 0) {
-        console.log("fetch prev");
         dispatch(fetchBook({ slug: slug, page: page - 1 }));
       }
     }
   }, [dispatch, page]);
   
   useEffect(() => {
-    console.log("fetch update");
     dispatch(fetchBook({ slug: slug, page: page }));
   }, [dispatch, slug]);
   // ---Создание закладки---

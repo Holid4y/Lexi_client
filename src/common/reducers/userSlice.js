@@ -16,7 +16,6 @@ export const fetchUser = createAsyncThunk(
       });
       const data = await response.json();
       dispatch(bookmarkLoaded(data));
-      console.log(data);
       return data;
     } catch (error) {
       if (error.message === "Unauthorized") {

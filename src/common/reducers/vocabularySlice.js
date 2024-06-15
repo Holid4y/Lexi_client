@@ -15,8 +15,6 @@ export const fetchVocabulary = createAsyncThunk(
         },
       });
       const data = await response.json();
-    //   dispatch(bookmarkLoaded(data));
-    //   console.log(data)
       return data;
        
     } catch (error) {
