@@ -19,6 +19,19 @@ const BookRetrieveHeader = ({ page }) => {
     }
   }, [dispatch, bookmark]);
 
+  useEffect(() => {
+    // если книга добавлена в закладки у пользователя
+    // то на каждой странице обновлять закладку
+    if (bookmark){
+      const data = {
+        bookId: pk,
+        targetPage: page,
+      }
+      dispatch(fetchBookmarksCreateUpdate(data))
+      console.log('update')
+    } 
+  }, [dispatch, page]);
+
   const handleIconClick = (bookmarkId, bookId, targetPage) => {
     console.log(bookmarkId, bookId, targetPage)
     if (isBookmarked){
