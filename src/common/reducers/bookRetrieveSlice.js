@@ -10,7 +10,9 @@ export const fetchBook = createAsyncThunk(
 
     const response = await fetch(url.toString(), {
       method: "GET",
-      ...headers,
+      headers: {
+        ...headers,
+      },
     });
     const data = await response.json();
     dispatch(bookLoaded(data));
@@ -28,7 +30,7 @@ const bookRetrieveSlice = createSlice({
     page_count: null,
     slug: null,
     pages: null,
-
+    bookmark: null,
 
     loading: false,
     error: null,
@@ -42,6 +44,7 @@ const bookRetrieveSlice = createSlice({
       state.page_count = action.payload.page_count;
       state.slug = action.payload.slug;
       state.pages = action.payload.pages;
+      state.bookmark = action.payload.bookmark;
     }
   },
   extraReducers: (builder) => {

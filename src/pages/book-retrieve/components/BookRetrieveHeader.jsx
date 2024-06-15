@@ -1,11 +1,37 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 import { renderResponse } from "../../../../public/urls";
 
 const BookRetrieveHeader = () => {
-  const { title, page_count, author, loading, error } = useSelector((state) => state.book);
+  const dispatch = useDispatch();
+  const { pk, title, page_count, author, bookmark, loading, error } = useSelector((state) => state.book);
+  const [isBookmarked, setIsBookmarked] = useState(false);
 
+  useEffect(() => {
+    console.log(bookmark)
+    if (bookmark){
+      setIsBookmarked(true);
+    } else {
+      setIsBookmarked(false)
+    }
+  }, [dispatch, bookmark]);
+
+  const handleIconClick = (bookmarkId, bookId, targetPage) => {
+    console.log(bookmarkId, bookId, targetPage)
+    if (isBookmarked){
+        setIsBookmarked(false);
+        dispatch(fetchBookmarksDelete(bookmarkId))
+    } else {
+        setIsBookmarked(true);
+        const data = {
+            bookId: bookId,
+            targetPage: targetPage,
+        }
+        dispatch(fetchBookmarksCreateUpdate(data))
+    }
+    
+  };
   return (
     <div className="container mb-4 pt-2">
       <div className="card text-end mb-4 w-100 bg-card-dark">
@@ -14,27 +40,17 @@ const BookRetrieveHeader = () => {
             <h5 className="card-title text-start">
               <b>{renderResponse(title, '...', loading, error)}</b>
             </h5>
-            {/* <input
-              type="checkbox"
-              className="btn-check"
-              id="btn-check-4"
-              autocomplete="off"
-            />
-            <label className="btn" for="btn-check-4">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
-                fill="currentColor"
-                className="bi bi-heart-fill"
-                viewBox="0 0 16 16"
-              >
-                <path
-                  fill-rule="evenodd"
-                  d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314"
-                />
+            <label className="btn" htmlFor="btn-check-4" onClick={() => handleIconClick(bookmark.pk, pk, bookmark.target_page)}>
+            {isBookmarked ? (
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="bi bi-bookmark-fill" viewBox="0 0 16 16">
+                <path d="M2 2v13.5a.5.5 0 0 0 .74.439L8 13.069l5.26 2.87A.5.5 0 0 0 14 15.5V2a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2"/>
               </svg>
-            </label> */}
+            ) : (
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="bi bi-bookmark" viewBox="0 0 16 16">
+                <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1z"/>
+              </svg>
+            )}
+            </label>
           </div>
           <div className="card-text card-text-lr">
             <span>

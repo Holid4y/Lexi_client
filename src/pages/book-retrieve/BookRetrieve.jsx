@@ -25,6 +25,7 @@ function BookRetrieve() {
     if (!pages) {
       console.log("fetch");
       dispatch(fetchBook({ slug: slug, page: page }));
+      return 
     }
 
     // если четная 50 страница,
