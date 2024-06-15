@@ -78,7 +78,7 @@ main{
 
 .btn-primary-auth{
     border-radius: 20px;
-    background-color: var(--btn-primary-auth);
+    background-color: var(--box-shadow-color);
     color: #FFFFFF;
     box-shadow: 0px 0px 10px var(--box-shadow-color);
 }
@@ -99,7 +99,7 @@ footer{
     padding: 5px 10px;
     background-color: var(--input-color);
     border-radius: 10px;
-    box-shadow: 0px 0px 20px var(--btn-primary-auth);
+    box-shadow: 0px 0px 20px var(--box-shadow-color);
 }
 
 .change{
@@ -146,14 +146,16 @@ footer{
 
 .bg-danger{
     box-shadow: 0px 0px 2px rgb(var(--bs-danger-rgb));
+    color: white;
 }
 .bg-success{
     box-shadow: 0px 0px 2px rgb(var(--bs-success-rgb));
+    color: white;
 }
 
 .card a{
     font-size: 18px;
-    color: var(--card-text-book);
+    color: var(--card-text-header);
 }
 
 .book-text{
@@ -265,24 +267,24 @@ footer{
 
 .statistic{
     padding-top: 5px;
-    background-color: #7d86be;
+    background-color: var(--input-color);
 }
 .statistic h4{
     font-size: 30px;
     font-weight: bold;
-    color: var(--bs-body-color);
+    color: var(--card-text-header);
 }
 .statistic span{
     padding: 0px 0px 5px 10px;
     font-size: 12px;
-    color: var(--bs-body-color);
+    color: var(--card-text-header);
 }
 
 .bg-card-dark{
     background: var(--input-color);
 }
 .bg-card-second{
-    background: #7d86be;
+    background: var(--book-text);
 }
 
 .svg-background {
@@ -295,6 +297,10 @@ footer{
 .svg-background svg{
     opacity: .5;
     fill: white;
+}
+
+.color-svg svg{
+    fill: var(--book-text);
 }
 
 .card {
@@ -373,4 +379,17 @@ footer{
 
 .word-history::-webkit-scrollbar {
     display: none;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+input[type='number'] {
+    -moz-appearance: textfield;
+}
+
+
+.box-none{
+    box-shadow: none;
 }

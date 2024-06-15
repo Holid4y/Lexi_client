@@ -9,7 +9,7 @@ function Search({ onChange }) {
       <nav className="navbar dark-nav p-2">
         <form className="d-flex w-100" role="search">
           <input
-            className="form-control w-100"
+            className="form-control w-100 box-none"
             type="search"
             placeholder="Поиск"
             aria-label="Search"

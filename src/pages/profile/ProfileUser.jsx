@@ -8,23 +8,32 @@ import { renderResponse } from "../../../public/urls";
 
 function Profile() {
   const dispatch = useDispatch();
-  const {
-    username,
-    email,
-    activated_email,
-    dark_theme,
-    number_of_false_set,
+  const { username, email, activated_email, dark_theme: initialDarkTheme, number_of_false_set, loading, error } = useSelector((state) => state.user);
 
-    loading,
-    error,
-  } = useSelector((state) => state.user);
+  const [darkTheme, setDarkTheme] = useState(initialDarkTheme);
 
   useEffect(() => {
     dispatch(fetchSettings());
   }, [dispatch]);
 
+  useEffect(() => {
+    const storedTheme = localStorage.getItem('theme');
+    if (storedTheme) {
+      setDarkTheme(storedTheme === 'dark');
+    } else {
+      setDarkTheme(window.matchMedia('(prefers-color-scheme: dark)').matches);
+    }
+  }, []);
+
+  useEffect(() => {
+    const theme = darkTheme ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-bs-theme', theme);
+    localStorage.setItem('theme', theme);
+  }, [darkTheme]);
+
   const handleThemeChange = () => {
-    // тут должен дергать fetchPatchSettings
+    setDarkTheme(!darkTheme);
+    // Здесь можно дергать fetchPatchSettings, если нужно сохранить настройку на сервере
   };
 
   return (
@@ -90,7 +99,7 @@ function Profile() {
               type="checkbox"
               role="switch"
               id="themeSwitch"
-              checked={dark_theme}
+              checked={darkTheme}
               onChange={handleThemeChange}
             />
           </div>

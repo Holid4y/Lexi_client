@@ -39,7 +39,7 @@ function TrainingCard() {
                 <div className="col-12 col-md-6">
                   <Link to="/training/reproduce">
                     <div className="card card-text-lr card-btn overflow-box bg-card-second">
-                        <div className="card-body text-start">
+                        <div className="card-body text-start text-white">
                           <span>Выбор ответа</span>
                         </div>
                         <div className="svg-background">
@@ -54,7 +54,7 @@ function TrainingCard() {
                   {/* <span className="book-text ps-4 pe-1">12</span> */}
                   <Link to="/training/recognize">
                     <div className="card mt-auto card-text-lr card-btn overflow-box bg-card-second">
-                      <div className="card-body text-start">
+                      <div className="card-body text-start text-white">
                         <span>Воспроизведение</span>
                       </div>
                       <div className="svg-background">
