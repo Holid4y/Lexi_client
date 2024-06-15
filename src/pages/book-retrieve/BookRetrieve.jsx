@@ -22,7 +22,6 @@ function BookRetrieve() {
   useEffect(() => {
     // если store пустой
     // то делает запрос на сервер
-    console.log('useEffect')
     if (!pages) {
       console.log("fetch");
       dispatch(fetchBook({ slug: slug, page: page }));
@@ -44,10 +43,6 @@ function BookRetrieve() {
     }
   }, [dispatch, slug, page]);
   
-  useEffect(() => {
-    // если к книге обращаються по другому slug, то надо обновить стэйт
-    dispatch(fetchBook({ slug: slug, page: page }));
-  }, [dispatch, slug]);
 
   // ---Создание закладки---
 
