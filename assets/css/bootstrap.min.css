@@ -90,6 +90,7 @@
   --box-shadow-color: #E5E9F0; /* Цвет тени блоков */
   --input-color: #FFFFFF; /* Цвет блоков */
   --card-text-header: #5E677C; /* Цвет текста card */
+  --disabled-bg: #ced5db;
   --book-text: #A2ABE3;
   --bs-body-bg-rgb: 255, 255, 255;
   --bs-emphasis-color: #000;
@@ -142,6 +143,7 @@
   --box-shadow-color: #292640; /* Цвет тени блоков */
   --input-color: #35324E; /* Цвет блоков */
   --card-text-header: #FFFFFF; /* Цвет текста card */
+  --disabled-bg: #1f1d2e;
   --bs-body-color-rgb: 222, 226, 230;
   --book-text: #A2ABE3;
   --bs-body-bg-rgb: 33, 37, 41;
@@ -2063,7 +2065,7 @@ progress {
   opacity: 1;
 }
 .form-control:disabled {
-  background-color: var(--bs-secondary-bg);
+  background-color: var(--disabled-bg);
   opacity: 1;
 }
 .form-control::-webkit-file-upload-button {
