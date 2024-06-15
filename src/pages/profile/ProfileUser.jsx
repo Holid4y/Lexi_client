@@ -33,15 +33,15 @@ function Profile() {
         <nav className="navbar dark-nav">
           <div className="container-fluid">
             <span className="navbar-brand">{renderResponse(username, '...', loading, error)}</span>
-            <Link class="text-danger" to="/login">
+            <Link className="text-danger" to="/login">
               Выйти
             </Link>
           </div>
         </nav>
       </div>
       <main className="container px-4">
-        <div className="mb-3">
-          <label for="login" className="form-label">
+        {/* <div className="mb-3">
+          <label htmlFor="login" className="form-label">
             Login
           </label>
           <input
@@ -50,9 +50,9 @@ function Profile() {
             id="login"
             value={renderResponse(username, '', loading, error)}
           />
-        </div>
+        </div> */}
         <div className="mb-3">
-          <label for="email" className="form-label">
+          <label htmlFor="email" className="form-label">
             Email
           </label>
           <input
@@ -70,7 +70,7 @@ function Profile() {
         </div>
 
         <div className="mb-4">
-          <label for="password" className="form-label">
+          <label htmlFor="password" className="form-label">
             Пароль
           </label>
           <input

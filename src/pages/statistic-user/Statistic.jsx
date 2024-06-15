@@ -23,19 +23,19 @@ function Statistic() {
 
   return (
     <div>
-      <div class="container sticky-top mb-4 pt-2">
-        <nav class="navbar dark-nav">
-          <div class="container-fluid">
-            <a class="navbar-brand" href="#">
+      <div className="container sticky-top mb-4 pt-2">
+        <nav className="navbar dark-nav">
+          <div className="container-fluid">
+            <a className="navbar-brand" href="#">
               Статистика
             </a>
           </div>
         </nav>
       </div>
 
-      <main class="container px-4">
-        <h5 class="mb-3">Уровни узнаваемости</h5>
-        <div class="row">
+      <main className="container px-4">
+        <h5 className="mb-3">Уровни узнаваемости</h5>
+        <div className="row">
           {recognize.length > 0 ? (
             recognize.map((countWords, index) => (
               <Block countWords={countWords} index={index} key={index} />
@@ -47,8 +47,8 @@ function Statistic() {
           )}
         </div>
 
-        <h5 class="mb-3">Уровни воспроизведения</h5>
-        <div class="row mb-4">
+        <h5 className="mb-3">Уровни воспроизведения</h5>
+        <div className="row mb-4">
         {reproduce.length > 0 ? (
             reproduce.map((countWords, index) => (
               <Block countWords={countWords} index={index} key={index} />
@@ -60,11 +60,11 @@ function Statistic() {
           )}
         </div>
 
-        <Link to="/lvl-settings" class="form-control mb-4 py-2">
+        <Link to="/lvl-settings" className="form-control mb-4 py-2">
           <span>Настроить уровни словаря</span>
         </Link>
 
-        <Link to="/word-list" class="btn btn-primary w-100 mb-3">
+        <Link to="/word-list" className="btn btn-primary w-100 mb-3">
           <span>Все слова</span>
         </Link>
       </main>
