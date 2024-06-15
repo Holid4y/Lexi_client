@@ -20,19 +20,11 @@ function BookRetrieve() {
   const { slug, page } = useParams();
 
   useEffect(() => {
-    // если store пустой
+    // если четная 50 страница и не равно первой,
     // то делает запрос на сервер
-    if (!pages) {
-      console.log("fetch");
-      dispatch(fetchBook({ slug: slug, page: page }));
-      return 
-    }
-
-    // если четная 50 страница,
-    // то делает запрос на сервер
-    if (isNext) {
+    if (isNext & page != 1) {
       if ((page - 1) % 50 == 0) {
-        console.log("fetch");
+        console.log("fetch next");
         dispatch(fetchBook({ slug: slug, page: page }));
       }
     } else {
@@ -41,9 +33,12 @@ function BookRetrieve() {
         dispatch(fetchBook({ slug: slug, page: page - 1 }));
       }
     }
-  }, [dispatch, slug, page]);
+  }, [dispatch, page]);
   
-
+  useEffect(() => {
+    console.log("fetch update");
+    dispatch(fetchBook({ slug: slug, page: page }));
+  }, [dispatch, slug]);
   // ---Создание закладки---
 
   // Когда зарегестрированный пользователь нажимает
