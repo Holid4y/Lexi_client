@@ -1,9 +1,8 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 const Pages = ({ page }) => {
   const { pages } = useSelector((state) => state.book);
-  console.log(pages)
   // принимает число и возвращает остаток от деления
   function remainder(num) {
     return num % 50;
