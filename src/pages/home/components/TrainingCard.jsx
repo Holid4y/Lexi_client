@@ -35,7 +35,7 @@ function TrainingCard() {
               Тренировка слов на сегодня
             </div> */}
             <div className="card-body">
-              <p className="text-start mb-0 row g-3">
+              <div className="text-start mb-0 row g-3">
                 <div className="col-12 col-md-6">
                   <Link to="/training/reproduce">
                     <div className="card card-text-lr card-btn overflow-box bg-card-second">
@@ -66,7 +66,7 @@ function TrainingCard() {
                     </div>
                   </Link>
                 </div>
-              </p>
+              </div>
             </div>
           </div>
       </div>
