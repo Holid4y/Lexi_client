@@ -294,12 +294,12 @@ footer{
 .statistic h4{
     font-size: 30px;
     font-weight: bold;
-    color: #fff;
+    color: #dee2e6;
 }
 .statistic span{
     padding: 0px 0px 5px 10px;
     font-size: 12px;
-    color: #fff;
+    color: #dee2e6;
 }
 
 .bg-card-dark{
