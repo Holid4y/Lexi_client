@@ -96,27 +96,13 @@ function BookRetrieve() {
     return (
       <ul className="pagination">
         <li className={`page-item ${currentPageIndex === 1 ? "disabled" : ""}`}>
-          <a
-            className="page-link text-white"
-            href="#"
-            aria-label="Previous"
-            onClick={() => handlePageChange(currentPageIndex - 1)}
-          >
+          <a className="page-link text-white" href="#" aria-label="Previous" onClick={() => handlePageChange(currentPageIndex - 1)} >
             <span aria-hidden="true">&laquo;</span>
           </a>
         </li>
         {pages}
-        <li
-          className={`page-item ${
-            currentPageIndex === totalPages ? "disabled" : ""
-          }`}
-        >
-          <a
-            className="page-link text-white"
-            href="#"
-            aria-label="Next"
-            onClick={() => handlePageChange(currentPageIndex + 1)}
-          >
+        <li className={`page-item ${ currentPageIndex === totalPages ? "disabled" : "" }`} >
+          <a className="page-link text-white" href="#" aria-label="Next" onClick={() => handlePageChange(currentPageIndex + 1)} >
             <span aria-hidden="true">&raquo;</span>
           </a>
         </li>
@@ -129,16 +115,10 @@ function BookRetrieve() {
       <BookRetrieveHeader page={page}/>
 
       {loading ? (
-        <p>Loading...</p>
-      ) : (
+        <p>Loading...</p> ) : (
         <>
           {pages && <Pages page={page} />}
-          <PaginationButton
-            page={page}
-            page_count={page_count}
-            slug={slug}
-            setIsNext={setIsNext}
-          />
+          <PaginationButton page={page} page_count={page_count} slug={slug} setIsNext={setIsNext} />
         </>
       )}
     </div>

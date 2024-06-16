@@ -101,6 +101,17 @@ footer{
     border-radius: 10px;
     box-shadow: 0px 0px 20px var(--box-shadow-color);
 }
+.dark-nav-vertical{
+    padding: 5px 10px;
+    background-color: var(--input-color);
+    border-radius: 10px;
+    box-shadow: 0px 0px 20px var(--box-shadow-color);
+    width: 60px;
+    height: 500px;
+    position: absolute;
+    left: -25%;
+    bottom: calc(50vh - 200px);
+}
 
 .change{
     float: right;
@@ -290,21 +301,6 @@ footer{
     cursor: pointer;
 }
 
-.statistic{
-    padding-top: 5px;
-    background-color: var(--book-text);
-}
-.statistic h4{
-    font-size: 30px;
-    font-weight: bold;
-    color: white;
-}
-.statistic span{
-    padding: 0px 0px 5px 10px;
-    font-size: 12px;
-    color: white;
-}
-
 .bg-card-dark{
     background: var(--input-color);
 }
@@ -417,4 +413,54 @@ input[type='number'] {
 
 .box-none{
     box-shadow: none;
+}
+
+.pagination-position{
+    width: 200px;
+    position: fixed;
+    bottom: 75px;
+    left: calc(50% - 100px);
+    opacity: .4;
+    transition: .5s;
+}
+.pagination-position:hover{
+    width: 200px;
+    position: fixed;
+    bottom: 75px;
+    left: calc(50% - 100px);
+    opacity: 1;
+}
+
+.btn-plus-minus{
+    background-color: var(--input-color);
+}
+.btn-plus-minus:hover{
+    background-color: var(--disabled-bg);
+}
+
+
+.statistic{
+    padding-top: 5px;
+    background-color: var(--book-text);
+}
+.statistic h4{
+    font-size: 30px;
+    font-weight: bold;
+    color: white;
+}
+.statistic span{
+    padding: 0px 0px 5px 10px;
+    font-size: 12px;
+    color: white;
+}
+
+
+.collapse {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease-out;
+}
+  
+.collapse.show {
+    max-height: 500px; /* Adjust to the maximum height of your content */
 }
