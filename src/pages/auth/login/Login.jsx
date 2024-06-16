@@ -33,14 +33,14 @@ const Login = () => {
               </div>
 
               <div className="mb-5">
-                  <label for="password" className="form-label">Пароль</label><span className="change"><a href="/html/change_pass.html">Забыл пароль</a></span>
+                  <label for="password" className="form-label">Пароль</label><span className="change link-color"><a href="/html/change_pass.html">Забыл пароль</a></span>
                   <input type="password" className="form-control py-2-5" id="password" value={password} onChange={(e) => setPassword(e.target.value)} />
               </div>
 
               <div className="text-center">
                   <a type="submit" onClick={handleLogin} className="btn btn-lg btn-primary-auth px-5 mb-2">Войти</a>
-                  <p className="fs-8">
-                      <span>Не зарегистрированы?</span>
+                  <p className="fs-8 link-color">
+                      <span className='pe-2'>Не зарегистрированы?</span>
                       <a href="/html/register.html">Регистрация</a>
                   </p>
               </div>
