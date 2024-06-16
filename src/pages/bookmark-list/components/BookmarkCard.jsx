@@ -25,8 +25,9 @@ const BookmarkCard = ({ bookmark }) => {
   };
 
   return (
-    <Link to={`/book/${bookmark.book_cover.slug}/${bookmark.target_page}`} className="col-12 col-md-6">
+    <div className="col-12 col-md-6">
       <div className="card text-end bg-card-dark w-100">
+        <Link to={`/book/${bookmark.book_cover.slug}/${bookmark.target_page}`}>
           <div className="card-body">
               <h5 className="card-title text-start mb-3"><b>{bookmark.book_cover.title}</b></h5>
               <div className="card-text card-text-lr">
@@ -34,7 +35,7 @@ const BookmarkCard = ({ bookmark }) => {
                   <span>{bookmark.book_cover.author}</span>
               </div>
           </div>
-        
+        </Link>
         {/* на это надо нажимать и должна меняться иконка */}
         <span className="position-absolute translate-middle mark" onClick={() => handleIconClick(bookmark.pk, bookmark.book_cover.book_id, bookmark.target_page)}>
         {isBookmarked ? (
@@ -47,9 +48,9 @@ const BookmarkCard = ({ bookmark }) => {
             </svg>
           )}
         </span>
-        
       </div>
-    </Link>
+    </div>
+    
     
   );
 };
