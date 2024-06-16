@@ -204,16 +204,38 @@ footer{
     background-color: var(--input-color);
     border-radius: 8px;
     outline: none;
-    transition: transform .5s;
+    transition: transform .3s;
 }
 
-.nav-link:hover{
-    outline: 3px solid var(--bs-body-bg);
-    transform: translateY(-10px);
+.nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 50%;
+    background: var(--book-text);
+    transition: width 0.3s, height 0.3s;
 }
-.nav-link.active_link{
-    outline: 3px solid var(--bs-body-bg);
-    transform: translateY(-10px);
+
+.nav-link:hover::after {
+    width: 8px;
+    height: 8px;
+}
+
+.nav-link:hover {
+    transform: translateY(-5px);
+}
+
+.nav-link.active_link::after {
+    width: 8px;
+    height: 8px;
+}
+
+.nav-link.active_link {
+    transform: translateY(-5px);
 }
 
 
