@@ -48,19 +48,32 @@ function BookmarkList() {
           ) : (
             <>
               {filteredBookmarks && filteredBookmarks.length > 0 ? (
-                filteredBookmarks.map((bookmark, index) => (
-                  <BookmarkCard bookmark={bookmark} key={index} />
-                ))
+                <>
+                  {filteredBookmarks.map((bookmark, index) => ( <BookmarkCard bookmark={bookmark} key={index} /> ))}
+                  <div className="pagination-position">
+                      <button type="button" className="btn btn-primary px-4" data-bs-toggle="modal" data-bs-target="#exampleModal1"> Добавить книгу </button>
+                  </div>
+                </>
               ) : (
                 <div className="text-center mt-5">
-                  <h4>У вас пока что нет книг в избранном 😔</h4>
+                  <div className="px-4 pt-5 mt-5 text-center">
+                    <h1 className="fw-bold mt-3 text-body-emphasis">У вас пока что нет книг в избранном 😔</h1>
+                    <div className="col-lg-8 mx-auto">
+                      <p className="lead mb-4">Вы можете выбрать книгу из предложенного списка, загрузить собственный файл или написать текст непосредственно нажав на кнопку 'Добавить книгу'</p>
+                      <div className="d-grid gap-2 d-sm-flex justify-content-sm-center mb-5">
+                        <button type="button" className="btn btn-primary px-4" data-bs-toggle="modal" data-bs-target="#exampleModal1">Добавить книгу</button>
+                        <Link to="/books" className="btn btn-outline-secondary px-4">Выбрать из списка</Link>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               )}
             </>
           )}
         </div>
-        <AddBook />
       </main>
+      {/* Модальное окно */}
+      <AddBook/>
     </div>
   );
 }
