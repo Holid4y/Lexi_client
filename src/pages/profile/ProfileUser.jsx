@@ -80,18 +80,6 @@ function Profile() {
           <span>Настроить уровни словаря</span>
         </Link>
 
-        <div className="form-control mb-3 py-2 d-flex justify-content-between align-items-center">
-          <span>Продвинутое тестирование</span>
-          <div className="form-check form-switch">
-            <input
-              className="form-check-input"
-              type="checkbox"
-              role="switch"
-              id="test_check"
-            />
-          </div>
-        </div>
-
         <span className="ps-2">Кол-во ложных вариантов</span>
         <div className="input-group mb-2">
           <input

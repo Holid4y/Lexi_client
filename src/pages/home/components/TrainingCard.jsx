@@ -55,7 +55,7 @@ function TrainingCard() {
                   <Link to="/training/recognize">
                     <div className="card mt-auto card-text-lr card-btn overflow-box bg-card-second">
                       <div className="card-body text-start text-white">
-                        <span>Воспроизведение</span>
+                        <span>Узнаваемость</span>
                       </div>
                       <div className="svg-background">
                         <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" className="bi bi-keyboard" viewBox="0 0 16 16" >

@@ -137,26 +137,6 @@ footer{
     height: 40px;
     margin: 0px 6px;
 }
-.block_week:hover .additional-text{
-    color: #fff;
-    background-color: #5b5e70;
-}
-.block_week:active .additional-text{
-    color: #fff;
-    background-color: #5b5e70;
-}
-/* Стили для дополнительного текста */
-.additional-text {
-    position: absolute;
-    top: 100%;
-    padding: 2px 5px;
-    border-radius: 4px;
-    text-align: center;
-    margin-top: 5px;
-    color: transparent;
-    background-color: transparent;
-    transition: .3s linear;
-}
 
 .bg-danger{
     box-shadow: 0px 0px 2px rgb(var(--bs-danger-rgb));
@@ -179,7 +159,7 @@ footer{
 }
 
 .hover-text-opacity #wordsToLearn {
-    opacity: 0;
+    opacity: .4;
     transition: opacity 0.5s ease;
 }
 
@@ -454,7 +434,6 @@ input[type='number'] {
     color: white;
 }
 
-
 .collapse {
     max-height: 0;
     overflow: hidden;
@@ -462,5 +441,9 @@ input[type='number'] {
 }
   
 .collapse.show {
-    max-height: 500px; /* Adjust to the maximum height of your content */
+    max-height: 500px;
+}
+
+.modal-md{
+    max-width: 400px;
 }

@@ -7,6 +7,7 @@ import { fetchBookmarks, fetchBookmarksDelete } from "../../common/reducers/book
 import Search from "../../common/components/Search";
 import Skeleton from "./components/Skeleton";
 import BookmarkCard from "./components/BookmarkCard";
+import AddBook from "./components/AddBook";
 
 function BookmarkList() {
   const dispatch = useDispatch();
@@ -49,6 +50,7 @@ function BookmarkList() {
               ))) ||
             (loading ? <Skeleton /> : <p>Error: {error}</p>)}
         </div>
+        <AddBook />
       </main>
     </div>
   )
