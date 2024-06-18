@@ -13,6 +13,11 @@ const BookRetrieveHeader = ({ page }) => {
   useEffect(() => {
     if (bookmark){
       setIsBookmarked(true);
+      const data = {
+        bookId: pk,
+        targetPage: page,
+      }
+      dispatch(fetchBookmarksCreateUpdate(data))
     } else {
       setIsBookmarked(false)
     }
