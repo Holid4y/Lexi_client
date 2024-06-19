@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { useParams } from "react-router-dom";
-import { Link } from "react-router-dom";
 
 import { fetchBook } from "../../common/reducers/bookRetrieveSlice";
 import { fetchBookmarksCreateUpdate } from "../../common/reducers/bookmarkSlice";

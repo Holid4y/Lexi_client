@@ -39,7 +39,7 @@ function Profile() {
             type="email"
             className="form-control py-2-5 mb-2"
             id="email"
-            value={renderResponse(email, '', loading, error)}
+            defaultValue={renderResponse(email, '', loading, error)}
           />
           <span className="text-danger mb-4 ps-2">Почта не подтверждена</span>
           <span className="change pe-2">
@@ -58,7 +58,7 @@ function Profile() {
             className="form-control py-2-5"
             id="password"
             disabled
-            value="1234567890"
+            defaultValue="1234567890"
           />
         </div>
 
@@ -80,24 +80,12 @@ function Profile() {
           <span>Настроить уровни словаря</span>
         </Link>
 
-        <div className="form-control mb-3 py-2 d-flex justify-content-between align-items-center">
-          <span>Продвинутое тестирование</span>
-          <div className="form-check form-switch">
-            <input
-              className="form-check-input"
-              type="checkbox"
-              role="switch"
-              id="test_check"
-            />
-          </div>
-        </div>
-
         <span className="ps-2">Кол-во ложных вариантов</span>
         <div className="input-group mb-2">
           <input
             type="number"
             className="form-control py-2"
-            value="4"
+            defaultValue="4"
           />
           <button className="btn btn-plus-minus" onClick={() => handleIncrementLevel(index)} type="button">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" className="bi bi-plus" viewBox="0 0 16 16">
@@ -116,7 +104,7 @@ function Profile() {
           <input
             type="number"
             className="form-control py-2"
-            value="10"
+            defaultValue="10"
           />
           <button className="btn btn-plus-minus" onClick={() => handleIncrementLevel(index)} type="button">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" className="bi bi-plus" viewBox="0 0 16 16">
