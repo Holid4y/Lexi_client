@@ -1,15 +1,18 @@
 import React, {useEffect} from "react";
 
 import { useDispatch, useSelector } from "react-redux";
-// import { fetchVocabulary } from "../../common/reducers/vocabularySlice";
+import { fetchWordGet } from "../../../common/reducers/wordSlice";
 
-function BlockContent() {
+function BlockContent({ pk }) {
   const dispatch = useDispatch();
-//   const { words, loading, error } = useSelector((state) => state.vocabulary);
+  const { translations, synonyms, meanings, loading, error } = useSelector((state) => state.word);
 
   useEffect(() => { 
-    console.log('init')
-  }, []);
+    console.log('init', pk)
+    dispatch(fetchWordGet(pk))
+  }, [dispatch]);
+
+  console.log(pk, translations, synonyms, meanings)
   return (
     <>
       <p>

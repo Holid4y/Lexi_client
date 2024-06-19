@@ -16,7 +16,7 @@ function Block({ word, index, toggleCardBody, visibleCardBodies }) {
         <span>{word.part_of_speech}</span>
         
         <div className={`card-body p-3 collapse text-white ${visibleCardBodies[index] ? "show" : ""}`}>
-          {visibleCardBodies[index] ? <BlockContent /> : ''}
+          {visibleCardBodies[index] ? <BlockContent pk={word.pk}/> : ''}
         </div> 
       </div>
     </div>

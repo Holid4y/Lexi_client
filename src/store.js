@@ -9,6 +9,7 @@ import userReducer from './common/reducers/userSlice';
 import homeReducer from './common/reducers/homeSlice';
 import vocabularyReducer from './common/reducers/vocabularySlice';
 import themeReducer from './common/reducers/themeSlice';
+import wordReducer from './common/reducers/wordSlice'
 
 export const store = configureStore({
   reducer: {
@@ -21,6 +22,7 @@ export const store = configureStore({
     home: homeReducer,
     vocabulary: vocabularyReducer,
     theme: themeReducer,
+    word: wordReducer
   },
 });
 
