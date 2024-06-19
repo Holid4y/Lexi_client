@@ -1,6 +1,34 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+
+import Masonry from "masonry-layout";
+import imagesLoaded from "imagesloaded";
+
+import { useDispatch, useSelector } from "react-redux";
+import { fetchVocabulary } from "../../common/reducers/vocabularySlice";
 
 function WordList() {
+  const dispatch = useDispatch();
+  const { words, loading, error } = useSelector((state) => state.vocabulary);
+  const [visibleCardBodies, setVisibleCardBodies] = useState([]);
+
+  useEffect(() => {
+    const grid = document.querySelector('.row');
+    imagesLoaded(grid, () => {
+      new Masonry(grid, {
+        itemSelector: '.col',
+        percentPosition: true,
+      });
+    });
+    dispatch(fetchVocabulary())
+  }, [dispatch, visibleCardBodies]);
+
+  const toggleCardBody = (index) => {
+    setVisibleCardBodies((prev) => {
+      const newVisibleCardBodies = [...prev];
+      newVisibleCardBodies[index] = !newVisibleCardBodies[index];
+      return newVisibleCardBodies;
+    });
+  };
   return (
     <div>
         <div className="container sticky-top mb-4 pt-2">
@@ -21,7 +49,7 @@ function WordList() {
                 </div>
                 <div className="collapse mb-3" id="collapse_Hello">
                     <div className="card card-body">
-                        <h4>Привет</h4>
+                        <h4>Привет (гл.)</h4>
                         <span>следить, увидеть, видеть, понаблюдать, смотреть, рассматривать, пронаблюдать, соблюдать, придерживаться, соблюсти, следовать, прослеживать, проследить, блюсти</span>
                         <hr/>
                         <span>watch, see, keep watch, notice, note, follow, adhere, keep, trace</span>
@@ -40,10 +68,13 @@ function WordList() {
                 </div>
                 <div className="collapse mb-3" id="collapse_White">
                     <div className="card card-body">
-                        <h4>Белый</h4>
-                        <span>следить, увидеть, видеть, понаблюдать, смотреть, рассматривать, пронаблюдать, соблюдать, придерживаться, соблюсти, следовать, прослеживать, проследить, блюсти</span>
+                        <h4>Белый (прил.)</h4>
+                        <span>белый, белоснежный, беленький</span> 
+                        <h6>Связанные слова</h6>
+                        <span>pale, gray, blank, clean</span>
+                        <h6>Антонимы</h6>
+                        <span>черный, грязный</span>
                         <hr/>
-                        <span>watch, see, keep watch, notice, note, follow, adhere, keep, trace</span>
                         <div className="row mt-3">
                             <div className="col-8"><button className="btn btn-danger">Удалить</button></div>
                             <div className="col-2">lvl - 3</div>

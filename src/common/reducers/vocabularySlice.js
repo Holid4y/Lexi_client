@@ -15,6 +15,7 @@ export const fetchVocabulary = createAsyncThunk(
         },
       });
       const data = await response.json();
+      dispatch(vocabularyLoaded(data))
       return data;
        
     } catch (error) {
@@ -53,7 +54,7 @@ const vocabularySlice = createSlice({
   name: "vocabulary",
   initialState: {
     // vocabulary
-    //
+    words: null,
     // stats
     recognize: [],
     reproduce: [],
@@ -65,6 +66,9 @@ const vocabularySlice = createSlice({
     vocabularyStatsLoaded: (state, action) => {
       state.recognize = action.payload.recognize;
       state.reproduce = action.payload.reproduce;
+    },
+    vocabularyLoaded: (state, action) => {
+      state.words = action.payload;
     }
   },
   extraReducers: (builder) => {
@@ -78,9 +82,19 @@ const vocabularySlice = createSlice({
       .addCase(fetchVocabularyStats.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;
+      })
+      .addCase(fetchVocabulary.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(fetchVocabulary.fulfilled, (state) => {
+        state.loading = false;
+      })
+      .addCase(fetchVocabulary.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message;
       });
   },
 });
 
-export const { vocabularyStatsLoaded } = vocabularySlice.actions;
+export const { vocabularyStatsLoaded, vocabularyLoaded } = vocabularySlice.actions;
 export default vocabularySlice.reducer;
