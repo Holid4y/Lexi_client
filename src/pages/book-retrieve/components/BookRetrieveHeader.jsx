@@ -5,34 +5,33 @@ import { renderResponse } from "../../../../public/urls";
 
 import { fetchBookmarksDelete, fetchBookmarksCreateUpdate } from "../../../common/reducers/bookmarkSlice";
 
-const BookRetrieveHeader = ({ page }) => {
+const BookRetrieveHeader = ({ pk, page }) => {
   const dispatch = useDispatch();
-  const { pk, title, page_count, author, bookmark, loading, error } = useSelector((state) => state.book);
+  const { title, page_count, author, bookmark, loading, error } = useSelector((state) => state.book);
   const [isBookmarked, setIsBookmarked] = useState(false);
+  const [previousPage, setPreviousPage] = useState(page);
 
   useEffect(() => {
+    // проверяет, есть ли закладка на этой странице
     if (bookmark){
       setIsBookmarked(true);
-      const data = {
-        bookId: pk,
-        targetPage: page,
-      }
-      dispatch(fetchBookmarksCreateUpdate(data))
     } else {
       setIsBookmarked(false)
     }
-  }, [dispatch, bookmark]);
+  }, [bookmark]);
 
   useEffect(() => {
-    // если книга добавлена в закладки у пользователя
-    // то на каждой странице обновлять закладку
-    if (bookmark){
-      const data = {
-        bookId: pk,
-        targetPage: page,
+    // Запускается только после изменения страницы
+    if (page !== previousPage) {
+      if (isBookmarked){
+        const data = {
+          bookId: pk,
+          targetPage: page,
+        }
+        dispatch(fetchBookmarksCreateUpdate(data))
       }
-      dispatch(fetchBookmarksCreateUpdate(data))
-    } 
+      setPreviousPage(page);
+    }
   }, [dispatch, page]);
 
   const handleIconClick = (bookmarkId, bookId, targetPage) => {
