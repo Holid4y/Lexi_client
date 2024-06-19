@@ -25,7 +25,7 @@ function BookList() {
     setSearchValue(value);
   };
 
-
+  console.log(books)
   return (
     <div className="align-items-center">
       <Search onChange={handleSearchChange} />
@@ -34,7 +34,7 @@ function BookList() {
         {(books && books.results && books.results
         .filter((book) => book.title.toLowerCase().includes(searchValue.toLowerCase()) )
         .map((book, index) => (
-            <Link key={`${book.pk}-${index}`} to={`/book/${book.slug}/${1}`} className="col-12 col-md-6">
+            <Link key={`${book.pk}-${index}`} to={`/book/${book.slug}/${book.bookmark && book.bookmark.target_page || 1}`} className="col-12 col-md-6">
               <BookCard book={book} />
             </Link>
           ))) ||

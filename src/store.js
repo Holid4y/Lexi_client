@@ -8,6 +8,7 @@ import authReducer from './common/reducers/authSlice';
 import userReducer from './common/reducers/userSlice';
 import homeReducer from './common/reducers/homeSlice';
 import vocabularyReducer from './common/reducers/vocabularySlice';
+import themeReducer from './common/reducers/themeSlice';
 
 export const store = configureStore({
   reducer: {
@@ -18,7 +19,8 @@ export const store = configureStore({
     auth: authReducer,
     user: userReducer,
     home: homeReducer,
-    vocabulary: vocabularyReducer
+    vocabulary: vocabularyReducer,
+    theme: themeReducer,
   },
 });
 

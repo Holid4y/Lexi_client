@@ -31,7 +31,6 @@ const Pages = ({ page }) => {
     <div>
       <main className="container px-4">
         <div className="book-text-read">{renderParagraphs()}</div>
-        
       </main>
     </div>
   );

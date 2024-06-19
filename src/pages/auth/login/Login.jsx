@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { fetchLogin } from '../../../common/reducers/authSlice';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -26,23 +27,24 @@ const Login = () => {
 
       <main className="form-signin w-100 m-auto">
           <form>
-              <h2 className="mb-5 text-center">Войти в аккаунт</h2>
+              <h2 className="mb-4 text-center">Войти в аккаунт</h2>
               <div className="mb-2">
                   <label for="login" className="form-label">Login или Email</label>
                   <input type="text" className="form-control py-2-5" id="login" value={username} onChange={(e) => setUsername(e.target.value)} />
               </div>
 
-              <div className="mb-5">
-                  <label for="password" className="form-label">Пароль</label><span className="change"><a href="/html/change_pass.html">Забыл пароль</a></span>
+              <div className="mb-4">
+                  <label for="password" className="form-label">Пароль</label><span className="change link-color"><a href="/html/change_pass.html">Забыл пароль</a></span>
                   <input type="password" className="form-control py-2-5" id="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+                  <p className="fs-8 link-color text-center mt-2">
+                      <span className='pe-2'>Не зарегистрированы?</span>
+                      <Link to="/register">Регистрация</Link>
+                  </p>
               </div>
 
               <div className="text-center">
                   <a type="submit" onClick={handleLogin} className="btn btn-lg btn-primary-auth px-5 mb-2">Войти</a>
-                  <p className="fs-8">
-                      <span>Не зарегистрированы?</span>
-                      <a href="/html/register.html">Регистрация</a>
-                  </p>
+                  
               </div>
           </form>
       </main>
