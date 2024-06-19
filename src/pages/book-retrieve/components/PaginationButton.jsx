@@ -1,7 +1,12 @@
 import React, { useRef, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
+import { useDispatch } from "react-redux";
+
+import { fetchBook } from '../../../common/reducers/bookRetrieveSlice';
+
 const PaginationButton = ({ page, page_count, slug, setIsNext }) => {
+  const dispatch = useDispatch();
   const modalRef = useRef(null);
   const navigate = useNavigate();
 
@@ -13,7 +18,12 @@ const PaginationButton = ({ page, page_count, slug, setIsNext }) => {
 
   const handlePageClick = (pageNum) => {
     navigate(`/book/${slug}/${pageNum}`);
+    dispatch(fetchBook({ slug: slug, page: pageNum }));
     modalRef.current.modalInstance.hide();
+  };
+
+  const handleChangePage = (pageNum) => {
+    navigate(`/book/${slug}/${pageNum}`);
   };
 
   const generatePageButtons = () => {
@@ -33,7 +43,6 @@ const PaginationButton = ({ page, page_count, slug, setIsNext }) => {
   return (
     <div>
       <nav className='pagination-position d-flex justify-content-center'>
-        <Link to={`/book/${slug}/${parseInt(page) - 1}`}>
           {page == 1 ? (
             <button className="btn btn-secondary disabled" disabled>
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-caret-left-fill" viewBox="0 0 16 16">
@@ -41,13 +50,15 @@ const PaginationButton = ({ page, page_count, slug, setIsNext }) => {
               </svg>
             </button>
           ) : (
-            <button className="btn btn-primary" onClick={() => setIsNext(false)}>
+            <button className="btn btn-primary" onClick={() => {
+              setIsNext(false);
+              handleChangePage(parseInt(page) - 1);
+            }}>
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-caret-left-fill" viewBox="0 0 16 16">
                 <path d="m3.86 8.753 5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506z"/>
               </svg>
             </button>
           )}
-        </Link>
         
         <button type="button" className="btn btn-secondary mx-2 px-4" data-bs-toggle="modal" data-bs-target="#exampleModal">
           <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" className="bi bi-view-list" viewBox="0 0 16 16">
@@ -55,7 +66,6 @@ const PaginationButton = ({ page, page_count, slug, setIsNext }) => {
           </svg>
         </button>
 
-        <Link to={`/book/${slug}/${parseInt(page) + 1}`}>
           {page_count == page ? (
             <button className="btn btn-secondary disabled" disabled>
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-caret-right-fill" viewBox="0 0 16 16">
@@ -63,13 +73,15 @@ const PaginationButton = ({ page, page_count, slug, setIsNext }) => {
               </svg>
             </button>
           ) : (
-            <button className="btn btn-primary" onClick={() => setIsNext(true)}>
+            <button className="btn btn-primary" onClick={() => {
+              setIsNext(true);
+              handleChangePage(parseInt(page) + 1);
+            }}>
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-caret-right-fill" viewBox="0 0 16 16">
                 <path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/>
               </svg>
             </button>
           )}
-        </Link>
       </nav>
 
       <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" ref={modalRef}>
