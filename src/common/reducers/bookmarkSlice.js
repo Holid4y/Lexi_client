@@ -40,7 +40,6 @@ export const fetchBookmarksCreateUpdate = createAsyncThunk(
         target_page: targetPage,
       }),
     });
-
     if (response.ok) {
       return 
     } else {

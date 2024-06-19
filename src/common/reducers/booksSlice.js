@@ -12,7 +12,10 @@ export const fetchBooks = createAsyncThunk(
     });
     url.search = params.toString();
     const response = await fetch(url.toString(), {
-      method: "GET" 
+      method: "GET",
+      headers: {
+        ...headers,
+      }, 
     }); 
 
     const data = await response.json();
