@@ -22,8 +22,11 @@ function WordList() {
         percentPosition: true,
       });
     });
-    dispatch(fetchVocabulary())
   }, [dispatch, visibleCardBodies]);
+
+  useEffect(() => {
+    dispatch(fetchVocabulary())
+  }, [dispatch]);
 
   const toggleCardBody = (index) => {
     setVisibleCardBodies((prev) => {
