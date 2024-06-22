@@ -30,12 +30,9 @@ function WordHistory() {
       <div className="card mb-4 p-4 word-history">
         <div className="row g-3 px-2">
           {recently_added_words && recently_added_words.map((word, index) => (
-            <div
-              key={index}
-              className="col-12 col-md-6 border-bottom d-flex justify-content-between"
-            >
+            <div key={index} className="col-12 col-md-6 border-bottom d-flex justify-content-between" >
               <span className="text-start">{word.text}</span>
-              <span className="text-end">{getFormattedDate(word.date_added)}</span>
+              <small className="text-end text-secondary">{getFormattedDate(word.date_added)}</small>
             </div>
           ))}
         </div>

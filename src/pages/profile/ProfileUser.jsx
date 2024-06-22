@@ -72,61 +72,46 @@ function Profile() {
           <div className="container-fluid">
             <span className="navbar-brand">{renderResponse(username, '...', loading, error)}</span>
             <Link className="text-danger" to="/login">
-              Выйти
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-door-open-fill me-2" viewBox="0 0 16 16">
+                <path d="M1.5 15a.5.5 0 0 0 0 1h13a.5.5 0 0 0 0-1H13V2.5A1.5 1.5 0 0 0 11.5 1H11V.5a.5.5 0 0 0-.57-.495l-7 1A.5.5 0 0 0 3 1.5V15zM11 2h.5a.5.5 0 0 1 .5.5V15h-1zm-2.5 8c-.276 0-.5-.448-.5-1s.224-1 .5-1 .5.448.5 1-.224 1-.5 1"/>
+              </svg>Выйти
             </Link>
           </div>
         </nav>
       </div>
-      <main className="container px-4">
+      <main className="container">
         <div className="mb-3">
-          <label htmlFor="email" className="form-label">
-            Email
-          </label>
-          <input
-            type="email"
-            className="form-control py-2-5 mb-2"
-            id="email"
-            defaultValue={renderResponse(email, '', loading, error)}
-          />
-          {activated_email ? (
-            ''
-          ):(<>
+          <label htmlFor="email" className="form-label">Email</label>
+          <input type="email" className="form-control py-2-5 mb-2" id="email" defaultValue={renderResponse(email, '', loading, error)}/>
+          {activated_email ? (''):(
+            <>
             <span className="text-danger mb-4 ps-2">Почта не подтверждена</span>
             <span className="change pe-2">
-              <a className="btn btn-primary" href="/html/change_pass.html">
-                Подтвердить
-              </a>
+              <a className="btn btn-primary" href="/html/change_pass.html">Подтвердить</a>
             </span>
             </>)
           }
-          
         </div>
 
         <div className="form-control mb-3 py-2 d-flex justify-content-between align-items-center">
           <span>{darkThemeState == dark_theme ? ('Темная тема') : ('Темная тема (не сохранено)')}</span>
           <div className="form-check form-switch">
-            <input
-              className="form-check-input"
-              type="checkbox"
-              role="switch"
-              id="themeSwitch"
-              checked={darkThemeState}
-              onChange={handleThemeChange}
-            />
+            <input className="form-check-input" type="checkbox" role="switch" id="themeSwitch" checked={darkThemeState} onChange={handleThemeChange} />
           </div>
         </div>
 
-        <Link to="/lvl-settings" className="form-control mb-3 py-2">
-          <span>Настроить уровни словаря</span>
+        <Link to="/lvl-settings" className="form-control mb-3 py-2 d-flex justify-content-between">
+          <span className="text-start">Настроить уровни словаря</span>
+          <span className="text-end">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
+              <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708"/>
+            </svg>
+          </span>
         </Link>
 
         <span className="ps-2">{falseSetLevel == number_of_false_set ? ('Кол-во ложных вариантов') : ('Кол-во ложных вариантов (не сохранено)')}</span>
         <div className="input-group mb-2">
-          <input
-            type="number"
-            className="form-control py-2"
-            defaultValue={falseSetLevel}
-          />
+          <input type="number" className="form-control py-2" defaultValue={falseSetLevel} />
           <button className="btn btn-plus-minus" onClick={() => handleIncrementLevel()} type="button">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" className="bi bi-plus" viewBox="0 0 16 16">
               <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
@@ -140,11 +125,22 @@ function Profile() {
         </div>
 
         { putLoading ? (
-            <small className="bg-success">сохранение</small>
-          ) : null}
-          <button type="text" className="btn btn-primary py-2 w-100" onClick={handleSave}>
-            <span>Сохранить</span>
-          </button>
+            <div className="d-flex justify-content-center mt-4">
+              <button type="text" className="btn btn-primary save-btn py-2 w-50" disabled>
+                <div class="spinner-border spinner-border-sm" role="status">
+                  <span class="visually-hidden">Loading...</span>
+                </div>
+              </button>
+            </div>
+          ) : 
+          <div className="d-flex justify-content-center my-4">
+            <button type="text" className="btn btn-primary save-btn py-2 w-50" onClick={handleSave}>
+              <span><b>Сохранить</b></span>
+            </button>
+          </div>}
+
+          
+          
 
         {/* <span className="ps-2">Кол-во слов в раунде</span>
         <div className="input-group mb-3">

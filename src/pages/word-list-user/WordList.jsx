@@ -39,18 +39,11 @@ function WordList() {
   return (
     <div>
       <Header />
-
-      <main className="container px-4">
-        <div className="row row-cols-1 row-cols-md-2 g-3 position-relative">
+      <main className="container">
+        <div className="row row-cols-2 row-cols-md-2 g-3 position-relative">
           {(words && words
             .map((word, index) => (
-                  <Block 
-                  word={word.word} 
-                  key={index} 
-                  index={index} 
-                  toggleCardBody={toggleCardBody}
-                  visibleCardBodies={visibleCardBodies}
-                  />
+                  <Block  word={word.word}  key={index}  index={index} toggleCardBody={toggleCardBody} visibleCardBodies={visibleCardBodies} />
               ))) ||
               (loading ? 'loading...' : <p>Error: {error}</p>)}
         </div>

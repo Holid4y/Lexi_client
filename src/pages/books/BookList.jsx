@@ -28,7 +28,7 @@ function BookList() {
   return (
     <div className="align-items-center">
       <Search onChange={handleSearchChange} />
-      <main className="container px-4">
+      <main className="container">
         <div className="row g-4">
         {(books && books.results && books.results
         .filter((book) => book.title.toLowerCase().includes(searchValue.toLowerCase()) )

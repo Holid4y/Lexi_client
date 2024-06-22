@@ -8,11 +8,8 @@ const Pagination = () => {
   const dispatch = useDispatch();
   const { books } = useSelector((state) => state.books);
 
-
   function existNextOrPrevious(next) {
-    if (next) {
-      return true;
-    }
+    if (next) { return true; }
     return false;
   }
 
@@ -30,18 +27,10 @@ const Pagination = () => {
 
   return (
     <div className={styles.pagination}>
-      <button
-        onClick={handlePrevPage}
-        disabled={!existNextOrPrevious(books.previous)}
-        className={!existNextOrPrevious(books.previous) ? "disabled" : ""}
-      >
+      <button onClick={handlePrevPage} disabled={!existNextOrPrevious(books.previous)} className={!existNextOrPrevious(books.previous) ? "disabled" : ""}>
         <span>&lt;</span>
       </button>
-      <button
-        onClick={handleNextPage}
-        disabled={!existNextOrPrevious(books.next)}
-        className={!existNextOrPrevious(books.next) ? "disabled" : ""}
-      >
+      <button onClick={handleNextPage} disabled={!existNextOrPrevious(books.next)} className={!existNextOrPrevious(books.next) ? "disabled" : ""} >
         <span>&gt;</span>
       </button>
     </div>

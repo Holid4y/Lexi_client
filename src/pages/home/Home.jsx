@@ -27,7 +27,7 @@ function Home() {
         </div>
       </div>
 
-      <main className="container px-4">
+      <main className="container">
         <InfoCard />
         <TrainingCard />
         <BooksLinkCard />
