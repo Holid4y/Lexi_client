@@ -1,7 +1,12 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+
+import { fetchWordPost } from "../../../common/reducers/wordSlice";
+
+import ViewWord from "./ViewWord";
 
 const Pages = ({ page }) => {
+  const dispatch = useDispatch();
   const { pages } = useSelector((state) => state.book);
   // принимает число и возвращает остаток от деления
   function remainder(num) {
@@ -10,8 +15,8 @@ const Pages = ({ page }) => {
   const getPage = (pages, pageIndex) => {
     return pages[remainder(pageIndex - 1)];
   };
-  function getWord(word) {
-    console.log(word)
+  function handleWordClick(word) {
+    dispatch(fetchWordPost(word))
   }
 
 
@@ -22,9 +27,8 @@ const Pages = ({ page }) => {
         let word = words[i];
         let punctuation = word.match(/[^a-zA-Z0-9]+$/);
         let wordWithoutPunctuation = word.replace(/[^a-zA-Z0-9]+$/, '');
-
         if (wordWithoutPunctuation) {
-            result.push(<span key={i} onClick={() => getWord(wordWithoutPunctuation)}>{wordWithoutPunctuation}</span>);
+            result.push(<span key={i} onClick={() => handleWordClick(wordWithoutPunctuation)}>{wordWithoutPunctuation}</span>);
         }
 
         if (punctuation) {
@@ -62,6 +66,8 @@ const Pages = ({ page }) => {
       <main className="container px-4">
         <div className="book-text-read">{renderParagraphs()}</div>
       </main>
+      {/* ЭТО ВРЕМЕННО */}
+      <ViewWord/>
     </div>
   );
 };

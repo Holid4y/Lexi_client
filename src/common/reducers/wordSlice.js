@@ -15,7 +15,7 @@ export const fetchWordGet = createAsyncThunk(
         },
       });
       const data = await response.json();
-      dispatch(wordLoaded(data));
+      dispatch(wordGetLoaded(data));
       return data;
        
     } catch (error) {
@@ -27,43 +27,30 @@ export const fetchWordGet = createAsyncThunk(
   }
 );
 
-export const fetchBookmarksCreateUpdate = createAsyncThunk(
-  "bookmarks/fetchBookmarksCreateUpdate",
-  async ({ bookId, targetPage }, { dispatch }) => {
-    const url = new URL(host + bookmarks);
-    const response = await fetch(url.toString(), {
-      method: "POST",
-      headers: {
-        ...headers,
-      },
-      body: JSON.stringify({
-        book_id: bookId,
-        target_page: targetPage,
-      }),
-    });
-    if (response.ok) {
-      return 
-    } else {
-      throw new Error(response.statusText);
-    }
-  }
-);
-
-export const fetchBookmarksDelete = createAsyncThunk(
-  "bookmarks/fetchBookmarksDelete",
-  async (bookmarkId, { dispatch }) => {
-    const url = new URL(host + bookmarks + bookmarkId);
-    const response = await fetch(url.toString(), {
-      method: "DELETE",
-      headers: {
-        ...headers,
-      },
-    });
-
-    if (response.status === 204) {
-      return 
-    } else {
-      throw new Error(response.statusText);
+export const fetchWordPost = createAsyncThunk(
+  "word/fetchWordPost",
+  async (word, { dispatch }) => {
+    const url = new URL(host + words);
+    
+    try {
+      const response = await fetch(url.toString(), {
+        method: "POST",
+        headers: {
+          ...headers,
+        }, 
+        body: JSON.stringify({
+          word: word
+        }),
+      });
+      const data = await response.json();
+      dispatch(wordPostLoaded(data));
+      return data;
+       
+    } catch (error) {
+      if (error.message === "Unauthorized") {
+        console.log("Ошибка 401: Unauthorized");
+      }
+      console.log(error)
     }
   }
 );
@@ -83,7 +70,7 @@ const wordSlice = createSlice({
     error: null
   },
   reducers: {
-    wordLoaded: (state, action) => {
+    wordGetLoaded: (state, action) => {
       state.pk = action.payload.pk;
       state.text = action.payload.text;
       state.part_of_speech = action.payload.part_of_speech;
@@ -91,6 +78,16 @@ const wordSlice = createSlice({
       state.translations = action.payload.translations;
       state.synonyms = action.payload.synonyms;
       state.meanings = action.payload.meanings;
+      console.log(action.payload)
+    },
+    wordPostLoaded: (state, action) => {
+      state.pk = action.payload.word.pk;
+      state.text = action.payload.word.text;
+      state.part_of_speech = action.payload.word.part_of_speech;
+      state.transcription = action.payload.word.transcription;
+      state.translations = action.payload.word.translations;
+      state.synonyms = action.payload.word.synonyms;
+      state.meanings = action.payload.word.meanings;
     },
   },
   extraReducers: (builder) => {
@@ -108,5 +105,5 @@ const wordSlice = createSlice({
   },
 });
 
-export const { wordLoaded } = wordSlice.actions;
+export const { wordGetLoaded, wordPostLoaded } = wordSlice.actions;
 export default wordSlice.reducer;
