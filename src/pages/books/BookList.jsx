@@ -25,7 +25,6 @@ function BookList() {
     setSearchValue(value);
   };
 
-  console.log(books)
   return (
     <div className="align-items-center">
       <Search onChange={handleSearchChange} />

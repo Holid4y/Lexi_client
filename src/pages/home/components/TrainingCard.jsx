@@ -4,25 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 function TrainingCard() {
-  //   const { learning_words, upload_books, loading, error } = useSelector(
-  //     (state) => state.home
-  //   );
-
-  //   const checkResponse = (response, loading, error) => {
-  //     if (response) {
-  //       return response;
-  //     }
-  //     if (!response && !loading) {
-  //       return "...";
-  //     }
-  //     if (loading) {
-  //       return "...";
-  //     }
-
-  //     if (error) {
-  //       return "!";
-  //     }
-  //   };
 
   return (
     <div className="row g-4">

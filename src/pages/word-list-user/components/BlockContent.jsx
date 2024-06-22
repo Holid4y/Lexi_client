@@ -8,11 +8,17 @@ function BlockContent({ pk }) {
   const { translations, synonyms, meanings, loading, error } = useSelector((state) => state.word);
 
   useEffect(() => { 
-    console.log('init', pk)
+    console.log('init BlockContent', 'word pk:', pk)
     dispatch(fetchWordGet(pk))
   }, [dispatch]);
 
-  console.log(pk, translations, synonyms, meanings)
+  useEffect(() => { 
+    if (translations){
+      console.log(pk, translations, synonyms, meanings)
+    }
+  }, [translations]);
+
+  
   return (
     <>
       <p>
