@@ -1,71 +1,74 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
-import { fetchDictionaryLevels, fetchPutDictionaryLevels, updateLevels, addLevel, deleteLevel } from "../../common/reducers/userSlice";
+import { fetchSettings, fetchPutSettings, updateLevels, addLevel, deleteLevel } from "../../common/reducers/userSlice";
 
 function lvlSettings() {
   const dispatch = useDispatch();
-  const { levels, loading, error, } = useSelector((state) => state.user);
+  const { username, email, activated_email, number_of_false_set, dark_theme, levels, loading, error, putLoading, putError } = useSelector((state) => state.user);
+  const [levelsState, setLevelsState] = useState()
 
   useEffect(() => {
-    dispatch(fetchDictionaryLevels());
-  }, [dispatch]);
-
-  function handleLevelChange(index, event) {
-    let payload = {
-      levels: levels.map((level, i) =>
-        i === index ? Math.max(1, parseInt(event.target.value)) : level
-      ),
+    if (levels){
+      setLevelsState(levels)
+    }else{
+      dispatch(fetchSettings());
     }
-    dispatch(updateLevels(payload));
-  }
+    
+  }, [dispatch, levels]);
+
+  // console.log(levelsState)
 
   function handleIncrementLevel(index) {
-    let payload = {
-      levels: levels.map((level, i) =>
+    let payload = levelsState.map((level, i) =>
         i === index ? level + 1 : level
-      ),
-    }
-    dispatch(updateLevels(payload));
+      )
+    setLevelsState(payload)
   }
 
   function handleDecrementLevel(index) {
-    let payload = {
-      levels: levels.map((level, i) =>
+    let payload = levelsState.map((level, i) =>
         i === index ? Math.max(1, level - 1) : level
-      ),
-    }
-    dispatch(updateLevels(payload));
+      )
+    setLevelsState(payload)
   }
 
+  // function handleAddLevel() {
+  //   const lastLevel = levels[levels.length - 1]
+  //   dispatch(addLevel({ level: Math.round(lastLevel * 1.5)}));
+  // }
   function handleAddLevel() {
-    const lastLevel = levels[levels.length - 1]
-    dispatch(addLevel({ level: Math.round(lastLevel * 1.5)}));
+    const lastLevel = levelsState[levelsState.length - 1]
+    setLevelsState((levelsState) => [...levelsState, Math.round(lastLevel * 1.5)])
   }
-  function handleDeleteLevel(targetLevel) {
-    dispatch(deleteLevel({ level: targetLevel }));
+  function handleDeleteLevel(index) {
+    setLevelsState(levelsState.filter((_, i) => i !== index));
   }
 
   function handleSave() {
-    dispatch(fetchPutDictionaryLevels(levels))
+    const data = {
+      "username": username,
+      "email": email,
+      "activated_email": activated_email,
+      "settings": {
+          "levels": levelsState,
+          "dark_theme": dark_theme,
+          "number_of_false_set": number_of_false_set
+      }
+    }
+    console.log(data, 'input data')
+    dispatch(fetchPutSettings(data))
   }
-
   const renderLevels = () => {
     return (
       <>
-        {levels && levels.map((level, index) => (
+        {levelsState && levelsState.map((level, index) => (
           <div className="mb-2" key={index}>
             <label htmlFor={`lvl${index}`} className="form-label">
-              Уровень {index + 1}
+              Уровень {index + 1} {levelsState && levelsState[index] == levels[index] ? null : '(не сохранено)' }
             </label>
               <div className="input-group mb-3">
-                  <input
-                    type="number"
-                    className="form-control py-2-5"
-                    id={`lvl${index}`}
-                    value={level}
-                    onChange={(event) => handleLevelChange(index, event)}
-                  />
+                <div className="form-control py-2-5">{level}</div>
                   <button className="btn btn-plus-minus" onClick={() => handleIncrementLevel(index)} type="button">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" className="bi bi-plus" viewBox="0 0 16 16">
                       <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
@@ -115,7 +118,7 @@ function lvlSettings() {
           </button>
         </div>
         <div className="mt-3">
-          {levels && loading ? (
+          {putLoading ? (
             <small className="bg-success">сохранение</small>
           ) : null}
           <button type="text" className="btn btn-primary py-2 w-100" onClick={handleSave}>

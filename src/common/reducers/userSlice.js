@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { host, user, settings, dictionaryLevels } from "../../../public/urls";
+import { host, user, settings } from "../../../public/urls";
 import { headers } from "../../../public/urls";
 
 export const fetchUser = createAsyncThunk(
@@ -28,7 +28,6 @@ export const fetchSettings = createAsyncThunk(
   "user/fetchSettings",
   async (_, { dispatch }) => {
     const url = new URL(host + settings);
-
     try {
       const response = await fetch(url.toString(), {
         method: "GET",
@@ -47,56 +46,10 @@ export const fetchSettings = createAsyncThunk(
   }
 );
 
-export const fetchPatchSettings = createAsyncThunk(
-  "user/fetchPatchSettings",
-  async (_, { dispatch }) => {
-    const url = new URL(host + settings);
-
-    try {
-      const response = await fetch(url.toString(), {
-        method: "PATCH",
-        headers: {
-          ...headers,
-        },
-      });
-      const data = await response.json();
-      // dispatch(settingsLoaded(data));
-      return data;
-    } catch (error) {
-      if (error.message === "Unauthorized") {
-        console.log("Ошибка 401: Unauthorized");
-      }
-    }
-  }
-);
-
-export const fetchDictionaryLevels = createAsyncThunk(
-  "user/fetchDictionaryLevels",
-  async (_, { dispatch }) => {
-    const url = new URL(host + dictionaryLevels);
-
-    try {
-      const response = await fetch(url.toString(), {
-        method: "GET",
-        headers: {
-          ...headers,
-        },
-      });
-      const data = await response.json();
-      dispatch(dictionaryLevelsLoaded(data));
-      return data;
-    } catch (error) {
-      if (error.message === "Unauthorized") {
-        console.log("Ошибка 401: Unauthorized");
-      }
-    }
-  }
-);
-
-export const fetchPutDictionaryLevels = createAsyncThunk(
-  "user/fetchPutDictionaryLevels",
+export const fetchPutSettings = createAsyncThunk(
+  "user/fetchPutSettings",
   async (data, { dispatch }) => {
-    const url = new URL(host + dictionaryLevels);
+    const url = new URL(host + settings);
 
     try {
       const response = await fetch(url.toString(), {
@@ -107,7 +60,7 @@ export const fetchPutDictionaryLevels = createAsyncThunk(
         body: JSON.stringify(data),
       });
       const result = await response.json();
-      dispatch(dictionaryLevelsLoaded(result));
+      dispatch(settingsLoaded(result));
       return result;
     } catch (error) {
       if (error.message === "Unauthorized") {
@@ -129,19 +82,22 @@ const userSlice = createSlice({
     activated_email: false,
     dark_theme: false,
     number_of_false_set: 4,
-    // dictionaryLevels
     levels: null,
-    // other
+    // settings get
     loading: false,
     error: null,
+    // settings put
+    putLoading: false,
+    putError: null
   },
   reducers: {
     settingsLoaded: (state, action) => {
       state.username = action.payload.username;
       state.email = action.payload.email;
       state.activated_email = action.payload.activated_email;
-      state.dark_theme = action.payload.dark_theme;
-      state.number_of_false_set = action.payload.number_of_false_set;
+      state.dark_theme = action.payload.settings.dark_theme;
+      state.number_of_false_set = action.payload.settings.number_of_false_set;
+      state.levels = action.payload.settings.levels
     },
     dictionaryLevelsLoaded: (state, action) => {
       state.levels = action.payload.levels;
@@ -180,30 +136,19 @@ const userSlice = createSlice({
         state.error = action.error.message;
       })
 
-      .addCase(fetchDictionaryLevels.pending, (state) => {
-        state.loading = true;
+      .addCase(fetchPutSettings.pending, (state) => {
+        state.putLoading = true;
       })
-      .addCase(fetchDictionaryLevels.fulfilled, (state) => {
-        state.loading = false;
+      .addCase(fetchPutSettings.fulfilled, (state) => {
+        state.putLoading = false;
       })
-      .addCase(fetchDictionaryLevels.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.error.message;
-      })
-
-      .addCase(fetchPutDictionaryLevels.pending, (state) => {
-        state.loading = true;
-      })
-      .addCase(fetchPutDictionaryLevels.fulfilled, (state) => {
-        state.loading = false;
-      })
-      .addCase(fetchPutDictionaryLevels.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.error.message;
+      .addCase(fetchPutSettings.rejected, (state, action) => {
+        state.putLoading = false;
+        state.putError = action.error.message;
       });
   },
 });
 
-export const { settingsLoaded, dictionaryLevelsLoaded, updateLevels, addLevel, deleteLevel } =
+export const { settingsLoaded, updateLevels, addLevel, deleteLevel } =
   userSlice.actions;
 export default userSlice.reducer;

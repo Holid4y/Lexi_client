@@ -15,7 +15,6 @@ export const home = "home/"
 // user
 export const user = "user/me/"
 export const settings = "users/settings/"
-export const dictionaryLevels = settings + "dictionary-levels/"
 
 // vocabulary
 export const vocabulary = "vocabulary/"
