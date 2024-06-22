@@ -66,6 +66,9 @@ const wordSlice = createSlice({
     synonyms: null,
     meanings: null,
 
+    // WordBlockTranslation
+    isVisible: false,
+
     loading: false,
     error: null
   },
@@ -78,7 +81,6 @@ const wordSlice = createSlice({
       state.translations = action.payload.translations;
       state.synonyms = action.payload.synonyms;
       state.meanings = action.payload.meanings;
-      console.log(action.payload)
     },
     wordPostLoaded: (state, action) => {
       state.pk = action.payload.word.pk;
@@ -88,6 +90,9 @@ const wordSlice = createSlice({
       state.translations = action.payload.word.translations;
       state.synonyms = action.payload.word.synonyms;
       state.meanings = action.payload.word.meanings;
+    },
+    toggleWordBlock: (state, action) => {
+      state.isVisible  = !state.isVisible
     },
   },
   extraReducers: (builder) => {
@@ -101,9 +106,20 @@ const wordSlice = createSlice({
       .addCase(fetchWordGet.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;
+      })
+
+      .addCase(fetchWordPost.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(fetchWordPost.fulfilled, (state) => {
+        state.loading = false;
+      })
+      .addCase(fetchWordPost.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message;
       });
   },
 });
 
-export const { wordGetLoaded, wordPostLoaded } = wordSlice.actions;
+export const { wordGetLoaded, wordPostLoaded, toggleWordBlock } = wordSlice.actions;
 export default wordSlice.reducer;

@@ -1,10 +1,21 @@
 import React from "react";
 
-import BlockContent from "./BlockContent";
+import { useDispatch, useSelector } from "react-redux";
 
-function Block({ word, index, toggleCardBody, visibleCardBodies }) {
+import { fetchWordGet, toggleWordBlock } from "../../../common/reducers/wordSlice";
+
+
+function Block({ word }) {
+  const dispatch = useDispatch();
+
+  function handleBlockClick(pk) {
+    dispatch(toggleWordBlock())
+    dispatch(fetchWordGet(pk))
+
+  }
+
   return (
-    <div className="col" role="button" onClick={() => toggleCardBody(index)}>
+    <div className="col" role="button" onClick={() => handleBlockClick(word.pk)}>
     
       <div className="card statistic pt-3">
         <h4 className="text-center p-3 pb-1">{word.text}</h4>
@@ -13,9 +24,6 @@ function Block({ word, index, toggleCardBody, visibleCardBodies }) {
           <span className="text-end">{word.part_of_speech}</span>
         </p>
         
-        <div className={`card-body p-3 collapse text-white ${visibleCardBodies[index] ? "show" : ""}`}>
-          {visibleCardBodies[index] ? <BlockContent pk={word.pk}/> : ''}
-        </div> 
       </div>
     </div>
   );
