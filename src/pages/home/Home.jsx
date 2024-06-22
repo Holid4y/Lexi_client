@@ -11,7 +11,6 @@ import WorsHistory from "./components/WorsHistory";
 
 function Home() {
   const dispatch = useDispatch();
-  const { count_recognize_to_learn, count_reproduce_to_learn, learning_words, new_words_today, upload_books, loading, error, } = useSelector((state) => state.home);
   useEffect(() => { dispatch(fetchHome()); }, [dispatch]);
 
   return (

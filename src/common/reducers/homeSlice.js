@@ -28,6 +28,8 @@ const homeSlice = createSlice({
     learning_words: null,
     new_words_today: null,
     upload_books: null,
+    recently_added_words: null,
+
     loading: false,
     error: null,
   },
@@ -38,6 +40,7 @@ const homeSlice = createSlice({
       state.learning_words = action.payload.learning_words;
       state.new_words_today = action.payload.new_words_today;
       state.upload_books = action.payload.upload_books;
+      state.recently_added_words = action.payload.recently_added_words;
     },
   },
   extraReducers: (builder) => {
