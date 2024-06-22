@@ -10,6 +10,34 @@ const Pages = ({ page }) => {
   const getPage = (pages, pageIndex) => {
     return pages[remainder(pageIndex - 1)];
   };
+  function getWord(word) {
+    console.log(word)
+  }
+
+
+  function addSpanTags(text) {
+    let words = text.split(/\s+/);
+    let result = [];
+    for (let i = 0; i < words.length; i++) {
+        let word = words[i];
+        let punctuation = word.match(/[^a-zA-Z0-9]+$/);
+        let wordWithoutPunctuation = word.replace(/[^a-zA-Z0-9]+$/, '');
+
+        if (wordWithoutPunctuation) {
+            result.push(<span key={i} onClick={() => getWord(wordWithoutPunctuation)}>{wordWithoutPunctuation}</span>);
+        }
+
+        if (punctuation) {
+            result.push(punctuation[0]);
+        }
+
+        result.push(' ');
+    }
+
+    return result.slice(0, -1); // Удаляем последний пробел
+}
+
+
 
   // Создание JSX элементов <p> для каждой строки
   function renderParagraphs() {
@@ -17,13 +45,15 @@ const Pages = ({ page }) => {
       const currentPage = getPage(pages, page);
       if (currentPage) {
         return currentPage.map((line, index) => (
-          <p key={index}>{line}</p>
+          <p key={index}>{addSpanTags(line)}</p>
         ));
       } else {
         return <p>Страница или книга не найдена</p>;
       }
     }
   }
+  
+  
 
   
 
