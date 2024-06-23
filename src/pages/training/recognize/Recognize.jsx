@@ -5,11 +5,17 @@ import { fetchTraining } from "../../../common/reducers/trainingSlice";
 
 function Recognize() {
   const dispatch = useDispatch();
-  const { bookmarks, loading, error } = useSelector(state => state.training);
+  const { training, loading, error } = useSelector(state => state.training);
 
   useEffect(() => {
-    dispatch(fetchTraining());
+    dispatch(fetchTraining('recognize'));
   }, [dispatch]);
+
+  useEffect(() => {
+    if (training) {
+      console.log(training)
+    }
+  }, [training]);
 
   return (
     <div className="align-items-center">

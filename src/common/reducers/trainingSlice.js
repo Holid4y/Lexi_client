@@ -7,6 +7,12 @@ export const fetchTraining = createAsyncThunk(
     "training/fetchTraining",
     async (type, { dispatch }) => {
       const url = new URL(host + training);
+
+      const params = new URLSearchParams({
+        type,
+      });
+      url.search = params.toString();
+
       try {
         const response = await fetch(url.toString(), {
           method: "GET",
@@ -15,8 +21,7 @@ export const fetchTraining = createAsyncThunk(
           },
         });
         const data = await response.json();
-        console.log(data)
-        // dispatch(trainingLoaded(data));
+        dispatch(trainingLoaded(data));
         return data;
       } catch (error) {
         if (error.message === "Unauthorized") {
@@ -57,7 +62,7 @@ const trainingSlice = createSlice({
 name: "training",
 initialState: {
     // training
-    
+    training: null,
 
     loading: false,
     error: null,
@@ -65,7 +70,7 @@ initialState: {
 },
 reducers: {
     trainingLoaded: (state, action) => {
-    //
+    state.training = action.payload
     },
 },
 extraReducers: (builder) => {
