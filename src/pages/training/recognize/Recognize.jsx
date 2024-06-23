@@ -1,7 +1,16 @@
 import React, { useEffect, useState } from "react";
-import Navigation from "../../../common/components/Navigation"
+import { useDispatch, useSelector } from "react-redux";
 
-function Reproduce() {
+import { fetchTraining } from "../../../common/reducers/trainingSlice";
+
+function Recognize() {
+  const dispatch = useDispatch();
+  const { bookmarks, loading, error } = useSelector(state => state.training);
+
+  useEffect(() => {
+    dispatch(fetchTraining());
+  }, [dispatch]);
+
   return (
     <div className="align-items-center">
 
@@ -37,4 +46,4 @@ function Reproduce() {
   );
 }
 
-export default Reproduce;
+export default Recognize;

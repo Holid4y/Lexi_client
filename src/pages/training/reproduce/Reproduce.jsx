@@ -5,7 +5,7 @@ function shuffleText(text) {
   return text.split('').sort(() => Math.random() - 0.5).join('');
 }
 
-function Recognize() {
+function Reproduce() {
   const [buttonClasses, setButtonClasses] = useState("form-control py-2 disabled placeholder");
   const [buttonText, setButtonText] = useState("white");
   const [isClicked, setIsClicked] = useState(false);
@@ -54,4 +54,4 @@ function Recognize() {
   );
 }
 
-export default Recognize;
+export default Reproduce;
