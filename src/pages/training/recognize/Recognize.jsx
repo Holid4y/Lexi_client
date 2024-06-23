@@ -6,19 +6,20 @@ import { fetchTraining, fetchTrainingPatch, nextRound } from "../../../common/re
 function Recognize() {
   const dispatch = useDispatch();
   const { training, round, loading, error } = useSelector(state => state.training);
+  
+  // Создаем состояние для выбранного ответа
   const [selectedAnswer, setSelectedAnswer] = useState(null);
-  const [falseSet, setFalseSet] = useState(null)
+  
+  // Создаем состояние для массива ложных ответов
+  const [falseSet, setFalseSet] = useState(null);
 
+  // Используем эффект для отправки запроса на получение тренировки
   useEffect(() => {
     dispatch(fetchTraining('recognize'));
   }, [dispatch]);
 
-  useEffect(() => {
-    if (training) {
-      console.log(training)
-    }
-  }, [training]);
 
+  // Функция для создания массива ложных ответов
   function makeFalseSet(falseAnswers, correctAnswer) {
     const falseSet = [...falseAnswers];
     falseSet.push(correctAnswer);
@@ -32,6 +33,7 @@ function Recognize() {
     return falseSet;
   }
 
+  // Используем эффект для создания массива ложных ответов для каждого раунда
   useEffect(() => {
     if (training){
       const falseAnswers = training[round].false_set
@@ -44,6 +46,7 @@ function Recognize() {
     
   }, [round, training]);
 
+  // Функция для обработки финального ответа
   function handleFinalAnswer() {
     if (selectedAnswer !== null) {
       const result = checkAnswer(selectedAnswer)
@@ -66,13 +69,16 @@ function Recognize() {
     }
   }
 
+  // Функция для проверки ответа
   function checkAnswer(answerWord) {
     return training[round].word.text == answerWord
   }
 
+  // Функция для изменения выбранного ответа (переключение radio)
   function handleAnswerChange(answer) {
     setSelectedAnswer(answer);
   }
+  
   return (
     <div className="align-items-center">
       <div className="container navbar-blur sticky-top mb-4 pt-4">
