@@ -282,6 +282,9 @@ footer{
     max-height: 500px; /* Увеличьте max-height до значения, которое больше ожидаемой высоты содержимого */
     overflow-y: auto; /* Включите прокрутку, если содержимое превышает max-height */
 }
+.no-scroll {
+    overflow: hidden;
+}
 
 .modal-backdrop {
     position: fixed;
