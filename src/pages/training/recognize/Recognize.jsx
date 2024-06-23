@@ -35,7 +35,9 @@ function Recognize() {
 
   // Используем эффект для создания массива ложных ответов для каждого раунда
   useEffect(() => {
+    
     if (training){
+      console.log(round)
       const falseAnswers = training[round].false_set
       const correctAnswer = {
         text: training[round].word.text,
@@ -44,7 +46,7 @@ function Recognize() {
       setFalseSet(makeFalseSet(falseAnswers, correctAnswer));
     }
     
-  }, [round, training]);
+  }, [round]);
 
   // Функция для обработки финального ответа
   function handleFinalAnswer() {
@@ -78,8 +80,9 @@ function Recognize() {
   function handleAnswerChange(answer) {
     setSelectedAnswer(answer);
   }
-  
+
   return (
+    
     <div className="align-items-center">
       <div className="container navbar-blur sticky-top mb-4 pt-4">
         <span className="block_week py-4">
@@ -87,8 +90,8 @@ function Recognize() {
           <button className="btn btn-primary ms-2 px-3">{training && training.length}</button>
         </span>
       </div>
-
-      <main className="container px-4">
+      {(training && 
+        <main className="container px-4">
         <div className="card statistic mb-5 pt-3">
           <h4 className="text-center p-2 fs-2">{training && training[round].word.text}</h4>
           <span className="fs-6">L{training && training[round].recognize_lvl}</span>
@@ -127,6 +130,8 @@ function Recognize() {
           Ответить
         </button>
       </main>
+      ) ||
+      (loading ? <p>Loading...</p>: <p>Error: {error}</p>)}
     </div>
   );
 }
