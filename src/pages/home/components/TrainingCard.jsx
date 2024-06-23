@@ -18,7 +18,7 @@ function TrainingCard() {
             <div className="card-body">
               <div className="text-start mb-0 row g-3">
                 <div className="col-12 col-md-6">
-                  <Link to="/training/reproduce">
+                  <Link to="/training/recognize">
                     <div className="card card-text-lr card-btn overflow-box bg-card-second">
                         <div className="card-body text-start text-white">
                           <span>Выбор ответа</span>
@@ -33,7 +33,7 @@ function TrainingCard() {
                 </div>
                 <div className="col-12 col-md-6">
                   {/* <span className="book-text ps-4 pe-1">12</span> */}
-                  <Link to="/training/recognize">
+                  <Link to="/training/reproduce">
                     <div className="card mt-auto card-text-lr card-btn overflow-box bg-card-second">
                       <div className="card-body text-start text-white">
                         <span>Узнаваемость</span>
