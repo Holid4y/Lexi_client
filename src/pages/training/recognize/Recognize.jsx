@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { fetchTraining, nextRound } from "../../../common/reducers/trainingSlice";
+import { fetchTraining, fetchTrainingPatch, nextRound } from "../../../common/reducers/trainingSlice";
 
 function Recognize() {
   const dispatch = useDispatch();
@@ -47,9 +47,19 @@ function Recognize() {
   function handleFinalAnswer() {
     if (selectedAnswer !== null) {
       const result = checkAnswer(selectedAnswer)
-      console.log(result)
-      dispatch(nextRound())
+      const data = {
+        type: 'recognize', 
+        pk: training[round].pk, 
+        is_correct: result
+      }
+      dispatch(fetchTrainingPatch(data)) // отбовляет бд
       setSelectedAnswer(null); // Сбрасываем выбранный вариант для следующего раунда
+ 
+      if ((round + 1) == training.length){
+        console.log('end')
+      }else{
+        dispatch(nextRound()) // следующий раунд
+      }
     } else {
       // Если ничего не выбрано, можно вывести предупреждение или сделать кнопку неактивной
       console.log("Пожалуйста, выберите ответ");
@@ -67,7 +77,7 @@ function Recognize() {
     <div className="align-items-center">
       <div className="container navbar-blur sticky-top mb-4 pt-4">
         <span className="block_week py-4">
-          <button className="btn btn-primary me-2 px-3">{round}</button> |{" "}
+          <button className="btn btn-primary me-2 px-3">{round + 1}</button> |{" "}
           <button className="btn btn-primary ms-2 px-3">{training && training.length}</button>
         </span>
       </div>
