@@ -63,6 +63,7 @@ name: "training",
 initialState: {
     // training
     training: null,
+    round: 0,
 
     loading: false,
     error: null,
@@ -70,7 +71,10 @@ initialState: {
 },
 reducers: {
     trainingLoaded: (state, action) => {
-    state.training = action.payload
+        state.training = action.payload
+    },
+    nextRound: (state, action) => {
+        state.round = state.round + 1
     },
 },
 extraReducers: (builder) => {
@@ -100,5 +104,5 @@ extraReducers: (builder) => {
 },
 });
 
-export const { trainingLoaded } = trainingSlice.actions;
+export const { trainingLoaded, nextRound } = trainingSlice.actions;
 export default trainingSlice.reducer;

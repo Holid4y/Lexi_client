@@ -6,7 +6,6 @@ function WordBlockTranslate() {
 
   const { text, part_of_speech, transcription, translations, synonyms, meanings, isVisible, loading, error } = useSelector((state) => state.word);
 
-  console.log(isVisible)
   return (
     <div id="my-block" className={`toggle-block ${isVisible  ? 'show' : ''}`}>
         <div className="px-3 py-2">
