@@ -11,7 +11,7 @@ function Block({ word }) {
   function handleBlockClick(pk) {
     dispatch(toggleWordBlock())
     dispatch(fetchWordGet(pk))
-
+    // чистить state 
   }
 
   return (

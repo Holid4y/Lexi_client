@@ -271,7 +271,7 @@ footer{
 .toggle-block {
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.5s ease-out;
+    transition: max-height 0.3s ease-out;
 }
 .toggle-block.show {
     max-height: 500px;
@@ -438,7 +438,7 @@ input[type='number'] {
 .collapse {
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.5s ease-out;
+    transition: max-height 5s ease-out;
 }
   
 .collapse.show {
@@ -471,4 +471,17 @@ input[type='number'] {
 
 .save-btn{
     border-radius: 20px;
+}
+
+.word-for-text{
+    transition: color 0.3s ease-out, font-weight 0.1s ease-out;
+}
+.word-for-text:hover{
+    cursor: pointer;
+    color: #dc3545;
+}
+.word-for-text:active{
+    cursor: pointer;
+    text-shadow: 0px 0px 5px #dc3545;
+    color: #dc3545;
 }
