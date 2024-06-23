@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Navigation from "../../../common/components/Navigation"
 
-function Reproduce() {
+function Recognize() {
   return (
     <div className="align-items-center">
 
@@ -37,4 +37,4 @@ function Reproduce() {
   );
 }
 
-export default Reproduce;
+export default Recognize;

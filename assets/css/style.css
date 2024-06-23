@@ -270,11 +270,32 @@ footer{
 
 .toggle-block {
     max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.3s ease-out;
+    transition: .3s ease-out;
+    overflow-y: scroll;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+.toggle-block::-webkit-scrollbar {
+    display: none;
 }
 .toggle-block.show {
-    max-height: 500px;
+    max-height: 500px; /* Увеличьте max-height до значения, которое больше ожидаемой высоты содержимого */
+    overflow-y: auto; /* Включите прокрутку, если содержимое превышает max-height */
+}
+
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: -10;
+}
+  
+#wordBlock {
+    position: relative;
+    z-index: 1050;
 }
 
 .toggle-span {

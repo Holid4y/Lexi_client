@@ -94,6 +94,15 @@ const wordSlice = createSlice({
     toggleWordBlock: (state, action) => {
       state.isVisible  = !state.isVisible
     },
+    cleanStateWord: (state, action) => {
+      state.pk = null;
+      state.text = null;
+      state.part_of_speech = null;
+      state.transcription = null;
+      state.translations = null;
+      state.synonyms = null;
+      state.meanings = null;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -121,5 +130,5 @@ const wordSlice = createSlice({
   },
 });
 
-export const { wordGetLoaded, wordPostLoaded, toggleWordBlock } = wordSlice.actions;
+export const { wordGetLoaded, wordPostLoaded, toggleWordBlock, cleanStateWord } = wordSlice.actions;
 export default wordSlice.reducer;

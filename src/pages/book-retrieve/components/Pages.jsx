@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchWordPost, toggleWordBlock } from "../../../common/reducers/wordSlice";
+import { fetchWordPost, toggleWordBlock, cleanStateWord } from "../../../common/reducers/wordSlice";
 import ViewWord from "./ViewWord";
 
 const Pages = ({ page }) => {
@@ -17,6 +17,7 @@ const Pages = ({ page }) => {
 
   function handleWordClick(word) {
     dispatch(fetchWordPost(word));
+    dispatch(cleanStateWord());
     dispatch(toggleWordBlock());
   }
 
