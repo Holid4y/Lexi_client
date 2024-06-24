@@ -34,7 +34,7 @@ const Login = () => {
               </div>
 
               <div className="mb-4">
-                  <label for="password" className="form-label">Пароль</label><span className="change link-color"><a href="/html/change_pass.html">Забыл пароль</a></span>
+                  <label for="password" className="form-label me-2">Пароль</label><span className="change link-color"><a href="/html/change_pass.html"><small>Забыл пароль</small></a></span>
                   <input type="password" className="form-control py-2-5" id="password" value={password} onChange={(e) => setPassword(e.target.value)} />
                   <p className="fs-8 link-color text-center mt-2">
                       <span className='pe-2'>Не зарегистрированы?</span>
@@ -42,9 +42,10 @@ const Login = () => {
                   </p>
               </div>
 
-              <div className="text-center">
-                  <a type="submit" onClick={handleLogin} className="btn btn-lg btn-primary-auth px-5 mb-2">Войти</a>
-                  
+              <div className="d-flex justify-content-center my-4">
+                <button type="submit" className="btn btn-primary save-btn py-2 w-50" onClick={handleLogin}>
+                  <span><b>Войти</b></span>
+                </button>
               </div>
           </form>
       </main>

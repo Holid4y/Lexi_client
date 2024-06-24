@@ -30,7 +30,7 @@ const PaginationButton = ({ page, page_count, slug, setIsNext }) => {
     const buttons = [];
     for (let i = 1; i <= page_count; i++) {
       buttons.push(
-        <div className='col-2' key={i}>
+        <div className='col-2 col-lg-1' key={i}>
           <button className='btn btn-primary w-100' onClick={() => handlePageClick(i)}>
             {i}
           </button>
@@ -85,13 +85,13 @@ const PaginationButton = ({ page, page_count, slug, setIsNext }) => {
       </nav>
 
       <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" ref={modalRef}>
-        <div className="modal-dialog">
+        <div className="modal-dialog modal-lg modal-dialog-scrollable">
           <div className="modal-content">
-            <div className="modal-header">
+            <div className="modal-header mb-2">
               <h1 className="modal-title fs-5" id="exampleModalLabel">Выберите страницу</h1>
               <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div className="modal-body row g-3">
+            <div className="modal-body row g-2">
               {generatePageButtons()}
             </div>
           </div>

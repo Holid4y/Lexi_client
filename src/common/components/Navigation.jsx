@@ -11,7 +11,7 @@ function Navigation() {
     };
   
   return (
-    <footer className="container fixed-bottom py-2">
+    <nav className="container fixed-bottom py-2">
         <div className="dark-nav">
             <WordBlockTranslate/>
             <ul className="nav justify-content-center">
@@ -47,7 +47,7 @@ function Navigation() {
                 </li>
             </ul>
         </div>
-    </footer>
+    </nav>
   );
 }
 

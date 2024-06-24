@@ -12,15 +12,12 @@ function TrainingCard() {
             <span id="wordsToLearn">Тренировка слов на сегодня</span>
           </div>
           <div className="card text-end bg-card-dark mb-4">
-            {/* <div class="card-header border-none text-start">
-              Тренировка слов на сегодня
-            </div> */}
             <div className="card-body">
               <div className="text-start mb-0 row g-3">
                 <div className="col-12 col-md-6">
                   <Link to="/training/recognize">
                     <div className="card card-text-lr card-btn overflow-box bg-card-second">
-                        <div className="card-body text-start text-white">
+                        <div className="card-body text-start text-white text-center">
                           <span>Выбор ответа</span>
                         </div>
                         <div className="svg-background">
@@ -35,7 +32,7 @@ function TrainingCard() {
                   {/* <span className="book-text ps-4 pe-1">12</span> */}
                   <Link to="/training/reproduce">
                     <div className="card mt-auto card-text-lr card-btn overflow-box bg-card-second">
-                      <div className="card-body text-start text-white">
+                      <div className="card-body text-start text-white text-center">
                         <span>Узнаваемость</span>
                       </div>
                       <div className="svg-background">

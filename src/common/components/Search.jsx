@@ -6,18 +6,11 @@ function Search({ onChange }) {
 
   return (
     <div className="container sticky-top mb-4 pt-2">
-      <nav className="navbar dark-nav p-2">
+      <nav className="navbar dark-nav">
         <form className="d-flex w-100" role="search">
-          <input
-            className="form-control w-100 box-none"
-            type="search"
-            placeholder="Поиск"
-            aria-label="Search"
-            onChange={handleInputChange} // Передаем обработчик изменения значения
-          />
+          <input className="form-control w-100 box-none" type="search" placeholder="Поиск" aria-label="Search" onChange={handleInputChange}/>
         </form>
       </nav>
-      
     </div>
   );
 }

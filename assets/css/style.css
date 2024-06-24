@@ -8,80 +8,38 @@
     outline-color: transparent;
     outline-width: 0;}
 
-html,
-body {
+html, body {
     height: 100%;
     margin: 0;
 }
-html{
+html, .toggle-block{
     scrollbar-width: none;
     overflow-y: auto;
     overflow-x: hidden;
 }
-html > html::-webkit-scrollbar {
+html > html::-webkit-scrollbar, .toggle-block::-webkit-scrollbar {
     display: none;
 }
-
-.body-auth{
-    height: 100vh;
-    align-items: center !important;
-    display: flex;
-    justify-content: center; 
-    padding: 40px 0;
-}
-
 main{
     padding-bottom: 70px;
 }
 
+.container{
+    max-width: 750px;
+}
+
+.body-auth{
+    height: 100vh;
+    display: flex;
+    justify-content: center; 
+    padding: 50px 0;
+}
 .form-signin {
     max-width: 350px;
     padding: 1rem;
 }
 
-.btn-bd-primary {
-    --bd-violet-bg: #7d86be;
-    --bd-violet-rgb: 112.520718, 44.062154, 249.437846;
-
-    --bs-btn-font-weight: 600;
-    --bs-btn-color: var(--bs-white);
-    --bs-btn-bg: var(--bd-violet-bg);
-    --bs-btn-border-color: var(--bd-violet-bg);
-    --bs-btn-hover-color: var(--bs-white);
-    --bs-btn-hover-bg: #8F96BF;
-    --bs-btn-hover-border-color: #8F96BF;
-    --bs-btn-focus-shadow-rgb: var(--bd-violet-rgb);
-    --bs-btn-active-color: var(--bs-btn-hover-color);
-    --bs-btn-active-bg: #8F96BF;
-    --bs-btn-active-border-color: #8F96BF;
-}
-.bd-mode-toggle { z-index: 1500 }
-
-.bd-mode-toggle .dropdown-menu .active .bi { display: block !important }
-.bi {
-    vertical-align: -.125em;
-    fill: currentColor }
-
 .blur{ filter: blur(5px) }
-
-.navbar-blur::before {
-    background-color: var(--bs-body-bg);
-    content: "";
-    position: absolute;
-    top: -15px;
-    left: 0;
-    width: 100%;
-    height: 85px;
-    z-index: -1; /* Помещаем псевдоэлемент за фоном контента */
-    filter: blur(5px); /* Применяем размытие */
-}
-
-.btn-primary-auth{
-    border-radius: 20px;
-    background-color: var(--disabled-bg);
-    color: #FFFFFF;
-    box-shadow: 0px 0px 10px var(--box-shadow-color);
-}
 
 a{
     color: var(--bs-body-color);
@@ -92,59 +50,15 @@ a{
     fill: var(--bs-body-color);
 }
 
-footer{
-    padding: 5px;
-}
 .dark-nav{
     padding: 5px 10px;
     background-color: var(--input-color);
     border-radius: 10px;
     box-shadow: 0px 0px 20px var(--box-shadow-color);
 }
-.dark-nav-vertical{
-    padding: 5px 10px;
-    background-color: var(--input-color);
-    border-radius: 10px;
-    box-shadow: 0px 0px 20px var(--box-shadow-color);
-    width: 60px;
-    height: 500px;
-    position: absolute;
-    left: -25%;
-    bottom: calc(50vh - 200px);
-}
 
-.change{
-    float: right;
-    left: 10px;
-}
-.change a {
-    padding-right: 10px;
-    font-size: 14px;
-}
 .link-color a {
     color: var(--bs-link-color);
-}
-
-
-.block_week {
-    background-color: var(--input-color);
-    box-shadow: 0px 0px 2px var(--input-color);
-    font-size: 16px;
-    border-radius: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 40px;
-    margin: 0px 6px;
-}
-
-.bg-danger{
-    box-shadow: 0px 0px 2px rgb(var(--bs-danger-rgb));
-    color: white;
-}
-.bg-success{
-    box-shadow: 0px 0px 2px rgb(var(--bs-success-rgb));
-    color: white;
 }
 
 .card a{
@@ -152,182 +66,32 @@ footer{
     color: var(--card-text-header);
 }
 
+
+/* Стили блоков статистики на главной */
 .book-text{
     font-size: 40px;
     font-weight: bold;
     color: var(--book-text);
 }
 
-.hover-text-opacity #wordsToLearn {
-    opacity: .4;
-    transition: opacity 0.5s ease;
-}
 
-.hover-text-opacity:hover #wordsToLearn {
-    opacity: 1;
-}
-.hover-text-opacity:active #wordsToLearn {
-    opacity: 1;
-}
-.container{
-    max-width: 750px;
-}
-
-
-.badge-error{
-    padding: 5px 13px;
-    border-radius: 50%;
-    background-color: rgb(var(--bs-danger-rgb));
-    border: 0px solid rgb(var(--bs-danger-rgb));
-    color: var(--bs-white);
-    z-index: 10;
-}
-
-.badge-seccses{
-    padding: 5px 12px;
-    border-radius: 10px;
-    background-color: rgb(var(--bs-success-rgb));
-    border: 0px solid rgb(var(--bs-success-rgb));
-    color: var(--bs-white);
-    z-index: 10;
-}
-
-.nav-link{
-    padding: 8px;
-    margin: 0px 4px;
-    background-color: var(--input-color);
-    border-radius: 8px;
-    outline: none;
-    transition: transform .3s;
-}
-
-.nav-link::after {
-    content: '';
-    position: absolute;
-    width: 0;
-    height: 0;
-    bottom: -5px;
-    left: 50%;
-    transform: translateX(-50%);
-    border-radius: 50%;
-    background: var(--book-text);
-    transition: width 0.3s, height 0.3s;
-}
-
-.nav-link:hover::after {
-    width: 8px;
-    height: 8px;
-}
-
-.nav-link:hover {
-    transform: translateY(-5px);
-}
-
-.nav-link.active_link::after {
-    width: 8px;
-    height: 8px;
-}
-
-.nav-link.active_link {
-    transform: translateY(-5px);
-}
-
-
-.dark-block{
-    background-color: var(--input-color);
-    border-radius: var(--bs-border-radius);
-    color: var(--bs-body-color);
-    padding: 5px 10px;
-    box-shadow: 0px 0px 10px var(--box-shadow-color);
-    border: none;
-    width: 100%;
-    height: 100%;
-}
-
-.book-text-read {
-    font-size: 18px;
-    line-height: 1.6;
-    text-align: justify;
-    color: var(--bs-body-color);
-    padding: 10px;
-    border-radius: 8px;
-    max-width: 100%;
-    overflow-wrap: break-word;
-    word-break: break-word;
-    box-sizing: border-box;
-}
-
-.book-text-read p {
-    margin-bottom: 1.5em;
-}
-
-.book-text-read h1, .book-text-read h2, .book-text-read h3 {
-    color: var(--bs-body-color);
-    line-height: 1.2;
-    margin-bottom: 0.5em;
-}
-
-
-.toggle-block {
-    max-height: 0;
-    transition: .3s ease-out;
-    overflow-y: scroll;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-}
-.toggle-block::-webkit-scrollbar {
-    display: none;
-}
-.toggle-block.show {
-    max-height: 500px; /* Увеличьте max-height до значения, которое больше ожидаемой высоты содержимого */
-    overflow-y: auto; /* Включите прокрутку, если содержимое превышает max-height */
-}
-.no-scroll {
-    overflow: hidden;
-}
-
-.modal-backdrop {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: -10;
-}
-  
-#wordBlock {
-    position: relative;
-    z-index: 1050;
-}
-
-.toggle-span {
-    cursor: pointer;
-}
-
+/* Стили для блока с тестами на главной */
 .bg-card-dark{
     background: var(--input-color);
 }
 .bg-card-second{
     background: var(--book-text);
 }
-
 .svg-background {
     position: absolute;
     top: 52%;
     right: 10%;
     transform: translateY(-50%) rotate(20deg) scale(2);
 }
-
 .svg-background svg{
     opacity: .5;
     fill: white;
 }
-
-.color-svg svg{
-    fill: var(--book-text);
-}
-
 .card {
     transition: transform .1s linear;
     color: var(--card-text-header);
@@ -342,16 +106,119 @@ footer{
     box-sizing: border-box;
 }
 
-.card-text-lr{
-    display: flex; 
-    justify-content: space-between;
-    align-items: center;
+
+/* Стили для более прозрачного цвета на главной */
+.hover-text-opacity #wordsToLearn {
+    opacity: .4;
+    transition: opacity 0.5s ease;
+}
+.hover-text-opacity:hover #wordsToLearn {
+    opacity: 1;
+}
+.hover-text-opacity:active #wordsToLearn {
+    opacity: 1;
+}
+
+
+/* Стили навигации нижней */
+.nav-link{
+    padding: 8px;
+    margin: 0px 4px;
+    background-color: var(--input-color);
+    border-radius: 8px;
+    outline: none;
+    transition: transform .3s;
+}
+.nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 50%;
+    background: var(--book-text);
+    transition: width 0.3s, height 0.3s;
+}
+.nav-link:hover::after {
+    width: 8px;
+    height: 8px;
+}
+.nav-link:hover {
+    transform: translateY(-5px);
+}
+.nav-link.active_link::after {
+    width: 8px;
+    height: 8px;
+}
+.nav-link.active_link {
+    transform: translateY(-5px);
+}
+
+
+/* Стили для текста книги */
+.book-text-read {
+    font-size: 18px;
+    line-height: 1.6;
+    text-align: justify;
+    color: var(--bs-body-color);
+    padding: 10px;
+    border-radius: 8px;
+    max-width: 100%;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    box-sizing: border-box;
+}
+.book-text-read p {
+    margin-bottom: 1.5em;
+}
+.book-text-read h1, .book-text-read h2, .book-text-read h3 {
+    color: var(--bs-body-color);
+    line-height: 1.2;
+    margin-bottom: 0.5em;
+}
+
+
+/* Стили для выезжающего меню с переводом слов */
+.toggle-block {
+    max-height: 0;
+    transition: .3s ease-out;
+}
+.toggle-block.show {
+    max-height: 500px;
+    overflow-y: auto;
+}
+
+
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: -1;
+}
+
+
+/* Стили цвета для SVG */
+.color-svg svg{
+    fill: var(--book-text);
+}
+.color-svg:hover svg{
+    fill: #CCD0F0;
 }
 
 .author {
     border-radius: 5px;
     height: 20px;
     background-color: #fff;
+}
+.card-text-lr{
+    display: flex; 
+    justify-content: space-between;
+    align-items: center;
 }
 
 .title,
@@ -361,7 +228,6 @@ footer{
     overflow: hidden;
     background-color: #5b5e70;
     border-radius: 5px;
-
 }
 .title::before,
 .page::before,
@@ -377,48 +243,39 @@ footer{
 }
 
 @keyframes shimmer {
-    0% {
-        left: -100%;
-    }
-    100% {
-        left: 100%;
-    }
+    0% { left: -100%; }
+    100% { left: 100%; }
 }
 
-.border-none{
-    border: none;
-}
-
+/* Стили закладок в избранном */
 .mark{
     top: 10%;
     left: 92%;
     background-color: transparent;
 }
 
-.word-history {
-    max-height: 350px;
+.word-history, .modal-body{
     overflow-y: scroll;
     scrollbar-width: none;
     -ms-overflow-style: none;
 }
-
-.word-history::-webkit-scrollbar {
+.word-history::-webkit-scrollbar, .modal-body::-webkit-scrollbar {
     display: none;
 }
 
+/* Убираем стрелки у input'а в профиле */
 input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-}
-input[type='number'] {
-    -moz-appearance: textfield;
-}
+input::-webkit-inner-spin-button {-webkit-appearance: none;}
+input[type='number'] { -moz-appearance: textfield;}
 
 
 .box-none{
+    min-height: 40px;
     box-shadow: none;
 }
 
+
+/* Позиционирование по центру над навигацией снизу */
 .pagination-position{
     width: 200px;
     position: fixed;
@@ -436,6 +293,8 @@ input[type='number'] {
     opacity: 1;
 }
 
+
+/* Стили для кнопок плюса и минуса */
 .btn-plus-minus{
     background-color: var(--input-color);
 }
@@ -444,50 +303,30 @@ input[type='number'] {
 }
 
 
-.statistic{
-    padding-top: 5px;
+/* Блоки уровней в статистике */
+.statistic-block{
     background-color: var(--book-text);
 }
-.statistic h4{
+.statistic{
+    border-radius: 20px;
+    background-color: var(--book-text);
+}
+.statistic-block h4{
     font-size: 30px;
     font-weight: bold;
     color: white;
 }
-.statistic span{
+.statistic h4{
+    font-size: 40px;
+    font-weight: bold;
+    color: white;
+}
+.statistic span, .statistic-block span{
     padding: 0px 0px 5px 10px;
     font-size: 12px;
     color: white;
 }
 
-.collapse {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 5s ease-out;
-}
-  
-.collapse.show {
-    max-height: 500px;
-}
-
-.modal-md{
-    max-width: 400px;
-}
-
-.transition1sec{
-    transition: 1s;
-}
-
-.outline-danger{
-    outline: 1px solid #dc3545;
-}
-.outline-danger:hover{
-    box-shadow: 0px 0px 5px #dc3545;
-    outline: 1px solid #dc3545;
-}
-.outline-danger:active{
-    box-shadow: 0px 0px 8px #dc3545;
-    outline: 1px solid #dc3545;
-}
 
 .w-55px{
     width: 55px;
@@ -497,15 +336,34 @@ input[type='number'] {
     border-radius: 20px;
 }
 
+
+/* Стили для слов в тексте при наведении */
 .word-for-text{
     transition: color 0.3s ease-out, font-weight 0.1s ease-out;
 }
 .word-for-text:hover{
     cursor: pointer;
-    color: #dc3545;
+    color: #ffc107;
 }
 .word-for-text:active{
     cursor: pointer;
-    text-shadow: 0px 0px 5px #dc3545;
-    color: #dc3545;
+    color: #ffc720;
+}
+
+
+/* Стили левего блока на ПК для автоматической прокруки */
+.autoScroll{
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: var(--input-color);
+    opacity: 0;
+    width: 15%;
+    border: none;
+    outline: none;
+    height: 100vh;
+    transition: opacity .2s ease-out;
+}
+.autoScroll:hover{
+    opacity: 0.5;
 }

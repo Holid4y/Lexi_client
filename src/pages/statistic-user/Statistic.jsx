@@ -40,6 +40,8 @@ function Statistic() {
   };
 
   const options = {
+    responsive: true,
+    maintainAspectRatio: false,
     plugins: {
       legend: { display: false },
       tooltip: { boxPadding: 3 }
@@ -57,12 +59,12 @@ function Statistic() {
       </div>
 
       <main className="container">
-        <div className="my-4 w-100">
+        <div className="chart-container" style={{ position: 'relative', width: '100%', height: '250px' }}>
           <Bar data={data} options={options} />
         </div>
 
-        <h5 className="mb-3">Уровни узнаваемости</h5>
-        <div className="row">
+        <h5 className="mt-4 mb-2">Уровни узнаваемости</h5>
+        <div className="row row-cols-3 row-cols-sm-4 row-cols-md-5 row-cols-lg-6 g-3">
           {recognize.length > 0 ? (
             recognize.map((countWords, index) => (
               <Block countWords={countWords} index={index} key={index} />
@@ -74,8 +76,8 @@ function Statistic() {
           )}
         </div>
 
-        <h5 className="mb-3">Уровни воспроизведения</h5>
-        <div className="row mb-2">
+        <h5 className="mt-4 mb-2">Уровни воспроизведения</h5>
+        <div className="row row-cols-3 row-cols-sm-4 row-cols-md-5 row-cols-lg-6 g-3 mb-4">
           {reproduce.length > 0 ? (
             reproduce.map((countWords, index) => (
               <Block countWords={countWords} index={index} key={index} />

@@ -22,7 +22,7 @@ function WordList() {
     <div>
       <Header />
       <main className="container">
-        <div className="row row-cols-2 row-cols-md-2 g-3 position-relative">
+        <div className="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-5 g-3">
           {(words && words
             .map((word, index) => (
                   <Block  word={word.word}  key={index} />

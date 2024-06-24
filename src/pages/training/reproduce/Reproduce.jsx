@@ -18,35 +18,29 @@ function Reproduce() {
 
   return (
     <div className="align-items-center">
-      <div className="container navbar-blur sticky-top mb-4 pt-4">
-        <span className="block_week py-4">
-          <button className="btn btn-primary me-2 px-3">7</button> | <button className="btn btn-primary ms-2 px-3">10</button>
-        </span>
-      </div>
+      <p className="text-center my-3 mb-4"><b className="fs-2">3</b> <small className="mx-2 pt-1">из</small> <b className="fs-2">8</b></p>
 
-      <main className="container px-4">
-        <div className="card statistic mb-5 pt-3">
-          <h4 className="text-center p-2 fs-2">Белый</h4>
-          <span className="fs-6">L4</span>
+      <main className="container">
+        <div className="card statistic mb-5 pt-4 mx-4">
+            <h4 className="text-center p-2">Белый</h4><span className="fs-6 ms-1">L4</span>
         </div>
 
-        <div className="mb-4">
-          <h3 className="text-center mb-3">Напишите ответ</h3>
-          <input type="text" className="form-control py-2-5 mb-2"/>
+        <div className="px-5 mb-4">
+          <div className="mb-4">
+            <h3 className="text-center mb-3">Напишите ответ</h3>
+            <input type="text" className="form-control py-2-5 mb-2"/>
+          </div>
+
+          <div className="mb-4">
+            <button  type="text"  className={buttonClasses}  onClick={handleButtonClick}  disabled={isClicked}>
+              <h1>{buttonText}</h1>
+            </button>
+            <small className="">Если затрудняетесь ответить, нажмите на блок с подсказкой</small>
+          </div>
         </div>
-
-        <button className="btn btn-success w-100 py-2 mb-5">
-          Ответить
-        </button>
-
-        <div className="mb-4">
-          <button 
-            type="text" 
-            className={buttonClasses} 
-            onClick={handleButtonClick} 
-            disabled={isClicked}
-          >
-            <h1>{buttonText}</h1>
+        <div className="d-flex justify-content-center my-4">
+          <button type="text" className="btn btn-primary save-btn py-2 w-50">
+            <span><b>Ответить</b></span>
           </button>
         </div>
       </main>

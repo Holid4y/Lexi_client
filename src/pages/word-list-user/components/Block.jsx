@@ -17,7 +17,7 @@ function Block({ word }) {
   return (
     <div className="col" role="button" onClick={() => handleBlockClick(word.pk)}>
     
-      <div className="card statistic pt-3">
+      <div className="card statistic-block pt-3">
         <h4 className="text-center p-3 pb-1">{word.text}</h4>
         <p>
           <span className="text-start">[{word.transcription}]</span>

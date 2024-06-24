@@ -27,6 +27,8 @@ import LvlSettings from './pages/profile/lvlSettings';
 import WordList from './pages/word-list-user/WordList';
 import Statistic from './pages/statistic-user/Statistic';
 
+import AutoScroll from "./common/components/AutoScroll";
+
 function App() {
   const dispatch = useDispatch();
   const { isAuth } = useSelector(state => state.auth);
@@ -116,6 +118,7 @@ function App() {
   return (
     <Router>
       <div>
+        <AutoScroll/>
         <ConditionalNavigation />
         <Routes>
           <Route path="/" element={<Home />} />

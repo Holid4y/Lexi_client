@@ -2,9 +2,9 @@ import React from "react";
 
 function Block({ countWords, index }) {
   return (
-    <div className="col-4 col-md-3">
-      <div className="card statistic mb-4">
-        <h4 className="text-center">{countWords}</h4>
+    <div className="col">
+      <div className="card statistic-block">
+        <h4 className="text-center pt-3">{countWords}</h4>
         <span>L{index + 1}</span>
       </div>
     </div>
