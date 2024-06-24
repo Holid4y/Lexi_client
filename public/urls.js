@@ -23,6 +23,9 @@ export const stats = vocabulary + "stats/"
 // words
 export const words = "words/"
 
+// training
+export const training = "training/"
+
 
 // Эта функция полезна для получения значения определенного cookie
 // из браузера, а именно для csrf токена.
