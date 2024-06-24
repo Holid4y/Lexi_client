@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { fetchTraining, fetchTrainingPatch, nextRound } from "../../../common/reducers/trainingSlice";
+import Loading from "../../../common/components/Loading";
 
 function Recognize() {
   const dispatch = useDispatch();
@@ -82,57 +83,32 @@ function Recognize() {
   }
 
   return (
-    
     <div className="align-items-center">
+      <p className="text-center my-3 mb-4"><b className="fs-2">{round + 1}</b> <small className="mx-2 pt-1">из</small> <b className="fs-2">{training && training.length}</b></p>
     
-      <div className="container navbar-blur sticky-top mb-4 pt-4">
-        <span className="block_week py-4">
-          <button className="btn btn-primary me-2 px-3">{round + 1}</button> |{" "}
-          <button className="btn btn-primary ms-2 px-3">{training && training.length}</button>
-        </span>
-      </div>
       {(training && 
-        <main className="container px-4">
-        <div className="card statistic mb-5 pt-3">
-          <h4 className="text-center p-2 fs-2">{training && training[round].word.text}</h4>
-          <span className="fs-6">L{training && training[round].recognize_lvl}</span>
+      <main className="container">
+        <div className="card statistic mb-5 pt-4 mx-4">
+            <h4 className="text-center p-2">{training && training[round].word.text}</h4><span className="fs-6 ms-1">L{training && training[round].recognize_lvl}</span>
         </div>
-
-        <div className="mb-4">
-          <h3 className="text-center mb-3">Варианты ответа</h3>
-
-          {falseSet && falseSet.map((word, index) => (
-            <div key={index}>
-              <input
-                type="radio"
-                className="btn-check"
-                name="options"
-                id={`option_${index}`}
-                checked={selectedAnswer === word.text}
-                onChange={() => handleAnswerChange(word.text)}
-              />
-              <label
-                className="btn btn-outline-primary w-100 mb-3 py-3"
-                htmlFor={`option_${index}`}
-              >
-                {word.translation}
-              </label> 
-            </div>
-             
-          ))}
+        <div className="px-5 mb-4">
+            <h3 className="text-center mb-3">Выборы ответа</h3>
+            {falseSet && falseSet.map((word, index) => (
+              <div key={index}>
+                <input type="radio" className="btn-check" name="options" id={`option_${index}`} checked={selectedAnswer === word.text} onChange={() => handleAnswerChange(word.text)} />
+                <label className="btn btn-dark-list w-100 mb-3 py-3" htmlFor={`option_${index}`} >
+                  {word.translation}
+                </label> 
+              </div>
+            ))}
         </div>
-
-        <button
-          className={`btn btn-success w-100 py-2 ${
-            selectedAnswer === null ? "disabled" : ""
-          }`}
-          onClick={handleFinalAnswer}
-        >
-          Ответить
-        </button>
-      </main>
-      ) ||
-      (loading ? <p>Loading...</p>: <p>Error: {error}</p>)}
+        <div className={`d-flex justify-content-center my-4 ${ selectedAnswer === null ? "disabled" : "" }`} onClick={handleFinalAnswer}>
+            <button type="text" className="btn btn-primary save-btn py-2 w-50">
+              <span><b>Ответить</b></span>
+            </button>
+        </div>
+      </main> ) ||
+      (loading ? <Loading /> : <p>Error: {error}</p>)}
     </div>
   );
 }
