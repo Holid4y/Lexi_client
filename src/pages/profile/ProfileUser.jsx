@@ -124,7 +124,7 @@ function Profile() {
             <div className="d-flex justify-content-center mt-4">
               <button type="text" className="btn btn-primary save-btn py-2 w-50" disabled>
                 <div class="spinner-border spinner-border-sm" role="status">
-                  <span class="visually-hidden">Loading...</span>
+                  <span class="visually-hidden">Загрузка...</span>
                 </div>
               </button>
             </div>

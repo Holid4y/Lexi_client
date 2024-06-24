@@ -352,7 +352,7 @@ input[type='number'] { -moz-appearance: textfield;}
 
 
 /* Стили левего блока на ПК для автоматической прокруки */
-.autoScroll{
+.autoScroll {
     position: fixed;
     top: 0;
     left: 0;
@@ -362,8 +362,13 @@ input[type='number'] { -moz-appearance: textfield;}
     border: none;
     outline: none;
     height: 100vh;
-    transition: opacity .2s ease-out;
-}
-.autoScroll:hover{
+    transition: opacity 0.3s ease-out;
+  }
+  
+  .autoScroll.visible {
     opacity: 0.5;
-}
+  }
+  
+  .autoScroll:hover {
+    opacity: 1;
+  }
