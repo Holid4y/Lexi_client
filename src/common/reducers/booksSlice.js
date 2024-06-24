@@ -2,53 +2,50 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { host, books } from "../../../public/urls";
 import { headers } from "../../../public/urls";
 
-export const fetchBooks = createAsyncThunk(
-  "books/fetchBooks",
-  async (page, { dispatch }) => {
+export const fetchBooks = createAsyncThunk("books/fetchBooks", async (page, { dispatch }) => {
     const url = new URL(host + books);
 
     const params = new URLSearchParams({
-      page,
+        page,
     });
     url.search = params.toString();
     const response = await fetch(url.toString(), {
-      method: "GET",
-      headers: {
-        ...headers,
-      }, 
-    }); 
+        method: "GET",
+        headers: {
+            ...headers,
+        },
+    });
 
     const data = await response.json();
     dispatch(booksLoaded(data));
     return data;
-  }
-);
+});
 
 const booksSlice = createSlice({
-  name: "books",
-  initialState: {
-    books: null,
-    loading: false,
-    error: null,
-  },
-  reducers: {
-    booksLoaded: (state, action) => {
-      state.books = action.payload;
-    }
-  },
-  extraReducers: (builder) => {
-    builder
-      .addCase(fetchBooks.pending, (state) => {
-        state.loading = true;
-      })
-      .addCase(fetchBooks.fulfilled, (state) => {
-        state.loading = false;
-      })
-      .addCase(fetchBooks.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.error.message;
-      });
-  },
+    name: "books",
+    initialState: {
+        books: null,
+        loading: false,
+        error: null,
+    },
+    reducers: {
+        booksLoaded: (state, action) => {
+            state.books = action.payload;
+        },
+    },
+    extraReducers: (builder) => {
+        builder
+            .addCase(fetchBooks.pending, (state) => {
+                state.loading = true;
+            })
+            .addCase(fetchBooks.fulfilled, (state) => {
+                state.loading = false;
+            })
+            .addCase(fetchBooks.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.error.message;
+            });
+    },
 });
 
 export const { booksLoaded } = booksSlice.actions;
