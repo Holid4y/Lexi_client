@@ -2,19 +2,14 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 function Header() {
-  const dispatch = useDispatch();
-  const { training, round } = useSelector((state) => state.training);
+    const dispatch = useDispatch();
+    const { training, round } = useSelector((state) => state.training);
 
-  return (
-    <div className="container navbar-blur sticky-top mb-4 pt-4">
-      <span className="block_week py-4">
-        <button className="btn btn-primary me-2 px-3">{round + 1}</button> |{" "}
-        <button className="btn btn-primary ms-2 px-3">
-          {training ? training.length : 0}
-        </button>
-      </span>
-    </div>
-  );
+    return (
+        <p className="text-center my-3 mb-4">
+            <b className="fs-2">{round + 1}</b> <small className="mx-2 pt-1">из</small> <b className="fs-2">{training && training.length}</b>
+        </p>
+    );
 }
 
 export default Header;

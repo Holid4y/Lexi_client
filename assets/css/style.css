@@ -372,3 +372,9 @@ input[type='number'] { -moz-appearance: textfield;}
   .autoScroll:hover {
     opacity: 1;
   }
+
+  .badge-position{
+    font-size: 12px;
+    top: 5%;
+    left: 80%;
+  }
