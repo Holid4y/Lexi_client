@@ -1,13 +1,22 @@
 // Нижняя навигация
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
+
+import { useSelector } from "react-redux";
+
 import WordBlockTranslate from "./WordBlockTranslate";
 
 function Navigation() {
+    const { trainingInfo } = useSelector((state) => state.training);
     const location = useLocation();
 
     const getLinkClass = (path) => {
         return location.pathname === path ? "nav-link color-svg active_link" : "nav-link color-svg";
+    };
+    const getTrainingInfo = () => {
+        if (trainingInfo) {
+            return trainingInfo.count_word_to_training_recognize + trainingInfo.count_word_to_training_reproduce
+        }
     };
 
     return (
@@ -62,7 +71,7 @@ function Navigation() {
                     </li>
                     <li className="nav-item">
                         <Link to="/training" className={`${getLinkClass("/training")} position-relative `}>
-                            <small class="position-absolute translate-middle badge badge-position bg-success">99</small>
+                            <small class="position-absolute translate-middle badge badge-position bg-success">{getTrainingInfo()}</small>
                             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" viewBox="0 0 16 16">
                                 <path
                                     fill="currentColor"

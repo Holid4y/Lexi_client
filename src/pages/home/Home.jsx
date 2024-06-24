@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchHome } from "../../common/reducers/homeSlice";
 
 import InfoCard from "./components/InfoCard";
-import TrainingCard from "./components/TrainingCard";
+import TrainingCard from "../training/TrainingCard";
 import BooksLinkCard from "./components/BooksLinkCard";
 import WorsHistory from "./components/WorsHistory";
 

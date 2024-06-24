@@ -8,6 +8,7 @@ import { setTheme } from "./common/reducers/themeSlice";
 
 import { checkAccessTokenValidity } from "./common/reducers/authSlice";
 import { fetchSettings } from "./common/reducers/userSlice";
+import { fetchTrainingInfo } from "./common/reducers/trainingSlice";
 
 import Navigation from "./common/components/Navigation";
 
@@ -47,6 +48,7 @@ function App() {
     }
     useEffect(() => {
         dispatch(checkAccessTokenValidity());
+        dispatch(fetchTrainingInfo())
 
         const storedTheme = localStorage.getItem("theme");
 
