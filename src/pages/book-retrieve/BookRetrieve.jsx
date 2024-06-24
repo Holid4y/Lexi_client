@@ -9,6 +9,8 @@ import BookRetrieveHeader from "./components/BookRetrieveHeader";
 import Pages from "./components/Pages";
 import PaginationButton from "./components/PaginationButton";
 
+import Loading from "../../common/components/Loading";
+
 function BookRetrieve() {
   const dispatch = useDispatch();
   const { pk, pages, page_count, loading, error } = useSelector(
@@ -39,8 +41,7 @@ function BookRetrieve() {
     <div>
       <BookRetrieveHeader pk={pk} page={page}/>
 
-      {loading ? (
-        <p>Loading...</p> ) : (
+      {loading ? ( <Loading /> ) : (
         <>
           {pages && <Pages page={page} />}
           <PaginationButton page={page} page_count={page_count} slug={slug} setIsNext={setIsNext} />

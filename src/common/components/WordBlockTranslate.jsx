@@ -1,13 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleWordBlock } from "../reducers/wordSlice";
-
-const LoadingSpinner = () => (
-  <div className="d-flex align-items-center">
-    <strong role="status">Loading...</strong>
-    <div className="spinner-border spinner-border-sm ms-auto" role="status" aria-hidden="true"></div>
-  </div>
-);
+import Loading from "../components/Loading";
 
 function WordBlockTranslate() {
   const dispatch = useDispatch();
@@ -75,7 +69,7 @@ function WordBlockTranslate() {
               ))}
             </div>
           ) : (
-            loading ? <LoadingSpinner /> : <div className="text-center"><span className="text-danger">Не найдено</span></div>
+            loading ? <Loading /> : <div className="text-center"><span className="text-danger">Не найдено</span></div>
           )}
         </div>
       </div>

@@ -12,6 +12,8 @@ import Header from "../Header";
 import WordCard from "../WordCard";
 import FalseSet from "./components/FalseSet";
 
+import Loading from "../../../common/components/Loading";
+
 function Recognize() {
   const dispatch = useDispatch();
   const { training, round, loading, error } = useSelector(
