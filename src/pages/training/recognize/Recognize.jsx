@@ -29,7 +29,7 @@ function Recognize() {
       const j = Math.floor(Math.random() * (i + 1));
       [falseSet[i], falseSet[j]] = [falseSet[j], falseSet[i]];
     }
-
+    console.log(falseSet)
     return falseSet;
   }
 
@@ -46,7 +46,7 @@ function Recognize() {
       setFalseSet(makeFalseSet(falseAnswers, correctAnswer));
     }
     
-  }, [round]);
+  }, [round, training]);
 
   // Функция для обработки финального ответа
   function handleFinalAnswer() {
