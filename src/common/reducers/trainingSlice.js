@@ -20,7 +20,13 @@ export const fetchTraining = createAsyncThunk(
         },
       });
       const data = await response.json();
-      dispatch(trainingLoaded(data));
+      
+      if (data.length != 0) {
+        dispatch(trainingLoaded(data));
+      } else {
+        console.log(data)
+      }
+      
       return data;
     } catch (error) {
       if (error.message === "Unauthorized") {
