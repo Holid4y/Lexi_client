@@ -23,7 +23,11 @@ function Recognize() {
 
     // Используем эффект для отправки запроса на получение тренировки
     useEffect(() => {
-        dispatch(fetchTraining("recognize"));
+        if (!training) {
+            dispatch(fetchTraining("recognize"));
+            console.log('fetch')
+        }
+
         if (!learning_words) {
             dispatch(fetchHome());
         }
@@ -67,7 +71,7 @@ function Recognize() {
             setSelectedAnswer(null); // Сбрасываем выбранный вариант для следующего раунда
 
             if (round + 1 == training.length) {
-                console.log("end");
+                console.log("end", 'надо очистить store');
             } else {
                 dispatch(nextRound()); // следующий раунд
             }

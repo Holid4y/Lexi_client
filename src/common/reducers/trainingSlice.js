@@ -129,16 +129,16 @@ const trainingSlice = createSlice({
                 state.error = action.error.message;
             })
 
-            .addCase(trainingInfoLoaded.pending, (state) => {
+            .addCase(fetchTrainingInfo.pending, (state) => {
                 state.loading = true;
             })
-            .addCase(trainingInfoLoaded.fulfilled, (state) => {
+            .addCase(fetchTrainingInfo.fulfilled, (state) => {
                 state.loading = false;
             })
-            .addCase(trainingInfoLoaded.rejected, (state, action) => {
+            .addCase(fetchTrainingInfo.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.error.message;
-            });
+            })
     },
 });
 
