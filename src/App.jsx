@@ -37,9 +37,11 @@ function App() {
         }
     }
 
+    
+
     useEffect(() => {
         dispatch(checkAccessTokenValidity());
-        dispatch(fetchTrainingInfo());
+        
 
         const storedTheme = localStorage.getItem("theme");
 
@@ -68,6 +70,10 @@ function App() {
     useEffect(() => {
         document.documentElement.setAttribute("data-bs-theme", theme);
     }, [theme]);
+
+    useEffect(() => {
+        dispatch(fetchTrainingInfo())
+    }, [dispatch]);
 
     return (
         <Router>

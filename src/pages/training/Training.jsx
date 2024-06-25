@@ -6,7 +6,7 @@ import TrainingCard from "./TrainingCard";
 
 function Training() {
     const dispatch = useDispatch();
-    const { trainingInfo } = useSelector((state) => state.training);
+    const { count_word_to_training_recognize, count_word_to_training_reproduce } = useSelector((state) => state.training);
 
     useEffect(() => {
         dispatch(fetchTrainingInfo())
@@ -32,8 +32,8 @@ function Training() {
                     <div class="row align-items-center g-lg-4">
                         <div class="col-lg-7 text-center text-lg-start mb-3">
                             <h1 class="display-4 fw-bold lh-1 text-body-emphasis">Необходимо пройти</h1>
-                            <span class="col-lg-10 fs-4">Тест с выбором ответа <b>{trainingInfo && trainingInfo.count_word_to_training_recognize}</b> слова </span><br />
-                            <span class="col-lg-10 fs-4">Тест на узнаваемость <b>{trainingInfo && trainingInfo.count_word_to_training_reproduce}</b> слова </span>
+                            <span class="col-lg-10 fs-4">Тест с выбором ответа <b>{count_word_to_training_recognize && count_word_to_training_recognize}</b> слова </span><br />
+                            <span class="col-lg-10 fs-4">Тест на узнаваемость <b>{count_word_to_training_reproduce && count_word_to_training_reproduce}</b> слова </span>
                         </div>
                         <div class="col-md-10 mx-auto col-lg-5">
                             <TrainingCard />

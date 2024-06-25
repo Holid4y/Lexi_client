@@ -1,5 +1,6 @@
-import React, { useState } from "react";
-import Navigation from "../../../common/components/Navigation";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
 
 function shuffleText(text) {
     return text
@@ -9,6 +10,10 @@ function shuffleText(text) {
 }
 
 function Reproduce() {
+    const dispatch = useDispatch();
+    const { training, round, loading, error } = useSelector((state) => state.training);
+    const { learning_words } = useSelector((state) => state.home);
+
     const [buttonClasses, setButtonClasses] = useState("form-control py-2 disabled placeholder");
     const [buttonText, setButtonText] = useState("white");
     const [isClicked, setIsClicked] = useState(false);
@@ -18,6 +23,77 @@ function Reproduce() {
         setButtonText(shuffleText(buttonText));
         setIsClicked(true);
     };
+
+    // Создаем состояние для выбранного ответа
+    const [selectedAnswer, setSelectedAnswer] = useState(null);
+
+    // Создаем состояние для массива ложных ответов
+    const [falseSet, setFalseSet] = useState(null);
+
+    // Используем эффект для отправки запроса на получение тренировки
+    // useEffect(() => {
+    //     if (!training) {
+    //         dispatch(fetchTraining("recognize"));
+    //         console.log('fetch')
+    //     }
+
+    //     if (!learning_words) {
+    //         dispatch(fetchHome());
+    //     }
+    // }, [dispatch]);
+
+    // Функция для создания массива ложных ответов
+    function makeFalseSet(falseAnswers, correctAnswer) {
+        const falseSet = [...falseAnswers];
+        falseSet.push(correctAnswer);
+
+        // Перемешиваем элементы массива с помощью алгоритма Фишера-Йетса
+        for (let i = falseSet.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [falseSet[i], falseSet[j]] = [falseSet[j], falseSet[i]];
+        }
+        return falseSet;
+    }
+
+    // Используем эффект для создания массива ложных ответов для каждого раунда
+    useEffect(() => {
+        if (training) {
+            const falseAnswers = training[round].false_set;
+            const correctAnswer = {
+                text: training[round].word.text,
+                translation: training[round].word.translation,
+            };
+            setFalseSet(makeFalseSet(falseAnswers, correctAnswer));
+        }
+    }, [round, training]);
+
+    // Функция для обработки финального ответа
+    function handleFinalAnswer() {
+        if (selectedAnswer !== null) {
+            const result = checkAnswer(selectedAnswer);
+            const data = {
+                type: "recognize",
+                pk: training[round].pk,
+                is_correct: result,
+            };
+            dispatch(fetchTrainingPatch(data)); // отбовляет бд
+            setSelectedAnswer(null); // Сбрасываем выбранный вариант для следующего раунда
+
+            if (round + 1 == training.length) {
+                console.log("end", 'надо очистить store');
+            } else {
+                dispatch(nextRound()); // следующий раунд
+            }
+        } else {
+            // Если ничего не выбрано, можно вывести предупреждение или сделать кнопку неактивной
+            console.log("Пожалуйста, выберите ответ");
+        }
+    }
+
+    // Функция для проверки ответа
+    function checkAnswer(answerWord) {
+        return training[round].word.text == answerWord;
+    }
 
     return (
         <div className="align-items-center">
