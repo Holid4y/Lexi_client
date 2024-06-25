@@ -18,9 +18,10 @@ export const fetchTraining = createAsyncThunk("training/fetchTraining", async (t
             },
         });
         const data = await response.json();
-
+        console.log('fetchTraining')
         if (data.length != 0) {
             dispatch(trainingLoaded(data));
+            dispatch(setType(type))
         } else
 
         return data;
@@ -83,18 +84,24 @@ const trainingSlice = createSlice({
     initialState: {
         // training
         training: null,
-        round: 0,
-        // счет правильных ответов
+
+
+        round_recognize: 0,
+        round_reproduce: 0,
+
+        type: null,
         score: 0,
 
-        loading: false,
-        error: null,
+        
         // info
         count_word_to_training_recognize: null,
         count_word_to_training_reproduce: null,
 
         patchLoading: false,
-        patchError: null
+        patchError: null,
+
+        loading: false,
+        error: null,
         
 
     },
@@ -108,7 +115,12 @@ const trainingSlice = createSlice({
             state.count_word_to_training_reproduce = action.payload.count_word_to_training_reproduce;
         },
         nextRound: (state, action) => {
-            state.round = state.round + 1;
+            if (state.type === "recognize"){
+                state.round_recognize = state.round_recognize + 1
+            }
+            if (state.type === "reproduce"){
+                state.round_reproduce =  state.round_reproduce + 1
+            }  
         },
         addScore: (state, action) => {
             state.score = state.score + 1;
@@ -120,12 +132,23 @@ const trainingSlice = createSlice({
             state.count_word_to_training_reproduce = state.count_word_to_training_reproduce - 1;
         },
 
-        clearRound: (state, action) => {
+        clearTraining: (state, action) => {
             state.training = null
-            state.round = 0
+        },
+        clearRound: (state, action) => {
+            if (state.type === "recognize"){
+                state.round_recognize = 0
+            }
+            if (state.type === "reproduce"){
+                state.round_reproduce = 0
+            }    
+            
         },
         clearScore: (state, action) => {
             state.score = 0
+        },
+        setType: (state, action) => {
+            state.type = action.payload;
         },
     },
     extraReducers: (builder) => {
@@ -165,5 +188,5 @@ const trainingSlice = createSlice({
     },
 });
 
-export const { trainingLoaded, nextRound, addScore, trainingInfoLoaded, clearRound, decrementTrainingInfoReproduce, decrementTrainingInfoRecognize, clearScore } = trainingSlice.actions;
+export const { trainingLoaded, nextRound, addScore, trainingInfoLoaded, clearTraining, decrementTrainingInfoReproduce, decrementTrainingInfoRecognize, clearScore, setType, clearRound } = trainingSlice.actions;
 export default trainingSlice.reducer;

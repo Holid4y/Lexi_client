@@ -1,6 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
+import { fetchTraining, fetchTrainingPatch, nextRound, addScore, clearTraining, decrementTrainingInfoRecognize } from "../../../common/reducers/trainingSlice";
+import { fetchHome } from "../../../common/reducers/homeSlice";
+
+import Header from "../Header";
+import WordCard from "../WordCard";
+import End from "../End";
+
+import Loading from "../../../common/components/Loading";
 
 function shuffleText(text) {
     return text
@@ -11,68 +19,38 @@ function shuffleText(text) {
 
 function Reproduce() {
     const dispatch = useDispatch();
-    const { training, round, loading, error } = useSelector((state) => state.training);
+    const { training, round_reproduce, type, count_word_to_training_reproduce, loading, patchLoading, error } = useSelector((state) => state.training);
     const { learning_words } = useSelector((state) => state.home);
 
-    const [buttonClasses, setButtonClasses] = useState("form-control py-2 disabled placeholder");
-    const [buttonText, setButtonText] = useState("white");
-    const [isClicked, setIsClicked] = useState(false);
+    // Создаем состояние для проверки последнего слова
+    const [isEnd, setIsEnd] = useState(false);
+    const round = round_reproduce;
+    const localType = "reproduce";
 
-    const handleButtonClick = () => {
-        setButtonClasses("form-control py-2");
-        setButtonText(shuffleText(buttonText));
-        setIsClicked(true);
-    };
-
-    // Создаем состояние для выбранного ответа
-    const [selectedAnswer, setSelectedAnswer] = useState(null);
-
-    // Создаем состояние для массива ложных ответов
-    const [falseSet, setFalseSet] = useState(null);
+    // --- логика отображения подсказок
+    const [isOpen, setIsOpen] = useState(false);
 
     // Используем эффект для отправки запроса на получение тренировки
-    // useEffect(() => {
-    //     if (!training) {
-    //         dispatch(fetchTraining("recognize"));
-    //         console.log('fetch')
-    //     }
-
-    //     if (!learning_words) {
-    //         dispatch(fetchHome());
-    //     }
-    // }, [dispatch]);
-
-    // Функция для создания массива ложных ответов
-    function makeFalseSet(falseAnswers, correctAnswer) {
-        const falseSet = [...falseAnswers];
-        falseSet.push(correctAnswer);
-
-        // Перемешиваем элементы массива с помощью алгоритма Фишера-Йетса
-        for (let i = falseSet.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [falseSet[i], falseSet[j]] = [falseSet[j], falseSet[i]];
-        }
-        return falseSet;
-    }
-
-    // Используем эффект для создания массива ложных ответов для каждого раунда
     useEffect(() => {
-        if (training) {
-            const falseAnswers = training[round].false_set;
-            const correctAnswer = {
-                text: training[round].word.text,
-                translation: training[round].word.translation,
-            };
-            setFalseSet(makeFalseSet(falseAnswers, correctAnswer));
+        // Проверяем, что выполняются следующие условия:
+        // 1. Массив training либо пустой, либо не существует (training является falsy значением)
+        // 2. Значение переменной type не равно значению переменной localType
+        // 3. Переменная patchLoading имеет значение false (falsy значение)
+        // Если все эти условия выполняются, то отправляем запроса на получение тренировки
+        if ((!training || type !== localType) && !patchLoading) {
+            dispatch(fetchTraining(localType));
         }
-    }, [round, training]);
+        if (!learning_words) {
+            dispatch(fetchHome());
+        }
+    }, [dispatch, isEnd, type]);
 
     // Функция для обработки финального ответа
     function handleFinalAnswer() {
         if (selectedAnswer !== null) {
             const result = checkAnswer(selectedAnswer);
             const data = {
-                type: "recognize",
+                type: localType,
                 pk: training[round].pk,
                 is_correct: result,
             };
@@ -80,7 +58,7 @@ function Reproduce() {
             setSelectedAnswer(null); // Сбрасываем выбранный вариант для следующего раунда
 
             if (round + 1 == training.length) {
-                console.log("end", 'надо очистить store');
+                console.log("end", "надо очистить store");
             } else {
                 dispatch(nextRound()); // следующий раунд
             }
@@ -97,37 +75,37 @@ function Reproduce() {
 
     return (
         <div className="align-items-center">
-            <p className="text-center my-3 mb-4">
-                <b className="fs-2">3</b> <small className="mx-2 pt-1">из</small> <b className="fs-2">8</b>
-            </p>
+            {(loading && <p>Loading...</p>) ||
+                (isEnd && <End type={localType} count_word_to_training={count_word_to_training_reproduce} setIsEnd={setIsEnd} />) ||
+                (training && (
+                    <>
+                        <Header round={round} trainingLength={training.length} />
+                        <main className="container px-4">
+                            <WordCard text={training && training[round].word.translation} lvl={training && training[round].reproduce_lvl} />
+                        </main>
+                    </>
+                ))}
 
-            <main className="container">
-                <div className="card statistic mb-5 pt-4 mx-4">
-                    <h4 className="text-center p-2">Белый</h4>
-                    <span className="fs-6 ms-1">L4</span>
+            <div className="px-5 mb-4">
+                <div className="mb-4">
+                    <h3 className="text-center mb-3">Напишите ответ</h3>
+                    <input type="text" className="form-control py-2-5 mb-2" />
                 </div>
 
-                <div className="px-5 mb-4">
-                    <div className="mb-4">
-                        <h3 className="text-center mb-3">Напишите ответ</h3>
-                        <input type="text" className="form-control py-2-5 mb-2" />
-                    </div>
-
-                    <div className="mb-4">
-                        <button type="text" className={buttonClasses} onClick={handleButtonClick} disabled={isClicked}>
-                            <h1>{buttonText}</h1>
-                        </button>
-                        <small className="">Если затрудняетесь ответить, нажмите на блок с подсказкой</small>
-                    </div>
-                </div>
-                <div className="d-flex justify-content-center my-4">
-                    <button type="text" className="btn btn-primary save-btn py-2 w-50">
-                        <span>
-                            <b>Ответить</b>
-                        </span>
+                <div className="mb-4">
+                    <button type="text" className={isOpen ? "form-control py-2" : "form-control py-2 disabled placeholder"} onClick={() => setIsOpen(true)} disabled={isOpen}>
+                        <h1>fff</h1>
                     </button>
+                    <small className="">Если затрудняетесь ответить, нажмите на блок с подсказкой</small>
                 </div>
-            </main>
+            </div>
+            <div className="d-flex justify-content-center my-4">
+                <button type="text" className="btn btn-primary save-btn py-2 w-50">
+                    <span>
+                        <b>Ответить</b>
+                    </span>
+                </button>
+            </div>
         </div>
     );
 }

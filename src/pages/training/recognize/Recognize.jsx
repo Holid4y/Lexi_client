@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { fetchTraining, fetchTrainingPatch, nextRound, addScore, clearRound, decrementTrainingInfoRecognize } from "../../../common/reducers/trainingSlice";
+import { fetchTraining, fetchTrainingPatch, nextRound, addScore, clearTraining, decrementTrainingInfoRecognize, setType, clearRound } from "../../../common/reducers/trainingSlice";
 import { fetchHome } from "../../../common/reducers/homeSlice";
 
 import Header from "../Header";
@@ -13,31 +13,34 @@ import Loading from "../../../common/components/Loading";
 
 function Recognize() {
     const dispatch = useDispatch();
-    const { training, round, count_word_to_training_recognize, loading, patchLoading, error } = useSelector((state) => state.training);
+    const { training, round_recognize, type, count_word_to_training_recognize, loading, patchLoading, error } = useSelector((state) => state.training);
     const { learning_words } = useSelector((state) => state.home);
-    const type = "recognize";
-    // Создаем состояние для выбранного ответа
+    const localType = "recognize";
+    const round = round_recognize
+    // выбранный ответ
     const [selectedAnswer, setSelectedAnswer] = useState(null);
-
-    // Создаем состояние для массива ложных ответов
+    // массив ложных ответов
     const [falseSet, setFalseSet] = useState(null);
-
-    // Создаем состояние для проверки последнего слова
+    // проверки последнего слова
     const [isEnd, setIsEnd] = useState(false);
 
     // Используем эффект для отправки запроса на получение тренировки
     useEffect(() => {
-        if (!training & !patchLoading) {
-            // отправлять запрос только в том случае
-            // если training пуст и если в данный момент
-            // не идет загрузка patchLoading
-            dispatch(fetchTraining(type));
+        // Проверяем, что выполняются следующие условия:
+        // 1. Массив training либо пустой, либо не существует (training является falsy значением)
+        // 2. Значение переменной type не равно значению переменной localType
+        // 3. Переменная patchLoading имеет значение false (falsy значение)
+        // Если все эти условия выполняются, то отправляем запроса на получение тренировки
+        
+        if ((!training | (type !== localType)) & !patchLoading) {
+            dispatch(fetchTraining(localType));
+
         }
 
         if (!learning_words) {
             dispatch(fetchHome());
         }
-    }, [dispatch, isEnd]);
+    }, [dispatch, isEnd, type]);
 
     // Функция для создания массива ложных ответов
     function makeFalseSet(falseAnswers, correctAnswer) {
@@ -55,12 +58,14 @@ function Recognize() {
     // Используем эффект для создания массива ложных ответов для каждого раунда
     useEffect(() => {
         if (training) {
-            const falseAnswers = training[round].false_set;
-            const correctAnswer = {
-                text: training[round].word.text,
-                translation: training[round].word.translation,
-            };
-            setFalseSet(makeFalseSet(falseAnswers, correctAnswer));
+            if (training[round].false_set) {
+                const falseAnswers = training[round].false_set;
+                const correctAnswer = {
+                    text: training[round].word.text,
+                    translation: training[round].word.translation,
+                };
+                setFalseSet(makeFalseSet(falseAnswers, correctAnswer));
+            }
         }
     }, [round, training]);
 
@@ -68,7 +73,8 @@ function Recognize() {
         // после ответа, если это последный раунд
         if (round + 1 == training.length) {
             setIsEnd(true); // отображаем страницу окончания
-            dispatch(clearRound()); // очищаем текущий round
+            dispatch(clearTraining()); // очищаем текущий training
+            dispatch(clearRound()) // сбрасывает до первого слова
         } else {
             dispatch(nextRound()); // следующий раунд
         }
@@ -79,7 +85,7 @@ function Recognize() {
         if (selectedAnswer !== null) {
             const is_correct = checkAnswer(selectedAnswer);
             const data = {
-                type: type,
+                type: localType,
                 pk: training[round].pk,
                 is_correct: is_correct,
             };
@@ -107,12 +113,13 @@ function Recognize() {
 
     return (
         <div className="align-items-center">
-            {(isEnd && <End type={type} count_word_to_training={count_word_to_training_recognize} setIsEnd={setIsEnd} />) ||
+            {(loading && <p>Loading...</p>) ||
+                (isEnd && <End type={localType} count_word_to_training={count_word_to_training_recognize} setIsEnd={setIsEnd} />) ||
                 (training && (
                     <>
-                        <Header />
+                        <Header round={round} trainingLength={training.length}/>
                         <main className="container px-4">
-                            <WordCard />
+                            <WordCard text={training && training[round].word.text} lvl={training && training[round].recognize_lvl} />
                             <div className="mb-4">
                                 <h3 className="text-center mb-3">Варианты ответа</h3>
                                 {falseSet &&
@@ -131,7 +138,6 @@ function Recognize() {
                         </main>
                     </>
                 )) ||
-                (loading && <p>Loading...</p>) ||
                 (error && <p>Error: {error}</p>) ||
                 (!training & (learning_words != 0) && (
                     <>
