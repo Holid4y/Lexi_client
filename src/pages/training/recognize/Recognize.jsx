@@ -4,10 +4,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchTraining, fetchTrainingPatch, nextRound, addScore, clearTraining, decrementTrainingInfoRecognize, setType, clearRound } from "../../../common/reducers/trainingSlice";
 import { fetchHome } from "../../../common/reducers/homeSlice";
 
-import Header from "../Header";
-import WordCard from "../WordCard";
+import Header from "../components/Header";
+import WordCard from "../components/WordCard";
 import FalseSet from "./components/FalseSet";
-import End from "../End";
+import End from "../components/End";
+import AnswerButton from "../components/AnswerButton";
 
 import Loading from "../../../common/components/Loading";
 
@@ -128,13 +129,7 @@ function Recognize() {
                                     ))}
                             </div>
 
-                            <div className="d-flex justify-content-center my-4" onClick={handleFinalAnswer}>
-                                <button type="text" className={`btn btn-primary save-btn py-2 w-50 ${selectedAnswer === null ? "disabled" : ""}`}>
-                                    <span>
-                                        <b>Ответить</b>
-                                    </span>
-                                </button>
-                            </div>
+                            < AnswerButton handleFinalAnswer={handleFinalAnswer} selectedAnswer={selectedAnswer}/>
                         </main>
                     </>
                 )) ||

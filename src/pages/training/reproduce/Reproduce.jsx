@@ -4,18 +4,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchTraining, fetchTrainingPatch, nextRound, addScore, clearTraining, decrementTrainingInfoRecognize } from "../../../common/reducers/trainingSlice";
 import { fetchHome } from "../../../common/reducers/homeSlice";
 
-import Header from "../Header";
-import WordCard from "../WordCard";
-import End from "../End";
+import Header from "../components/Header";
+import WordCard from "../components/WordCard";
+import End from "../components/End";
+import Hint from "./components/Hint"
 
 import Loading from "../../../common/components/Loading";
 
-function shuffleText(text) {
-    return text
-        .split("")
-        .sort(() => Math.random() - 0.5)
-        .join("");
-}
+
 
 function Reproduce() {
     const dispatch = useDispatch();
@@ -27,8 +23,7 @@ function Reproduce() {
     const round = round_reproduce;
     const localType = "reproduce";
 
-    // --- логика отображения подсказок
-    const [isOpen, setIsOpen] = useState(false);
+    
 
     // Используем эффект для отправки запроса на получение тренировки
     useEffect(() => {
@@ -83,29 +78,23 @@ function Reproduce() {
                         <main className="container px-4">
                             <WordCard text={training && training[round].word.translation} lvl={training && training[round].reproduce_lvl} />
                         </main>
+                        <div className="px-5 mb-4">
+                            <div className="mb-4">
+                                <h3 className="text-center mb-3">Напишите ответ</h3>
+                                <input type="text" className="form-control py-2-5 mb-2" />
+                            </div>
+
+                            <Hint text={training[round].word.text}/>
+                        </div>
+                        <div className="d-flex justify-content-center my-4">
+                            <button type="text" className="btn btn-primary save-btn py-2 w-50">
+                                <span>
+                                    <b>Ответить</b>
+                                </span>
+                            </button>
+                        </div>
                     </>
                 ))}
-
-            <div className="px-5 mb-4">
-                <div className="mb-4">
-                    <h3 className="text-center mb-3">Напишите ответ</h3>
-                    <input type="text" className="form-control py-2-5 mb-2" />
-                </div>
-
-                <div className="mb-4">
-                    <button type="text" className={isOpen ? "form-control py-2" : "form-control py-2 disabled placeholder"} onClick={() => setIsOpen(true)} disabled={isOpen}>
-                        <h1>fff</h1>
-                    </button>
-                    <small className="">Если затрудняетесь ответить, нажмите на блок с подсказкой</small>
-                </div>
-            </div>
-            <div className="d-flex justify-content-center my-4">
-                <button type="text" className="btn btn-primary save-btn py-2 w-50">
-                    <span>
-                        <b>Ответить</b>
-                    </span>
-                </button>
-            </div>
         </div>
     );
 }

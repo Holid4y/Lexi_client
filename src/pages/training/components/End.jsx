@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
-import { clearScore } from "../../common/reducers/trainingSlice";
+import { clearScore } from "../../../common/reducers/trainingSlice";
 
 function End({ type, count_word_to_training, setIsEnd }) {
     const dispatch = useDispatch();
