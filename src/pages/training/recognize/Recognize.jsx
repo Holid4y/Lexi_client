@@ -13,7 +13,7 @@ import Loading from "../../../common/components/Loading";
 
 function Recognize() {
     const dispatch = useDispatch();
-    const { training, round, count_word_to_training_recognize, loading, error } = useSelector((state) => state.training);
+    const { training, round, count_word_to_training_recognize, loading, patchLoading, error } = useSelector((state) => state.training);
     const { learning_words } = useSelector((state) => state.home);
     const type = "recognize";
     // Создаем состояние для выбранного ответа
@@ -27,15 +27,17 @@ function Recognize() {
 
     // Используем эффект для отправки запроса на получение тренировки
     useEffect(() => {
-        if (!training) {
+        if (!training & !patchLoading) {
+            // отправлять запрос только в том случае
+            // если training пуст и если в данный момент
+            // не идет загрузка patchLoading
             dispatch(fetchTraining("recognize"));
-            console.log("fetch");
         }
 
         if (!learning_words) {
             dispatch(fetchHome());
         }
-    }, [dispatch]);
+    }, [dispatch, isEnd]);
 
     // Функция для создания массива ложных ответов
     function makeFalseSet(falseAnswers, correctAnswer) {
@@ -105,7 +107,7 @@ function Recognize() {
 
     return (
         <div className="align-items-center">
-            {(isEnd && <End type={type} count_word_to_training={count_word_to_training_recognize} />) ||
+            {(isEnd && <End type={type} count_word_to_training={count_word_to_training_recognize} setIsEnd={setIsEnd} />) ||
                 (training && (
                     <>
                         <Header />

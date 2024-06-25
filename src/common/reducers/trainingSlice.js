@@ -21,9 +21,7 @@ export const fetchTraining = createAsyncThunk("training/fetchTraining", async (t
 
         if (data.length != 0) {
             dispatch(trainingLoaded(data));
-        } else {
-            console.log(data);
-        }
+        } else
 
         return data;
     } catch (error) {
@@ -66,7 +64,6 @@ export const fetchTrainingPatch = createAsyncThunk("training/fetchTrainingPatch"
         pk: pk,
         is_correct: is_correct,
     };
-    console.log(JSON.stringify(body));
     const response = await fetch(url.toString(), {
         method: "PATCH",
         headers: {
@@ -90,12 +87,16 @@ const trainingSlice = createSlice({
         // счет правильных ответов
         score: 0,
 
+        loading: false,
+        error: null,
         // info
         count_word_to_training_recognize: null,
         count_word_to_training_reproduce: null,
 
-        loading: false,
-        error: null,
+        patchLoading: false,
+        patchError: null
+        
+
     },
     reducers: {
         trainingLoaded: (state, action) => {
@@ -141,14 +142,14 @@ const trainingSlice = createSlice({
             })
 
             .addCase(fetchTrainingPatch.pending, (state) => {
-                state.loading = true;
+                state.patchLoading = true;
             })
             .addCase(fetchTrainingPatch.fulfilled, (state) => {
-                state.loading = false;
+                state.patchLoading = false;
             })
             .addCase(fetchTrainingPatch.rejected, (state, action) => {
-                state.loading = false;
-                state.error = action.error.message;
+                state.patchLoading = false;
+                state.patchError = action.error.message;
             })
 
             .addCase(fetchTrainingInfo.pending, (state) => {
