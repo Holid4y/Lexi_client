@@ -31,7 +31,7 @@ function Recognize() {
             // отправлять запрос только в том случае
             // если training пуст и если в данный момент
             // не идет загрузка patchLoading
-            dispatch(fetchTraining("recognize"));
+            dispatch(fetchTraining(type));
         }
 
         if (!learning_words) {
