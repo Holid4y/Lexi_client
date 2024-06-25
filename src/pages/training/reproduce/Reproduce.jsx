@@ -7,23 +7,22 @@ import { fetchHome } from "../../../common/reducers/homeSlice";
 import Header from "../components/Header";
 import WordCard from "../components/WordCard";
 import End from "../components/End";
-import Hint from "./components/Hint"
+import Hint from "./components/Hint";
 
 import Loading from "../../../common/components/Loading";
-
-
 
 function Reproduce() {
     const dispatch = useDispatch();
     const { training, round_reproduce, type, count_word_to_training_reproduce, loading, patchLoading, error } = useSelector((state) => state.training);
     const { learning_words } = useSelector((state) => state.home);
 
+    // выбранный ответ
+    const [selectedAnswer, setSelectedAnswer] = useState('');
+
     // Создаем состояние для проверки последнего слова
     const [isEnd, setIsEnd] = useState(false);
     const round = round_reproduce;
     const localType = "reproduce";
-
-    
 
     // Используем эффект для отправки запроса на получение тренировки
     useEffect(() => {
@@ -40,33 +39,9 @@ function Reproduce() {
         }
     }, [dispatch, isEnd, type]);
 
-    // Функция для обработки финального ответа
-    function handleFinalAnswer() {
-        if (selectedAnswer !== null) {
-            const result = checkAnswer(selectedAnswer);
-            const data = {
-                type: localType,
-                pk: training[round].pk,
-                is_correct: result,
-            };
-            dispatch(fetchTrainingPatch(data)); // отбовляет бд
-            setSelectedAnswer(null); // Сбрасываем выбранный вариант для следующего раунда
-
-            if (round + 1 == training.length) {
-                console.log("end", "надо очистить store");
-            } else {
-                dispatch(nextRound()); // следующий раунд
-            }
-        } else {
-            // Если ничего не выбрано, можно вывести предупреждение или сделать кнопку неактивной
-            console.log("Пожалуйста, выберите ответ");
-        }
-    }
-
-    // Функция для проверки ответа
-    function checkAnswer(answerWord) {
-        return training[round].word.text == answerWord;
-    }
+    const handleInputChange = (event) => {
+        setSelectedAnswer(event.target.value);
+    };
 
     return (
         <div className="align-items-center">
@@ -81,10 +56,10 @@ function Reproduce() {
                         <div className="px-5 mb-4">
                             <div className="mb-4">
                                 <h3 className="text-center mb-3">Напишите ответ</h3>
-                                <input type="text" className="form-control py-2-5 mb-2" />
+                                <input type="text" className="form-control py-2-5 mb-2" value={selectedAnswer} onChange={handleInputChange} />
                             </div>
 
-                            <Hint text={training[round].word.text}/>
+                            <Hint text={training[round].word.text} />
                         </div>
                         <div className="d-flex justify-content-center my-4">
                             <button type="text" className="btn btn-primary save-btn py-2 w-50">

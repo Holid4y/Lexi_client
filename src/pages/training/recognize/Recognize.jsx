@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { fetchTraining, fetchTrainingPatch, nextRound, addScore, clearTraining, decrementTrainingInfoRecognize, setType, clearRound } from "../../../common/reducers/trainingSlice";
+import { fetchTraining } from "../../../common/reducers/trainingSlice";
 import { fetchHome } from "../../../common/reducers/homeSlice";
 
 import Header from "../components/Header";
@@ -17,7 +17,7 @@ function Recognize() {
     const { training, round_recognize, type, count_word_to_training_recognize, loading, patchLoading, error } = useSelector((state) => state.training);
     const { learning_words } = useSelector((state) => state.home);
     const localType = "recognize";
-    const round = round_recognize
+    const round = round_recognize;
     // выбранный ответ
     const [selectedAnswer, setSelectedAnswer] = useState(null);
     // массив ложных ответов
@@ -32,10 +32,9 @@ function Recognize() {
         // 2. Значение переменной type не равно значению переменной localType
         // 3. Переменная patchLoading имеет значение false (falsy значение)
         // Если все эти условия выполняются, то отправляем запроса на получение тренировки
-        
+
         if ((!training | (type !== localType)) & !patchLoading) {
             dispatch(fetchTraining(localType));
-
         }
 
         if (!learning_words) {
@@ -70,47 +69,7 @@ function Recognize() {
         }
     }, [round, training]);
 
-    function checkRound() {
-        // после ответа, если это последный раунд
-        if (round + 1 == training.length) {
-            setIsEnd(true); // отображаем страницу окончания
-            dispatch(clearTraining()); // очищаем текущий training
-            dispatch(clearRound()) // сбрасывает до первого слова
-        } else {
-            dispatch(nextRound()); // следующий раунд
-        }
-    }
-
-    // Функция для обработки финального ответа
-    function handleFinalAnswer() {
-        if (selectedAnswer !== null) {
-            const is_correct = checkAnswer(selectedAnswer);
-            const data = {
-                type: localType,
-                pk: training[round].pk,
-                is_correct: is_correct,
-            };
-            // отнимаем от информационного счетчика 1
-            dispatch(decrementTrainingInfoRecognize());
-
-            dispatch(fetchTrainingPatch(data)); // отбовляет бд
-
-            if (is_correct) {
-                // прибавляем балл за правельный ответ
-                dispatch(addScore());
-            }
-            setSelectedAnswer(null); // Сбрасываем выбранный вариант для следующего раунда
-            checkRound();
-        } else {
-            // Если ничего не выбрано, можно вывести предупреждение или сделать кнопку неактивной
-            console.log("Пожалуйста, выберите ответ");
-        }
-    }
-
-    // Функция для проверки ответа
-    function checkAnswer(answerWord) {
-        return training[round].word.text == answerWord;
-    }
+    
 
     return (
         <div className="align-items-center">
@@ -118,7 +77,7 @@ function Recognize() {
                 (isEnd && <End type={localType} count_word_to_training={count_word_to_training_recognize} setIsEnd={setIsEnd} />) ||
                 (training && (
                     <>
-                        <Header round={round} trainingLength={training.length}/>
+                        <Header round={round} trainingLength={training.length} />
                         <main className="container px-4">
                             <WordCard text={training && training[round].word.text} lvl={training && training[round].recognize_lvl} />
                             <div className="mb-4">
@@ -129,7 +88,7 @@ function Recognize() {
                                     ))}
                             </div>
 
-                            < AnswerButton handleFinalAnswer={handleFinalAnswer} selectedAnswer={selectedAnswer}/>
+                            <AnswerButton localType={localType} selectedAnswer={selectedAnswer} currentTraining={training} setSelectedAnswer={setSelectedAnswer} currentRound={round} setIsEnd={setIsEnd}/>
                         </main>
                     </>
                 )) ||
