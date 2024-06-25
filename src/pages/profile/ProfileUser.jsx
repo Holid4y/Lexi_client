@@ -1,21 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-
 import { useDispatch, useSelector } from "react-redux";
-
-import { fetchSettings } from "../../common/reducers/userSlice";
-import { fetchPutSettings } from "../../common/reducers/userSlice";
-
-import { setTheme } from "../../common/reducers/themeSlice"; // Импортируем экшн для переключения темы
+import { fetchSettings, fetchPutSettings } from "../../common/reducers/userSlice";
+import { setTheme } from "../../common/reducers/themeSlice";
 import { renderResponse } from "../../../public/urls";
 
 function Profile() {
     const dispatch = useDispatch();
 
     const { username, email, activated_email, number_of_false_set, dark_theme, levels, loading, error, putLoading, putError } = useSelector((state) => state.user);
-    const darkTheme = useSelector((state) => state.theme.darkTheme); // Получаем тему из глобального состояния
+    const currentTheme = useSelector((state) => state.theme.theme); // Получаем текущую тему из Redux
 
-    const [darkThemeState, setDarkThemeState] = useState(darkTheme);
+    const [themeState, setThemeState] = useState(currentTheme);
     const [falseSetLevel, setFalseSetLevel] = useState();
 
     useEffect(() => {
@@ -28,15 +24,19 @@ function Profile() {
         if (number_of_false_set) {
             setFalseSetLevel(number_of_false_set);
         }
-        if (darkTheme) {
-            setDarkThemeState(darkTheme);
-        }
-    }, [number_of_false_set, darkTheme]);
+    }, [number_of_false_set]);
 
-    const handleThemeChange = () => {
-        setDarkThemeState(!darkThemeState);
-        dispatch(setTheme(!darkThemeState));
-        localStorage.setItem("theme", !darkThemeState ? "dark" : "light");
+    useEffect(() => {
+        if (currentTheme) {
+            setThemeState(currentTheme); // Синхронизация локального состояния с Redux
+        }
+    }, [currentTheme]);
+
+    const handleThemeChange = (event) => {
+        const value = event.target.value;
+        setThemeState(value);
+        dispatch(setTheme(value));
+        localStorage.setItem("theme", value);
     };
 
     const handleIncrementLevel = () => {
@@ -58,13 +58,14 @@ function Profile() {
             activated_email: activated_email,
             settings: {
                 levels: levels,
-                dark_theme: darkThemeState,
+                dark_theme: themeState,
                 number_of_false_set: falseSetLevel,
             },
         };
         console.log(data, "input data");
         dispatch(fetchPutSettings(data));
     }
+
     return (
         <div className="align-items-center">
             <div className="container sticky-top mb-4 pt-2">
@@ -97,31 +98,33 @@ function Profile() {
                     )}
                 </div>
 
-                <div className="form-control mb-3 py-2 d-flex justify-content-between align-items-center">
-                    <span>{darkThemeState == dark_theme ? "Темная тема" : "Темная тема (не сохранено)"}</span>
-                    <div className="form-check form-switch">
-                        <input className="form-check-input" type="checkbox" role="switch" id="themeSwitch" checked={darkThemeState} onChange={handleThemeChange} />
-                    </div>
+                <div className="form-control p-0 mb-3 d-flex justify-content-between align-items-center">
+                    <select className="form-select" value={themeState} onChange={handleThemeChange}>
+                        <option value="light">Светлая</option>
+                        <option value="dark">Темная</option>
+                        <option value="green">Зеленая</option>
+                        <option value="red">Красная</option>
+                    </select>
                 </div>
 
-                <Link to="/lvl-settings" className="form-control mb-3 py-2 d-flex justify-content-between">
+                <Link to="/lvl-settings" className="form-control mb-3 py-2-5 d-flex justify-content-between">
                     <span className="text-start">Настроить уровни словаря</span>
                     <span className="text-end">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
-                            <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708" />
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" className="bi bi-chevron-right" viewBox="0 0 16 16">
+                            <path fillRule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708" />
                         </svg>
                     </span>
                 </Link>
 
-                <span className="ps-2">{falseSetLevel == number_of_false_set ? "Кол-во ложных вариантов" : "Кол-во ложных вариантов (не сохранено)"}</span>
+                <span className="ps-2">{falseSetLevel === number_of_false_set ? "Кол-во ложных вариантов" : "Кол-во ложных вариантов (не сохранено)"}</span>
                 <div className="input-group mb-2">
-                    <input type="number" className="form-control py-2" defaultValue={falseSetLevel} />
-                    <button className="btn btn-plus-minus" onClick={() => handleIncrementLevel()} type="button">
+                    <input type="number" className="form-control py-2-5" defaultValue={falseSetLevel} />
+                    <button className="btn btn-plus-minus box-shadow" onClick={handleIncrementLevel} type="button">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" className="bi bi-plus" viewBox="0 0 16 16">
                             <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
                         </svg>
                     </button>
-                    <button className="btn btn-plus-minus" onClick={() => handleDecrementLevel()} type="button">
+                    <button className="btn btn-plus-minus box-shadow" onClick={handleDecrementLevel} type="button">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" className="bi bi-dash" viewBox="0 0 16 16">
                             <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8" />
                         </svg>
@@ -131,8 +134,8 @@ function Profile() {
                 {putLoading ? (
                     <div className="d-flex justify-content-center mt-4">
                         <button type="text" className="btn btn-primary save-btn py-2 w-50" disabled>
-                            <div class="spinner-border spinner-border-sm" role="status">
-                                <span class="visually-hidden">Загрузка...</span>
+                            <div className="spinner-border spinner-border-sm" role="status">
+                                <span className="visually-hidden">Загрузка...</span>
                             </div>
                         </button>
                     </div>

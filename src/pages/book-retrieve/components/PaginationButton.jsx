@@ -1,8 +1,6 @@
 import React, { useRef, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
-
+import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-
 import { fetchBook } from "../../../common/reducers/bookRetrieveSlice";
 
 const PaginationButton = ({ page, page_count, slug, setIsNext }) => {
@@ -31,9 +29,7 @@ const PaginationButton = ({ page, page_count, slug, setIsNext }) => {
         for (let i = 1; i <= page_count; i++) {
             buttons.push(
                 <div className="col-2 col-lg-1" key={i}>
-                    <button className="btn btn-primary w-100" onClick={() => handlePageClick(i)}>
-                        {i}
-                    </button>
+                    <button className="btn btn-primary w-100" onClick={() => handlePageClick(i)}>{i}</button>
                 </div>
             );
         }
@@ -50,12 +46,7 @@ const PaginationButton = ({ page, page_count, slug, setIsNext }) => {
                         </svg>
                     </button>
                 ) : (
-                    <button
-                        className="btn btn-primary"
-                        onClick={() => {
-                            setIsNext(false);
-                            handleChangePage(parseInt(page) - 1);
-                        }}>
+                    <button className="btn btn-primary" onClick={() => { setIsNext(false); handleChangePage(parseInt(page) - 1); }}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-caret-left-fill" viewBox="0 0 16 16">
                             <path d="m3.86 8.753 5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506z" />
                         </svg>
@@ -75,12 +66,7 @@ const PaginationButton = ({ page, page_count, slug, setIsNext }) => {
                         </svg>
                     </button>
                 ) : (
-                    <button
-                        className="btn btn-primary"
-                        onClick={() => {
-                            setIsNext(true);
-                            handleChangePage(parseInt(page) + 1);
-                        }}>
+                    <button className="btn btn-primary" onClick={() => { setIsNext(true); handleChangePage(parseInt(page) + 1);}}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-caret-right-fill" viewBox="0 0 16 16">
                             <path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z" />
                         </svg>
@@ -92,9 +78,7 @@ const PaginationButton = ({ page, page_count, slug, setIsNext }) => {
                 <div className="modal-dialog modal-lg modal-dialog-scrollable">
                     <div className="modal-content">
                         <div className="modal-header mb-2">
-                            <h1 className="modal-title fs-5" id="exampleModalLabel">
-                                Выберите страницу
-                            </h1>
+                            <h1 className="modal-title fs-5" id="exampleModalLabel">Выберите страницу</h1>
                             <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div className="modal-body row g-2">{generatePageButtons()}</div>

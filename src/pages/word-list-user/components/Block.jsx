@@ -15,14 +15,15 @@ function Block({ word }) {
 
     return (
         <div className="col" role="button" onClick={() => handleBlockClick(word.pk)}>
-            <div className="card statistic-block pt-3">
-                <h4 className="text-center p-3 pb-1">{word.text}</h4>
-                <p>
-                    <span className="text-start">[{word.transcription}]</span>
-                    <span className="text-end">{word.part_of_speech}</span>
-                </p>
+            <div className="card statistic-block d-flex flex-column justify-content-center align-items-center position-relative">
+                <h4 className="text-center">{word.text}</h4>
+                <div className="position-absolute bottom-0 start-0 ms-2 mb-2">
+                    <span className="d-block">[{word.transcription}]</span>
+                    {/* <span className="d-block">{word.part_of_speech}</span> */}
+                </div>
             </div>
         </div>
+
     );
 }
 

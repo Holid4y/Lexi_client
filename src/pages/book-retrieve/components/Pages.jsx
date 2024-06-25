@@ -1,7 +1,6 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchWordPost, toggleWordBlock, cleanStateWord } from "../../../common/reducers/wordSlice";
-import ViewWord from "./ViewWord";
 
 const Pages = ({ page }) => {
     const dispatch = useDispatch();
@@ -59,7 +58,6 @@ const Pages = ({ page }) => {
             <main className="container px-4">
                 <div className="book-text-read">{renderParagraphs()}</div>
             </main>
-            <ViewWord />
         </div>
     );
 };

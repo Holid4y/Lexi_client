@@ -11,7 +11,7 @@ function Navigation() {
     const location = useLocation();
 
     const getLinkClass = (path) => {
-        return location.pathname === path ? "nav-link color-svg active_link" : "nav-link color-svg";
+        return location.pathname === path ? "nav-link active_link" : "nav-link";
     };
     const getTrainingInfo = () => {
         if (trainingInfo) {
@@ -26,7 +26,7 @@ function Navigation() {
                 <ul className="nav justify-content-center">
                     <li className="nav-item">
                         <Link to="/" className={getLinkClass("/")}>
-                            <svg width="34" height="30" viewBox="0 0 34 30" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <svg width="34" height="30" viewBox="0 0 34 30" className="currentColor" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                 <g clipPath="url(#clip0_494_42)">
                                     <path
                                         d="M6.375 0H27.625C28.7522 0 29.8332 0.395088 30.6302 1.09835C31.4272 1.80161 31.875 2.75544 31.875 3.75V26.25C31.875 27.2446 31.4272 28.1984 30.6302 28.9016C29.8332 29.6049 28.7522 30 27.625 30H6.375C5.24783 30 4.16683 29.6049 3.3698 28.9016C2.57277 28.1984 2.125 27.2446 2.125 26.25V24.375H4.25V26.25C4.25 26.7473 4.47388 27.2242 4.8724 27.5758C5.27091 27.9275 5.81141 28.125 6.375 28.125H27.625C28.1886 28.125 28.7291 27.9275 29.1276 27.5758C29.5261 27.2242 29.75 26.7473 29.75 26.25V3.75C29.75 3.25272 29.5261 2.77581 29.1276 2.42417C28.7291 2.07254 28.1886 1.875 27.625 1.875H6.375C5.81141 1.875 5.27091 2.07254 4.8724 2.42417C4.47388 2.77581 4.25 3.25272 4.25 3.75V5.625H2.125V3.75C2.125 2.75544 2.57277 1.80161 3.3698 1.09835C4.16683 0.395088 5.24783 0 6.375 0Z"
@@ -51,7 +51,7 @@ function Navigation() {
                     </li>
                     <li className="nav-item">
                         <Link to="/bookmarks" className={getLinkClass("/bookmarks")}>
-                            <svg width="30" height="30" viewBox="0 0 30 30" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <svg width="30" height="30" viewBox="0 0 30 30" className="currentColor" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                 <path
                                     fillRule="evenodd"
                                     clipRule="evenodd"
@@ -72,7 +72,7 @@ function Navigation() {
                     <li className="nav-item">
                         <Link to="/training" className={`${getLinkClass("/training")} position-relative `}>
                             <small class="position-absolute translate-middle badge badge-position bg-success">{getTrainingInfo()}</small>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" viewBox="0 0 16 16">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" className="currentColor" fill="currentColor" viewBox="0 0 16 16">
                                 <path
                                     fill="currentColor"
                                     d="M9.5 0a.5.5 0 0 1 .5.5.5.5 0 0 0 .5.5.5.5 0 0 1 .5.5V2a.5.5 0 0 1-.5.5h-5A.5.5 0 0 1 5 2v-.5a.5.5 0 0 1 .5-.5.5.5 0 0 0 .5-.5.5.5 0 0 1 .5-.5z"
@@ -85,9 +85,9 @@ function Navigation() {
                             </svg>
                         </Link>
                     </li>
-                    <li className="nav-item">
+                    {/* <li className="nav-item">
                         <Link to="/profile" className={getLinkClass("/profile")}>
-                            <svg width="30" height="30" viewBox="0 0 30 30" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <svg width="30" height="30" viewBox="0 0 30 30" className="currentColor" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                 <g clipPath="url(#clip0_494_23)">
                                     <path
                                         d="M20.625 11.25C20.625 12.7418 20.0324 14.1726 18.9775 15.2275C17.9226 16.2824 16.4918 16.875 15 16.875C13.5082 16.875 12.0774 16.2824 11.0225 15.2275C9.96763 14.1726 9.375 12.7418 9.375 11.25C9.375 9.75816 9.96763 8.32742 11.0225 7.27252C12.0774 6.21763 13.5082 5.625 15 5.625C16.4918 5.625 17.9226 6.21763 18.9775 7.27252C20.0324 8.32742 20.625 9.75816 20.625 11.25Z"
@@ -105,7 +105,7 @@ function Navigation() {
                                 </defs>
                             </svg>
                         </Link>
-                    </li>
+                    </li> */}
                 </ul>
             </div>
         </nav>

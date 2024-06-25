@@ -18,6 +18,8 @@ function BookRetrieve() {
     const { slug, page } = useParams();
 
     useEffect(() => {
+
+        localStorage.setItem('recentlyBook', JSON.stringify({ slug, page }));
         // если четная 50 страница и не равно первой,
         // то делает запрос на сервер
         if (isNext & (page != 1)) {
@@ -37,16 +39,15 @@ function BookRetrieve() {
 
     return (
         <div className="align-items-center">
-            <BookRetrieveHeader pk={pk} page={page} />
-
-            {loading ? (
-                <Loading />
-            ) : (
-                <>
-                    {pages && <Pages page={page} />}
-                    <PaginationButton page={page} page_count={page_count} slug={slug} setIsNext={setIsNext} />
-                </>
-            )}
+            <div className="container">
+                <BookRetrieveHeader pk={pk} page={page} />
+                {loading ? ( <Loading /> ) : (
+                    <>
+                        {pages && <Pages page={page} />}
+                        <PaginationButton page={page} page_count={page_count} slug={slug} setIsNext={setIsNext} />
+                    </>
+                )}
+            </div>
         </div>
     );
 }
