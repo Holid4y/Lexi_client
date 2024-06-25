@@ -46,9 +46,12 @@ function App() {
             return null;
         }
     }
+
+    
+
     useEffect(() => {
         dispatch(checkAccessTokenValidity());
-        dispatch(fetchTrainingInfo())
+        
 
         const storedTheme = localStorage.getItem("theme");
 
@@ -69,13 +72,17 @@ function App() {
         // Если хранилище пустое и пользователь не зарегистрирован, то устанавливаем тему по ос
         if (storedTheme == null && isAuth == null) {
             dispatch(setTheme(getColorScheme() === "dark"));
-        }
+        } 
     }, [dispatch, isAuth, dark_theme]);
 
     useEffect(() => {
         const theme = darkTheme ? "dark" : "light";
         document.documentElement.setAttribute("data-bs-theme", theme);
     }, [darkTheme]);
+
+    useEffect(() => {
+        dispatch(fetchTrainingInfo())
+    }, [dispatch]);
 
     return (
         <Router>

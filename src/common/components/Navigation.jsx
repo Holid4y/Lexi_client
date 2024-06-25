@@ -7,15 +7,15 @@ import { useSelector } from "react-redux";
 import WordBlockTranslate from "./WordBlockTranslate";
 
 function Navigation() {
-    const { trainingInfo } = useSelector((state) => state.training);
+    const { count_word_to_training_recognize, count_word_to_training_reproduce } = useSelector((state) => state.training);
     const location = useLocation();
 
     const getLinkClass = (path) => {
         return location.pathname === path ? "nav-link color-svg active_link" : "nav-link color-svg";
     };
     const getTrainingInfo = () => {
-        if (trainingInfo) {
-            return trainingInfo.count_word_to_training_recognize + trainingInfo.count_word_to_training_reproduce
+        if (count_word_to_training_recognize != null & count_word_to_training_reproduce != null) {
+            return count_word_to_training_recognize + count_word_to_training_reproduce
         }
     };
 

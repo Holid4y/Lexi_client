@@ -87,9 +87,12 @@ const trainingSlice = createSlice({
         // training
         training: null,
         round: 0,
+        // счет правильных ответов
+        score: 0,
 
         // info
-        trainingInfo: null,
+        count_word_to_training_recognize: null,
+        count_word_to_training_reproduce: null,
 
         loading: false,
         error: null,
@@ -99,10 +102,29 @@ const trainingSlice = createSlice({
             state.training = action.payload;
         },
         trainingInfoLoaded: (state, action) => {
-            state.trainingInfo = action.payload;
+            state.count_word_to_training_recognize = action.payload.count_word_to_training_recognize;
+
+            state.count_word_to_training_reproduce = action.payload.count_word_to_training_reproduce;
         },
         nextRound: (state, action) => {
             state.round = state.round + 1;
+        },
+        addScore: (state, action) => {
+            state.score = state.score + 1;
+        },
+        decrementTrainingInfoRecognize: (state, action) => {
+            state.count_word_to_training_recognize = state.count_word_to_training_recognize - 1;
+        },
+        decrementTrainingInfoReproduce: (state, action) => {
+            state.count_word_to_training_reproduce = state.count_word_to_training_reproduce - 1;
+        },
+
+        clearRound: (state, action) => {
+            state.training = null
+            state.round = 0
+        },
+        clearScore: (state, action) => {
+            state.score = 0
         },
     },
     extraReducers: (builder) => {
@@ -142,5 +164,5 @@ const trainingSlice = createSlice({
     },
 });
 
-export const { trainingLoaded, nextRound, trainingInfoLoaded } = trainingSlice.actions;
+export const { trainingLoaded, nextRound, addScore, trainingInfoLoaded, clearRound, decrementTrainingInfoReproduce, decrementTrainingInfoRecognize, clearScore } = trainingSlice.actions;
 export default trainingSlice.reducer;
