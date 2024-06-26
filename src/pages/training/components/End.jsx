@@ -27,7 +27,8 @@ function End({ type, count_word_to_training, setIsEnd, score }) {
             <p>Результат: {scoreState} правильных ответов </p>
             {(count_word_to_training != 0 & count_word_to_training != null) && (
                 <Link to={`/training/${type}`} onClick={() => handleAction()}>
-                    <button>Следующий раунд ({count_word_to_training})</button>
+                    <button>Следующий раунд</button>
+                    <small>Осталось {count_word_to_training} слов</small>
                 </Link>
             )}
             
