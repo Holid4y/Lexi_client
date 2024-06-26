@@ -1,5 +1,4 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
 
 function FalseSet({ word, index, selectedAnswer, setSelectedAnswer }) {
     // Функция для изменения выбранного ответа (переключение radio)
