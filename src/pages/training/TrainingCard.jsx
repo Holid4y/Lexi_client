@@ -4,6 +4,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 function TrainingCard() {
+    const recognizeState = useSelector((state) => state.recognize);
+    const reproduceState = useSelector((state) => state.reproduce);
+
+    const recognizeRound = recognizeState && recognizeState.round;
+    const reproduceRound = reproduceState && reproduceState.round;
     return (
         <div className="row g-4">
             <div className="col-12 hover-text-opacity">
@@ -14,6 +19,7 @@ function TrainingCard() {
                     <div className="card-body">
                         <div className="text-start mb-0 row g-3">
                             <div className="col-12 col-md-6">
+                                <span> {recognizeRound != 0 ? `Продолжить. Вы на ${recognizeRound + 1}-м слове` : ""}</span>
                                 <Link to="/training/recognize">
                                     <div className="card card-text-lr card-btn overflow-box bg-card-second">
                                         <div className="card-body text-start text-white text-center">
@@ -28,6 +34,7 @@ function TrainingCard() {
                                 </Link>
                             </div>
                             <div className="col-12 col-md-6">
+                                <span> {reproduceRound != 0 ? `Продолжить. Вы на ${reproduceRound} слове` : ""}</span>
                                 {/* <span className="book-text ps-4 pe-1">12</span> */}
                                 <Link to="/training/reproduce">
                                     <div className="card mt-auto card-text-lr card-btn overflow-box bg-card-second">
