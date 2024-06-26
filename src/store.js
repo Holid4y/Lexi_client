@@ -13,6 +13,7 @@ import wordReducer from './common/reducers/wordSlice'
 // training
 import trainingReducer from './common/reducers/training/trainingSlice';
 import recognizeReducer from './common/reducers/training/recognizeSlice';
+import reproduceReducer from './common/reducers/training/reproduceSlice';
 
 export const store = configureStore({
   reducer: {
@@ -29,7 +30,7 @@ export const store = configureStore({
     // training
     training: trainingReducer,
     recognize: recognizeReducer,
-    // reproduce: ''
+    reproduce: reproduceReducer,
   },
 });
 
