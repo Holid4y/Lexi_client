@@ -1,37 +1,43 @@
 ::selection {
-    background-color: #7479B380;
-    color: #E5E9F0;}
+    background-color: #7479b380;
+    color: #e5e9f0;
+}
 ::-moz-selection {
-    background-color: #7479B380;
-    color: #E5E9F0;}
+    background-color: #7479b380;
+    color: #e5e9f0;
+}
 :focus {
     outline-color: transparent;
-    outline-width: 0;}
+    outline-width: 0;
+}
 
-html, body {
+html,
+body {
     height: 100%;
     margin: 0;
 }
-html, .toggle-block{
+html,
+.toggle-block {
     scrollbar-width: none;
     overflow-y: auto;
     overflow-x: hidden;
 }
-html > html::-webkit-scrollbar, .toggle-block::-webkit-scrollbar {
+html > html::-webkit-scrollbar,
+.toggle-block::-webkit-scrollbar {
     display: none;
 }
-main{
+main {
     padding-bottom: 70px;
 }
 
-.container{
+.container {
     max-width: 750px;
 }
 
-.body-auth{
+.body-auth {
     height: 100vh;
     display: flex;
-    justify-content: center; 
+    justify-content: center;
     padding: 50px 0;
 }
 .form-signin {
@@ -39,9 +45,11 @@ main{
     padding: 1rem;
 }
 
-.blur{ filter: blur(5px) }
+.blur {
+    filter: blur(5px);
+}
 
-a{
+a {
     color: var(--card-text-header);
     text-decoration: none;
 }
@@ -50,11 +58,11 @@ a{
     fill: var(--card-text-header);
 }
 
-.dark-nav{
+.dark-nav {
     padding: 5px 10px;
-    min-height: 50px;
+    min-height: 55px;
     background-color: var(--input-color);
-    border-radius: 10px;
+    border-radius: 15px;
     box-shadow: 0px 0px 20px var(--box-shadow-color);
 }
 
@@ -62,25 +70,23 @@ a{
     color: var(--bs-link-color);
 }
 
-.card a{
+.card a {
     font-size: 18px;
     color: var(--card-text-header);
 }
 
-
 /* Стили блоков статистики на главной */
-.book-text{
+.book-text {
     font-size: 40px;
     font-weight: bold;
     color: var(--text-header);
 }
 
-
 /* Стили для блока с тестами на главной */
-.bg-card-dark{
+.bg-card-dark {
     background: var(--input-color);
 }
-.bg-card-second{
+.bg-card-second {
     background: var(--bg-btn-primary);
 }
 .svg-background {
@@ -89,12 +95,12 @@ a{
     right: 10%;
     transform: translateY(-50%) rotate(20deg) scale(2);
 }
-.svg-background svg{
-    opacity: .5;
+.svg-background svg {
+    opacity: 0.5;
     fill: white;
 }
 .card {
-    transition: transform .1s linear;
+    transition: transform 0.1s linear;
     color: var(--card-text-header);
 }
 
@@ -107,10 +113,9 @@ a{
     box-sizing: border-box;
 }
 
-
 /* Стили для более прозрачного цвета на главной */
 .hover-text-opacity #wordsToLearn {
-    opacity: .4;
+    opacity: 0.4;
     transition: opacity 0.5s ease;
 }
 .hover-text-opacity:hover #wordsToLearn {
@@ -120,18 +125,17 @@ a{
     opacity: 1;
 }
 
-
 /* Стили навигации нижней */
-.nav-link{
+.nav-link {
     padding: 8px;
     margin: 0px 4px;
     background-color: var(--input-color);
-    border-radius: 8px;
+    border-radius: 15px;
     outline: none;
-    transition: transform .3s;
+    transition: transform 0.3s;
 }
 .nav-link::after {
-    content: '';
+    content: "";
     position: absolute;
     width: 0;
     height: 0;
@@ -157,7 +161,6 @@ a{
     transform: translateY(-5px);
 }
 
-
 /* Стили для текста книги */
 .book-text-read {
     font-size: 18px;
@@ -165,7 +168,7 @@ a{
     text-align: justify;
     color: var(--bs-body-color);
     padding: 10px;
-    border-radius: 8px;
+    border-radius: 15px;
     max-width: 100%;
     overflow-wrap: break-word;
     word-break: break-word;
@@ -174,24 +177,24 @@ a{
 .book-text-read p {
     margin-bottom: 1.5em;
 }
-.book-text-read h1, .book-text-read h2, .book-text-read h3 {
+.book-text-read h1,
+.book-text-read h2,
+.book-text-read h3 {
     color: var(--bs-body-color);
     line-height: 1.2;
     margin-bottom: 0.5em;
 }
 
-
 /* Стили для выезжающего меню с переводом слов */
 .toggle-block {
     color: var(--card-text-header);
     max-height: 0;
-    transition: .3s ease-out;
+    transition: 0.3s ease-out;
 }
 .toggle-block.show {
     max-height: 500px;
     overflow-y: auto;
 }
-
 
 .modal-backdrop {
     position: fixed;
@@ -203,25 +206,24 @@ a{
     z-index: -1;
 }
 
-
 /* Стили цвета для SVG */
-.currentColor path{
-    transition: fill .2s ease-out;
+.currentColor path {
+    transition: fill 0.2s ease-out;
 }
-.currentColor path{
+.currentColor path {
     fill: var(--text-header);
 }
-.currentColor:hover path{
+.currentColor:hover path {
     fill: var(--bs-body-color);
 }
 
 .author {
-    border-radius: 5px;
+    border-radius: 15px;
     height: 20px;
     background-color: #fff;
 }
-.card-text-lr{
-    display: flex; 
+.card-text-lr {
+    display: flex;
     justify-content: space-between;
     align-items: center;
 }
@@ -232,7 +234,7 @@ a{
     position: relative;
     overflow: hidden;
     background-color: #5b5e70;
-    border-radius: 5px;
+    border-radius: 15px;
 }
 .title::before,
 .page::before,
@@ -248,33 +250,42 @@ a{
 }
 
 @keyframes shimmer {
-    0% { left: -100%; }
-    100% { left: 100%; }
+    0% {
+        left: -100%;
+    }
+    100% {
+        left: 100%;
+    }
 }
 
 /* Стили закладок в избранном */
-.mark{
+.mark {
     top: 10%;
     left: 92%;
     background-color: transparent;
 }
 
-.word-history, .modal-body{
+.word-history,
+.modal-body {
     overflow-y: scroll;
     scrollbar-width: none;
     -ms-overflow-style: none;
 }
-.word-history::-webkit-scrollbar, .modal-body::-webkit-scrollbar {
+.word-history::-webkit-scrollbar,
+.modal-body::-webkit-scrollbar {
     display: none;
 }
 
 /* Убираем стрелки у input'а в профиле */
 input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {-webkit-appearance: none;}
-input[type='number'] { -moz-appearance: textfield;}
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+input[type="number"] {
+    -moz-appearance: textfield;
+}
 
-
-.search{
+.search {
     background-color: var(--input-color);
     color: var(--card-text-header);
     border: none;
@@ -283,18 +294,17 @@ input[type='number'] { -moz-appearance: textfield;}
     box-shadow: none;
 }
 
-
 /* Позиционирование по центру над навигацией снизу */
-.pagination-position{
+.pagination-position {
     width: 200px;
     position: fixed;
     bottom: 75px;
     left: calc(50% - 100px);
-    opacity: .4;
-    transition: .5s;
+    opacity: 0.4;
+    transition: 0.5s;
     z-index: 1000;
 }
-.pagination-position:hover{
+.pagination-position:hover {
     width: 200px;
     position: fixed;
     bottom: 75px;
@@ -302,64 +312,60 @@ input[type='number'] { -moz-appearance: textfield;}
     opacity: 1;
 }
 
-
 /* Стили для кнопок плюса и минуса */
-.btn-plus-minus{
+.btn-plus-minus {
     background-color: var(--input-color);
 }
-.btn-plus-minus:hover{
+.btn-plus-minus:hover {
     background-color: var(--disabled-bg);
 }
 
-
 /* Блоки уровней в статистике */
-.statistic-block{
+.statistic-block {
     aspect-ratio: 1 / 1;
     background-color: var(--bg-btn-primary);
 }
-.statistic{
-    border-radius: 20px;
+.statistic {
+    border-radius: 15px;
     background-color: var(--book-text);
 }
-.statistic-block h4{
+.statistic-block h4 {
     font-size: 30px;
     font-weight: bold;
     color: white;
 }
-.statistic h4{
+.statistic h4 {
     font-size: 40px;
     font-weight: bold;
     color: white;
 }
-.statistic span, .statistic-block span{
+.statistic span,
+.statistic-block span {
     padding: 0px 0px 5px 10px;
     font-size: 12px;
     color: white;
 }
 
-
-.w-55px{
+.w-55px {
     width: 55px;
 }
 
-.save-btn{
-    border-radius: 20px;
+.save-btn {
+    border-radius: 15px;
 }
-
 
 /* Стили для слов в тексте при наведении */
-.word-for-text{
+.word-for-text {
     transition: color 0.3s ease-out, font-weight 0.1s ease-out;
 }
-.word-for-text:hover{
+.word-for-text:hover {
     cursor: pointer;
     color: #ffc107;
 }
-.word-for-text:active{
+.word-for-text:active {
     cursor: pointer;
     color: #ffc720;
 }
-
 
 /* Стили левего блока на ПК для автоматической прокруки */
 .autoScroll {
@@ -373,26 +379,26 @@ input[type='number'] { -moz-appearance: textfield;}
     outline: none;
     height: 100vh;
     transition: opacity 0.3s ease-out;
-  }
-  
-  .autoScroll.visible {
-    opacity: 0.5;
-  }
-  
-  .autoScroll:hover {
-    opacity: 1;
-  }
+}
 
-  .badge-position{
+.autoScroll.visible {
+    opacity: 0.5;
+}
+
+/* .autoScroll:hover {
+    opacity: 1;
+  } */
+
+.badge-position {
     font-size: 12px;
     top: 5%;
     left: 80%;
-  }
+}
 
-  .box-shadow{
+.box-shadow {
     box-shadow: 0px 0px 10px var(--box-shadow-color);
-  }
+}
 
-  .form-control{
+.form-control {
     min-height: 50px;
-  }
+}

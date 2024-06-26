@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 function BooksLinkCard() {
     return (
         <Link to="/books">
-            <div className="card text-end mb-3 w-100 bg-card-dark card-btn">
+            <div className="card text-end mb-3 w-100 bg-card-dark card-btn p-2">
                 <div className="card-body">
                     <h4 className="card-title w-75 text-start">
                         <b>Книги и тексты</b>

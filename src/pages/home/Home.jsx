@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchHome } from "../../common/reducers/homeSlice";
-
 import InfoCard from "./components/InfoCard";
 import BooksLinkCard from "./components/BooksLinkCard";
 import WorsHistory from "./components/WorsHistory";
+import SVG from "../../common/components/Icons/SVG";
 
 function Home() {
     const dispatch = useDispatch();
@@ -32,18 +32,16 @@ function Home() {
             <div className="container sticky-top mb-3 pt-2">
                 <nav className="navbar dark-nav px-3">
                     <span className="navbar-brand">Главная</span>
-                    <div class="dropdown dropstart">
+                    {/* <div class="dropdown dropstart">
                         <button class="btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" viewBox="0 0 16 16">
-                                <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>
-                            </svg>
+                            <SVG name="settings"/>
                         </button>
                         <ul class="dropdown-menu">
                             <li><Link class="dropdown-item" to="/profile">Профиль</Link></li>
                             <li><button class="dropdown-item" type="button">Настройки</button></li>
                             <li><Link class="dropdown-item" to="/login">Выйти</Link></li>
                         </ul>
-                    </div>
+                    </div> */}
                 </nav>
             </div>
             <div className="container pb-5">

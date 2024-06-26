@@ -1,7 +1,5 @@
 import React from "react";
-
-import { useDispatch, useSelector } from "react-redux";
-
+import { useDispatch } from "react-redux";
 import { fetchWordGet, toggleWordBlock } from "../../../common/reducers/wordSlice";
 
 function Block({ word }) {
@@ -15,7 +13,7 @@ function Block({ word }) {
 
     return (
         <div className="col" role="button" onClick={() => handleBlockClick(word.pk)}>
-            <div className="card statistic-block d-flex flex-column justify-content-center align-items-center position-relative">
+            <div className="card card-btn statistic-block d-flex flex-column justify-content-center align-items-center position-relative">
                 <h4 className="text-center">{word.text}</h4>
                 <div className="position-absolute bottom-0 start-0 ms-2 mb-2">
                     <span className="d-block">[{word.transcription}]</span>
