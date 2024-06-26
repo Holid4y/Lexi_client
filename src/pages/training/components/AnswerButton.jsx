@@ -1,7 +1,9 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 
-import { fetchTrainingPatch, decrementTrainingInfoRecognize, addScore, nextRound, clearTraining, clearRound } from "../../../common/reducers/trainingSlice";
+import { fetchTrainingPatch, decrementTrainingInfoRecognize } from "../../../common/reducers/training/trainingSlice";
+
+import { addScore, nextRound, clearTraining, clearRound } from "../../../common/reducers/training/recognizeSlice";
 
 function AnswerButton({ localType, selectedAnswer, setSelectedAnswer, currentTraining, currentRound, setIsEnd }) {
     const dispatch = useDispatch();
@@ -19,7 +21,8 @@ function AnswerButton({ localType, selectedAnswer, setSelectedAnswer, currentTra
 
     // Функция для обработки финального ответа
     function handleFinalAnswer() {
-        if (selectedAnswer !== null) {
+        console.log(selectedAnswer)
+        if (selectedAnswer !== null & selectedAnswer !== '') {
             const is_correct = checkAnswer(selectedAnswer);
             const data = {
                 type: localType,
@@ -50,7 +53,7 @@ function AnswerButton({ localType, selectedAnswer, setSelectedAnswer, currentTra
 
     return (
         <div className="d-flex justify-content-center my-4" onClick={() => handleFinalAnswer()}>
-            <button type="text" className={`btn btn-primary save-btn py-2 w-50 ${selectedAnswer === null ? "disabled" : ""}`}>
+            <button type="text" className={`btn btn-primary save-btn py-2 w-50 ${(selectedAnswer === null | selectedAnswer === '')? "disabled" : ""}`}>
                 <span>
                     <b>Ответить</b>
                 </span>

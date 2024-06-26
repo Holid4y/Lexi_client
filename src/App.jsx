@@ -7,8 +7,8 @@ import { setIsAuth } from "./common/reducers/authSlice";
 import { setTheme } from "./common/reducers/themeSlice";
 
 import { checkAccessTokenValidity } from "./common/reducers/authSlice";
-import { fetchSettings } from "./common/reducers/userSlice";
-import { fetchTrainingInfo } from "./common/reducers/trainingSlice";
+import { fetchSettings } from "./common/reducers/userSlice"
+import { fetchTrainingInfo } from "./common/reducers/training/trainingSlice";
 
 import Navigation from "./common/components/Navigation";
 

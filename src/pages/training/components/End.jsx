@@ -2,11 +2,10 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
-import { clearScore } from "../../../common/reducers/trainingSlice";
+import { clearScore } from "../../../common/reducers/training/recognizeSlice";
 
-function End({ type, count_word_to_training, setIsEnd }) {
+function End({ type, count_word_to_training, setIsEnd, score }) {
     const dispatch = useDispatch();
-    const { score } = useSelector((state) => state.training);
     const [scoreState, setScoreState] = useState(0)
 
 

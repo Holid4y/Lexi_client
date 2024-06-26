@@ -1,6 +1,8 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { host, training, info } from "../../../public/urls";
-import { headers } from "../../../public/urls";
+import { host, training, info } from "../../../../public/urls";
+import { headers } from "../../../../public/urls";
+
+import { recognizeLoaded } from "./recognizeSlice";
 
 export const fetchTraining = createAsyncThunk("training/fetchTraining", async (type, { dispatch }) => {
     const url = new URL(host + training);
@@ -20,8 +22,12 @@ export const fetchTraining = createAsyncThunk("training/fetchTraining", async (t
         const data = await response.json();
         console.log('fetchTraining')
         if (data.length != 0) {
-            dispatch(trainingLoaded(data));
-            dispatch(setType(type))
+            if (type === "recognize") {
+                dispatch(recognizeLoaded(data));
+            }
+            if (type === "reproduce") {
+                // dispatch(reproduceLoaded(data));
+            } 
         } else
 
         return data;
@@ -82,17 +88,6 @@ export const fetchTrainingPatch = createAsyncThunk("training/fetchTrainingPatch"
 const trainingSlice = createSlice({
     name: "training",
     initialState: {
-        // training
-        training: null,
-
-
-        round_recognize: 0,
-        round_reproduce: 0,
-
-        type: null,
-        score: 0,
-
-        
         // info
         count_word_to_training_recognize: null,
         count_word_to_training_reproduce: null,
@@ -106,49 +101,16 @@ const trainingSlice = createSlice({
 
     },
     reducers: {
-        trainingLoaded: (state, action) => {
-            state.training = action.payload;
-        },
         trainingInfoLoaded: (state, action) => {
             state.count_word_to_training_recognize = action.payload.count_word_to_training_recognize;
 
             state.count_word_to_training_reproduce = action.payload.count_word_to_training_reproduce;
-        },
-        nextRound: (state, action) => {
-            if (state.type === "recognize"){
-                state.round_recognize = state.round_recognize + 1
-            }
-            if (state.type === "reproduce"){
-                state.round_reproduce =  state.round_reproduce + 1
-            }  
-        },
-        addScore: (state, action) => {
-            state.score = state.score + 1;
         },
         decrementTrainingInfoRecognize: (state, action) => {
             state.count_word_to_training_recognize = state.count_word_to_training_recognize - 1;
         },
         decrementTrainingInfoReproduce: (state, action) => {
             state.count_word_to_training_reproduce = state.count_word_to_training_reproduce - 1;
-        },
-
-        clearTraining: (state, action) => {
-            state.training = null
-        },
-        clearRound: (state, action) => {
-            if (state.type === "recognize"){
-                state.round_recognize = 0
-            }
-            if (state.type === "reproduce"){
-                state.round_reproduce = 0
-            }    
-            
-        },
-        clearScore: (state, action) => {
-            state.score = 0
-        },
-        setType: (state, action) => {
-            state.type = action.payload;
         },
     },
     extraReducers: (builder) => {
@@ -188,5 +150,5 @@ const trainingSlice = createSlice({
     },
 });
 
-export const { trainingLoaded, nextRound, addScore, trainingInfoLoaded, clearTraining, decrementTrainingInfoReproduce, decrementTrainingInfoRecognize, clearScore, setType, clearRound } = trainingSlice.actions;
+export const { trainingLoaded, trainingInfoLoaded, decrementTrainingInfoReproduce, decrementTrainingInfoRecognize } = trainingSlice.actions;
 export default trainingSlice.reducer;

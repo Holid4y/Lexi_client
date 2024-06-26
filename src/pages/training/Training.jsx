@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
-import { fetchTrainingInfo } from "../../common/reducers/trainingSlice";
+import { fetchTrainingInfo } from "../../common/reducers/training/trainingSlice";
 
 import TrainingCard from "./TrainingCard";
 

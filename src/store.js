@@ -10,7 +10,9 @@ import homeReducer from './common/reducers/homeSlice';
 import vocabularyReducer from './common/reducers/vocabularySlice';
 import themeReducer from './common/reducers/themeSlice';
 import wordReducer from './common/reducers/wordSlice'
-import trainingReducer from './common/reducers/trainingSlice'
+// training
+import trainingReducer from './common/reducers/training/trainingSlice';
+import recognizeReducer from './common/reducers/training/recognizeSlice';
 
 export const store = configureStore({
   reducer: {
@@ -24,7 +26,10 @@ export const store = configureStore({
     vocabulary: vocabularyReducer,
     theme: themeReducer,
     word: wordReducer,
-    training: trainingReducer
+    // training
+    training: trainingReducer,
+    recognize: recognizeReducer,
+    // reproduce: ''
   },
 });
 

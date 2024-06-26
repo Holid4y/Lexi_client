@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { fetchTraining } from "../../../common/reducers/trainingSlice";
+import { fetchTraining } from "../../../common/reducers/training/trainingSlice";
 import { fetchHome } from "../../../common/reducers/homeSlice";
 
 import Header from "../components/Header";
@@ -10,14 +10,16 @@ import FalseSet from "./components/FalseSet";
 import End from "../components/End";
 import AnswerButton from "../components/AnswerButton";
 
-import Loading from "../../../common/components/Loading";
 
 function Recognize() {
     const dispatch = useDispatch();
-    const { training, round_recognize, type, count_word_to_training_recognize, loading, patchLoading, error } = useSelector((state) => state.training);
+    const { count_word_to_training_recognize, loading, patchLoading, error } = useSelector((state) => state.training);
+    const { recognize, round, score } = useSelector((state) => state.recognize);
     const { learning_words } = useSelector((state) => state.home);
+    
     const localType = "recognize";
-    const round = round_recognize;
+    const training = recognize
+    
     // выбранный ответ
     const [selectedAnswer, setSelectedAnswer] = useState(null);
     // массив ложных ответов
@@ -29,18 +31,17 @@ function Recognize() {
     useEffect(() => {
         // Проверяем, что выполняются следующие условия:
         // 1. Массив training либо пустой, либо не существует (training является falsy значением)
-        // 2. Значение переменной type не равно значению переменной localType
-        // 3. Переменная patchLoading имеет значение false (falsy значение)
+        // 2. Переменная patchLoading имеет значение false (falsy значение)
         // Если все эти условия выполняются, то отправляем запроса на получение тренировки
 
-        if ((!training | (type !== localType)) & !patchLoading) {
+        if (!training & !patchLoading) {
             dispatch(fetchTraining(localType));
         }
 
         if (!learning_words) {
             dispatch(fetchHome());
         }
-    }, [dispatch, isEnd, type]);
+    }, [dispatch, isEnd]);
 
     // Функция для создания массива ложных ответов
     function makeFalseSet(falseAnswers, correctAnswer) {
@@ -69,12 +70,10 @@ function Recognize() {
         }
     }, [round, training]);
 
-    
-
     return (
         <div className="align-items-center">
-            {(loading && <p>Loading...</p>) ||
-                (isEnd && <End type={localType} count_word_to_training={count_word_to_training_recognize} setIsEnd={setIsEnd} />) ||
+            {loading ? <p>Loading...</p> : 
+                (isEnd && <End type={localType} count_word_to_training={count_word_to_training_recognize} setIsEnd={setIsEnd} score={score} />) ||
                 (training && (
                     <>
                         <Header round={round} trainingLength={training.length} />
