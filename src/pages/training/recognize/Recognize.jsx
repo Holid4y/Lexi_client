@@ -4,22 +4,23 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchTraining } from "../../../common/reducers/training/trainingSlice";
 import { fetchHome } from "../../../common/reducers/homeSlice";
 
+import { addScore, nextRound, clearTraining, clearRound } from "../../../common/reducers/training/recognizeSlice";
+
 import Header from "../components/Header";
 import WordCard from "../components/WordCard";
 import FalseSet from "./components/FalseSet";
 import End from "../components/End";
 import AnswerButton from "../components/AnswerButton";
 
-
 function Recognize() {
     const dispatch = useDispatch();
     const { count_word_to_training_recognize, loading, patchLoading, error } = useSelector((state) => state.training);
     const { recognize, round, score } = useSelector((state) => state.recognize);
     const { learning_words } = useSelector((state) => state.home);
-    
+
     const localType = "recognize";
-    const training = recognize
-    
+    const training = recognize;
+
     // выбранный ответ
     const [selectedAnswer, setSelectedAnswer] = useState(null);
     // массив ложных ответов
@@ -70,9 +71,26 @@ function Recognize() {
         }
     }, [round, training]);
 
+    function checkRound(is_correct) {
+        if (is_correct) {
+            // прибавляем балл за правельный ответ
+            dispatch(addScore());
+        }
+        // после ответа, если это последный раунд
+        if (round + 1 == training.length) {
+            setIsEnd(true); // отображаем страницу окончания
+            dispatch(clearTraining()); // очищаем текущий training
+            dispatch(clearRound()); // сбрасывает до первого слова
+        } else {
+            dispatch(nextRound()); // следующий раунд
+        }
+    }
+
     return (
         <div className="align-items-center">
-            {loading ? <p>Loading...</p> : 
+            {loading ? (
+                <p>Loading...</p>
+            ) : (
                 (isEnd && <End type={localType} count_word_to_training={count_word_to_training_recognize} setIsEnd={setIsEnd} score={score} />) ||
                 (training && (
                     <>
@@ -87,7 +105,14 @@ function Recognize() {
                                     ))}
                             </div>
 
-                            <AnswerButton localType={localType} selectedAnswer={selectedAnswer} currentTraining={training} setSelectedAnswer={setSelectedAnswer} currentRound={round} setIsEnd={setIsEnd}/>
+                            <AnswerButton
+                                localType={localType}
+                                selectedAnswer={selectedAnswer}
+                                currentTraining={training}
+                                setSelectedAnswer={setSelectedAnswer}
+                                currentRound={round}
+                                checkRound={checkRound}
+                            />
                         </main>
                     </>
                 )) ||
@@ -97,7 +122,8 @@ function Recognize() {
                         <p>На данный момент, все слова повторены. </p>
                         <p>Изученных и повторенных слов: {learning_words}.</p>
                     </>
-                )) || <p>У вас нет слов для повторения, их надо добавить</p>}
+                )) || <p>У вас нет слов для повторения, их надо добавить</p>
+            )}
         </div>
     );
 }

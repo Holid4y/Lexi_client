@@ -3,21 +3,12 @@ import { useDispatch } from "react-redux";
 
 import { fetchTrainingPatch, decrementTrainingInfoRecognize } from "../../../common/reducers/training/trainingSlice";
 
-import { addScore, nextRound, clearTraining, clearRound } from "../../../common/reducers/training/recognizeSlice";
 
-function AnswerButton({ localType, selectedAnswer, setSelectedAnswer, currentTraining, currentRound, setIsEnd }) {
+
+function AnswerButton({ localType, selectedAnswer, setSelectedAnswer, currentTraining, currentRound, checkRound }) {
     const dispatch = useDispatch();
 
-    function checkRound() {
-        // после ответа, если это последный раунд
-        if (currentRound + 1 == currentTraining.length) {
-            setIsEnd(true); // отображаем страницу окончания
-            dispatch(clearTraining()); // очищаем текущий training
-            dispatch(clearRound()); // сбрасывает до первого слова
-        } else {
-            dispatch(nextRound()); // следующий раунд
-        }
-    }
+    
 
     // Функция для обработки финального ответа
     function handleFinalAnswer() {
@@ -34,12 +25,9 @@ function AnswerButton({ localType, selectedAnswer, setSelectedAnswer, currentTra
 
             dispatch(fetchTrainingPatch(data)); // отбовляет бд
 
-            if (is_correct) {
-                // прибавляем балл за правельный ответ
-                dispatch(addScore());
-            }
+            
             setSelectedAnswer(null); // Сбрасываем выбранный вариант для следующего раунда
-            checkRound();
+            checkRound(is_correct);
         } else {
             // Если ничего не выбрано, можно вывести предупреждение или сделать кнопку неактивной
             console.log("Пожалуйста, выберите ответ");
