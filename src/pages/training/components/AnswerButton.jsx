@@ -5,10 +5,11 @@ import { fetchTrainingPatch, decrementTrainingInfoRecognize } from "../../../com
 
 
 
+
 function AnswerButton({ localType, selectedAnswer, setSelectedAnswer, currentTraining, currentRound, checkRound, decrementTrainingInfo }) {
     const dispatch = useDispatch();
 
-    
+
 
     // Функция для обработки финального ответа
     function handleFinalAnswer() {
@@ -37,7 +38,8 @@ function AnswerButton({ localType, selectedAnswer, setSelectedAnswer, currentTra
 
     // Функция для проверки ответа
     function checkAnswer(answerWord) {
-        return currentTraining[currentRound].word.text == answerWord.trim();
+        const cleanWord = answerWord.trim().toLowerCase()
+        return currentTraining[currentRound].word.text == cleanWord;
     }
 
     return (
