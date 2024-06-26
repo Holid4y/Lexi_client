@@ -34,7 +34,7 @@ function TrainingCard() {
                                 </Link>
                             </div>
                             <div className="col-12 col-md-6">
-                                <span> {reproduceRound != 0 ? `Продолжить. Вы на ${reproduceRound} слове` : ""}</span>
+                                <span> {reproduceRound != 0 ? `Продолжить. Вы на ${reproduceRound + 1} слове` : ""}</span>
                                 {/* <span className="book-text ps-4 pe-1">12</span> */}
                                 <Link to="/training/reproduce">
                                     <div className="card mt-auto card-text-lr card-btn overflow-box bg-card-second">

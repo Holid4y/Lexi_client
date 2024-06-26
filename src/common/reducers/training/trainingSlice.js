@@ -3,6 +3,7 @@ import { host, training, info } from "../../../../public/urls";
 import { headers } from "../../../../public/urls";
 
 import { recognizeLoaded } from "./recognizeSlice";
+import { reproduceLoaded } from "./reproduceSlice";
 
 export const fetchTraining = createAsyncThunk("training/fetchTraining", async (type, { dispatch }) => {
     const url = new URL(host + training);
@@ -26,7 +27,7 @@ export const fetchTraining = createAsyncThunk("training/fetchTraining", async (t
                 dispatch(recognizeLoaded(data));
             }
             if (type === "reproduce") {
-                // dispatch(reproduceLoaded(data));
+                dispatch(reproduceLoaded(data));
             } 
         } else
 

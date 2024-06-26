@@ -5,14 +5,14 @@ import { fetchTrainingPatch, decrementTrainingInfoRecognize } from "../../../com
 
 
 
-function AnswerButton({ localType, selectedAnswer, setSelectedAnswer, currentTraining, currentRound, checkRound }) {
+function AnswerButton({ localType, selectedAnswer, setSelectedAnswer, currentTraining, currentRound, checkRound, decrementTrainingInfo }) {
     const dispatch = useDispatch();
 
     
 
     // Функция для обработки финального ответа
     function handleFinalAnswer() {
-        console.log(selectedAnswer)
+        
         if (selectedAnswer !== null & selectedAnswer !== '') {
             const is_correct = checkAnswer(selectedAnswer);
             const data = {
@@ -20,8 +20,9 @@ function AnswerButton({ localType, selectedAnswer, setSelectedAnswer, currentTra
                 pk: currentTraining[currentRound].pk,
                 is_correct: is_correct,
             };
+            console.log(selectedAnswer, is_correct)
             // отнимаем от информационного счетчика 1
-            dispatch(decrementTrainingInfoRecognize());
+            dispatch(decrementTrainingInfo());
 
             dispatch(fetchTrainingPatch(data)); // отбовляет бд
 
@@ -36,7 +37,7 @@ function AnswerButton({ localType, selectedAnswer, setSelectedAnswer, currentTra
 
     // Функция для проверки ответа
     function checkAnswer(answerWord) {
-        return currentTraining[currentRound].word.text == answerWord;
+        return currentTraining[currentRound].word.text == answerWord.trim();
     }
 
     return (

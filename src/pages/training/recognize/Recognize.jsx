@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { fetchTraining } from "../../../common/reducers/training/trainingSlice";
+import { decrementTrainingInfoRecognize, fetchTraining } from "../../../common/reducers/training/trainingSlice";
 import { fetchHome } from "../../../common/reducers/homeSlice";
 
-import { addScore, nextRound, clearTraining, clearRound } from "../../../common/reducers/training/recognizeSlice";
+import { addScore, nextRound, clearTraining, clearRound, clearScore } from "../../../common/reducers/training/recognizeSlice";
 
 import Header from "../components/Header";
 import WordCard from "../components/WordCard";
@@ -91,7 +91,7 @@ function Recognize() {
             {loading ? (
                 <p>Loading...</p>
             ) : (
-                (isEnd && <End type={localType} count_word_to_training={count_word_to_training_recognize} setIsEnd={setIsEnd} score={score} />) ||
+                (isEnd && <End type={localType} count_word_to_training={count_word_to_training_recognize} setIsEnd={setIsEnd} score={score} clearScore={clearScore} />) ||
                 (training && (
                     <>
                         <Header round={round} trainingLength={training.length} />
@@ -112,6 +112,7 @@ function Recognize() {
                                 setSelectedAnswer={setSelectedAnswer}
                                 currentRound={round}
                                 checkRound={checkRound}
+                                decrementTrainingInfo={decrementTrainingInfoRecognize}
                             />
                         </main>
                     </>
