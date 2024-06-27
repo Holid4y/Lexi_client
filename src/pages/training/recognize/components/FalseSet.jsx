@@ -24,8 +24,7 @@ function FalseSet({ word, index, selectedAnswer, setSelectedAnswer, isViewResult
     function setClass() {
             // подсветить выбранный ответ красным, а правельный зеленым по верх красного
             
-            if (word.text === localSelectedAnswer) {
-                
+            if (word.text === localSelectedAnswer) {       
                 setClassState(`${classState} box-danger`);
             }
             if (word.text === correctWord) {

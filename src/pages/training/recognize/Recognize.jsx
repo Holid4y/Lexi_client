@@ -84,8 +84,6 @@ function Recognize() {
         setIsViewResult(false)
     }
 
-    function viewResult() {}
-
     function checkRound(is_correct) {
         if (is_correct) {
             // прибавляем балл за правельный ответ
