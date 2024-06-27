@@ -93,7 +93,11 @@ function Recognize() {
         }
         setIsViewResult(true)
         // Это позволяет добавить задержку перед переключением на следующий раунд
-        setTimeout(performRoundSwitch, 5000);
+        const correctTime = 500
+        const wrongTime = 2000
+        const timeCallDown = is_correct ? correctTime : wrongTime
+
+        setTimeout(performRoundSwitch, timeCallDown);
     }
 
     return (
