@@ -1,20 +1,39 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 
-function FalseSet({ word, index, selectedAnswer, setSelectedAnswer, isViewResult }) {
+function FalseSet({ word, index, selectedAnswer, setSelectedAnswer, isViewResult, correctWord }) {
+    const [classState, setClassState] = useState("")
+    const [localSelectedAnswer, setLocalSelectedAnswer] = useState(null)
+    
+    useEffect(() => {
+        setClassState('btn btn-dark-list w-100 mb-3 py-3')
+        if (isViewResult) {   
+            setClass()
+            
+        }
+    }, [isViewResult]);
+
+    useEffect(() => {
+        setLocalSelectedAnswer(selectedAnswer)
+    }, [selectedAnswer]);
+
     // Функция для изменения выбранного ответа (переключение radio)
     function handleAnswerChange(answer) {
         setSelectedAnswer(answer);
     }
 
-    let labelClass = "btn btn-dark-list w-100 mb-3 py-3";
-    // if (hasAnswered) {
-    //     if (word.text === correctAnswer) {
-    //         labelClass += " box-success";
-    //     } else if (selectedAnswer === word.text) {
-    //         labelClass += " box-danger";
-    //     }
-    // }
-
+    function setClass() {
+            // подсветить выбранный ответ красным, а правельный зеленым по верх красного
+            
+            if (word.text === localSelectedAnswer) {
+                
+                setClassState(`${classState} box-danger`);
+            }
+            if (word.text === correctWord) {
+                setClassState(`${classState} box-success`);
+            } 
+        
+    }
+    
     return (
         <div>
             <input
@@ -26,7 +45,7 @@ function FalseSet({ word, index, selectedAnswer, setSelectedAnswer, isViewResult
                 onChange={() => handleAnswerChange(word.text)}
                 disabled={isViewResult}
             />
-            <label className={labelClass} htmlFor={`option_${index}`}>
+            <label className={classState} htmlFor={`option_${index}`}>
                 {word.translation}
             </label>
         </div>

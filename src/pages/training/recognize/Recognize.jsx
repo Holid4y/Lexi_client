@@ -93,7 +93,7 @@ function Recognize() {
         }
         setIsViewResult(true)
         // Это позволяет добавить задержку перед переключением на следующий раунд
-        setTimeout(performRoundSwitch, 1000);
+        setTimeout(performRoundSwitch, 5000);
     }
 
     return (
@@ -111,7 +111,7 @@ function Recognize() {
                                 <h3 className="text-center mb-3">Варианты ответа</h3>
                                 {falseSet &&
                                     falseSet.map((word, index) => (
-                                        <FalseSet key={index} word={word} index={index} selectedAnswer={selectedAnswer} setSelectedAnswer={setSelectedAnswer} isViewResult={isViewResult}/>
+                                        <FalseSet key={index} word={word} index={index} selectedAnswer={selectedAnswer} setSelectedAnswer={setSelectedAnswer} isViewResult={isViewResult} correctWord={training[round].word.text}/>
                                     ))}
                             </div>
 

@@ -378,3 +378,16 @@ input[type='number'] { -moz-appearance: textfield;}
     top: 5%;
     left: 80%;
   }
+  
+
+.box-success {
+    /* background-color: #2add54;
+    border-color: #4be66f; */
+    box-shadow: 0px 0px 10px #4be66f;
+}
+
+.box-danger {
+    /* background-color: #dd2a2a;
+    border-color: #e64b4b; */
+    box-shadow: 0px 0px 10px #e64b4b;
+}
