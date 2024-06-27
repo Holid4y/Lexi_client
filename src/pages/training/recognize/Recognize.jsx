@@ -29,6 +29,8 @@ function Recognize() {
     // проверки последнего слова
     const [isEnd, setIsEnd] = useState(false);
 
+    const [isViewResult, setIsViewResult] = useState(false);
+
     // Используем эффект для отправки запроса на получение тренировки
     useEffect(() => {
         // Проверяем, что выполняются следующие условия:
@@ -38,6 +40,8 @@ function Recognize() {
 
         if (!training & !patchLoading) {
             dispatch(fetchTraining(localType));
+            dispatch(clearScore());
+            dispatch(clearRound());
         }
 
         if (!learning_words) {
@@ -72,19 +76,27 @@ function Recognize() {
         }
     }, [round, training]);
 
+    function performRoundSwitch() {
+        if (round + 1 === training.length) {
+            setIsEnd(true); // отображаем страницу окончания
+        } else {
+            dispatch(nextRound()); // отображает следующий раунд
+        }
+        setIsViewResult(false)
+    }
+
     function checkRound(is_correct) {
         if (is_correct) {
             // прибавляем балл за правельный ответ
             dispatch(addScore());
         }
-        // после ответа, если это последный раунд
-        if (round + 1 == training.length) {
-            setIsEnd(true); // отображаем страницу окончания
-            dispatch(clearTraining()); // очищаем текущий training
-            dispatch(clearRound()); // сбрасывает до первого слова
-        } else {
-            dispatch(nextRound()); // следующий раунд
-        }
+        setIsViewResult(true)
+        // Это позволяет добавить задержку перед переключением на следующий раунд
+        const correctTime = 500
+        const wrongTime = 2000
+        const timeCallDown = is_correct ? correctTime : wrongTime
+
+        setTimeout(performRoundSwitch, timeCallDown);
     }
 
     return (
@@ -102,7 +114,7 @@ function Recognize() {
                                 <h3 className="text-center mb-3">Варианты ответа</h3>
                                 {falseSet &&
                                     falseSet.map((word, index) => (
-                                        <FalseSet key={index} word={word} index={index} selectedAnswer={selectedAnswer} setSelectedAnswer={setSelectedAnswer} />
+                                        <FalseSet key={index} word={word} index={index} selectedAnswer={selectedAnswer} setSelectedAnswer={setSelectedAnswer} isViewResult={isViewResult} correctWord={training[round].word.text}/>
                                     ))}
                             </div>
 
