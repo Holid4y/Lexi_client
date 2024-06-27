@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleWordBlock } from "../reducers/wordSlice";
-import Loading from "../components/Loading";
+import Loading from "../components/Treatment/Loading";
 
 function WordBlockTranslate() {
     const dispatch = useDispatch();

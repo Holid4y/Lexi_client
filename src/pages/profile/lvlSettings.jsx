@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchSettings, fetchPutSettings} from "../../common/reducers/userSlice";
-import { Link } from "react-router-dom";
+import Headers from "../../common/components/Headers/Header";
+import Loading from "../../common/components/Treatment/Loading";
+import Errors from "../../common/components/Treatment/Errors";
 
 function lvlSettings() {
     const dispatch = useDispatch();
@@ -47,9 +49,14 @@ function lvlSettings() {
         };
         dispatch(fetchPutSettings(data));
     }
+
+    const Header = <Headers title="Настройки уровней"/>
+    const LoadingView = <Loading/>
+    const ErrorView = <Errors error={error}/>
+
     const renderLevels = () => {
         return (
-            <>
+            <div>
                 {levelsState && levelsState.map((level, index) => (
                     <div className="mb-2" key={index}>
                         <label htmlFor={`lvl${index}`} className="form-label">
@@ -79,54 +86,49 @@ function lvlSettings() {
                         </div>
                     </div>
                 ))}
-            </>
+            </div>
         );
     };
 
     return (
         <div className="align-items-center">
-            <div className="container sticky-top mb-3 pt-2">
-                <nav className="navbar dark-nav">
-                    <div className="container-fluid">
-                        <span className="navbar-brand">Настройки уровней</span>
+            {Header}
+            {loading ? ( LoadingView ) : (
+                <main className="container pb-5">
+                    <div className="my-3">
+                        <small className="ps-2">Для каждого уровня укажите перерыв (в днях) до следующего повторения</small>
                     </div>
-                </nav>
-            </div>
 
-            <main className="container">
-                <div className="my-3">
-                    <small className="ps-2">Для каждого уровня укажите перерыв (в днях) до следующего повторения</small>
-                </div>
-
-                {(levels && renderLevels()) || (loading ? <p>Loading...</p> : <p>Error: {error}</p>)}
-                <div className="my-3">
-                    <button className="btn btn-secondary w-55px me-2" onClick={handleAddLevel} type="button">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
-                            <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2" />
-                        </svg>
-                    </button>
-                    <small>При необходимости, добавьте уровни</small>
-                </div>
-                <div className="mt-3">
-                    {putLoading ? (
-                        <div className="d-flex justify-content-center my-4">
-                            <button type="text" className="btn btn-primary save-btn py-2 w-50" disabled>
-                                <div class="spinner-border spinner-border-sm" role="status">
-                                    <span class="visually-hidden">Loading...</span>
-                                </div>
-                            </button>
-                        </div>
-                    ) : (
-                        <div className="d-flex justify-content-center my-4">
-                            <button type="text" className="btn btn-primary save-btn py-2 w-50" onClick={handleSave}>
-                                <span>
-                                    <b>Сохранить</b>
-                                </span>
-                            </button>
-                        </div>
-                    )}
-                </div>
-            </main>
+                    {(levels && renderLevels()) || (loading ? LoadingView : ErrorView)}
+                    <div className="my-3">
+                        <button className="btn btn-secondary w-55px me-2" onClick={handleAddLevel} type="button">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-plus-lg" viewBox="0 0 16 16">
+                                <path fillRule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2" />
+                            </svg>
+                        </button>
+                        <small>При необходимости, добавьте уровни</small>
+                    </div>
+                    <div className="mt-3">
+                        {putLoading ? (
+                            <div className="d-flex justify-content-center my-4">
+                                <button type="text" className="btn btn-primary save-btn py-2 w-50" disabled>
+                                    <div className="spinner-border spinner-border-sm" role="status">
+                                        <span className="visually-hidden">Loading...</span>
+                                    </div>
+                                </button>
+                            </div>
+                        ) : (
+                            <div className="d-flex justify-content-center my-4">
+                                <button type="text" className="btn btn-primary save-btn py-2 w-50" onClick={handleSave}>
+                                    <span>
+                                        <b>Сохранить</b>
+                                    </span>
+                                </button>
+                            </div>
+                        )}
+                    </div>
+                </main>
+            )}
         </div>
     );
 }

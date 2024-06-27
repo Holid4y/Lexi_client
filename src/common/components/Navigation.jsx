@@ -13,8 +13,8 @@ function Navigation() {
         return location.pathname === path ? "nav-link active_link" : "nav-link";
     };
     const getTrainingInfo = () => {
-        if (count_word_to_training_recognize != null & count_word_to_training_reproduce != null) {
-            return count_word_to_training_recognize + count_word_to_training_reproduce
+        if ((count_word_to_training_recognize != null) & (count_word_to_training_reproduce != null)) {
+            return count_word_to_training_recognize + count_word_to_training_reproduce;
         }
     };
 
@@ -25,23 +25,23 @@ function Navigation() {
                 <ul className="nav justify-content-center">
                     <li className="nav-item">
                         <Link to="/" className={getLinkClass("/")}>
-                            <SVG name="home"/>
+                            <SVG name="home" />
                         </Link>
                     </li>
                     <li className="nav-item">
                         <Link to="/bookmarks" className={getLinkClass("/bookmarks")}>
-                            <SVG name="marklist"/>
+                            <SVG name="marklist" />
                         </Link>
                     </li>
                     <li className="nav-item">
                         <Link to="/training" className={`${getLinkClass("/training")} position-relative `}>
-                            <small class="position-absolute translate-middle badge badge-position bg-success">{getTrainingInfo()}</small>
-                            <SVG name="training"/>
+                            <small className="position-absolute translate-middle badge badge-position bg-success">{getTrainingInfo()}</small>
+                            <SVG name="training" />
                         </Link>
                     </li>
                     <li className="nav-item">
                         <Link to="/profile" className={getLinkClass("/profile")}>
-                            <SVG name="profile"/>
+                            <SVG name="profile" />
                         </Link>
                     </li>
                 </ul>

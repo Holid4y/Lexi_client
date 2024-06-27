@@ -1,9 +1,11 @@
 import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchVocabulary } from "../../common/reducers/vocabularySlice";
 import Block from "./components/Block";
 import SVG from "../../common/components/Icons/SVG";
+import Headers from "../../common/components/Headers/Header";
+import Loading from "../../common/components/Treatment/Loading";
+import Errors from "../../common/components/Treatment/Errors";
 
 function WordList() {
     const dispatch = useDispatch();
@@ -13,20 +15,20 @@ function WordList() {
         dispatch(fetchVocabulary());
     }, [dispatch]);
 
+    const Header = <Headers title="Настройки уровней"/>
+    const LoadingView = <Loading/>
+    const ErrorView = <Errors error={error} />
+
     return (
         <div className="align-items-center">
-            <div className="container sticky-top mb-3 pt-2">
-                <nav className="navbar dark-nav">
-                    <div className="container-fluid">
-                        <span className="navbar-brand">Мои слова</span>
+            {Header}
+            {loading ? ( LoadingView ) : (
+                <main className="container pb-5">
+                    <div className="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-5 g-3">
+                        {(words && words.map((word, index) => <Block word={word.word} key={index} />)) || (loading ? LoadingView : ErrorView)}
                     </div>
-                </nav>
-            </div>
-            <main className="container">
-                <div className="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-5 g-3">
-                    {(words && words.map((word, index) => <Block word={word.word} key={index} />)) || (loading ? "loading..." : <p>Error: {error}</p>)}
-                </div>
-            </main>
+                </main>
+            )}
         </div>
     );
 }
