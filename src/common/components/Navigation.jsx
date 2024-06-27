@@ -35,7 +35,7 @@ function Navigation() {
                     </li>
                     <li className="nav-item">
                         <Link to="/training" className={`${getLinkClass("/training")} position-relative `}>
-                            <small class="position-absolute translate-middle badge badge-position bg-success">{getTrainingInfo()}</small>
+                            <small className="position-absolute translate-middle badge badge-position bg-success">{getTrainingInfo()}</small>
                             <SVG name="training"/>
                         </Link>
                     </li>

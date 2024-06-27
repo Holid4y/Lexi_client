@@ -22,16 +22,19 @@ function BookList() {
         setSearchValue(value);
     };
 
+    const Header = 
+    <div className="container sticky-top mb-3 pt-2">
+        <nav className="navbar dark-nav">
+            <div className="container-fluid">
+                <Search onChange={handleSearchChange} />
+            </div>
+        </nav>
+    </div>;
+
     return (
         <div className="align-items-center">
-            <div className="container sticky-top mb-3 pt-2">
-                <nav className="navbar dark-nav">
-                    <div className="container-fluid">
-                        <Search onChange={handleSearchChange} />
-                    </div>
-                </nav>
-            </div>
-            <main className="container">
+            {Header}
+            <main className="container pb-5">
                 <div className="row g-4">
                     {(books &&
                         books.results &&

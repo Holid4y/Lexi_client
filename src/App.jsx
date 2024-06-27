@@ -1,11 +1,13 @@
 import { useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+
 import { checkAccessTokenValidity } from "./common/reducers/authSlice";
 import { fetchSettings } from "./common/reducers/userSlice";
-import { fetchTrainingInfo } from "./common/reducers/trainingSlice";
+import { fetchTrainingInfo } from "./common/reducers/training/trainingSlice";
 import { setTheme } from "./common/reducers/themeSlice";
 import Navigation from "./common/components/Navigation";
+
 import Home from "./pages/home/Home";
 import BookList from "./pages/books/BookList";
 import BookRetrieve from "./pages/book-retrieve/BookRetrieve";

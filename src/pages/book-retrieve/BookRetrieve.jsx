@@ -37,17 +37,20 @@ function BookRetrieve() {
         dispatch(fetchBook({ slug: slug, page: page }));
     }, [dispatch, slug]);
 
+
+    const Header = <BookRetrieveHeader pk={pk} page={page} />;
+    const Page = <Pages page={page}/>;
+    const Pagination = <PaginationButton page={page} page_count={page_count} slug={slug} setIsNext={setIsNext} />;
+
     return (
         <div className="align-items-center">
-            <div className="container">
-                <BookRetrieveHeader pk={pk} page={page} />
-                {loading ? ( <Loading /> ) : (
-                    <>
-                        {pages && <Pages page={page} />}
-                        <PaginationButton page={page} page_count={page_count} slug={slug} setIsNext={setIsNext} />
-                    </>
-                )}
-            </div>
+            {Header}
+            {loading ? ( <Loading /> ) : (
+                <main className="container pb-5">
+                    {pages && Page}
+                    {Pagination}
+                </main>
+            )}
         </div>
     );
 }

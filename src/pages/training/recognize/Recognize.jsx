@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 import { decrementTrainingInfoRecognize, fetchTraining } from "../../../common/reducers/training/trainingSlice";
 import { fetchHome } from "../../../common/reducers/homeSlice";
@@ -21,21 +22,21 @@ function Recognize() {
     const localType = "recognize";
     const training = recognize;
 
-    // выбранный ответ
-    const [selectedAnswer, setSelectedAnswer] = useState(null);
-    // массив ложных ответов
+    const [selectedAnswer, setSelectedAnswer] = useState(() => {
+        return localStorage.getItem("selectedAnswer") || null;
+    });
     const [falseSet, setFalseSet] = useState(null);
-    // проверки последнего слова
     const [isEnd, setIsEnd] = useState(false);
+    const [isCorrect, setIsCorrect] = useState(() => {
+        const saved = localStorage.getItem("isCorrect");
+        return saved === "true" ? true : saved === "false" ? false : null;
+    });
+    const [hasAnswered, setHasAnswered] = useState(() => {
+        return localStorage.getItem("hasAnswered") === "true" || false;
+    });
 
-    // Используем эффект для отправки запроса на получение тренировки
     useEffect(() => {
-        // Проверяем, что выполняются следующие условия:
-        // 1. Массив training либо пустой, либо не существует (training является falsy значением)
-        // 2. Переменная patchLoading имеет значение false (falsy значение)
-        // Если все эти условия выполняются, то отправляем запроса на получение тренировки
-
-        if (!training & !patchLoading) {
+        if (!training && !patchLoading) {
             dispatch(fetchTraining(localType));
         }
 
@@ -44,20 +45,6 @@ function Recognize() {
         }
     }, [dispatch, isEnd]);
 
-    // Функция для создания массива ложных ответов
-    function makeFalseSet(falseAnswers, correctAnswer) {
-        const falseSet = [...falseAnswers];
-        falseSet.push(correctAnswer);
-
-        // Перемешиваем элементы массива с помощью алгоритма Фишера-Йетса
-        for (let i = falseSet.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [falseSet[i], falseSet[j]] = [falseSet[j], falseSet[i]];
-        }
-        return falseSet;
-    }
-
-    // Используем эффект для создания массива ложных ответов для каждого раунда
     useEffect(() => {
         if (training) {
             if (training[round].false_set) {
@@ -71,85 +58,153 @@ function Recognize() {
         }
     }, [round, training]);
 
-    function checkRound(is_correct) {
-        if (is_correct) {
-            // прибавляем балл за правельный ответ
-            dispatch(addScore());
+    useEffect(() => {
+        localStorage.setItem("selectedAnswer", selectedAnswer);
+        localStorage.setItem("isCorrect", isCorrect);
+        localStorage.setItem("hasAnswered", hasAnswered);
+    }, [selectedAnswer, isCorrect, hasAnswered]);
+
+    function makeFalseSet(falseAnswers, correctAnswer) {
+        const falseSet = [...falseAnswers];
+        falseSet.push(correctAnswer);
+
+        for (let i = falseSet.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [falseSet[i], falseSet[j]] = [falseSet[j], falseSet[i]];
         }
-        // после ответа, если это последный раунд
-        if (round + 1 == training.length) {
-            setIsEnd(true); // отображаем страницу окончания
-            dispatch(clearTraining()); // очищаем текущий training
-            dispatch(clearRound()); // сбрасывает до первого слова
+        return falseSet;
+    }
+
+    function checkRound(is_correct) {
+        setIsCorrect(is_correct);
+        setHasAnswered(true);
+
+        if (is_correct) {
+            dispatch(addScore());
+            setTimeout(() => {
+                if (round + 1 === training.length) {
+                    setIsEnd(true);
+                    dispatch(clearTraining());
+                    dispatch(clearRound());
+                } else {
+                    dispatch(nextRound());
+                }
+                setIsCorrect(null);
+                setSelectedAnswer(null);
+                setHasAnswered(false);
+                localStorage.removeItem("selectedAnswer");
+                localStorage.removeItem("isCorrect");
+                localStorage.removeItem("hasAnswered");
+            }, 2000);
         } else {
-            dispatch(nextRound()); // следующий раунд
+            const correctWordIndex = falseSet.findIndex((word) => word.text === training[round].word.text);
+            setFalseSet((prevFalseSet) =>
+                prevFalseSet.map((word, index) => {
+                    if (word.text === selectedAnswer) {
+                        return { ...word, className: "box-danger" };
+                    } else if (index === correctWordIndex) {
+                        return { ...word, className: "box-success" };
+                    } else {
+                        return word;
+                    }
+                })
+            );
         }
     }
 
-    return (
-        <div className="align-items-center">
-            {loading ? (
-                <p>Loading...</p>
-            ) : (
-                (isEnd && <End type={localType} count_word_to_training={count_word_to_training_recognize} setIsEnd={setIsEnd} score={score} clearScore={clearScore} />) ||
-                (training && (
-                    <>
-                        <Header round={round} trainingLength={training.length} />
-                        <main className="container px-4">
-                            <WordCard text={training && training[round].word.text} lvl={training && training[round].recognize_lvl} />
-                            <div className="mb-4">
-                                <h3 className="text-center mb-3">Варианты ответа</h3>
-                                {falseSet &&
-                                    falseSet.map((word, index) => (
-                                        <FalseSet key={index} word={word} index={index} selectedAnswer={selectedAnswer} setSelectedAnswer={setSelectedAnswer} />
-                                    ))}
-                            </div>
+    function nextRoundManually() {
+        if (round + 1 === training.length) {
+            setIsEnd(true);
+            dispatch(clearTraining());
+            dispatch(clearRound());
+        } else {
+            dispatch(nextRound());
+        }
+        setIsCorrect(null);
+        setSelectedAnswer(null);
+        setHasAnswered(false);
+        localStorage.removeItem("selectedAnswer");
+        localStorage.removeItem("isCorrect");
+        localStorage.removeItem("hasAnswered");
+    }
 
-                            <AnswerButton
-                                localType={localType}
+    const EndingPage = <End type={localType} count_word_to_training={count_word_to_training_recognize} setIsEnd={setIsEnd} score={score} clearScore={clearScore} />;
+    const loadingView = <p>Loading...</p>;
+    const RoundPage = training && (
+        <div>
+            <Header round={round} trainingLength={training.length} />
+            <main className="container px-4">
+                <WordCard text={training[round].word.text} lvl={training[round].recognize_lvl} />
+                <div className="mb-4">
+                    <h3 className="text-center mb-3">Варианты ответа</h3>
+                    {falseSet &&
+                        falseSet.map((word, index) => (
+                            <FalseSet
+                                key={index}
+                                word={word}
+                                index={index}
                                 selectedAnswer={selectedAnswer}
-                                currentTraining={training}
                                 setSelectedAnswer={setSelectedAnswer}
-                                currentRound={round}
-                                checkRound={checkRound}
-                                decrementTrainingInfo={decrementTrainingInfoRecognize}
+                                isCorrect={isCorrect}
+                                hasAnswered={hasAnswered}
+                                correctAnswer={training[round].word.text}
                             />
-                        </main>
-                    </>
-                )) ||
-                (error && <p>Error: {error}</p>) ||
-                (!training & (learning_words != 0) && (
-                    <div className="align-items-center">
-                        <div className="container sticky-top mb-3 pt-2">
-                            <nav className="navbar dark-nav">
-                                <div className="container-fluid">
-                                    <span className="navbar-brand">Тестирование</span>
-                                </div>
-                            </nav>
-                        </div>
-                        <div className="container">
-                            <div className="text-center mt-5">
-                                <div className="px-4 pt-5 mt-5 text-center">
-                                    <h1 className="fw-bold mt-3 text-body-emphasis">Все слова повторены 🥰</h1>
-                                    <div className="col-lg-8 mx-auto">
-                                        <p className="lead mb-4">
-                                            <span>Изученных и повторенных слов: <b className="btn btn-success">{learning_words}</b></span> <br />
-                                            <span>Читайте больше и добавляйте новые слова</span>
-                                        </p>
-                                        <div className="d-grid gap-2 d-sm-flex justify-content-sm-center mb-5">
-                                            <Link to="/books" className="btn btn-primary px-4">
-                                                Выбрать из списка
-                                            </Link>
-                                        </div>
-                                    </div>
-                                </div>
+                        ))}
+                </div>
+
+                <AnswerButton
+                    localType={localType}
+                    selectedAnswer={selectedAnswer}
+                    setSelectedAnswer={setSelectedAnswer}
+                    currentTraining={training}
+                    currentRound={round}
+                    checkRound={checkRound}
+                    decrementTrainingInfo={decrementTrainingInfoRecognize}
+                    isCorrect={isCorrect}
+                    hasAnswered={hasAnswered}
+                    nextRoundManually={nextRoundManually}
+                />
+            </main>
+        </div>
+    );
+
+    const ErrorPage = <p>Error: {error}</p>;
+    const NoMoreWords = !training && learning_words !== 0 && (
+        <div className="align-items-center">
+            <div className="container sticky-top mb-3 pt-2">
+                <nav className="navbar dark-nav">
+                    <div className="container-fluid">
+                        <span className="navbar-brand">Тестирование</span>
+                    </div>
+                </nav>
+            </div>
+            <div className="container">
+                <div className="text-center mt-5">
+                    <div className="px-4 pt-5 mt-5 text-center">
+                        <h1 className="fw-bold mt-3 text-body-emphasis">Все слова повторены 🥰</h1>
+                        <div className="col-lg-8 mx-auto">
+                            <p className="lead mb-4">
+                                <span>
+                                    Изученных и повторенных слов: <b className="btn btn-success">{learning_words}</b>
+                                </span>{" "}
+                                <br />
+                                <span>Читайте больше и добавляйте новые слова</span>
+                            </p>
+                            <div className="d-grid gap-2 d-sm-flex justify-content-sm-center mb-5">
+                                <Link to="/books" className="btn btn-primary px-4">
+                                    Выбрать из списка
+                                </Link>
                             </div>
                         </div>
                     </div>
-                )) || <p>У вас нет слов для повторения, их надо добавить</p>
-            )}
+                </div>
+            </div>
         </div>
     );
+
+    const NoWords = <p>У вас нет слов для повторения, их надо добавить</p>;
+
+    return <div className="align-items-center">{loading ? loadingView : (isEnd && EndingPage) || RoundPage || (error && ErrorPage) || NoMoreWords || NoWords}</div>;
 }
 
 export default Recognize;

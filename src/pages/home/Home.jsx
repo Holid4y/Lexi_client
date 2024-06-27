@@ -27,37 +27,32 @@ function Home() {
         dispatch(fetchHome());
     }, [dispatch]);
 
+    const Header = 
+    <div className="container sticky-top mb-3 pt-2">
+        <nav className="navbar dark-nav px-3">
+            <span className="navbar-brand">Главная</span>
+        </nav>
+    </div>
+
+    const BtnRead = 
+    <div className="pagination-position d-flex justify-content-center">
+        {continueReadingUrl && (
+            <Link to={continueReadingUrl}>
+                <button type="button" className="btn btn-primary px-4">
+                    Продолжить читать
+                </button>
+            </Link>
+        )}
+    </div>
+
     return (
         <div className="align-items-center">
-            <div className="container sticky-top mb-3 pt-2">
-                <nav className="navbar dark-nav px-3">
-                    <span className="navbar-brand">Главная</span>
-                    {/* <div class="dropdown dropstart">
-                        <button class="btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <SVG name="settings"/>
-                        </button>
-                        <ul class="dropdown-menu">
-                            <li><Link class="dropdown-item" to="/profile">Профиль</Link></li>
-                            <li><button class="dropdown-item" type="button">Настройки</button></li>
-                            <li><Link class="dropdown-item" to="/login">Выйти</Link></li>
-                        </ul>
-                    </div> */}
-                </nav>
-            </div>
+            {Header}
             <div className="container pb-5">
                 <InfoCard />
                 <BooksLinkCard />
                 <WorsHistory />
-
-                <div className="pagination-position d-flex justify-content-center">
-                    {continueReadingUrl && (
-                        <Link to={continueReadingUrl}>
-                            <button type="button" className="btn btn-primary px-4">
-                                Продолжить читать
-                            </button>
-                        </Link>
-                    )}
-                </div>
+                {BtnRead}
             </div>
         </div>
     );

@@ -34,21 +34,29 @@ function BookmarkList() {
 
     const filteredBookmarks = bookmarks?.results?.filter((bookmark) => bookmark.book_cover.title.toLowerCase().includes(searchValue.toLowerCase()));
 
+
+    const Header = 
+    <div className="container sticky-top mb-3 pt-2">
+        <nav className="navbar dark-nav">
+            <div className="container-fluid">
+                <Search onChange={handleSearchChange} />
+            </div>
+        </nav>
+    </div>;
+
+    const Error = <p>Error: {error}</p>;
+
+
+
     return (
         <div className="align-items-center">
-            <div className="container sticky-top mb-3 pt-2">
-                <nav className="navbar dark-nav">
-                    <div className="container-fluid">
-                        <Search onChange={handleSearchChange} />
-                    </div>
-                </nav>
-            </div>
+            {Header}
             <div className="container">
                 <div className="row g-4">
-                    {loading ? ( <Skeleton /> ) : error ? ( <p>Error: {error}</p> ) : (
-                        <>
+                    {loading ? ( <Skeleton /> ) : error ? ( Error ) : (
+                        <div>
                             {filteredBookmarks && filteredBookmarks.length > 0 ? (
-                                <>
+                                <div>
                                     {filteredBookmarks.map((bookmark, index) => (
                                         <BookmarkCard bookmark={bookmark} key={index} />
                                     ))}
@@ -58,7 +66,7 @@ function BookmarkList() {
                                             Добавить книгу{" "}
                                         </button>
                                     </div>
-                                </>
+                                </div>
                             ) : (
                                 <div className="text-center mt-5">
                                     <div className="px-4 pt-5 mt-5 text-center">
@@ -80,7 +88,7 @@ function BookmarkList() {
                                     </div>
                                 </div>
                             )}
-                        </>
+                        </div>
                     )}
                 </div>
             </div>

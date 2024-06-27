@@ -21,6 +21,7 @@ export const fetchTraining = createAsyncThunk("training/fetchTraining", async (t
             },
         });
         const data = await response.json();
+        
         console.log('fetchTraining')
         if (data.length != 0) {
             if (type === "recognize") {
