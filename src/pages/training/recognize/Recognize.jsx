@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 import { addScore, nextRound, clearScore } from "../../../common/reducers/training/recognizeSlice";
 
-import { getTrainig, getTLeargingWord } from "../common/utils";
+import { getTrainig, getLeargingWord } from "../common/utils";
 
 import Header from "../components/Header";
 import WordCard from "../components/WordCard";
@@ -32,7 +32,7 @@ function Recognize() {
     // Используем эффект для отправки запроса на получение тренировки
     useEffect(() => {
         getTrainig(dispatch, isEnd, patchLoading, localType)
-        getTLeargingWord(dispatch, learning_words)
+        getLeargingWord(dispatch, learning_words)
     }, [dispatch, isEnd]);
 
     function performRoundSwitch() {

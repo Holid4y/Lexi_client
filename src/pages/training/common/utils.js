@@ -18,7 +18,7 @@ export function getTrainig(dispatch, isEnd, patchLoading, localType) {
 }
 
 
-export function getTLeargingWord(dispatch, learning_words) {
+export function getLeargingWord(dispatch, learning_words) {
 
     // learning_words нужны для того чтобы обработать их отсудствие и отобразить noWordPage
     if (!learning_words) {
