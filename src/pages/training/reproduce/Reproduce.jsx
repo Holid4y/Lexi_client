@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { fetchTraining } from "../../../common/reducers/training/trainingSlice";
-import { fetchHome } from "../../../common/reducers/homeSlice";
-
 import { addScore, nextRound, clearTraining, clearRound, clearScore } from "../../../common/reducers/training/reproduceSlice";
+
+import { getTrainig, getLeargingWord } from "../common/utils";
 
 import Header from "../components/Header";
 import WordCard from "../components/WordCard";
@@ -29,18 +28,8 @@ function Reproduce() {
 
     // Используем эффект для отправки запроса на получение тренировки
     useEffect(() => {
-        // Проверяем, что выполняются следующие условия:
-        // 1. Массив training либо пустой, либо не существует (training является falsy значением)
-        // 2. Переменная patchLoading имеет значение false (falsy значение)
-        // Если все эти условия выполняются, то отправляем запроса на получение тренировки
-
-        if (!training & !patchLoading) {
-            dispatch(fetchTraining(localType));
-        }
-
-        if (!learning_words) {
-            dispatch(fetchHome());
-        }
+        getTrainig(dispatch, isEnd, patchLoading, localType)
+        getLeargingWord(dispatch, learning_words)
     }, [dispatch, isEnd]);
 
     const handleInputChange = (event) => {
