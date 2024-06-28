@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 
-import { fetchTrainingPatch, decrementTrainingInfoRecognize } from "../../../common/reducers/training/trainingSlice";
+import { fetchTrainingPatch, decrementTrainingInfo } from "../../../common/reducers/training/trainingSlice";
 
-function AnswerButton({ localType, selectedAnswer, setSelectedAnswer, currentTraining, currentRound, checkRound, decrementTrainingInfo, performRoundSwitch }) {
+function AnswerButton({ localType, selectedAnswer, setSelectedAnswer, currentTraining, currentRound, checkRound, performRoundSwitch }) {
     const dispatch = useDispatch();
     const [isCorrect, setIsCorrect] = useState(null);
     // Функция для обработки финального ответа

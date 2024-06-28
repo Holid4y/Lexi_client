@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { decrementTrainingInfoRecognize } from "../../../common/reducers/training/trainingSlice";
 
 import { addScore, nextRound, clearScore } from "../../../common/reducers/training/recognizeSlice";
 
@@ -92,7 +91,6 @@ function Recognize() {
                                 setSelectedAnswer={setSelectedAnswer}
                                 currentRound={round}
                                 checkRound={checkRound}
-                                decrementTrainingInfo={decrementTrainingInfoRecognize}
                                 performRoundSwitch={performRoundSwitch}
                             />
                         </main>

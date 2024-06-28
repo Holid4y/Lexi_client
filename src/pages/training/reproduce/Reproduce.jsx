@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { decrementTrainingInfoReproduce, fetchTraining } from "../../../common/reducers/training/trainingSlice";
+import { fetchTraining } from "../../../common/reducers/training/trainingSlice";
 import { fetchHome } from "../../../common/reducers/homeSlice";
 
 import { addScore, nextRound, clearTraining, clearRound, clearScore } from "../../../common/reducers/training/reproduceSlice";
@@ -89,7 +89,6 @@ function Reproduce() {
                             setSelectedAnswer={setSelectedAnswer}
                             currentRound={round}
                             checkRound={checkRound}
-                            decrementTrainingInfo={decrementTrainingInfoReproduce}
                         />
                     </>
                 ))
