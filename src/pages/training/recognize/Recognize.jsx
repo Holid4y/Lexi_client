@@ -34,16 +34,16 @@ function Recognize() {
     // Используем эффект для отправки запроса на получение тренировки
     useEffect(() => {
         // Проверяем, что выполняются следующие условия:
-        // 1. Массив training либо пустой, либо не существует (training является falsy значением)
+        // 1. Во время рендара, isEnd должен быть false, чтобы не сбросить счет и не обновить state
         // 2. Переменная patchLoading имеет значение false (falsy значение)
-        // Если все эти условия выполняются, то отправляем запроса на получение тренировки
-
-        if (!training & !patchLoading) {
+        // это нужно для того, чтобы сделать fetchTraining с самыми свежими данными
+        // так как patchLoading обновляет бд 
+        
+        if (!isEnd & !patchLoading) {
             dispatch(fetchTraining(localType));
             dispatch(clearScore());
             dispatch(clearRound());
         }
-
         if (!learning_words) {
             dispatch(fetchHome());
         }
