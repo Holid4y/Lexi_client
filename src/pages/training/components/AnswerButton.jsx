@@ -1,27 +1,58 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { fetchTrainingPatch, decrementTrainingInfo } from "../../../common/reducers/training/trainingSlice";
 
-function AnswerButton({ localType, selectedAnswer, setSelectedAnswer, currentTraining, currentRound, checkRound, performRoundSwitch }) {
+import { setAnswer, nextRound, addScore } from "../../../common/reducers/training/trainingRoundSlice";
+
+function AnswerButton({ localType, currentTraining, setIsEnd, setIsViewResult }) {
     const dispatch = useDispatch();
+    const { answer, training, round } = useSelector((state) => state.trainingRound);
+
     const [isCorrect, setIsCorrect] = useState(null);
+
+    function performRoundSwitch() {
+        if (round + 1 === training.length) {
+            setIsEnd(true); // отображаем страницу окончания
+        } else {
+            dispatch(nextRound()); // отображает следующий раунд
+        }
+        setIsViewResult(false);
+    }
+
+    function checkRound(is_correct) {
+        if (is_correct) {
+            // прибавляем балл за правельный ответ
+            dispatch(addScore());
+            setIsViewResult(true);
+            // Это позволяет добавить задержку перед переключением на следующий раунд
+            const correctTime = 1000;
+            const wrongTime = 0;
+
+            const timeCallDown = is_correct ? correctTime : wrongTime;
+
+            setTimeout(performRoundSwitch, timeCallDown);
+        } else {
+            setIsViewResult(true);
+        }
+    }
+
     // Функция для обработки финального ответа
     function handleFinalAnswer() {
-        if ((selectedAnswer !== null) & (selectedAnswer !== "")) {
-            const is_correct = checkAnswer(selectedAnswer);
+        if ((answer !== null) & (answer !== "")) {
+            const is_correct = checkAnswer(answer);
             const data = {
                 type: localType,
-                pk: currentTraining[currentRound].pk,
+                pk: currentTraining[round].pk,
                 is_correct: is_correct,
             };
-            console.log(selectedAnswer, is_correct);
+            console.log(answer, is_correct);
             // отнимаем от информационного счетчика 1
             dispatch(decrementTrainingInfo());
 
             dispatch(fetchTrainingPatch(data)); // отбовляет бд
 
-            setSelectedAnswer(null); // Сбрасываем выбранный вариант для следующего раунда
+            dispatch(setAnswer(null)); // Сбрасываем выбранный вариант для следующего раунда
             checkRound(is_correct);
         } else {
             // Если ничего не выбрано, можно вывести предупреждение или сделать кнопку неактивной
@@ -32,7 +63,7 @@ function AnswerButton({ localType, selectedAnswer, setSelectedAnswer, currentTra
     // Функция для проверки ответа
     function checkAnswer(answerWord) {
         const cleanWord = answerWord.trim().toLowerCase();
-        const resultBool = currentTraining[currentRound].word.text == cleanWord;
+        const resultBool = currentTraining[round].word.text == cleanWord;
         setIsCorrect(resultBool);
         return resultBool;
     }
@@ -40,7 +71,7 @@ function AnswerButton({ localType, selectedAnswer, setSelectedAnswer, currentTra
     const AnswerButton = (
         <button
             type="text"
-            className={`btn btn-primary save-btn py-2 w-50 ${(selectedAnswer === null) | (selectedAnswer === "") ? "disabled" : ""}`}
+            className={`btn btn-primary save-btn py-2 w-50 ${(answer === null) | (answer === "") ? "disabled" : ""}`}
             onClick={() => handleFinalAnswer()}
         >
             <span>

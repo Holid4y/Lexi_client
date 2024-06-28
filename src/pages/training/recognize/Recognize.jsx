@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
-import { addScore, nextRound, clearScore } from "../../../common/reducers/training/recognizeSlice";
-
 import { getTrainig, getLeargingWord } from "../common/utils";
 
 import Header from "../components/Header";
@@ -15,14 +13,10 @@ import AnswerButton from "../components/AnswerButton";
 function Recognize() {
     const dispatch = useDispatch();
     const { count_word_to_training_recognize, loading, patchLoading, error } = useSelector((state) => state.training);
-    const { recognize, round, score } = useSelector((state) => state.recognize);
+    const { training, round, score } = useSelector((state) => state.trainingRound);
     const { learning_words } = useSelector((state) => state.home);
 
     const localType = "recognize";
-    const training = recognize;
-
-    // выбранный ответ
-    const [selectedAnswer, setSelectedAnswer] = useState(null);
 
     // проверки последнего слова
     const [isEnd, setIsEnd] = useState(false);
@@ -31,42 +25,16 @@ function Recognize() {
 
     // Используем эффект для отправки запроса на получение тренировки
     useEffect(() => {
-        getTrainig(dispatch, isEnd, patchLoading, localType)
-        getLeargingWord(dispatch, learning_words)
+        getTrainig(dispatch, isEnd, patchLoading, localType);
+        getLeargingWord(dispatch, learning_words);
     }, [dispatch, isEnd]);
-
-    function performRoundSwitch() {
-        if (round + 1 === training.length) {
-            setIsEnd(true); // отображаем страницу окончания
-        } else {
-            dispatch(nextRound()); // отображает следующий раунд
-        }
-        setIsViewResult(false);
-    }
-
-    function checkRound(is_correct) {
-        if (is_correct) {
-            // прибавляем балл за правельный ответ
-            dispatch(addScore());
-            setIsViewResult(true);
-            // Это позволяет добавить задержку перед переключением на следующий раунд
-            const correctTime = 1000;
-            const wrongTime = 0;
-
-            const timeCallDown = is_correct ? correctTime : wrongTime;
-
-            setTimeout(performRoundSwitch, timeCallDown);
-        } else {
-            setIsViewResult(true);
-        }
-    }
 
     return (
         <div className="align-items-center">
             {loading ? (
                 <p>Loading...</p>
             ) : (
-                (isEnd && <End type={localType} count_word_to_training={count_word_to_training_recognize} setIsEnd={setIsEnd} score={score} clearScore={clearScore} />) ||
+                (isEnd && <End type={localType} count_word_to_training={count_word_to_training_recognize} setIsEnd={setIsEnd} score={score} />) ||
                 (training && (
                     <>
                         <Header round={round} trainingLength={training.length} />
@@ -77,8 +45,6 @@ function Recognize() {
                                 <FalseSet
                                     training={training}
                                     round={round}
-                                    selectedAnswer={selectedAnswer}
-                                    setSelectedAnswer={setSelectedAnswer}
                                     isViewResult={isViewResult}
                                     correctWord={training[round].word.text}
                                 />
@@ -86,12 +52,9 @@ function Recognize() {
 
                             <AnswerButton
                                 localType={localType}
-                                selectedAnswer={selectedAnswer}
                                 currentTraining={training}
-                                setSelectedAnswer={setSelectedAnswer}
-                                currentRound={round}
-                                checkRound={checkRound}
-                                performRoundSwitch={performRoundSwitch}
+                                setIsEnd={setIsEnd}
+                                setIsViewResult={setIsViewResult}
                             />
                         </main>
                     </>

@@ -1,9 +1,9 @@
 import { fetchTraining } from "../../../common/reducers/training/trainingSlice";
 import { fetchHome } from "../../../common/reducers/homeSlice";
 
-import { clearRound, clearScore } from "../../../common/reducers/training/recognizeSlice";
+import { clearScore, clearRound } from "../../../common/reducers/training/trainingRoundSlice";
 
-export function getTrainig(dispatch, isEnd, patchLoading, localType) {
+export function getTrainig(dispatch, isEnd, patchLoading, localType, ) {
     // Проверяем, что выполняются следующие условия:
     // 1. Во время рендара, isEnd должен быть false, чтобы не сбросить счет и не обновить state
     // 2. Переменная patchLoading имеет значение false (falsy значение)

@@ -2,8 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { host, training, info } from "../../../../public/urls";
 import { headers } from "../../../../public/urls";
 
-import { recognizeLoaded } from "./recognizeSlice";
-import { reproduceLoaded } from "./reproduceSlice";
+import { trainingLoaded } from "./trainingRoundSlice";
 
 export const fetchTraining = createAsyncThunk("training/fetchTraining", async (type, { dispatch }) => {
     const url = new URL(host + training);
@@ -23,13 +22,10 @@ export const fetchTraining = createAsyncThunk("training/fetchTraining", async (t
         const data = await response.json();
         console.log('fetchTraining')
         if (data.length != 0) {
-            if (type === "recognize") {
-                dispatch(recognizeLoaded(data));
-            }
-            if (type === "reproduce") {
-                dispatch(reproduceLoaded(data));
-            } 
-        } else
+            dispatch(trainingLoaded(data))
+        } else {
+            console.log('слов для повторения нет')
+        }
 
         return data;
     } catch (error) {
@@ -152,5 +148,5 @@ const trainingSlice = createSlice({
     },
 });
 
-export const { trainingLoaded, trainingInfoLoaded, decrementTrainingInfo } = trainingSlice.actions;
+export const { trainingInfoLoaded, decrementTrainingInfo } = trainingSlice.actions;
 export default trainingSlice.reducer;
