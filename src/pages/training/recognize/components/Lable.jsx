@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 
-function Lable({ word, index, selectedAnswer, isViewResult, correctWord }) {
+function Lable({ word, index, isViewResult, correctWord }) {
+    const { answer } = useSelector((state) => state.trainingRound);
+
     const [classState, setClassState] = useState("");
     const [localSelectedAnswer, setLocalSelectedAnswer] = useState(null);
 
@@ -12,8 +15,8 @@ function Lable({ word, index, selectedAnswer, isViewResult, correctWord }) {
     }, [isViewResult]);
 
     useEffect(() => {
-        setLocalSelectedAnswer(selectedAnswer);
-    }, [selectedAnswer]);
+        setLocalSelectedAnswer(answer);
+    }, [answer]);
 
 
     function setClass() {

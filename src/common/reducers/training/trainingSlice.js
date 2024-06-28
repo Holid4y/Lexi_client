@@ -2,8 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { host, training, info } from "../../../../public/urls";
 import { headers } from "../../../../public/urls";
 
-import { recognizeLoaded } from "./recognizeSlice";
-import { reproduceLoaded } from "./reproduceSlice";
+import { trainingLoaded } from "./trainingRoundSlice";
 
 export const fetchTraining = createAsyncThunk("training/fetchTraining", async (type, { dispatch }) => {
     const url = new URL(host + training);
@@ -23,13 +22,10 @@ export const fetchTraining = createAsyncThunk("training/fetchTraining", async (t
         const data = await response.json();
         console.log('fetchTraining')
         if (data.length != 0) {
-            if (type === "recognize") {
-                dispatch(recognizeLoaded(data));
-            }
-            if (type === "reproduce") {
-                dispatch(reproduceLoaded(data));
-            } 
-        } else
+            dispatch(trainingLoaded(data))
+        } else {
+            console.log('слов для повторения нет')
+        }
 
         return data;
     } catch (error) {
@@ -93,6 +89,8 @@ const trainingSlice = createSlice({
         count_word_to_training_recognize: null,
         count_word_to_training_reproduce: null,
 
+        viewCountSumm: null,
+
         patchLoading: false,
         patchError: null,
 
@@ -106,12 +104,11 @@ const trainingSlice = createSlice({
             state.count_word_to_training_recognize = action.payload.count_word_to_training_recognize;
 
             state.count_word_to_training_reproduce = action.payload.count_word_to_training_reproduce;
+
+            state.viewCountSumm = action.payload.count_word_to_training_recognize + action.payload.count_word_to_training_reproduce
         },
-        decrementTrainingInfoRecognize: (state, action) => {
-            state.count_word_to_training_recognize = state.count_word_to_training_recognize - 1;
-        },
-        decrementTrainingInfoReproduce: (state, action) => {
-            state.count_word_to_training_reproduce = state.count_word_to_training_reproduce - 1;
+        decrementTrainingInfo: (state) => {
+            state.viewCountSumm = state.viewCountSumm  - 1;
         },
     },
     extraReducers: (builder) => {
@@ -151,5 +148,5 @@ const trainingSlice = createSlice({
     },
 });
 
-export const { trainingLoaded, trainingInfoLoaded, decrementTrainingInfoReproduce, decrementTrainingInfoRecognize } = trainingSlice.actions;
+export const { trainingInfoLoaded, decrementTrainingInfo } = trainingSlice.actions;
 export default trainingSlice.reducer;
