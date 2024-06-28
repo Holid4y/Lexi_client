@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { decrementTrainingInfoRecognize, fetchTraining } from "../../../common/reducers/training/trainingSlice";
-import { fetchHome } from "../../../common/reducers/homeSlice";
+import { decrementTrainingInfoRecognize } from "../../../common/reducers/training/trainingSlice";
 
-import { addScore, nextRound, clearTraining, clearRound, clearScore } from "../../../common/reducers/training/recognizeSlice";
+import { addScore, nextRound, clearScore } from "../../../common/reducers/training/recognizeSlice";
 
 import { getTrainig, getTLeargingWord } from "../common/utils";
 
