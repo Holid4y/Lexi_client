@@ -15,7 +15,7 @@ function WordList() {
         dispatch(fetchVocabulary());
     }, [dispatch]);
 
-    const Header = <Headers title="Настройки уровней"/>
+    const Header = <Headers title="Все слова"/>
     const LoadingView = <Loading/>
     const ErrorView = <Errors error={error} />
 
