@@ -5,6 +5,8 @@ import { fetchTrainingPatch, decrementTrainingInfo } from "../../../common/reduc
 
 import { setAnswer, nextRound, addScore } from "../../../common/reducers/training/trainingRoundSlice";
 
+import { cleanAnswer } from "../common/utils";
+
 function AnswerButton({ localType, currentTraining, setIsEnd, setIsViewResult }) {
     const dispatch = useDispatch();
     const { answer, training, round } = useSelector((state) => state.trainingRound);
@@ -62,7 +64,7 @@ function AnswerButton({ localType, currentTraining, setIsEnd, setIsViewResult })
 
     // Функция для проверки ответа
     function checkAnswer(answerWord) {
-        const cleanWord = answerWord.trim().toLowerCase();
+        const cleanWord = cleanAnswer(answerWord);
         const resultBool = currentTraining[round].word.text == cleanWord;
         setIsCorrect(resultBool);
         return resultBool;

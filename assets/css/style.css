@@ -409,6 +409,9 @@ input[type="number"] {
     border-color: #4be66f;
     box-shadow: 0px 0px 10px #4be66f;
 }
+.box-success-input {
+    box-shadow: 0px 0px 20px #4be66f;
+}
 
 .box-danger {
     background-color: #dd2a2a;

@@ -42,16 +42,11 @@ function Reproduce() {
                             <WordCard text={training && training[round].word.translation} lvl={training && training[round].recognize_lvl} />
                         </main>
                         <div className="px-5 mb-4">
-                            <TextInput />
+                            <TextInput correctWord={training[round].word.text} isViewResult={isViewResult} />
 
                             <Hint text={training[round].word.text} />
                         </div>
-                        <AnswerButton 
-                            localType={localType} 
-                            currentTraining={training} 
-                            setIsEnd={setIsEnd} 
-                            setIsViewResult={setIsViewResult} 
-                        />
+                        <AnswerButton localType={localType} currentTraining={training} setIsEnd={setIsEnd} setIsViewResult={setIsViewResult} />
                     </>
                 ))
             )}

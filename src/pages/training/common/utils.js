@@ -25,3 +25,8 @@ export function getLeargingWord(dispatch, learning_words) {
         dispatch(fetchHome());
     }
 }
+
+
+export function cleanAnswer(text){
+    return text.trim().toLowerCase()
+}
