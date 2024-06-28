@@ -89,14 +89,18 @@ function Recognize() {
         if (is_correct) {
             // прибавляем балл за правельный ответ
             dispatch(addScore());
-        }
-        setIsViewResult(true)
-        // Это позволяет добавить задержку перед переключением на следующий раунд
-        const correctTime = 500
-        const wrongTime = 2000
-        const timeCallDown = is_correct ? correctTime : wrongTime
+            setIsViewResult(true)
+            // Это позволяет добавить задержку перед переключением на следующий раунд
+            const correctTime = 1000
+            const wrongTime = 0
 
-        setTimeout(performRoundSwitch, timeCallDown);
+            const timeCallDown = is_correct ? correctTime : wrongTime
+
+            setTimeout(performRoundSwitch, timeCallDown);
+        } else {
+            setIsViewResult(true)
+        }
+        
     }
 
     return (
@@ -126,6 +130,7 @@ function Recognize() {
                                 currentRound={round}
                                 checkRound={checkRound}
                                 decrementTrainingInfo={decrementTrainingInfoRecognize}
+                                performRoundSwitch={performRoundSwitch}
                             />
                         </main>
                     </>
