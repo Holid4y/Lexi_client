@@ -1,52 +1,47 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 
-function FalseSet({ word, index, selectedAnswer, setSelectedAnswer, isViewResult, correctWord }) {
-    const [classState, setClassState] = useState("")
-    const [localSelectedAnswer, setLocalSelectedAnswer] = useState(null)
-    
-    useEffect(() => {
-        setClassState('btn btn-dark-list w-100 mb-3 py-3')
-        if (isViewResult) {   
-            setClass()
-            
+import RadioInput from "./RadioInput";
+import Lable from "./Lable";
+
+function FalseSet({ training, round, selectedAnswer, setSelectedAnswer, isViewResult, correctWord }) {
+    // массив ложных ответов
+    const [falseSet, setFalseSet] = useState(null);
+    // Функция для создания массива ложных ответов
+    function makeFalseSet(falseAnswers, correctAnswer) {
+        const falseSet = [...falseAnswers];
+        falseSet.push(correctAnswer);
+
+        // Перемешиваем элементы массива с помощью алгоритма Фишера-Йетса
+        for (let i = falseSet.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [falseSet[i], falseSet[j]] = [falseSet[j], falseSet[i]];
         }
-    }, [isViewResult]);
+        return falseSet;
+    }
 
+    // Используем эффект для создания массива ложных ответов для каждого раунда
     useEffect(() => {
-        setLocalSelectedAnswer(selectedAnswer)
-    }, [selectedAnswer]);
-
-    // Функция для изменения выбранного ответа (переключение radio)
-    function handleAnswerChange(answer) {
-        setSelectedAnswer(answer);
-    }
-
-    function setClass() {
-            // подсветить выбранный ответ красным, а правельный зеленым по верх красного
-            
-            if (word.text === localSelectedAnswer) {       
-                setClassState(`${classState} box-danger`);
+        if (training) {
+            if (training[round].false_set) {
+                const falseAnswers = training[round].false_set;
+                const correctAnswer = {
+                    text: training[round].word.text,
+                    translation: training[round].word.translation,
+                };
+                setFalseSet(makeFalseSet(falseAnswers, correctAnswer));
             }
-            if (word.text === correctWord) {
-                setClassState(`${classState} box-success`);
-            } 
-        
-    }
-    
+        }
+    }, [round, training]);
+
     return (
         <div>
-            <input
-                type="radio"
-                className="btn-check "
-                name="options"
-                id={`option_${index}`}
-                checked={selectedAnswer === word.text}
-                onChange={() => handleAnswerChange(word.text)}
-                disabled={isViewResult}
-            />
-            <label className={classState} htmlFor={`option_${index}`}>
-                {word.translation}
-            </label>
+            {falseSet &&
+                falseSet.map((word, index) => (
+                    <>
+                        <RadioInput word={word} index={index} selectedAnswer={selectedAnswer} isViewResult={isViewResult} setSelectedAnswer={setSelectedAnswer} />
+                        <Lable word={word} index={index} selectedAnswer={selectedAnswer} isViewResult={isViewResult} correctWord={correctWord} />
+                    </>
+                ))}
         </div>
     );
 }

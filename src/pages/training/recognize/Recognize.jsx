@@ -4,8 +4,9 @@ import { Link } from "react-router-dom";
 import { decrementTrainingInfoRecognize, fetchTraining } from "../../../common/reducers/training/trainingSlice";
 import { fetchHome } from "../../../common/reducers/homeSlice";
 
-
 import { addScore, nextRound, clearTraining, clearRound, clearScore } from "../../../common/reducers/training/recognizeSlice";
+
+import { getTrainig, getTLeargingWord } from "../common/utils";
 
 import Header from "../components/Header";
 import WordCard from "../components/WordCard";
@@ -24,8 +25,7 @@ function Recognize() {
 
     // выбранный ответ
     const [selectedAnswer, setSelectedAnswer] = useState(null);
-    // массив ложных ответов
-    const [falseSet, setFalseSet] = useState(null);
+
     // проверки последнего слова
     const [isEnd, setIsEnd] = useState(false);
 
@@ -33,48 +33,9 @@ function Recognize() {
 
     // Используем эффект для отправки запроса на получение тренировки
     useEffect(() => {
-        // Проверяем, что выполняются следующие условия:
-        // 1. Во время рендара, isEnd должен быть false, чтобы не сбросить счет и не обновить state
-        // 2. Переменная patchLoading имеет значение false (falsy значение)
-        // это нужно для того, чтобы сделать fetchTraining с самыми свежими данными
-        // так как patchLoading обновляет бд 
-        
-        if (!isEnd & !patchLoading) {
-            dispatch(fetchTraining(localType));
-            dispatch(clearScore());
-            dispatch(clearRound());
-        }
-        if (!learning_words) {
-            dispatch(fetchHome());
-        }
+        getTrainig(dispatch, isEnd, patchLoading, localType)
+        getTLeargingWord(dispatch, learning_words)
     }, [dispatch, isEnd]);
-
-    // Функция для создания массива ложных ответов
-    function makeFalseSet(falseAnswers, correctAnswer) {
-        const falseSet = [...falseAnswers];
-        falseSet.push(correctAnswer);
-
-        // Перемешиваем элементы массива с помощью алгоритма Фишера-Йетса
-        for (let i = falseSet.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [falseSet[i], falseSet[j]] = [falseSet[j], falseSet[i]];
-        }
-        return falseSet;
-    }
-
-    // Используем эффект для создания массива ложных ответов для каждого раунда
-    useEffect(() => {
-        if (training) {
-            if (training[round].false_set) {
-                const falseAnswers = training[round].false_set;
-                const correctAnswer = {
-                    text: training[round].word.text,
-                    translation: training[round].word.translation,
-                };
-                setFalseSet(makeFalseSet(falseAnswers, correctAnswer));
-            }
-        }
-    }, [round, training]);
 
     function performRoundSwitch() {
         if (round + 1 === training.length) {
@@ -82,25 +43,24 @@ function Recognize() {
         } else {
             dispatch(nextRound()); // отображает следующий раунд
         }
-        setIsViewResult(false)
+        setIsViewResult(false);
     }
 
     function checkRound(is_correct) {
         if (is_correct) {
             // прибавляем балл за правельный ответ
             dispatch(addScore());
-            setIsViewResult(true)
+            setIsViewResult(true);
             // Это позволяет добавить задержку перед переключением на следующий раунд
-            const correctTime = 1000
-            const wrongTime = 0
+            const correctTime = 1000;
+            const wrongTime = 0;
 
-            const timeCallDown = is_correct ? correctTime : wrongTime
+            const timeCallDown = is_correct ? correctTime : wrongTime;
 
             setTimeout(performRoundSwitch, timeCallDown);
         } else {
-            setIsViewResult(true)
+            setIsViewResult(true);
         }
-        
     }
 
     return (
@@ -116,10 +76,14 @@ function Recognize() {
                             <WordCard text={training && training[round].word.text} lvl={training && training[round].recognize_lvl} />
                             <div className="mb-4">
                                 <h3 className="text-center mb-3">Варианты ответа</h3>
-                                {falseSet &&
-                                    falseSet.map((word, index) => (
-                                        <FalseSet key={index} word={word} index={index} selectedAnswer={selectedAnswer} setSelectedAnswer={setSelectedAnswer} isViewResult={isViewResult} correctWord={training[round].word.text}/>
-                                    ))}
+                                <FalseSet
+                                    training={training}
+                                    round={round}
+                                    selectedAnswer={selectedAnswer}
+                                    setSelectedAnswer={setSelectedAnswer}
+                                    isViewResult={isViewResult}
+                                    correctWord={training[round].word.text}
+                                />
                             </div>
 
                             <AnswerButton
@@ -151,7 +115,10 @@ function Recognize() {
                                     <h1 className="fw-bold mt-3 text-body-emphasis">Все слова повторены 🥰</h1>
                                     <div className="col-lg-8 mx-auto">
                                         <p className="lead mb-4">
-                                            <span>Изученных и повторенных слов: <b className="btn btn-success">{learning_words}</b></span> <br />
+                                            <span>
+                                                Изученных и повторенных слов: <b className="btn btn-success">{learning_words}</b>
+                                            </span>{" "}
+                                            <br />
                                             <span>Читайте больше и добавляйте новые слова</span>
                                         </p>
                                         <div className="d-grid gap-2 d-sm-flex justify-content-sm-center mb-5">
