@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
+import { setHintIsOpen } from "../../../../common/reducers/training/trainingRoundSlice";
 
 function Hint({ text }) {
-    // --- логика отображения подсказок
-    const [isOpen, setIsOpen] = useState(false);
-    const [hint, setHint] = useState(null)
-    
-    useEffect(() => {
-        setIsOpen(false)
-    }, []);
+    const dispatch = useDispatch();
+    const { hintIsOpen } = useSelector((state) => state.trainingRound);
+    const [ hintText, setHintText ] = useState(null)
 
 
     function shuffleText(text) {
@@ -17,16 +16,22 @@ function Hint({ text }) {
             .join("");
     }
 
+    useEffect(() => {
+        dispatch(setHintIsOpen(false))
+    }, [dispatch, text]);
+
+    
+
     function handleClick() {
-        console.log('click')
-        setIsOpen(true)
-        setHint(shuffleText(text))
+        setHintText(shuffleText(text))
+        dispatch(setHintIsOpen(true))
+        
     }
 
     return (
         <div className="mb-4">
-            <button type="text" className={isOpen ? "form-control py-2" : "form-control py-2 disabled placeholder"} onClick={() => handleClick()} disabled={isOpen}>
-                <h1>{hint ? hint : 'жопа'}</h1>
+            <button type="text" className={hintIsOpen ? "form-control py-2" : "form-control py-2 disabled placeholder"} onClick={() => handleClick()} disabled={hintIsOpen}>
+                <h1>{hintText ? hintText : 'жопа'}</h1>
             </button>
             <small className="">Если затрудняетесь ответить, нажмите на блок с подсказкой</small>
         </div>

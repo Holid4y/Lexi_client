@@ -6,17 +6,13 @@ import WordBlockTranslate from "./WordBlockTranslate";
 import SVG from "../components/Icons/SVG";
 
 function Navigation() {
-    const { count_word_to_training_recognize, count_word_to_training_reproduce } = useSelector((state) => state.training);
+    const { viewCountSumm } = useSelector((state) => state.training);
     const location = useLocation();
 
     const getLinkClass = (path) => {
         return location.pathname === path ? "nav-link active_link" : "nav-link";
     };
-    const getTrainingInfo = () => {
-        if ((count_word_to_training_recognize != null) & (count_word_to_training_reproduce != null)) {
-            return count_word_to_training_recognize + count_word_to_training_reproduce;
-        }
-    };
+    const TrainigBadge = viewCountSumm ? <small className="position-absolute translate-middle badge badge-position bg-success">{viewCountSumm}</small> : null;
 
     return (
         <nav className="container fixed-bottom py-2">
@@ -35,7 +31,7 @@ function Navigation() {
                     </li>
                     <li className="nav-item">
                         <Link to="/training" className={`${getLinkClass("/training")} position-relative `}>
-                            <small className="position-absolute translate-middle badge badge-position bg-success">{getTrainingInfo()}</small>
+                            {TrainigBadge}
                             <SVG name="training" />
                         </Link>
                     </li>

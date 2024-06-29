@@ -3,17 +3,17 @@ import { Link } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
 
-import { addScore, nextRound, clearTraining, clearRound, clearScore } from "../../../common/reducers/training/recognizeSlice";
+import { throwState, clearScore } from "../../../common/reducers/training/trainingRoundSlice";
 
 
-function End({ type, count_word_to_training, setIsEnd, score, clearScore }) {
+
+function End({ type, count_word_to_training, setIsEnd, score, clearState }) {
     const dispatch = useDispatch();
     // const [scoreState, setScoreState] = useState(0)
 
 
     useEffect(() => {
-        dispatch(clearTraining()); // очищаем текущий training
-        dispatch(clearRound()); // сбрасывает до первого слова 
+        dispatch(throwState()); // очищаем текущий state
     }, [dispatch]);
 
     function handleAction() {
