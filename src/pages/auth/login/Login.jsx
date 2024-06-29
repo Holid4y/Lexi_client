@@ -11,9 +11,7 @@ const Login = () => {
   const [password, setPassword] = useState('');
 
   const handleLogin = () => {
-    
     dispatch(fetchLogin({ username: username, password: password }));
-
   };
 
   return (
@@ -29,12 +27,12 @@ const Login = () => {
           <form>
               <h2 className="mb-4 text-center">Войти в аккаунт</h2>
               <div className="mb-2">
-                  <label for="login" className="form-label">Login или Email</label>
+                  <label htmlFor="login" className="form-label">Login или Email</label>
                   <input type="text" className="form-control py-2-5" id="login" value={username} onChange={(e) => setUsername(e.target.value)} />
               </div>
 
               <div className="mb-4">
-                  <label for="password" className="form-label me-2">Пароль</label><span className="change link-color"><a href="/html/change_pass.html"><small>Забыл пароль</small></a></span>
+                  <label htmlFor="password" className="form-label me-2">Пароль</label><span className="change link-color"><a href="/html/change_pass.html"><small>Забыл пароль</small></a></span>
                   <input type="password" className="form-control py-2-5" id="password" value={password} onChange={(e) => setPassword(e.target.value)} />
                   <p className="fs-8 link-color text-center mt-2">
                       <span className='pe-2'>Не зарегистрированы?</span>
@@ -43,7 +41,7 @@ const Login = () => {
               </div>
 
               <div className="d-flex justify-content-center my-4">
-                <button type="submit" className="btn btn-primary save-btn py-2 w-50" onClick={handleLogin}>
+                <button type='button' className="btn btn-primary save-btn py-2 w-50" onClick={handleLogin}>
                   <span><b>Войти</b></span>
                 </button>
               </div>

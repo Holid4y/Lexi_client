@@ -81,6 +81,10 @@ a {
     font-weight: bold;
     color: var(--text-header);
 }
+.spinner-border{
+    font-size: 20px;
+    font-weight: 400;
+}
 
 /* Стили для блока с тестами на главной */
 .bg-card-dark {
