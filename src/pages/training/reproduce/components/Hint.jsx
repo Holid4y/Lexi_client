@@ -31,7 +31,7 @@ function Hint({ text }) {
     return (
         <div className="mb-4">
             <button type="text" className={hintIsOpen ? "form-control py-2" : "form-control py-2 disabled placeholder"} onClick={() => handleClick()} disabled={hintIsOpen}>
-                <h1>{hintText ? hintText : 'жопа'}</h1>
+                <h1>{hintText ? hintText : ''}</h1>
             </button>
             <small className="">Если затрудняетесь ответить, нажмите на блок с подсказкой</small>
         </div>
