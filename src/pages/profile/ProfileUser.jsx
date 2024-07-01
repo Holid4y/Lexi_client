@@ -46,13 +46,13 @@ function Profile() {
     };
 
     const handleIncrementLevel = () => {
-        if (falseSetLevel < 10) {
+        if (falseSetLevel < 5) {
             setFalseSetLevel(falseSetLevel + 1);
         }
     };
 
     const handleDecrementLevel = () => {
-        if (falseSetLevel > 3) {
+        if (falseSetLevel > 2) {
             setFalseSetLevel(falseSetLevel - 1);
         }
     };
