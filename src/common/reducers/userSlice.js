@@ -52,12 +52,19 @@ export const fetchPutSettings = createAsyncThunk("user/fetchPutSettings", async 
             body: JSON.stringify(data),
         });
         const result = await response.json();
-        dispatch(settingsLoaded(result));
+        dispatch(settingsPutLoaded(result));
+        // Проверяем статус ответа
+        if (!response.ok) {
+            // Если статус не 2xx, бросаем ошибку
+            dispatch(setError(result))
+            throw new Error(`Ошибка ${response.status}: ${response.statusText}.`);
+        }
         return result;
     } catch (error) {
         if (error.message === "Unauthorized") {
             console.log("Ошибка 401: Unauthorized");
         }
+        console.log(error)
     }
 });
 
@@ -65,14 +72,15 @@ const userSlice = createSlice({
     name: "user",
     initialState: {
         // user
-        user: null,
-        // settings
         username: null,
         email: null,
         activated_email: false,
+        // settings
         dark_theme: false,
-        number_of_false_set: 4,
+        number_of_false_set: null,
         levels: null,
+        count_word_in_round: null,
+        time_to_view_result: null,
         // settings get
         loading: false,
         error: null,
@@ -88,6 +96,15 @@ const userSlice = createSlice({
             state.dark_theme = action.payload.settings.dark_theme;
             state.number_of_false_set = action.payload.settings.number_of_false_set;
             state.levels = action.payload.settings.levels;
+            state.count_word_in_round = action.payload.settings.count_word_in_round;
+            state.time_to_view_result = action.payload.settings.time_to_view_result;
+        },
+        settingsPutLoaded: (state, action) => {
+            state.dark_theme = action.payload.dark_theme;
+            state.number_of_false_set = action.payload.number_of_false_set;
+            state.levels = action.payload.levels;
+            state.count_word_in_round = action.payload.count_word_in_round;
+            state.time_to_view_result = action.payload.time_to_view_result;
         },
         dictionaryLevelsLoaded: (state, action) => {
             state.levels = action.payload.levels;
@@ -100,6 +117,10 @@ const userSlice = createSlice({
         },
         deleteLevel: (state, action) => {
             state.levels.splice(action.payload.level, 1);
+        },
+        // error
+        setError: (state, action) => {
+            state.error = action.payload
         },
     },
     extraReducers: (builder) => {
@@ -139,5 +160,5 @@ const userSlice = createSlice({
     },
 });
 
-export const { settingsLoaded, updateLevels, addLevel, deleteLevel } = userSlice.actions;
+export const { settingsLoaded, settingsPutLoaded, updateLevels, addLevel, deleteLevel, setError } = userSlice.actions;
 export default userSlice.reducer;
