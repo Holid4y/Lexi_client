@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 
 import { getTrainig, getLeargingWord } from "../common/utils";
 
+import { nextRound, setIsEnd, throwOneRoundState } from "../../../common/reducers/training/trainingRoundSlice";
+
 import Header from "../components/Header";
 import WordCard from "../components/WordCard";
 import FalseSet from "./components/FalseSet";
@@ -13,48 +15,50 @@ import AnswerButton from "../components/AnswerButton";
 function Recognize() {
     const dispatch = useDispatch();
     const { count_word_to_training_recognize, loading, patchLoading, error } = useSelector((state) => state.training);
-    const { training, round, score } = useSelector((state) => state.trainingRound);
+    const { training, round, score, isEnd } = useSelector((state) => state.trainingRound);
     const { learning_words } = useSelector((state) => state.home);
 
     const localType = "recognize";
 
-    // проверки последнего слова
-    const [isEnd, setIsEnd] = useState(false);
 
-    const [isViewResult, setIsViewResult] = useState(false);
+    function performRoundSwitch() {
+        if (round + 1 === training.length) {
+            dispatch(setIsEnd(true)); // отображаем страницу окончания
+        } else {
+            dispatch(nextRound()); // отображает следующий раунд
+        }
+        dispatch(throwOneRoundState()) // просле переключения раунда, очищаем state
+    }
 
     // Используем эффект для отправки запроса на получение тренировки
     useEffect(() => {
         getTrainig(dispatch, isEnd, patchLoading, localType);
         getLeargingWord(dispatch, learning_words);
-    }, [dispatch, isEnd]);
+    }, [dispatch]);
 
     return (
         <div className="align-items-center">
             {loading ? (
                 <p>Loading...</p>
             ) : (
-                (isEnd && <End type={localType} count_word_to_training={count_word_to_training_recognize} setIsEnd={setIsEnd} score={score} />) ||
+                (isEnd && <End type={localType} count_word_to_training={count_word_to_training_recognize} score={score} />) ||
                 (training && (
                     <>
-                        <Header round={round} trainingLength={training.length} />
+                        <Header />
                         <main className="container px-4">
-                            <WordCard text={training && training[round].word.text} lvl={training && training[round].recognize_lvl} />
+                            <WordCard localType={localType}/>
                             <div className="mb-4">
                                 <h3 className="text-center mb-3">Варианты ответа</h3>
                                 <FalseSet
                                     training={training}
                                     round={round}
-                                    isViewResult={isViewResult}
                                     correctWord={training[round].word.text}
+                                    performRoundSwitch={performRoundSwitch} 
                                 />
                             </div>
 
                             <AnswerButton
                                 localType={localType}
-                                currentTraining={training}
-                                setIsEnd={setIsEnd}
-                                setIsViewResult={setIsViewResult}
                             />
                         </main>
                     </>

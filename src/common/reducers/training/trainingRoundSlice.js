@@ -4,10 +4,16 @@ import { training } from "../../../../public/urls";
 const reproduceSlice = createSlice({
     name: "trainingRound",
     initialState: {
+        // common
         training: null,
         round: 0,
         score: 0,
+        isEnd: false,
+
+        // one round state
         answer: null,
+        isViewResult: false,
+        isCorrect: null,
 
         // hint
         hintIsOpen: false,
@@ -20,7 +26,12 @@ const reproduceSlice = createSlice({
             // выполнять при последней страницы
             state.training = null;
             state.round = 0;
+        },
+        throwOneRoundState: (state, action) => {
+            // выполнять при ответе страницы
             state.answer = null;
+            state.isViewResult = false;
+            state.isCorrect = null;
         },
         // round
         nextRound: (state, action) => {
@@ -45,17 +56,34 @@ const reproduceSlice = createSlice({
         setAnswer: (state, action) => {
             state.answer = action.payload;
         },
+        // isEnd
+        setIsEnd: (state, action) => {
+            state.isEnd = action.payload;
+        },
+        // isViewResult
+        setIsViewResult:(state, action) => {
+            state.isViewResult = action.payload;
+        },
+        // isCorrect
+        setIsCorrect: (state, action) => {
+            state.isCorrect = action.payload;
+        },
+        
     },
 });
 
 export const { 
     trainingLoaded, 
     throwState, 
+    throwOneRoundState,
     nextRound, 
     clearRound, 
     addScore, 
     clearScore, 
     setHintIsOpen, 
-    setAnswer 
+    setAnswer,
+    setIsEnd,
+    setIsViewResult,
+    setIsCorrect 
 } = reproduceSlice.actions;
 export default reproduceSlice.reducer;

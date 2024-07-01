@@ -3,13 +3,13 @@ import { Link } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
 
-import { throwState, clearScore } from "../../../common/reducers/training/trainingRoundSlice";
+import { throwState, clearScore, setIsEnd } from "../../../common/reducers/training/trainingRoundSlice";
 
 
 
-function End({ type, count_word_to_training, setIsEnd, score, clearState }) {
+function End({ type, count_word_to_training, score }) {
     const dispatch = useDispatch();
-    // const [scoreState, setScoreState] = useState(0)
+    
 
 
     useEffect(() => {
@@ -19,7 +19,7 @@ function End({ type, count_word_to_training, setIsEnd, score, clearState }) {
     function handleAction() {
         dispatch(clearScore())
         // переключить isEnd на false
-        setIsEnd(false)
+        dispatch(setIsEnd(false))
         
     }
     return (

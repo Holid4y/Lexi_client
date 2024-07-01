@@ -39,7 +39,7 @@ function Reproduce() {
                     <>
                         <Header round={round} trainingLength={training.length} />
                         <main className="container px-4">
-                            <WordCard text={training && training[round].word.translation} lvl={training && training[round].recognize_lvl} />
+                            <WordCard localType={localType} />
                         </main>
                         <div className="px-5 mb-4">
                             <TextInput correctWord={training[round].word.text} isViewResult={isViewResult} />

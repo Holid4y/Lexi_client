@@ -1,37 +1,44 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
-function Lable({ word, index, isViewResult, correctWord }) {
-    const { answer } = useSelector((state) => state.trainingRound);
+import { handleFinalAnswer } from "../../common/utils";
 
+function Lable({ word, index, correctWord, performRoundSwitch }) {
+    const dispatch = useDispatch();
+    const { answer, training, round, isViewResult } = useSelector((state) => state.trainingRound);
     const [classState, setClassState] = useState("");
+
     const [localSelectedAnswer, setLocalSelectedAnswer] = useState(null);
+    const [localCorrectWord, setLocalCorrectWord] = useState(correctWord);
 
     useEffect(() => {
         setClassState("btn btn-dark-list w-100 mb-3 py-3");
+        setLocalCorrectWord(correctWord);
         if (isViewResult) {
             setClass();
         }
     }, [isViewResult]);
 
-    useEffect(() => {
-        setLocalSelectedAnswer(answer);
-    }, [answer]);
-
 
     function setClass() {
         // подсветить выбранный ответ красным, а правельный зеленым по верх красного
-
         if (word.text === localSelectedAnswer) {
             setClassState(`${classState} box-danger`);
         }
-        if (word.text === correctWord) {
+        if (word.text === localCorrectWord) {
             setClassState(`${classState} box-success`);
         }
     }
 
     return (
-        <label className={classState} htmlFor={`option_${index}`}>
+        <label
+            className={classState}
+            htmlFor={`option_${index}`}
+            onClick={() => {
+                handleFinalAnswer(word.text, "recognize", training, round, dispatch, performRoundSwitch);
+                setLocalSelectedAnswer(word.text);
+            }}
+        >
             {word.translation}
         </label>
     );

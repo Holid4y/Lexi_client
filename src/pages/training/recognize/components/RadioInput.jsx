@@ -4,9 +4,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { setAnswer } from "../../../../common/reducers/training/trainingRoundSlice";
 
 
-function RadioInput({ word, index,  isViewResult }) {
+function RadioInput({ word, index }) {
     const dispatch = useDispatch();
-    const { answer } = useSelector((state) => state.trainingRound);
+    const { answer, isViewResult } = useSelector((state) => state.trainingRound);
 
     return (
         <input
