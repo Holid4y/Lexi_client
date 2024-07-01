@@ -14,12 +14,8 @@ function Reproduce() {
     const dispatch = useDispatch();
 
     const { count_word_to_training_reproduce, loading, patchLoading, error } = useSelector((state) => state.training);
-    const { training, round, score } = useSelector((state) => state.trainingRound);
+    const { training, round, score, isEnd } = useSelector((state) => state.trainingRound);
     const { learning_words } = useSelector((state) => state.home);
-
-    // Создаем состояние для проверки последнего слова
-    const [isEnd, setIsEnd] = useState(false);
-    const [isViewResult, setIsViewResult] = useState(false);
 
     const localType = "reproduce";
 
@@ -34,19 +30,19 @@ function Reproduce() {
             {loading ? (
                 <p>Loading...</p>
             ) : (
-                (isEnd && <End type={localType} count_word_to_training={count_word_to_training_reproduce} setIsEnd={setIsEnd} score={score} />) ||
+                (isEnd && <End type={localType} count_word_to_training={count_word_to_training_reproduce} score={score} />) ||
                 (training && (
                     <>
-                        <Header round={round} trainingLength={training.length} />
+                        <Header />
                         <main className="container px-4">
-                            <WordCard localType={localType} />
+                            <WordCard localType={localType} text={training[round].word.translation} />
                         </main>
                         <div className="px-5 mb-4">
-                            <TextInput correctWord={training[round].word.text} isViewResult={isViewResult} />
+                            <TextInput correctWord={training[round].word.text} />
 
                             <Hint text={training[round].word.text} />
                         </div>
-                        <AnswerButton localType={localType} currentTraining={training} setIsEnd={setIsEnd} setIsViewResult={setIsViewResult} />
+                        <AnswerButton localType={localType} />
                     </>
                 ))
             )}

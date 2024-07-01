@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { handleFinalAnswer } from "../../common/utils";
 
-function Lable({ word, index, correctWord, performRoundSwitch }) {
+function Lable({ word, index, correctWord }) {
     const dispatch = useDispatch();
     const { answer, training, round, isViewResult } = useSelector((state) => state.trainingRound);
     const [classState, setClassState] = useState("");
@@ -35,7 +35,7 @@ function Lable({ word, index, correctWord, performRoundSwitch }) {
             className={classState}
             htmlFor={`option_${index}`}
             onClick={() => {
-                handleFinalAnswer(word.text, "recognize", training, round, dispatch, performRoundSwitch);
+                handleFinalAnswer(word.text, "recognize", training, round, dispatch);
                 setLocalSelectedAnswer(word.text);
             }}
         >

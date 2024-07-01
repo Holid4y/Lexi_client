@@ -20,16 +20,6 @@ function Recognize() {
 
     const localType = "recognize";
 
-
-    function performRoundSwitch() {
-        if (round + 1 === training.length) {
-            dispatch(setIsEnd(true)); // отображаем страницу окончания
-        } else {
-            dispatch(nextRound()); // отображает следующий раунд
-        }
-        dispatch(throwOneRoundState()) // просле переключения раунда, очищаем state
-    }
-
     // Используем эффект для отправки запроса на получение тренировки
     useEffect(() => {
         getTrainig(dispatch, isEnd, patchLoading, localType);
@@ -46,20 +36,13 @@ function Recognize() {
                     <>
                         <Header />
                         <main className="container px-4">
-                            <WordCard localType={localType}/>
+                            <WordCard localType={localType} text={training[round].word.text}/>
                             <div className="mb-4">
                                 <h3 className="text-center mb-3">Варианты ответа</h3>
-                                <FalseSet
-                                    training={training}
-                                    round={round}
-                                    correctWord={training[round].word.text}
-                                    performRoundSwitch={performRoundSwitch} 
-                                />
+                                <FalseSet training={training} round={round} correctWord={training[round].word.text} />
                             </div>
 
-                            <AnswerButton
-                                localType={localType}
-                            />
+                            <AnswerButton localType={localType} />
                         </main>
                     </>
                 )) ||

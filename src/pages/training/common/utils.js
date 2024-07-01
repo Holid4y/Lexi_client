@@ -5,7 +5,7 @@ import { clearScore, clearRound } from "../../../common/reducers/training/traini
 
 import { fetchTrainingPatch, decrementTrainingInfo } from "../../../common/reducers/training/trainingSlice";
 
-import { setAnswer, addScore, setIsViewResult, setIsCorrect, throwOneRoundState } from "../../../common/reducers/training/trainingRoundSlice";
+import { setAnswer, addScore, setIsViewResult, setIsCorrect, throwOneRoundState, setIsEnd, nextRound } from "../../../common/reducers/training/trainingRoundSlice";
 
 export function getTrainig(dispatch, isEnd, patchLoading, localType, ) {
     // Проверяем, что выполняются следующие условия:
@@ -18,7 +18,7 @@ export function getTrainig(dispatch, isEnd, patchLoading, localType, ) {
         dispatch(clearScore());
         dispatch(clearRound());
         dispatch(throwOneRoundState())
-        
+
         dispatch(fetchTraining(localType));  
     }
 }
@@ -46,7 +46,7 @@ function checkAnswer(dispatch, answerWord, currentTraining, round) {
     return resultBool;
 }
 
-function checkRound(is_correct, dispatch, performRoundSwitch) {
+function checkRound(is_correct, dispatch, round, currentTraining) {
     if (is_correct) {
         // прибавляем балл за правельный ответ
         dispatch(addScore());
@@ -57,14 +57,14 @@ function checkRound(is_correct, dispatch, performRoundSwitch) {
 
         const timeCallDown = is_correct ? correctTime : wrongTime;
 
-        setTimeout(performRoundSwitch, timeCallDown);
+        setTimeout(() => performRoundSwitch(dispatch, round, currentTraining), timeCallDown);
     } else {
         dispatch(setIsViewResult(true));
     }
 }
 
 
-export function handleFinalAnswer(answer, localType, currentTraining, round, dispatch, performRoundSwitch) {
+export function handleFinalAnswer(answer, localType, currentTraining, round, dispatch) {
     if ((answer !== null) & (answer !== "")) {
         const is_correct = checkAnswer(dispatch, answer, currentTraining, round);
         const data = {
@@ -78,9 +78,18 @@ export function handleFinalAnswer(answer, localType, currentTraining, round, dis
         dispatch(fetchTrainingPatch(data)); // отбовляет бд
 
         dispatch(setAnswer(null)); // Сбрасываем выбранный вариант для следующего раунда
-        checkRound(is_correct, dispatch, performRoundSwitch);
+        checkRound(is_correct, dispatch, round, currentTraining);
     } else {
         // Если ничего не выбрано, можно вывести предупреждение или сделать кнопку неактивной
         console.log("Пожалуйста, выберите ответ");
     }
+}
+
+export function performRoundSwitch(dispatch, round, currentTraining) {
+    if (round + 1 === currentTraining.length) {
+        dispatch(setIsEnd(true)); // отображаем страницу окончания
+    } else {
+        dispatch(nextRound()); // отображает следующий раунд
+    }
+    dispatch(throwOneRoundState()) // просле переключения раунда, очищаем state
 }

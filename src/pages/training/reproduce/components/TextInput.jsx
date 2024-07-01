@@ -5,9 +5,9 @@ import { setAnswer } from "../../../../common/reducers/training/trainingRoundSli
 
 import { cleanAnswer } from "../../common/utils";
 
-function TextInput({ correctWord, isViewResult }) {
+function TextInput({ correctWord }) {
     const dispatch = useDispatch();
-    const { round } = useSelector((state) => state.trainingRound);
+    const { round, isViewResult } = useSelector((state) => state.trainingRound);
     const [classState, setClassState] = useState("");
     const [localAnswer, setLocalAnswer] = useState("");
 
@@ -29,6 +29,8 @@ function TextInput({ correctWord, isViewResult }) {
         // подсветить выбранный ответ красным, а правельный зеленым по верх красного
         if (correctWord === cleanWord) {
             setClassState(`${classState} box-success-input`);
+        } else {
+            setClassState(`${classState} box-danger-input`)
         }
     }
 

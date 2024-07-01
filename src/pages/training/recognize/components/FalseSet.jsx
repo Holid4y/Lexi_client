@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import RadioInput from "./RadioInput";
 import Lable from "./Lable";
 
-function FalseSet({ training, round, correctWord, performRoundSwitch }) {
+function FalseSet({ training, round, correctWord }) {
     // массив ложных ответов
     const [falseSet, setFalseSet] = useState(null);
     // Функция для создания массива ложных ответов
@@ -43,7 +43,7 @@ function FalseSet({ training, round, correctWord, performRoundSwitch }) {
                             index={index} 
                         />
 
-                        <Lable word={word} index={index} correctWord={correctWord} performRoundSwitch={performRoundSwitch} />
+                        <Lable word={word} index={index} correctWord={correctWord} />
                     </>
                 ))}
         </div>

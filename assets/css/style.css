@@ -415,7 +415,10 @@ input[type="number"] {
     color: white;
 }
 .box-success-input {
-    box-shadow: 0px 0px 20px #4be66f;
+    box-shadow: 0px 0px 20px var(--bg-success-answer);
+}
+.box-danger-input {
+    box-shadow: 0px 0px 20px var(--bg-error-answer);
 }
 
 .box-danger {
