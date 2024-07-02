@@ -27,6 +27,9 @@ export const words = "words/";
 export const training = "training/";
 export const info = training + "info/"
 
+// googletrans 
+export const googletrans = words + "googletrans/"
+
 // Эта функция полезна для получения значения определенного cookie
 // из браузера, а именно для csrf токена.
 export function getCookie(name) {

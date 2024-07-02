@@ -2,6 +2,8 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchWordPost, toggleWordBlock, cleanStateWord } from "../../../common/reducers/wordSlice";
 
+import { fetchGooletrans } from "../../../common/reducers/googletransSlice";
+
 const Pages = ({ page }) => {
     const dispatch = useDispatch();
     const { pages } = useSelector((state) => state.book);
@@ -14,13 +16,14 @@ const Pages = ({ page }) => {
         return pages[remainder(pageIndex - 1)];
     };
 
-    function handleWordClick(word) {
+    function handleWordClick(word, paragraph) {
+        dispatch(fetchGooletrans(paragraph))
         dispatch(fetchWordPost(word));
         dispatch(cleanStateWord());
         dispatch(toggleWordBlock());
     }
 
-    function addSpanTags(text) {
+    function addSpanTags(text, paragraph) {
         let words = text.split(/\s+/);
         let result = [];
         for (let i = 0; i < words.length; i++) {
@@ -29,7 +32,7 @@ const Pages = ({ page }) => {
             let wordWithoutPunctuation = word.replace(/[^a-zA-Z0-9]+$/, "");
             if (wordWithoutPunctuation) {
                 result.push(
-                    <span className="word-for-text" key={i} onClick={() => handleWordClick(wordWithoutPunctuation)}>
+                    <span className="word-for-text" key={i} onClick={() => handleWordClick(wordWithoutPunctuation, paragraph)}>
                         {wordWithoutPunctuation}
                     </span>
                 );
@@ -41,17 +44,18 @@ const Pages = ({ page }) => {
         }
         return result.slice(0, -1); // Удаляем последний пробел
     }
-
+    
     function renderParagraphs() {
         if (pages) {
             const currentPage = getPage(pages, page);
             if (currentPage) {
-                return currentPage.map((line, index) => <p key={index}>{addSpanTags(line)}</p>);
+                return currentPage.map((line, index) => <p key={index}>{addSpanTags(line, line)}</p>);
             } else {
                 return <p>Страница или книга не найдена</p>;
             }
         }
     }
+    
 
     return (
         <div>

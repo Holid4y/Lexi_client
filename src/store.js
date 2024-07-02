@@ -14,6 +14,8 @@ import wordReducer from './common/reducers/wordSlice'
 import trainingReducer from './common/reducers/training/trainingSlice';
 import trainingRoundReducer from './common/reducers/training/trainingRoundSlice';
 
+import googletransReducer from './common/reducers/googletransSlice';
+
 export const store = configureStore({
   reducer: {
     books: booksReducer,
@@ -28,7 +30,9 @@ export const store = configureStore({
     word: wordReducer,
     // training
     training: trainingReducer,
-    trainingRound: trainingRoundReducer
+    trainingRound: trainingRoundReducer,
+
+    googletrans: googletransReducer
   },
 });
 
