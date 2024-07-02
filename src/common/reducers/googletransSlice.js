@@ -17,7 +17,11 @@ export const fetchGooletrans = createAsyncThunk("word/fetchWordPost", async (tex
             }),
         });
         const data = await response.json();
-        dispatch(googletransLoaded(data));
+        if (response.ok) {
+            console.log(data)
+            dispatch(googletransLoaded(data));
+        }
+        
         return data;
     } catch (error) {
         if (error.message === "Unauthorized") {

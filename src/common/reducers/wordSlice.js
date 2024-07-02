@@ -37,7 +37,10 @@ export const fetchWordPost = createAsyncThunk("word/fetchWordPost", async (word,
             }),
         });
         const data = await response.json();
-        dispatch(wordPostLoaded(data));
+        if (response.ok) {
+            dispatch(wordPostLoaded(data));
+        }
+        
         return data;
     } catch (error) {
         if (error.message === "Unauthorized") {
