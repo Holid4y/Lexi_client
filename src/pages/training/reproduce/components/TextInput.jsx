@@ -55,7 +55,7 @@ function TextInput({ correctWord }) {
             }
         }
 
-        // Add remaining characters
+        // Добавление оставшихся символов
         if (correctWord.length > localAnswer.length) {
             for (let i = localAnswer.length; i < correctWord.length; i++) {
                 result.push(
@@ -74,12 +74,7 @@ function TextInput({ correctWord }) {
     return (
         <div className="mb-4">
             <h3 className="text-center mb-3">Напишите ответ</h3>
-            <input
-                type="text"
-                className={classState}
-                value={localAnswer}
-                onChange={handleInputChange}
-            />
+            <input type="text" className={classState} value={localAnswer} onChange={handleInputChange} />
             {isViewResult && !isCorrectAnswer && (
                 <div className="correct-text mt-2">
                     {getCorrectWordStyled()}
