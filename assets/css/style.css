@@ -436,3 +436,21 @@ input[type="number"] {
     border-color: var(--bg-first-colum-hover);
     background-color: var(--bg-first-colum-hover);
 }
+
+.ans_red_text {
+    color: red;
+    font-weight: bolder;
+    font-size: 45px;
+}
+
+.ans_green_text {
+    color: green;
+    font-weight: bolder;
+    font-size: 45px;
+}
+
+.correct-text{
+    text-align: center;
+    font-size: 40px;
+    font-weight: bold;
+}
