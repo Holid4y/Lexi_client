@@ -59,8 +59,19 @@ function TextInput({ correctWord }) {
         if (correctWord.length > localAnswer.length) {
             for (let i = localAnswer.length; i < correctWord.length; i++) {
                 result.push(
-                    <span key={i}>
-                        {correctWord[i]}
+                    <span key={i} className="ans_green_text">
+                        <u>{correctWord[i]}</u>
+                    </span>
+                );
+            }
+        }
+
+        // Добавление оставшихся символов ответа пользователя
+        if (localAnswer.length > correctWord.length) {
+            for (let i = correctWord.length; i < localAnswer.length; i++) {
+                result.push(
+                    <span key={i} className="ans_red_text">
+                        <u>{localAnswer[i]}</u>
                     </span>
                 );
             }
@@ -74,7 +85,12 @@ function TextInput({ correctWord }) {
     return (
         <div className="mb-4">
             <h3 className="text-center mb-3">Напишите ответ</h3>
-            <input type="text" className={classState} value={localAnswer} onChange={handleInputChange} />
+            <input
+                type="text"
+                className={classState}
+                value={localAnswer}
+                onChange={handleInputChange}
+            />
             {isViewResult && !isCorrectAnswer && (
                 <div className="correct-text mt-2">
                     {getCorrectWordStyled()}
