@@ -366,13 +366,17 @@ input[type="number"] {
         color 0.3s ease-out,
         font-weight 0.1s ease-out;
 }
-.word-for-text:hover {
-    cursor: pointer;
-    color: #ffc107;
-}
-.word-for-text:active {
-    cursor: pointer;
-    color: #ffc720;
+
+/* Стили, которые не будут применяться на сенсорных устройствах */
+@media (hover: hover) and (pointer: fine) {
+    .word-for-text:hover {
+        cursor: pointer;
+        color: #ffc107;
+    }
+    .word-for-text:active {
+        cursor: pointer;
+        color: #ffc720;
+    }
 }
 
 /* Стили левего блока на ПК для автоматической прокруки */
@@ -458,9 +462,18 @@ input[type="number"] {
     font-size: 40px;
     font-weight: bold;
 }
+.paragraph {
+    margin-bottom: 40px;
+    font-size: 22px;
+}
 .sentences {
     position: relative;
     display: block;
+    margin-bottom: 10px;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
 }
 .translation-button {
     top: -10px;
@@ -474,6 +487,13 @@ input[type="number"] {
     transition: opacity 0.3s ease;
 }
 
-.sentences:hover .translation-button {
-    opacity: 1;
+/* Стили, которые не будут применяться на сенсорных устройствах */
+@media (hover: hover) and (pointer: fine) {
+    .sentences:hover .translation-button {
+        opacity: 1;
+    }
+}
+
+.translation {
+    display: block;
 }

@@ -1,13 +1,24 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchWordPost, toggleWordBlock, cleanStateWord } from "../../../common/reducers/wordSlice";
-import SVG from "../../../common/components/Icons/SVG";
 
-import { fetchGooletrans } from "../../../common/reducers/googletransSlice";
+import TranslationButton from "./TranslationButton";
 
 const Pages = ({ page }) => {
     const dispatch = useDispatch();
     const { pages } = useSelector((state) => state.book);
+    const [timeTouchStart, setTimeTouchStart] = useState(0)
+    const [timeTouchEnd, setTimeTouchEnd] = useState(0)
+
+    const timeLongTouch = 1000
+
+    useEffect(() => {
+        const timeDifference = timeTouchEnd - timeTouchStart
+        if (timeDifference > timeLongTouch){
+            console.log('это долго')
+        }
+        
+    }, [timeTouchEnd]);
 
     function remainder(num) {
         return num % 50;
@@ -48,15 +59,20 @@ const Pages = ({ page }) => {
     function formatText(text) {
         // Разбиваем текст на предложения
         const sentences = text.match(/[^\.!\?]+[\.!\?]+["']?|.+$/g);
+
+
         // Оборачиваем каждое предложение в тег
         const formattedSentences = sentences.map((part, index) => {
             return (
-                <span className="sentences">
+                <span 
+                onTouchStart={() => setTimeTouchStart(new Date().getTime())} 
+                key={index} 
+                className="sentences" 
+                onTouchEnd={() => setTimeTouchEnd(new Date().getTime())}>
+
                     {addSpanTags(part)}
-                    <div className="translation-button" onClick={() => console.log(part)}>
-                        <SVG  name={'translate'}/>
-                    </div>
-                    
+                    <TranslationButton text={part} />
+
                 </span>
             );
         });
@@ -69,7 +85,11 @@ const Pages = ({ page }) => {
         if (pages) {
             const currentPage = getPage(pages, page);
             if (currentPage) {
-                return currentPage.map((line, index) => <p key={index}>{formatText(line)}</p>);
+                return currentPage.map((line, index) => (
+                    <p className={"paragraph"} key={index}>
+                        {formatText(line)}
+                    </p>
+                ));
             } else {
                 return <p>Страница или книга не найдена</p>;
             }
