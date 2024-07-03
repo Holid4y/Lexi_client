@@ -32,18 +32,18 @@ function Reproduce() {
             ) : (
                 (isEnd && <End type={localType} count_word_to_training={count_word_to_training_reproduce} score={score} />) ||
                 (training && (
-                    <>
+                    <div className="container mb-4">
                         <Header />
-                        <main className="container px-4">
+                        <main>
                             <WordCard localType={localType} text={training[round].word.translation} />
                         </main>
-                        <div className="px-5 mb-4">
+                        <div className="">
                             <TextInput correctWord={training[round].word.text} />
 
                             <Hint text={training[round].word.text} />
                         </div>
                         <AnswerButton localType={localType} />
-                    </>
+                    </div>
                 ))
             )}
         </div>
