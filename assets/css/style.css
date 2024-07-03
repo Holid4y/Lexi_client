@@ -81,7 +81,7 @@ a {
     font-weight: bold;
     color: var(--text-header);
 }
-.spinner-border{
+.spinner-border {
     font-size: 20px;
     font-weight: 400;
 }
@@ -148,7 +148,9 @@ a {
     transform: translateX(-50%);
     border-radius: 50%;
     background: var(--book-text);
-    transition: width 0.3s, height 0.3s;
+    transition:
+        width 0.3s,
+        height 0.3s;
 }
 .nav-link:hover::after {
     width: 8px;
@@ -360,7 +362,9 @@ input[type="number"] {
 
 /* Стили для слов в тексте при наведении */
 .word-for-text {
-    transition: color 0.3s ease-out, font-weight 0.1s ease-out;
+    transition:
+        color 0.3s ease-out,
+        font-weight 0.1s ease-out;
 }
 .word-for-text:hover {
     cursor: pointer;
@@ -407,7 +411,6 @@ input[type="number"] {
     min-height: 50px;
 }
 
-
 .box-success {
     background-color: var(--bg-success-answer);
     border-color: var(--bg-success-answer);
@@ -428,11 +431,11 @@ input[type="number"] {
     color: white;
 }
 
-.bg-second{
+.bg-second {
     border-color: var(--bg-first-colum);
     background-color: var(--bg-first-colum);
 }
-.bg-second:hover{
+.bg-second:hover {
     border-color: var(--bg-first-colum-hover);
     background-color: var(--bg-first-colum-hover);
 }
@@ -454,4 +457,23 @@ input[type="number"] {
     text-align: center;
     font-size: 40px;
     font-weight: bold;
+}
+.sentences {
+    position: relative;
+    display: block;
+}
+.translation-button {
+    top: -10px;
+    left: -32px;
+    display: block;
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    opacity: 0;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+}
+
+.sentences:hover .translation-button {
+    opacity: 1;
 }

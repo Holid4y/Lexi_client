@@ -1,6 +1,7 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchWordPost, toggleWordBlock, cleanStateWord } from "../../../common/reducers/wordSlice";
+import SVG from "../../../common/components/Icons/SVG";
 
 import { fetchGooletrans } from "../../../common/reducers/googletransSlice";
 
@@ -16,14 +17,13 @@ const Pages = ({ page }) => {
         return pages[remainder(pageIndex - 1)];
     };
 
-    function handleWordClick(word, paragraph) {
-        dispatch(fetchGooletrans(paragraph))
+    function handleWordClick(word) {
         dispatch(fetchWordPost(word));
         dispatch(cleanStateWord());
         dispatch(toggleWordBlock());
     }
 
-    function addSpanTags(text, paragraph) {
+    function addSpanTags(text) {
         let words = text.split(/\s+/);
         let result = [];
         for (let i = 0; i < words.length; i++) {
@@ -32,7 +32,7 @@ const Pages = ({ page }) => {
             let wordWithoutPunctuation = word.replace(/[^a-zA-Z0-9]+$/, "");
             if (wordWithoutPunctuation) {
                 result.push(
-                    <span className="word-for-text" key={i} onClick={() => handleWordClick(wordWithoutPunctuation, paragraph)}>
+                    <span className="word-for-text" key={i} onClick={() => handleWordClick(wordWithoutPunctuation)}>
                         {wordWithoutPunctuation}
                     </span>
                 );
@@ -44,18 +44,37 @@ const Pages = ({ page }) => {
         }
         return result.slice(0, -1); // Удаляем последний пробел
     }
-    
+
+    function formatText(text) {
+        // Разбиваем текст на предложения
+        const sentences = text.match(/[^\.!\?]+[\.!\?]+["']?|.+$/g);
+        // Оборачиваем каждое предложение в тег
+        const formattedSentences = sentences.map((part, index) => {
+            return (
+                <span className="sentences">
+                    {addSpanTags(part)}
+                    <div className="translation-button" onClick={() => console.log(part)}>
+                        <SVG  name={'translate'}/>
+                    </div>
+                    
+                </span>
+            );
+        });
+
+        // Возвращаем массив JSX-элементов
+        return formattedSentences;
+    }
+
     function renderParagraphs() {
         if (pages) {
             const currentPage = getPage(pages, page);
             if (currentPage) {
-                return currentPage.map((line, index) => <p key={index}>{addSpanTags(line, line)}</p>);
+                return currentPage.map((line, index) => <p key={index}>{formatText(line)}</p>);
             } else {
                 return <p>Страница или книга не найдена</p>;
             }
         }
     }
-    
 
     return (
         <div>
