@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+
 import { fetchSettings, fetchPutSettings } from "../../common/reducers/userSlice";
+import { setIsAuth } from "../../common/reducers/authSlice";
+
 import { setTheme } from "../../common/reducers/themeSlice";
 import { renderResponse } from "../../../public/urls";
 import Loading from "../../common/components/Treatment/Loading";
@@ -94,7 +97,9 @@ function Profile() {
     }
 
     const handleLogout = () => {
-        localStorage.clear();
+        localStorage.removeItem('access');
+        localStorage.removeItem('refresh');
+        dispatch(setIsAuth(false))
         navigate("/login");
     };
 
