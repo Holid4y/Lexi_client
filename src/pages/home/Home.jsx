@@ -1,5 +1,8 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { useDispatch, useSelector } from "react-redux";
+
+import { fetchHome } from "../../common/reducers/homeSlice";
+
 import InfoCard from "./components/InfoCard";
 import BooksLinkCard from "./components/BooksLinkCard";
 import WorsHistory from "./components/WorsHistory";
@@ -9,7 +12,12 @@ import BtnReadBook from "./components/BtnReadBook";
 
 function Home() {
     const dispatch = useDispatch();
-    const { loading } = useSelector((state) => state.books);
+    const { loading } = useSelector((state) => state.home);
+
+    useEffect(() => {
+        dispatch(fetchHome());
+    }, [dispatch]);
+
     const LoadingView = <Loading/>
     const Header = <Headers title="Главная"/>
     const InfoCardView = <InfoCard />

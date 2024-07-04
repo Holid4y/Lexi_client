@@ -3,21 +3,25 @@ import { host, googletrans } from "../../../public/urls";
 import { headers } from "../../../public/urls";
 
 
-export const fetchGoogletrans = createAsyncThunk("word/fetchWordPost", async (text, { dispatch }) => {
+export const fetchGoogletrans = createAsyncThunk("gooletrans/fetchGoogletrans", async (text, { dispatch }) => {
     const url = new URL(host + googletrans);
-
+    const accessToken = localStorage.getItem("access");
+    const auth = {
+        Authorization: `Beare ${accessToken}`,
+    };
     try {
         const response = await fetch(url.toString(), {
             method: "POST",
             headers: {
                 ...headers,
+                ...auth
             },
             body: JSON.stringify({
                 text: text,
             }),
         });
         const data = await response.json();
-        if (response.ok) {
+        if (data) {
             dispatch(googletransLoaded(data));
         }
         

@@ -49,7 +49,7 @@ function WordBlockTranslate() {
                                     <SVG name="voice_min"/>
                                 </button>
                                 <div style={{ marginLeft: "auto", display: "flex", alignItems: "center" }}>
-                                    <button className="btn">
+                                    <button className="btn" onClick={() => console.log('fjk')}>
                                         <SVG name="Unfill_star"/>
                                     </button>
                                 </div>

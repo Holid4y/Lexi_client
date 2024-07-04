@@ -12,11 +12,16 @@ export const fetchTraining = createAsyncThunk("training/fetchTraining", async (t
     });
     url.search = params.toString();
 
+    const accessToken = localStorage.getItem("access");
+    const auth = {
+        Authorization: `Beare ${accessToken}`,
+    };
     try {
         const response = await fetch(url.toString(), {
             method: "GET",
             headers: {
                 ...headers,
+                ...auth
             },
         });
         const data = await response.json();
@@ -37,12 +42,16 @@ export const fetchTraining = createAsyncThunk("training/fetchTraining", async (t
 });
 export const fetchTrainingInfo = createAsyncThunk("training/fetchTrainingInfo", async (_, { dispatch }) => {
     const url = new URL(host + info);
-
+    const accessToken = localStorage.getItem("access");
+    const auth = {
+        Authorization: `Beare ${accessToken}`,
+    };
     try {
         const response = await fetch(url.toString(), {
             method: "GET",
             headers: {
                 ...headers,
+                ...auth
             },
         });
         const data = await response.json();
@@ -58,7 +67,10 @@ export const fetchTrainingInfo = createAsyncThunk("training/fetchTrainingInfo", 
 
 export const fetchTrainingPatch = createAsyncThunk("training/fetchTrainingPatch", async ({ type, pk, is_correct }, { dispatch }) => {
     const url = new URL(host + training);
-
+    const accessToken = localStorage.getItem("access");
+    const auth = {
+        Authorization: `Beare ${accessToken}`,
+    };
     const params = new URLSearchParams({
         type,
     });
@@ -72,6 +84,7 @@ export const fetchTrainingPatch = createAsyncThunk("training/fetchTrainingPatch"
         method: "PATCH",
         headers: {
             ...headers,
+            ...auth
         },
         body: JSON.stringify(body),
     });
@@ -96,8 +109,6 @@ const trainingSlice = createSlice({
 
         loading: false,
         error: null,
-        
-
     },
     reducers: {
         trainingInfoLoaded: (state, action) => {
@@ -105,10 +116,10 @@ const trainingSlice = createSlice({
 
             state.count_word_to_training_reproduce = action.payload.count_word_to_training_reproduce;
 
-            state.viewCountSumm = action.payload.count_word_to_training_recognize + action.payload.count_word_to_training_reproduce
+            state.viewCountSumm = action.payload.count_word_to_training_recognize + action.payload.count_word_to_training_reproduce;
         },
         decrementTrainingInfo: (state) => {
-            state.viewCountSumm = state.viewCountSumm  - 1;
+            state.viewCountSumm = state.viewCountSumm - 1;
         },
     },
     extraReducers: (builder) => {
@@ -144,7 +155,7 @@ const trainingSlice = createSlice({
             .addCase(fetchTrainingInfo.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.error.message;
-            })
+            });
     },
 });
 

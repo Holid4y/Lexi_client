@@ -60,7 +60,7 @@ const fetchVerify = async (token) => {
         },
         body: JSON.stringify({ token }),
     });
-
+ 
     if (response.status === 200) {
         return true;
     } else if (response.status === 401) {

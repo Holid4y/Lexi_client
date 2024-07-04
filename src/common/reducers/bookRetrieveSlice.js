@@ -1,19 +1,19 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { host, books } from "../../../public/urls";
-import { headers } from "../../../public/urls";
+import { getResponse } from "../../../public/urls";
 
 export const fetchBook = createAsyncThunk("book/fetchBook", async (params, { dispatch }) => {
     const { slug, page } = params;
     const url = new URL(host + books + slug + "/" + page);
 
-    const response = await fetch(url.toString(), {
-        method: "GET",
-        headers: {
-            ...headers,
-        },
-    });
-    const data = await response.json();
-    dispatch(bookLoaded(data));
+    const response = await getResponse(url, "GET")
+    
+    if (response.ok) {
+        const data = await response.json();
+        if (data) {
+            dispatch(bookLoaded(data));
+        }
+    }
     return data;
 });
 

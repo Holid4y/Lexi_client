@@ -1,53 +1,33 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { host, user, settings } from "../../../public/urls";
-import { headers } from "../../../public/urls";
+import { getResponse, headers } from "../../../public/urls";
 
-export const fetchUser = createAsyncThunk("user/fetchUser", async (_, { dispatch }) => {
-    const url = new URL(host + user);
 
-    try {
-        const response = await fetch(url.toString(), {
-            method: "GET",
-            headers: {
-                ...headers,
-            },
-        });
-        const data = await response.json();
-        dispatch(bookmarkLoaded(data));
-        return data;
-    } catch (error) {
-        if (error.message === "Unauthorized") {
-            console.log("Ошибка 401: Unauthorized");
-        }
-    }
-});
 export const fetchSettings = createAsyncThunk("user/fetchSettings", async (_, { dispatch }) => {
     const url = new URL(host + settings);
-    try {
-        const response = await fetch(url.toString(), {
-            method: "GET",
-            headers: {
-                ...headers,
-            },
-        });
+    const response = await getResponse(url, "GET")
+    
+    if (response.ok) {
         const data = await response.json();
-        dispatch(settingsLoaded(data));
-        return data;
-    } catch (error) {
-        if (error.message === "Unauthorized") {
-            console.log("Ошибка 401: Unauthorized");
+        if (data) {
+            dispatch(settingsLoaded(data));
         }
     }
+    return data;
 });
 
 export const fetchPutSettings = createAsyncThunk("user/fetchPutSettings", async (data, { dispatch }) => {
     const url = new URL(host + settings);
-
+    const accessToken = localStorage.getItem("access");
+    const auth = {
+        Authorization: `Beare ${accessToken}`,
+    };
     try {
         const response = await fetch(url.toString(), {
             method: "PUT",
             headers: {
                 ...headers,
+                ...auth
             },
             body: JSON.stringify(data),
         });
@@ -125,16 +105,6 @@ const userSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder
-            .addCase(fetchUser.pending, (state) => {
-                state.loading = true;
-            })
-            .addCase(fetchUser.fulfilled, (state) => {
-                state.loading = false;
-            })
-            .addCase(fetchUser.rejected, (state, action) => {
-                state.loading = false;
-                state.error = action.error.message;
-            })
 
             .addCase(fetchSettings.pending, (state) => {
                 state.loading = true;

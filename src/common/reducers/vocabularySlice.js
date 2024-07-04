@@ -1,44 +1,34 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { host, vocabulary, stats } from "../../../public/urls";
-import { headers } from "../../../public/urls";
+import { getResponse } from "../../../public/urls";
 
 export const fetchVocabulary = createAsyncThunk("vocabulary/fetchVocabulary", async (_, { dispatch }) => {
     const url = new URL(host + vocabulary);
 
-    try {
-        const response = await fetch(url.toString(), {
-            method: "GET",
-            headers: {
-                ...headers,
-            },
-        });
+    const response = await getResponse(url, "GET");
+
+    if (response.ok) {
         const data = await response.json();
-        dispatch(vocabularyLoaded(data));
-        return data;
-    } catch (error) {
-        if (error.message === "Unauthorized") {
-            console.log("Ошибка 401: Unauthorized");
+        if (data) {
+            dispatch(vocabularyLoaded(data));
         }
     }
+
+    return data;
 });
 export const fetchVocabularyStats = createAsyncThunk("vocabulary/fetchVocabularyStats", async (_, { dispatch }) => {
     const url = new URL(host + stats);
 
-    try {
-        const response = await fetch(url.toString(), {
-            method: "GET",
-            headers: {
-                ...headers,
-            },
-        });
+    const response = await getResponse(url, "GET")
+    
+    if (response.ok) {
         const data = await response.json();
-        dispatch(vocabularyStatsLoaded(data));
-        return data;
-    } catch (error) {
-        if (error.message === "Unauthorized") {
-            console.log("Ошибка 401: Unauthorized");
+        if (data) {
+            dispatch(vocabularyStatsLoaded(data));
         }
     }
+    
+    return data;
 });
 
 const vocabularySlice = createSlice({

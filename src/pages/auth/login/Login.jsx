@@ -3,6 +3,8 @@ import { fetchLogin } from '../../../common/reducers/authSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 
+import Loading from '../../../common/components/Treatment/Loading';
+
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -10,16 +12,24 @@ const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  useEffect(() => {
-    if (isAuth) {
-      navigate('/');
-    }
-  }, [isAuth, navigate]);
 
   const handleLogin = () => {
-    dispatch(fetchLogin({ username: username, password: password }));
-  };
-
+    dispatch(fetchLogin({ username: username, password: password }))
+        .then((response) => {
+            if (response.meta.requestStatus === "fulfilled") {
+                if (response.payload.access) {
+                    navigate("/");
+                }
+            } else if (response.meta.requestStatus === "rejected") {
+                console.log("Что-то не верно");
+            }
+        })
+        .catch((error) => {
+            console.error("Ошибка при выполнении запроса:", error);
+        });
+    
+};
+  const LoadingView = <Loading/>
   return (
     <div className='body-auth'>
       <header className="navbar sticky-top position-absolute">
@@ -28,7 +38,8 @@ const Login = () => {
               <path d="M111.492 31.36C110.612 31.36 109.865 31.08 109.252 30.52C108.665 29.9333 108.372 29.2 108.372 28.32C108.372 27.44 108.665 26.7067 109.252 26.12C109.865 25.5067 110.612 25.2 111.492 25.2C112.345 25.2 113.078 25.5067 113.692 26.12C114.332 26.7067 114.652 27.44 114.652 28.32C114.652 29.1733 114.332 29.8933 113.692 30.48C113.078 31.0667 112.345 31.36 111.492 31.36Z" fill="white"/>
           </svg>
       </header>
-
+      {loading && LoadingView}
+      {error && "Что-то не верно"}
       <main className="form-signin w-100 m-auto">
           <form>
               <h2 className="mb-4 text-center">Войти в аккаунт</h2>

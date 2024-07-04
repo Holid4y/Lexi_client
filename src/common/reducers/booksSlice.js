@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { host, books } from "../../../public/urls";
-import { headers } from "../../../public/urls";
+import { getResponse } from "../../../public/urls";
 
 export const fetchBooks = createAsyncThunk("books/fetchBooks", async (page, { dispatch }) => {
     const url = new URL(host + books);
@@ -9,15 +9,15 @@ export const fetchBooks = createAsyncThunk("books/fetchBooks", async (page, { di
         page,
     });
     url.search = params.toString();
-    const response = await fetch(url.toString(), {
-        method: "GET",
-        headers: {
-            ...headers,
-        },
-    });
-
-    const data = await response.json();
-    dispatch(booksLoaded(data));
+    
+    const response = await getResponse(url, "GET")
+    
+    if (response.ok) {
+        const data = await response.json();
+        if (data) {
+            dispatch(booksLoaded(data));
+        }
+    }
     return data;
 });
 

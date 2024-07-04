@@ -25,10 +25,10 @@ export const words = "words/";
 
 // training
 export const training = "training/";
-export const info = training + "info/"
+export const info = training + "info/";
 
-// googletrans 
-export const googletrans = words + "googletrans/"
+// googletrans
+export const googletrans = words + "googletrans/";
 
 // Эта функция полезна для получения значения определенного cookie
 // из браузера, а именно для csrf токена.
@@ -76,5 +76,34 @@ export const renderResponse = (response, sceleton, loading, error, finaly) => {
 export let headers = {
     "Content-type": "application/json",
     "X-CSRFToken": getCookie("csrftoken"),
-    Authorization: `Beare ${localStorage.getItem("access")}`,
 };
+
+export async function getResponse(url, method, body) {
+    let headers = {
+        "Content-type": "application/json",
+        "X-CSRFToken": getCookie("csrftoken"),
+    };
+
+    const accessToken = localStorage.getItem("access");
+    if (!accessToken) {
+        console.warn(`Отсутствует accessToken. Запрос на ${url}`);
+        return null;
+    }
+
+    const auth = {
+        Authorization: `Beare ${accessToken}`,
+    };
+    
+    const response = await fetch(url.toString(), {
+        method: method,
+        headers: {
+            ...headers,
+            ...auth,
+        },
+    });
+
+    
+    console.log(`${method} Запрос на ${url}. OK: ${response.ok}`);
+    // console.log( await response.json())
+    return response;
+}

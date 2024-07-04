@@ -4,33 +4,34 @@ import { headers } from "../../../public/urls";
 
 export const fetchWordGet = createAsyncThunk("word/fetchWordGet", async (pk, { dispatch }) => {
     const url = new URL(host + words + pk);
-
-    try {
-        const response = await fetch(url.toString(), {
-            method: "GET",
-            headers: {
-                ...headers,
-            },
-        });
-        const data = await response.json();
-        dispatch(wordGetLoaded(data));
-        return data;
-    } catch (error) {
-        if (error.message === "Unauthorized") {
-            console.log("Ошибка 401: Unauthorized");
-        }
-        console.log(error);
-    }
+    const accessToken = localStorage.getItem("access");
+    const auth = {
+        Authorization: `Beare ${accessToken}`,
+    };
+    const response = await fetch(url.toString(), {
+        method: "GET",
+        headers: {
+            ...headers,
+            ...auth
+        },
+    });
+    const data = await response.json();
+    dispatch(wordGetLoaded(data));
+    return data;
 });
 
 export const fetchWordPost = createAsyncThunk("word/fetchWordPost", async (word, { dispatch }) => {
     const url = new URL(host + words);
-
+    const accessToken = localStorage.getItem("access");
+    const auth = {
+        Authorization: `Beare ${accessToken}`,
+    };
     try {
         const response = await fetch(url.toString(), {
             method: "POST",
             headers: {
                 ...headers,
+                ...auth
             },
             body: JSON.stringify({
                 word: word,
@@ -40,7 +41,7 @@ export const fetchWordPost = createAsyncThunk("word/fetchWordPost", async (word,
         if (response.ok) {
             dispatch(wordPostLoaded(data));
         }
-        
+
         return data;
     } catch (error) {
         if (error.message === "Unauthorized") {
