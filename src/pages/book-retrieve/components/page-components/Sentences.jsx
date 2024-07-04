@@ -54,7 +54,6 @@ function Sentences({ sentences, index }) {
       }, [timeTouchStart, timeTouchEnd]);
 
     useEffect(() => {
-        console.log(timePushed)
         if (timePushed > 300) {
             setClassName("sentences push-start")
         }
