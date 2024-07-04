@@ -31,7 +31,7 @@ const Pages = ({ page }) => {
         // Оборачиваем каждое предложение в тег
         const formattedSentences = filteredSentences.map((sentences, index) => {
             return (
-                <Sentences sentences={sentences} index={index} /> 
+                <Sentences sentences={sentences} index={index} key={index}/> 
             );
         });
 
