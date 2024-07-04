@@ -19,7 +19,7 @@ import Profile from "./pages/profile/ProfileUser";
 import LvlSettings from "./pages/profile/lvlSettings";
 import WordList from "./pages/word-list-user/WordList";
 import Statistic from "./pages/statistic-user/Statistic";
-import AutoScroll from "./common/components/AutoScroll";
+import LandingMain from "./pages/landing/LandingMain";
 
 function App() {
     const dispatch = useDispatch();
@@ -78,7 +78,6 @@ function App() {
     return (
         <Router>
             <div>
-                <AutoScroll />
                 <ConditionalNavigation />
                 <Routes>
                     <Route path="/" element={<Home />} />
@@ -94,6 +93,7 @@ function App() {
                     <Route path="/profile" element={<Profile />} />
                     <Route path="/statistic" element={<Statistic />} />
                     <Route path="/lvl-settings" element={<LvlSettings />} />
+                    <Route path="/landing" element={<LandingMain />} />
                     {/* Другие маршруты */}
                 </Routes>
             </div>
@@ -103,7 +103,7 @@ function App() {
 
 function ConditionalNavigation() {
     const location = useLocation();
-    const hideNavigationPaths = ["/login", "/register"]; // пути, на которых не нужно показывать навигацию
+    const hideNavigationPaths = ["/login", "/register", "/landing"]; // пути, на которых не нужно показывать навигацию
 
     return hideNavigationPaths.includes(location.pathname) ? null : <Navigation />;
 }

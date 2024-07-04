@@ -9,8 +9,8 @@ function BooksLinkCard() {
                     <h4 className="card-title w-75 text-start">
                         <b>Книги и тексты</b>
                     </h4>
-                    <p className="card-text w-75 text-start">
-                        Читайте книги и тексты. <br /> Добавляйте новые слова в свой словарь.
+                    <p className="card-text w-50 text-start">
+                        Читайте книги и сохраняйте важные слова в закладки для повторения
                     </p>
                     <p className="card-text">Читать больше</p>
                 </div>

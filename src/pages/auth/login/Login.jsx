@@ -1,14 +1,20 @@
-// ВХОД
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { fetchLogin } from '../../../common/reducers/authSlice';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Login = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { isAuth, loading, error } = useSelector((state) => state.auth);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+
+  useEffect(() => {
+    if (isAuth) {
+      navigate('/');
+    }
+  }, [isAuth, navigate]);
 
   const handleLogin = () => {
     dispatch(fetchLogin({ username: username, password: password }));

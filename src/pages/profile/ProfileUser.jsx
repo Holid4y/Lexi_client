@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchSettings, fetchPutSettings } from "../../common/reducers/userSlice";
 import { setTheme } from "../../common/reducers/themeSlice";
@@ -8,8 +8,9 @@ import Loading from "../../common/components/Treatment/Loading";
 
 function Profile() {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
-    const { username, email, activated_email, number_of_false_set, levels, count_word_in_round, time_to_view_result,loading, error, putLoading  } = useSelector((state) => state.user);
+    const { username, email, activated_email, number_of_false_set, levels, count_word_in_round, time_to_view_result, loading, error, putLoading } = useSelector((state) => state.user);
     const currentTheme = useSelector((state) => state.theme.theme); // Получаем текущую тему из Redux
 
     const [themeState, setThemeState] = useState(currentTheme);
@@ -21,16 +22,16 @@ function Profile() {
         if (!username) {
             dispatch(fetchSettings());
         }
-    }, [dispatch]);
+    }, [dispatch, username]);
 
-    // заполняем state когда он появиться в redux
+    // заполняем state когда он появится в redux
     useEffect(() => {
         if (username) {
             setFalseSetLevel(number_of_false_set);
             setCountWordInRoundState(count_word_in_round)
             setTimeToViewResultState(time_to_view_result)
         }
-    }, [username]);
+    }, [username, number_of_false_set, count_word_in_round, time_to_view_result]);
 
     useEffect(() => {
         if (currentTheme) {
@@ -58,7 +59,7 @@ function Profile() {
     };
 
     const handleIncrementCountWordInRound = () => {
-        if (countWordInRoundState  < 50) {
+        if (countWordInRoundState < 50) {
             setCountWordInRoundState(countWordInRoundState + 1);
         }
     };
@@ -70,13 +71,13 @@ function Profile() {
     };
 
     const handleIncrementTimeToViewResultState = () => {
-        if (timeToViewResultState  < 5000) {
+        if (timeToViewResultState < 5000) {
             setTimeToViewResultState(timeToViewResultState + 100);
         }
     };
 
     const handleDecrementTimeToViewResultState = () => {
-        if (countWordInRoundState > 0) {
+        if (timeToViewResultState > 0) {
             setTimeToViewResultState(timeToViewResultState - 100);
         }
     };
@@ -85,12 +86,17 @@ function Profile() {
         const data = {
             dark_theme: themeState,
             number_of_false_set: falseSetLevel,
-            count_word_in_round: countWordInRoundState, 
+            count_word_in_round: countWordInRoundState,
             time_to_view_result: timeToViewResultState
         };
         console.log(data, "input data");
         dispatch(fetchPutSettings(data));
     }
+
+    const handleLogout = () => {
+        localStorage.clear();
+        navigate("/login");
+    };
 
     const LoadingView = <Loading />;
 
@@ -99,9 +105,9 @@ function Profile() {
             <nav className="navbar dark-nav">
                 <div className="container-fluid">
                     <span className="navbar-brand">{renderResponse(username, "...", loading, error)}</span>
-                    <Link className="text-danger" to="/login">
+                    <button className="text-danger btn" onClick={handleLogout}>
                         Выйти
-                    </Link>
+                    </button>
                 </div>
             </nav>
         </div>
@@ -180,7 +186,7 @@ function Profile() {
                     </svg>
                 </button>
                 <button className="btn btn-plus-minus box-shadow" onClick={handleDecrementCountWordInRound} type="button">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" className="bi bi-dash" viewBox="0 0 16 16">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" className="bi bi-dash" viewBox="0 16 16">
                         <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8" />
                     </svg>
                 </button>
@@ -205,6 +211,7 @@ function Profile() {
             </div>
         </div>
     );
+
     return (
         <div className="align-items-center">
             {Header}
