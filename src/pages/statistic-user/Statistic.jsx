@@ -109,7 +109,7 @@ function Statistic() {
     const CanvaView = (
         <div className="text-center">
             <h5 className="mt-4 mb-2">Правильных слов в тестах</h5>
-            <div className="chart-container" style={{ position: "relative", width: "100%", height: "250px" }}>
+            <div className="chart-container" style={{ position: "relative", width: "100%", height: "200px" }}>
                 <Bar data={barData} options={barOptions} />
             </div>
         </div>
@@ -118,7 +118,7 @@ function Statistic() {
     const CanvaViewLvl = (
         <div className="text-center">
             <h5 className="mt-4 mb-2">Количество слов в уровнях</h5>
-            <div className="chart-container" style={{ position: "relative", width: "100%", height: "250px" }}>
+            <div className="chart-container" style={{ position: "relative", width: "100%", height: "200px" }}>
                 <Bar data={barDatalvl} options={barOptions} />
             </div>
         </div>
