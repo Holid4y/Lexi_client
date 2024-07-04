@@ -3,9 +3,9 @@ import { host, googletrans } from "../../../public/urls";
 import { headers } from "../../../public/urls";
 
 
-export const fetchGooletrans = createAsyncThunk("word/fetchWordPost", async (text, { dispatch }) => {
+export const fetchGoogletrans = createAsyncThunk("word/fetchWordPost", async (text, { dispatch }) => {
     const url = new URL(host + googletrans);
-    console.log(text, 'googletrans')
+
     try {
         const response = await fetch(url.toString(), {
             method: "POST",
@@ -17,7 +17,10 @@ export const fetchGooletrans = createAsyncThunk("word/fetchWordPost", async (tex
             }),
         });
         const data = await response.json();
-        dispatch(googletransLoaded(data));
+        if (response.ok) {
+            dispatch(googletransLoaded(data));
+        }
+        
         return data;
     } catch (error) {
         if (error.message === "Unauthorized") {
@@ -42,13 +45,13 @@ const gooletransSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder
-            .addCase(fetchGooletrans.pending, (state) => {
+            .addCase(fetchGoogletrans.pending, (state) => {
                 state.loading = true;
             })
-            .addCase(fetchGooletrans.fulfilled, (state) => {
+            .addCase(fetchGoogletrans.fulfilled, (state) => {
                 state.loading = false;
             })
-            .addCase(fetchGooletrans.rejected, (state, action) => {
+            .addCase(fetchGoogletrans.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.error.message;
             })

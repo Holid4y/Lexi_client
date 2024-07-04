@@ -81,7 +81,7 @@ a {
     font-weight: bold;
     color: var(--text-header);
 }
-.spinner-border{
+.spinner-border {
     font-size: 20px;
     font-weight: 400;
 }
@@ -148,7 +148,9 @@ a {
     transform: translateX(-50%);
     border-radius: 50%;
     background: var(--book-text);
-    transition: width 0.3s, height 0.3s;
+    transition:
+        width 0.3s,
+        height 0.3s;
 }
 .nav-link:hover::after {
     width: 8px;
@@ -361,15 +363,21 @@ input[type="number"] {
 
 /* Стили для слов в тексте при наведении */
 .word-for-text {
-    transition: color 0.3s ease-out, font-weight 0.1s ease-out;
+    transition:
+        color 0.3s ease-out,
+        font-weight 0.1s ease-out;
 }
-.word-for-text:hover {
-    cursor: pointer;
-    color: var(--bg-first-colum-hover);
-}
-.word-for-text:active {
-    cursor: pointer;
-    color: var(--bg-first-colum-hover);
+
+/* Стили, которые не будут применяться на сенсорных устройствах */
+@media (hover: hover) and (pointer: fine) {
+    .word-for-text:hover {
+        cursor: pointer;
+        color: #ffc107;
+    }
+    .word-for-text:active {
+        cursor: pointer;
+        color: #ffc720;
+    }
 }
 
 .badge-position {
@@ -385,7 +393,6 @@ input[type="number"] {
 .form-control {
     min-height: 50px;
 }
-
 
 .box-success {
     background-color: var(--bg-success-answer);
@@ -407,11 +414,11 @@ input[type="number"] {
     color: white;
 }
 
-.bg-second{
+.bg-second {
     border-color: var(--bg-first-colum);
     background-color: var(--bg-first-colum);
 }
-.bg-second:hover{
+.bg-second:hover {
     border-color: var(--bg-first-colum-hover);
     background-color: var(--bg-first-colum-hover);
 }
@@ -428,7 +435,7 @@ input[type="number"] {
     font-size: 45px;
 }
 
-.correct-text{
+.correct-text {
     word-wrap: break-word;
     text-align: center;
     font-size: 40px;
@@ -472,4 +479,58 @@ input[type="number"] {
 
 .h-65{
     min-height: 65px;
+}
+.paragraph {
+    margin-bottom: 40px;
+    font-size: 22px;
+}
+.sentences {
+    position: relative;
+    display: block;
+    margin-bottom: 10px;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    transition: transform 0.3s ease;
+}
+.view-loading::before {
+    content: "";
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    width: 10px;
+    height: 10px;
+    background-color: #ffffff;
+    border-radius: 50%;
+}
+.push-start {
+    transform: scale(0.95);
+}
+.push-end {
+    transform: scale(1);
+}
+.translation-button {
+    top: -10px;
+    left: -32px;
+    display: block;
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    opacity: 0;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+}
+
+/* Стили, которые не будут применяться на сенсорных устройствах */
+@media (hover: hover) and (pointer: fine) {
+    .sentences:hover .translation-button {
+        opacity: 1;
+    }
+}
+
+.translation {
+    display: block;
+    margin-bottom: 40px;
+    font-weight: lighter;
 }
