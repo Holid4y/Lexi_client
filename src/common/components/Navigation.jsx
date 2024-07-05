@@ -1,13 +1,22 @@
 // Нижняя навигация
-import React from "react";
+import React, {useEffect} from "react";
 import { Link, useLocation } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+
+import { fetchTrainingInfo } from "../reducers/training/trainingSlice";
+
 import WordBlockTranslate from "./WordBlockTranslate";
 import SVG from "../components/Icons/SVG";
 
 function Navigation() {
+    const dispatch = useDispatch()
+
     const { viewCountSumm } = useSelector((state) => state.training);
     const location = useLocation();
+
+    useEffect(() => {
+        dispatch(fetchTrainingInfo())
+    }, [dispatch]);
 
     const getLinkClass = (path) => {
         return location.pathname === path ? "nav-link active_link" : "nav-link";
