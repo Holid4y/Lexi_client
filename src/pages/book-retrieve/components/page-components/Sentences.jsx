@@ -87,9 +87,7 @@ function Sentences({ sentences, index }) {
     return (
         <span onTouchStart={() => handleTouchStart()} key={index} className={className} onTouchEnd={() => handleTouchEnd()} onContextMenu={handleContextMenu}>
             <SpanWord sentences={sentences} />
-
             <TranslationButton handleTranslate={handleTranslate} />
-
             {showTranslation && <span className="translation">{translation}</span>}
         </span>
     );

@@ -10,7 +10,7 @@ function Navigation() {
     const location = useLocation();
 
     const getLinkClass = (path) => {
-        return location.pathname === path ? "nav-link active_link" : "nav-link";
+        return location.pathname === path ? "nav-link navigation-custome active_link" : "nav-link navigation-custome";
     };
     const TrainigBadge = viewCountSumm ? <small className="position-absolute translate-middle badge badge-position bg-success">{viewCountSumm}</small> : null;
 
