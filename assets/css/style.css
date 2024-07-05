@@ -210,7 +210,7 @@ a {
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
-    z-index: -1;
+    z-index: 0;
 }
 
 /* Стили цвета для SVG */
@@ -309,7 +309,7 @@ input[type="number"] {
     left: calc(50% - 100px);
     opacity: 0.4;
     transition: 0.5s;
-    z-index: 1000;
+    z-index: 10;
 }
 .pagination-position:hover {
     width: 200px;
@@ -550,4 +550,30 @@ input[type="number"] {
 
 .align-items-stretch {
     align-items: stretch;
+}
+
+.aspect-ratio{
+    aspect-ratio: 1 / 1;
+}
+
+.hover-opacity{
+    padding: 5px 8px;
+    left: 90%;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
+.avatar-block:hover .hover-opacity{
+    opacity: 1;
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .hover-opacity{
+        padding: 5px 8px;
+        left: 90%;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+    .avatar-block:hover .hover-opacity{
+        opacity: 1;
+    }
 }

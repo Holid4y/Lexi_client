@@ -68,7 +68,7 @@ function Statistic() {
         ],
     };
 
-    const Header = <Headers title="Настройки уровней" />;
+    const Header = <Headers title="Статистика" />;
     const LoadingView = <Loading />;
 
     const BlockWordStatistic = <div className="row mb-4">
