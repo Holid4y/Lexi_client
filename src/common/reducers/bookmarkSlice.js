@@ -33,8 +33,6 @@ export const fetchBookmarksCreateUpdate = createAsyncThunk("bookmarks/fetchBookm
             return data
         }
     } 
-
-    return 
 });
 
 export const fetchBookmarksDelete = createAsyncThunk("bookmarks/fetchBookmarksDelete", async (bookmarkId, { dispatch }) => {

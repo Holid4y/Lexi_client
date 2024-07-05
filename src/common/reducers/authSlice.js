@@ -3,7 +3,7 @@ import { host, login, refresh, verify } from "../../../public/urls";
 import { headers } from "../../../public/urls";
 
 export const fetchLogin = createAsyncThunk("auth/fetchLogin", async ({ username, password }, { dispatch }) => {
-    console.log("fetchlogin");
+
     const url = new URL(host + login);
     const response = await fetch(url.toString(), {
         method: "POST",

@@ -22,7 +22,7 @@ const Pages = ({ page }) => {
             return null;
         }
         // Разбиваем текст на предложения
-        const sentences = text.trim().match(/[^\.!\?]+[\.!\?]+["'”]?|.+$/g);
+        const sentences = text.trim().match(/[^\.!\?]+[\.!\?]+["'”)]?|.+$/g);
         if (!sentences) {
             return null;
         }
