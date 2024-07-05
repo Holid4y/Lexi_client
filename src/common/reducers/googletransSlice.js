@@ -1,37 +1,28 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { host, googletrans } from "../../../public/urls";
-import { headers } from "../../../public/urls";
+import { getResponse } from "../../../public/urls";
 
 
 export const fetchGoogletrans = createAsyncThunk("gooletrans/fetchGoogletrans", async (text, { dispatch }) => {
     const url = new URL(host + googletrans);
-    const accessToken = localStorage.getItem("access");
-    const auth = {
-        Authorization: `Beare ${accessToken}`,
-    };
-    try {
-        const response = await fetch(url.toString(), {
-            method: "POST",
-            headers: {
-                ...headers,
-                ...auth
-            },
-            body: JSON.stringify({
-                text: text,
-            }),
-        });
+
+    const body = { 
+        text: text,
+    }
+    const bodyString = JSON.stringify(body);
+
+    const response = await getResponse(url, "POST", bodyString)
+
+    
+    if (response.ok) {
         const data = await response.json();
         if (data) {
-            dispatch(googletransLoaded(data));
+            return data
+            // dispatch(googletransLoaded(data));
         }
-        
-        return data;
-    } catch (error) {
-        if (error.message === "Unauthorized") {
-            console.log("Ошибка 401: Unauthorized");
-        }
-        console.log(error);
     }
+    
+
 });
 
 const gooletransSlice = createSlice({

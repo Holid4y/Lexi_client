@@ -1,54 +1,39 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { host, words } from "../../../public/urls";
-import { headers } from "../../../public/urls";
+import { headers, getResponse } from "../../../public/urls";
 
 export const fetchWordGet = createAsyncThunk("word/fetchWordGet", async (pk, { dispatch }) => {
     const url = new URL(host + words + pk);
-    const accessToken = localStorage.getItem("access");
-    const auth = {
-        Authorization: `Beare ${accessToken}`,
-    };
-    const response = await fetch(url.toString(), {
-        method: "GET",
-        headers: {
-            ...headers,
-            ...auth
-        },
-    });
-    const data = await response.json();
-    dispatch(wordGetLoaded(data));
+
+    const response = await getResponse(url, "GET")
+
+    if (response.ok) {
+        const data = await response.json();
+        if (data) {
+            dispatch(wordGetLoaded(data));
+        }
+    }
+
     return data;
 });
 
 export const fetchWordPost = createAsyncThunk("word/fetchWordPost", async (word, { dispatch }) => {
     const url = new URL(host + words);
-    const accessToken = localStorage.getItem("access");
-    const auth = {
-        Authorization: `Beare ${accessToken}`,
-    };
-    try {
-        const response = await fetch(url.toString(), {
-            method: "POST",
-            headers: {
-                ...headers,
-                ...auth
-            },
-            body: JSON.stringify({
-                word: word,
-            }),
-        });
+
+    const body = { word: word }
+    const bodyString = JSON.stringify(body);
+
+    const response = await getResponse(url, "POST", bodyString)
+
+    if (response.ok) {
         const data = await response.json();
-        if (response.ok) {
+        if (data) {
             dispatch(wordPostLoaded(data));
         }
-
-        return data;
-    } catch (error) {
-        if (error.message === "Unauthorized") {
-            console.log("Ошибка 401: Unauthorized");
-        }
-        console.log(error);
     }
+
+    return data;
+
 });
 
 const wordSlice = createSlice({

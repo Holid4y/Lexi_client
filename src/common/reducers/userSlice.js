@@ -18,33 +18,19 @@ export const fetchSettings = createAsyncThunk("user/fetchSettings", async (_, { 
 
 export const fetchPutSettings = createAsyncThunk("user/fetchPutSettings", async (data, { dispatch }) => {
     const url = new URL(host + settings);
-    const accessToken = localStorage.getItem("access");
-    const auth = {
-        Authorization: `Beare ${accessToken}`,
-    };
-    try {
-        const response = await fetch(url.toString(), {
-            method: "PUT",
-            headers: {
-                ...headers,
-                ...auth
-            },
-            body: JSON.stringify(data),
-        });
-        const result = await response.json();
-        dispatch(settingsPutLoaded(result));
-        // Проверяем статус ответа
-        if (!response.ok) {
-            // Если статус не 2xx, бросаем ошибку
-            dispatch(setError(result))
-            throw new Error(`Ошибка ${response.status}: ${response.statusText}.`);
+
+    const bodyString = JSON.stringify(data);
+
+    const response = await getResponse(url, "PUT", bodyString)
+    
+    if (response.ok) {
+        const data = await response.json();
+        if (data) {
+            dispatch(settingsPutLoaded(data));
         }
-        return result;
-    } catch (error) {
-        if (error.message === "Unauthorized") {
-            console.log("Ошибка 401: Unauthorized");
-        }
-        console.log(error)
+    } else {
+        const data = await response.json();
+        dispatch(setError(data))
     }
 });
 

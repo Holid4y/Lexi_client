@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { host, training, info } from "../../../../public/urls";
-import { headers } from "../../../../public/urls";
+import { getResponse } from "../../../../public/urls";
 
 import { trainingLoaded } from "./trainingRoundSlice";
 
@@ -12,65 +12,38 @@ export const fetchTraining = createAsyncThunk("training/fetchTraining", async (t
     });
     url.search = params.toString();
 
-    const accessToken = localStorage.getItem("access");
-    const auth = {
-        Authorization: `Beare ${accessToken}`,
-    };
-    try {
-        const response = await fetch(url.toString(), {
-            method: "GET",
-            headers: {
-                ...headers,
-                ...auth
-            },
-        });
-        const data = await response.json();
-        console.log('fetchTraining')
-        if (data.length != 0) {
-            dispatch(trainingLoaded(data))
-        } else {
-            console.log('слов для повторения нет')
-        }
+    const response = await getResponse(url, "GET")
 
-        return data;
-    } catch (error) {
-        if (error.message === "Unauthorized") {
-            console.log("Ошибка 401: Unauthorized");
-        }
-        console.log(error);
+    // if not no content
+    if (response.status !== 204) {
+        const data = await response.json();
+        if (data) {
+            dispatch(trainingLoaded(data));
+        } 
+    } else {
+        console.log("слов для повторения нет");
     }
+
+    return 
 });
+
 export const fetchTrainingInfo = createAsyncThunk("training/fetchTrainingInfo", async (_, { dispatch }) => {
     const url = new URL(host + info);
-    const accessToken = localStorage.getItem("access");
-    const auth = {
-        Authorization: `Beare ${accessToken}`,
-    };
-    try {
-        const response = await fetch(url.toString(), {
-            method: "GET",
-            headers: {
-                ...headers,
-                ...auth
-            },
-        });
+
+    const response = await getResponse(url, "GET")
+    
+    if (response.ok) {
         const data = await response.json();
-        dispatch(trainingInfoLoaded(data));
-        return data;
-    } catch (error) {
-        if (error.message === "Unauthorized") {
-            console.log("Ошибка 401: Unauthorized");
+        if (data) {
+            dispatch(trainingInfoLoaded(data));
         }
-        console.log(error);
     }
+    return data;
 });
 
 export const fetchTrainingPatch = createAsyncThunk("training/fetchTrainingPatch", async ({ type, pk, is_correct }, { dispatch }) => {
     const url = new URL(host + training);
-    const accessToken = localStorage.getItem("access");
-    const auth = {
-        Authorization: `Beare ${accessToken}`,
-    };
+
     const params = new URLSearchParams({
         type,
     });
@@ -80,19 +53,12 @@ export const fetchTrainingPatch = createAsyncThunk("training/fetchTrainingPatch"
         pk: pk,
         is_correct: is_correct,
     };
-    const response = await fetch(url.toString(), {
-        method: "PATCH",
-        headers: {
-            ...headers,
-            ...auth
-        },
-        body: JSON.stringify(body),
-    });
-    if (response.ok) {
-        return;
-    } else {
-        throw new Error(response.statusText);
-    }
+
+    const bodyString = JSON.stringify(body);
+
+    await getResponse(url, "PATCH", bodyString)
+
+  
 });
 
 const trainingSlice = createSlice({
