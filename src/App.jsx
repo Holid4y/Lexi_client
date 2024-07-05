@@ -44,7 +44,6 @@ function App() {
     useEffect(() => {
         dispatch(checkAccessTokenValidity());
         
-
         const storedTheme = localStorage.getItem("theme");
 
         // Проверка хранилища на наличие темы

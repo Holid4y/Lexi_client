@@ -31,9 +31,7 @@ function Sentences({ sentences, index }) {
     return (
         <span key={index} className={"sentences"}>
             <SpanWord sentences={sentences} />
-
             <TranslationButton handleTranslate={handleTranslate} />
-
             {showTranslation && <span className="translation">{translation}</span>}
         </span>
     );
