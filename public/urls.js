@@ -100,10 +100,10 @@ export async function getResponse(url, method, body) {
             ...headers,
             ...auth,
         },
+        body: body
     });
 
     
     console.log(`${method} Запрос на ${url}. OK: ${response.ok}`);
-    // console.log( await response.json())
     return response;
 }

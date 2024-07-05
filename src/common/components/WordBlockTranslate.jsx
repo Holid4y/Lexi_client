@@ -9,7 +9,6 @@ function WordBlockTranslate() {
 
     const { text, part_of_speech, transcription, translations, synonyms, meanings, isVisible, loading, error } = useSelector((state) => state.word);
 
-    const { translated_text } = useSelector((state) => state.googletrans);
 
     useEffect(() => {
         function handleClickOutside(event) {
@@ -83,15 +82,6 @@ function WordBlockTranslate() {
                                     {meaning.text}
                                 </span>
                             ))}
-                            {translated_text && (
-                                <>
-                                    <hr />
-                                    <b>Перевод предложения: </b>
-                                    <span className="pe-2 text-break">
-                                        {translated_text}
-                                    </span>
-                                </> 
-                            )}
                             
                         </div>
                     ) : loading ? (

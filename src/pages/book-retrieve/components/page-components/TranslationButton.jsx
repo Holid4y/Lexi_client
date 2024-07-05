@@ -7,9 +7,9 @@ function TranslationButton({ handleTranslate }) {
 
 
     return (
-        <div className="translation-button" onClick={handleTranslate}>
+        <i className="translation-button" onClick={handleTranslate}>
             <SVG name={"translate"} />
-        </div>
+        </i>
     );
 }
 

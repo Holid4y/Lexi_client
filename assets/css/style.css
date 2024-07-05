@@ -517,7 +517,7 @@ input[type="number"] {
     position: absolute;
     width: 30px;
     height: 30px;
-    opacity: 0;
+    opacity: 1;
     cursor: pointer;
     transition: opacity 0.3s ease;
 }
@@ -526,6 +526,10 @@ input[type="number"] {
 @media (hover: hover) and (pointer: fine) {
     .sentences:hover .translation-button {
         opacity: 1;
+    }
+    .translation-button {
+        opacity: 0;
+
     }
 }
 
