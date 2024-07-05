@@ -1,16 +1,28 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+
 import { toggleWordBlock } from "../reducers/wordSlice";
+import { fetchVocabularyPost, fetchVocabularyDelete } from "../reducers/vocabularySlice";
+
 import Loading from "../components/Treatment/Loading";
 import SVG from "../../common/components/Icons/SVG";
 
 function WordBlockTranslate() {
     const dispatch = useDispatch();
 
-    const { text, part_of_speech, transcription, translations, synonyms, meanings, isVisible, loading, error } = useSelector((state) => state.word);
+    const { pk, text, part_of_speech, transcription, translations, synonyms, meanings, related_pk, isVisible, loading, error } = useSelector(
+        (state) => state.word
+    );
 
+    const [isRelatedWord, setIsRelatedWord] = useState(false);
 
     useEffect(() => {
+        setIsRelatedWord(related_pk)
+    }, [text]);
+    
+    useEffect(() => {
+        
+        
         function handleClickOutside(event) {
             const wordBlock = document.getElementById("wordBlock");
             if (wordBlock && !wordBlock.contains(event.target)) {
@@ -32,6 +44,15 @@ function WordBlockTranslate() {
         };
     }, [isVisible, dispatch]);
 
+    const handleAddWordToVocabulary = (pk) => {
+        dispatch(fetchVocabularyPost(pk));
+        setIsRelatedWord(true)
+    };
+    const handleDeleteWordToVocabulary = (related_pk) => {
+        dispatch(fetchVocabularyDelete(related_pk));
+        setIsRelatedWord(false)
+    };
+
     return (
         <div>
             <div className="modal-backdrop fade show" style={{ display: isVisible ? "block" : "none" }}></div>
@@ -45,12 +66,18 @@ function WordBlockTranslate() {
                                 </span>
                                 <span>[ {transcription} ]</span>
                                 <button className="btn">
-                                    <SVG name="voice_min"/>
+                                    <SVG name="voice_min" />
                                 </button>
                                 <div style={{ marginLeft: "auto", display: "flex", alignItems: "center" }}>
-                                    <button className="btn" onClick={() => console.log('fjk')}>
-                                        <SVG name="Unfill_star"/>
-                                    </button>
+                                    {isRelatedWord ? (
+                                        <button className="btn" onClick={() => handleDeleteWordToVocabulary(related_pk)}>
+                                            <SVG name="fill_star" />
+                                        </button>
+                                    ) : (
+                                        <button className="btn" onClick={() => handleAddWordToVocabulary(pk)}>
+                                            <SVG name="Unfill_star" />
+                                        </button>
+                                    )}
                                 </div>
                             </div>
                             <div>
@@ -82,7 +109,6 @@ function WordBlockTranslate() {
                                     {meaning.text}
                                 </span>
                             ))}
-                            
                         </div>
                     ) : loading ? (
                         <Loading />

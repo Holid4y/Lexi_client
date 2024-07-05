@@ -16,6 +16,7 @@ export const fetchVocabulary = createAsyncThunk("vocabulary/fetchVocabulary", as
 
     return data;
 });
+
 export const fetchVocabularyStats = createAsyncThunk("vocabulary/fetchVocabularyStats", async (_, { dispatch }) => {
     const url = new URL(host + stats);
 
@@ -31,6 +32,32 @@ export const fetchVocabularyStats = createAsyncThunk("vocabulary/fetchVocabulary
     return data;
 });
 
+export const fetchVocabularyPost = createAsyncThunk("vocabulary/fetchVocabularyPost", async (pk, { dispatch }) => {
+    const url = new URL(host + vocabulary);
+    const body = { 
+        word: pk
+    }
+    const bodyString = JSON.stringify(body);
+    await getResponse(url, "POST", bodyString);
+
+    if (response.ok) {
+        const data = await response.json();
+        if (data) {
+            return data
+        }
+    } 
+
+});
+
+export const fetchVocabularyDelete = createAsyncThunk("vocabulary/fetchVocabularyDelete", async (pk, { dispatch }) => {
+    const url = new URL(host + vocabulary + pk);
+
+    await getResponse(url, "DELETE");
+    
+    return
+
+});
+
 const vocabularySlice = createSlice({
     name: "vocabulary",
     initialState: {
@@ -42,6 +69,9 @@ const vocabularySlice = createSlice({
         // other
         loading: false,
         error: null,
+        // post
+        postLoading: false,
+        postError: null
     },
     reducers: {
         vocabularyStatsLoaded: (state, action) => {
@@ -64,6 +94,7 @@ const vocabularySlice = createSlice({
                 state.loading = false;
                 state.error = action.error.message;
             })
+
             .addCase(fetchVocabulary.pending, (state) => {
                 state.loading = true;
             })
@@ -73,6 +104,17 @@ const vocabularySlice = createSlice({
             .addCase(fetchVocabulary.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.error.message;
+            })
+
+            .addCase(fetchVocabularyPost.pending, (state) => {
+                state.postLoading = true;
+            })
+            .addCase(fetchVocabularyPost.fulfilled, (state) => {
+                state.postLoading = false;
+            })
+            .addCase(fetchVocabularyPost.rejected, (state, action) => {
+                state.postLoading = false;
+                state.postError = action.error.message;
             });
     },
 });
