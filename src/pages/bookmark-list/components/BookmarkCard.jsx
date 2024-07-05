@@ -22,9 +22,13 @@ const BookmarkCard = ({ bookmark }) => {
         }
     };
 
+    const styleCardisBookmark = {
+        opacity: isBookmarked? "1" : ".3"
+    };
+
     return (
         <div className="col-12 col-md-6">
-            <div className="card text-end bg-card-dark w-100">
+            <div className="card text-end bg-card-dark w-100" style={styleCardisBookmark}>
                 <Link to={`/book/${bookmark.book_cover.slug}/${bookmark.target_page}`}>
                     <div className="card-body">
                         <h5 className="card-title text-start mb-3">
