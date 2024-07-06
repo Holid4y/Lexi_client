@@ -24,7 +24,7 @@ function WordList() {
             {loading ? ( LoadingView ) : (
                 <main className="container pb-5">
                     <div className="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-5 g-3">
-                        {(words && words.map((word, index) => <Block pk={word.pk} word={word.word} key={index} />)) || (loading ? LoadingView : ErrorView)}
+                        {(words && words.results.map((word, index) => <Block pk={word.pk} word={word.word} key={index} />)) || (loading ? LoadingView : ErrorView)}
                     </div>
                 </main>
             )}
