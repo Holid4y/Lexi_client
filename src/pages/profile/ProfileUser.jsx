@@ -416,6 +416,19 @@ function Profile() {
                         </div>
                         {/* {OptionsAvatar} */}
                     </div>
+
+                    {/* <div className="row mb-4">
+                        <div className="col-6">
+                            <div className="card">
+                                <h4 className="game-text text-center py-2">Задания</h4>
+                            </div>
+                        </div>
+                        <div className="col-6">
+                            <div className="card">
+                                <h4 className="game-text text-center py-2">Мои достижения</h4>
+                            </div>
+                        </div>
+                    </div> */}
                     
                     <ul className="nav nav-tabs" id="myTab" role="tablist">
                         <li className="nav-item w-50 text-center" role="presentation">

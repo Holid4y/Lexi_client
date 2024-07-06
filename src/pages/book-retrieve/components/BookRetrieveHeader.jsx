@@ -46,6 +46,7 @@ const BookRetrieveHeader = ({ pk, page }) => {
             dispatch(fetchBookmarksCreateUpdate(data));
         }
     };
+    
     return (
         <div className="container mb-4 pt-2">
             <div className="card text-end mb-4 w-100 bg-card-dark">

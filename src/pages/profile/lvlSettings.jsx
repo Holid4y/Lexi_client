@@ -43,7 +43,25 @@ function lvlSettings() {
         dispatch(fetchPutSettings(data));
     }
 
-    const Header = <Headers title="Настройки уровней" />;
+    const hasChanges = JSON.stringify(levelsState) !== JSON.stringify(levels);
+
+    const Header = <div className="container sticky-top mb-4 pt-2">
+        <nav className="navbar dark-nav">
+            <div className="container-fluid px-1">
+                <span className="navbar-brand">Настройки уровней</span>
+                {putLoading ? (
+                    <button className="btn mx-0 text-success">
+                        <span className="visually-hidden">Загрузка...</span>
+                    </button>
+                ) : hasChanges ? (
+                    <button className="btn mx-0 text-success" onClick={handleSave}>
+                        Сохранить
+                    </button>
+                ) : null}
+            </div>
+        </nav>
+    </div>
+
     const LoadingView = <Loading />;
     const ErrorView = <Errors error={error} />;
 
@@ -109,25 +127,6 @@ function lvlSettings() {
                             </svg>
                         </button>
                         <small>При необходимости, добавьте уровни</small>
-                    </div>
-                    <div className="mt-3">
-                        {putLoading ? (
-                            <div className="d-flex justify-content-center my-4">
-                                <button type="text" className="btn btn-primary save-btn py-2 w-50" disabled>
-                                    <div className="spinner-border spinner-border-sm" role="status">
-                                        <span className="visually-hidden">Loading...</span>
-                                    </div>
-                                </button>
-                            </div>
-                        ) : (
-                            <div className="d-flex justify-content-center my-4">
-                                <button type="text" className="btn btn-primary save-btn py-2 w-50" onClick={handleSave}>
-                                    <span>
-                                        <b>Сохранить</b>
-                                    </span>
-                                </button>
-                            </div>
-                        )}
                     </div>
                 </main>
             )}

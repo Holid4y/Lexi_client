@@ -28,8 +28,8 @@ function Hint({ text }) {
                 onClick={() => handleClick()} disabled={hintIsOpen} >
                 <h1 className="p-0 m-0">{hintText ? hintText : ''}</h1>
                 {showSmallText && (
-                    <small className="small-text-hint top-50 start-50 translate-middle w-100 text-start ps-3">
-                        Если затрудняетесь ответить, нажмите на блок с подсказкой
+                    <small className="small-text-hint top-50 start-50 translate-middle w-100 text-center ps-3">
+                        Нажмите, если затрудняетесь ответить
                     </small>
                 )}
             </button>

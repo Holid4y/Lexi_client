@@ -26,6 +26,16 @@ function BookRetrieve() {
         dispatch(fetchBook({ slug: slug, page: page }));
     }, [dispatch, slug]);
 
+    useEffect(() => {
+        // Вычисление процента прогресса
+        const progressBar = document.querySelector('.progress-bar');
+        if (progressBar && page_count) {
+            const percentage = (page / page_count) * 100;
+            progressBar.style.width = `${percentage}%`;
+            progressBar.setAttribute('aria-valuenow', percentage);
+        }
+    }, [page, page_count]);
+
     const LoadingView = <Loading />;
     const Header = <BookRetrieveHeader pk={pk} page={page} />;
     const Page = <Pages page={page}/>;
@@ -34,6 +44,11 @@ function BookRetrieve() {
     return (
         <div className="align-items-center">
             {Header}
+            <div className="container sticky-top">
+                <div className="progress progress-2" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                    <div className="progress-bar"></div>
+                </div>
+            </div>
             {loading ? ( LoadingView ) : (
                 <main className="container pb-5">
                     {pages && Page}
