@@ -2,9 +2,12 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { host, vocabulary, stats } from "../../../public/urls";
 import { getResponse } from "../../../public/urls";
 
-export const fetchVocabulary = createAsyncThunk("vocabulary/fetchVocabulary", async (_, { dispatch }) => {
+export const fetchVocabulary = createAsyncThunk("vocabulary/fetchVocabulary", async (page, { dispatch }) => {
     const url = new URL(host + vocabulary);
-
+    const params = new URLSearchParams({
+        page,
+    });
+    url.search = params.toString();
     const response = await getResponse(url, "GET");
 
     if (response.ok) {

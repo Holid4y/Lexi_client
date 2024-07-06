@@ -11,7 +11,9 @@ function WordList() {
     const dispatch = useDispatch();
     const { words, loading, error } = useSelector((state) => state.vocabulary);
     useEffect(() => {
-        dispatch(fetchVocabulary());
+        // сюда надо передавать страницу, на которую надо перейди (просто число) 
+        // тут для примера, захардкожу 1
+        dispatch(fetchVocabulary(1));
     }, [dispatch]);
 
     const Header = <Headers title="Все слова"/>
