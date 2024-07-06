@@ -1,14 +1,14 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { fetchWordGet, toggleWordBlock } from "../../../common/reducers/wordSlice";
+import { fetchWordGet, toggleWordBlock, setReletedPk } from "../../../common/reducers/wordSlice";
 
-function Block({ word }) {
+function Block({ word, pk }) {
     const dispatch = useDispatch();
 
-    function handleBlockClick(pk) {
+    function handleBlockClick(wordPk) {
         dispatch(toggleWordBlock());
-        dispatch(fetchWordGet(pk));
-        // чистить state
+        dispatch(fetchWordGet(wordPk));
+        dispatch(setReletedPk(pk))
     }
 
     return (

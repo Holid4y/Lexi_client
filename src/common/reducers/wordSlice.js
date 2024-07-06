@@ -46,6 +46,7 @@ const wordSlice = createSlice({
         translations: null,
         synonyms: null,
         meanings: null,
+        related_pk: false,
 
         // WordBlockTranslation
         isVisible: false,
@@ -71,6 +72,8 @@ const wordSlice = createSlice({
             state.translations = action.payload.word.translations;
             state.synonyms = action.payload.word.synonyms;
             state.meanings = action.payload.word.meanings;
+
+            state.related_pk = action.payload.related_pk
         },
         toggleWordBlock: (state, action) => {
             state.isVisible = !state.isVisible;
@@ -83,6 +86,9 @@ const wordSlice = createSlice({
             state.translations = null;
             state.synonyms = null;
             state.meanings = null;
+        },
+        setReletedPk:(state, action) => {
+            state.related_pk = action.payload
         },
     },
     extraReducers: (builder) => {
@@ -111,5 +117,5 @@ const wordSlice = createSlice({
     },
 });
 
-export const { wordGetLoaded, wordPostLoaded, toggleWordBlock, cleanStateWord } = wordSlice.actions;
+export const { wordGetLoaded, wordPostLoaded, toggleWordBlock, cleanStateWord, setReletedPk } = wordSlice.actions;
 export default wordSlice.reducer;
