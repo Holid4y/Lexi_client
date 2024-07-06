@@ -12,8 +12,16 @@ function BookList() {
     const dispatch = useDispatch();
     const { books, loading, error } = useSelector((state) => state.books);
     const currentPage = useSelector((state) => state.page);
+    // console.log(books) 
+    // {
+    //     count: 4, // количество страниц
+    //     next: 2, // номер след. страницы
+    //     previous: null, // номер предыдущую страницы
+    //     results: Array(1) // массив с результатоми
+    // }
 
     useEffect(() => {
+        // сюда надо передавать страницу, на которую надо перейди (просто число) 
         dispatch(fetchBooks(currentPage));
     }, [dispatch, currentPage]);
 
