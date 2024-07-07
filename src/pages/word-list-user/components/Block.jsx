@@ -12,7 +12,7 @@ function Block({ word, pk }) {
     }
 
     return (
-        <div className="col" role="button" onClick={() => handleBlockClick(word.pk)}>
+        <div role="button" onClick={() => handleBlockClick(word.pk)}>
             <div className="card card-btn statistic-block d-flex flex-column justify-content-center align-items-center position-relative">
                 <h4 className="text-center">{word.text}</h4>
                 <div className="position-absolute bottom-0 start-0 ms-2 mb-2">

@@ -1,8 +1,8 @@
 import React, { useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { fetchBook } from "../../../common/reducers/bookRetrieveSlice";
-import SVG from "../../../common/components/Icons/SVG";
+import { fetchBook } from "../../reducers/bookRetrieveSlice";
+import SVG from "../Icons/SVG";
 
 
 const PaginationButton = ({ page, page_count, slug, setIsNext }) => {

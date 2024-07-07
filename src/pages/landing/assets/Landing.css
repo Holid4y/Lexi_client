@@ -1,0 +1,29 @@
+/* 
+html,
+.container {
+    scrollbar-width: none;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+html > html::-webkit-scrollbar,
+.container::-webkit-scrollbar {
+    display: none;
+}
+.container {
+    height: 100vh;
+    scroll-snap-type: y mandatory;
+}
+
+.section {
+    height: 100vh;
+    scroll-snap-align: start;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    color: white;
+}
+
+.bg-primary { background-color: #007bff; }
+.bg-danger { background-color: #dc3545; }
+.bg-secondary { background-color: #6c757d; } */

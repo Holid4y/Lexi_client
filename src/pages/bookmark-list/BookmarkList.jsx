@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchBookmarks, fetchBookmarksDelete } from "../../common/reducers/bookmarkSlice";
 import { Link } from "react-router-dom";
@@ -6,22 +6,19 @@ import BookmarkCard from "./components/BookmarkCard";
 import AddBook from "./components/AddBook";
 import Search from "../../common/components/Headers/Search";
 import Loading from "../../common/components/Treatment/Loading";
+import PaginationButton from "../../common/components/Pagination/PagePagination";
 
 function BookmarkList() {
     const dispatch = useDispatch();
     const { bookmarks, loading, error } = useSelector((state) => state.bookmarks);
+    const [currentPage, setCurrentPage] = useState(1);
 
     useEffect(() => {
-        dispatch(fetchBookmarks());
-    }, [dispatch]);
+        dispatch(fetchBookmarks(currentPage));
+    }, [dispatch, currentPage]);
 
-    // Удаление закладки
-    const deleteBookmark = (bookmarkId) => {
-        if (bookmarkId) {
-            dispatch(fetchBookmarksDelete(bookmarkId));
-        } else {
-            console.error("Ошибка: Невозможно удалить закладку. Отсутствует bookmarkId");
-        }
+    const handlePageChange = (page) => {
+        setCurrentPage(page);
     };
 
     const filteredBookmarks = bookmarks?.results?.filter((bookmark) => bookmark.book_cover.title.toLowerCase());
@@ -31,15 +28,14 @@ function BookmarkList() {
     <div>
         {filteredBookmarks && filteredBookmarks.length > 0 ? (
             <div className="row g-4">
+                <div className="col-12 col-md-6">
+                    <button type="button" className="card card-btn bg-card-dark w-100 h-100 d-flex justify-content-center align-items-center" data-bs-toggle="modal" data-bs-target="#exampleModal1">
+                        <b className="fs-1">+</b>
+                    </button>
+                </div>
                 {filteredBookmarks.map((bookmark, index) => (
                     <BookmarkCard bookmark={bookmark} key={index} />
                 ))}
-                <div className="pagination-position">
-                    <button type="button" className="btn btn-primary px-4" data-bs-toggle="modal" data-bs-target="#exampleModal1">
-                        {" "}
-                        Добавить книгу{" "}
-                    </button>
-                </div>
             </div>
         ) : (
             <div className="text-center mt-5">
@@ -71,6 +67,7 @@ function BookmarkList() {
             {loading ? ( LoadingView ) : (
                 <main className="container pb-5">
                     {BooksMarkView}
+                    <PaginationButton currentPage={currentPage} pageCount={bookmarks ? Math.ceil(bookmarks.count / 2) : 1} onPageChange={handlePageChange} setIsNext={(isNext) => {}}/>
                     {BtnAddBook}
                 </main>
             )}

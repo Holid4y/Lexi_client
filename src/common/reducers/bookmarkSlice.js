@@ -2,18 +2,18 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { host, bookmarks } from "../../../public/urls";
 import { getResponse } from "../../../public/urls";
 
-export const fetchBookmarks = createAsyncThunk("bookmarks/fetchBookmarks", async (_, { dispatch }) => {
+export const fetchBookmarks = createAsyncThunk("bookmarks/fetchBookmarks", async (page = 1) => {
     const url = new URL(host + bookmarks);
+    url.searchParams.append('page', page);
 
-    const response = await getResponse(url, "GET")
+    const response = await getResponse(url, "GET");
     
     if (response.ok) {
         const data = await response.json();
-        if (data) {
-            dispatch(bookmarkLoaded(data));
-        }
+        return data;
+    } else {
+        throw new Error('Failed to fetch bookmarks');
     }
-    return data;
 });
 
 export const fetchBookmarksCreateUpdate = createAsyncThunk("bookmarks/fetchBookmarksCreateUpdate", async ({ bookId, targetPage }, { dispatch }) => {
@@ -51,18 +51,15 @@ const bookmarkSlice = createSlice({
         loading: false,
         error: null,
     },
-    reducers: {
-        bookmarkLoaded: (state, action) => {
-            state.bookmarks = action.payload;
-        },
-    },
+    reducers: {},
     extraReducers: (builder) => {
         builder
             .addCase(fetchBookmarks.pending, (state) => {
                 state.loading = true;
             })
-            .addCase(fetchBookmarks.fulfilled, (state) => {
+            .addCase(fetchBookmarks.fulfilled, (state, action) => {
                 state.loading = false;
+                state.bookmarks = action.payload;
             })
             .addCase(fetchBookmarks.rejected, (state, action) => {
                 state.loading = false;
