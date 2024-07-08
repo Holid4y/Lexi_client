@@ -32,24 +32,6 @@ function Statistic() {
         },
     };
 
-    const barData = {
-        labels: ["01", "02", "03", "04", "05", "06", "07"],
-        datasets: [
-            {
-                label: "Узнаваемость",
-                data: [4, 11, 9, 7, 8, 3, 6],
-                backgroundColor: bgFirstCol,
-                borderRadius: 8,
-            },
-            {
-                label: "Воспроизведение",
-                data: [6, 3, 8, 7, 9, 11, 4],
-                backgroundColor: bgSecondCol,
-                borderRadius: 8,
-            },
-        ],
-    };
-
     const barDatalvl = {
         labels: recognize.map((_, index) => `L${index + 1}`),
         datasets: [
@@ -106,19 +88,10 @@ function Statistic() {
         </div>
     </div>
 
-    const CanvaView = (
-        <div className="text-center">
-            <h5 className="mt-4 mb-2">Правильных слов в тестах</h5>
-            <div className="chart-container" style={{ position: "relative", width: "100%", height: "200px" }}>
-                <Bar data={barData} options={barOptions} />
-            </div>
-        </div>
-    );
-
     const CanvaViewLvl = (
         <div className="text-center">
             <h5 className="mt-4 mb-2">Количество слов в уровнях</h5>
-            <div className="chart-container" style={{ position: "relative", width: "100%", height: "200px" }}>
+            <div className="chart-container" style={{ position: "relative", width: "100%", height: "230px" }}>
                 <Bar data={barDatalvl} options={barOptions} />
             </div>
         </div>
@@ -154,7 +127,6 @@ function Statistic() {
             ) : (
                 <main className="container pb-5">
                     {BlockWordStatistic}
-                    {CanvaView}
                     {CanvaViewLvl}
                     {/* {LinkLVLSettings}
                     {LinkAllWords} */}

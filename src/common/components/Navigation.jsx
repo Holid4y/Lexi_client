@@ -25,9 +25,9 @@ function Navigation() {
 
     return (
         <nav className="container fixed-bottom py-2">
-            <div className="dark-nav">
+            <div className="">
                 <WordBlockTranslate />
-                <ul className="nav justify-content-center">
+                <ul className="dark-nav nav justify-content-center">
                     <li className="nav-item">
                         <Link to="/" className={getLinkClass("/")}>
                             <SVG name="home" />

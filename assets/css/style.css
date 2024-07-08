@@ -26,6 +26,11 @@ html > html::-webkit-scrollbar,
 .toggle-block::-webkit-scrollbar {
     display: none;
 }
+
+body.no-scroll {
+    overflow: hidden;
+}
+
 main {
     padding-bottom: 70px;
 }
@@ -602,3 +607,16 @@ input[type="number"] {
 .opacity-3 {
     opacity: 0.3;
 }
+
+.add-word-text{
+    background-color: #ffffff;
+    color: red;
+    cursor: pointer;
+    padding: 2px 10px;
+    border-radius: 10px;
+}
+
+.text-break-all {
+    word-wrap: break-all !important;
+    word-break: break-all !important;
+  }
