@@ -351,6 +351,7 @@ input[type="number"] {
 
 /* Блоки уровней в статистике */
 .statistic-block {
+    word-break: break-all;
     aspect-ratio: 1 / 1;
     background-color: var(--bg-btn-primary);
 }
@@ -359,7 +360,7 @@ input[type="number"] {
     background-color: var(--book-text);
 }
 .statistic-block h4 {
-    font-size: 30px;
+    font-size: 25px;
     font-weight: bold;
     color: white;
 }
