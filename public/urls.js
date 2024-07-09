@@ -12,8 +12,7 @@ export const verify = "jwt/verify/";
 // home
 export const home = "home/";
 
-// user
-export const user = "user/me/";
+// settings
 export const settings = "users/settings/";
 
 // vocabulary
@@ -29,6 +28,10 @@ export const info = training + "info/";
 
 // googletrans
 export const googletrans = words + "googletrans/";
+
+// auth
+export const auth = "auth/"
+export const registration = auth + "users/"
 
 // Эта функция полезна для получения значения определенного cookie
 // из браузера, а именно для csrf токена.
