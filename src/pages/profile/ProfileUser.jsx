@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import Avatar from 'avataaars';
 
-import { fetchSettings, fetchPutSettings } from "../../common/reducers/userSlice";
+import { fetchSettings, fetchPutSettings, throwUser } from "../../common/reducers/userSlice";
 import { setIsAuth } from "../../common/reducers/authSlice";
 import { setTheme } from "../../common/reducers/themeSlice";
 import { renderResponse } from "../../../public/urls";
@@ -116,6 +116,7 @@ function Profile() {
         localStorage.removeItem('access');
         localStorage.removeItem('refresh');
         dispatch(setIsAuth(false))
+        dispatch(throwUser())
         navigate("/login");
     };
 

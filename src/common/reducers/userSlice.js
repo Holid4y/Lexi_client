@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { host, user, settings } from "../../../public/urls";
+import { host, settings } from "../../../public/urls";
 import { getResponse, headers } from "../../../public/urls";
 
 
@@ -88,6 +88,21 @@ const userSlice = createSlice({
         setError: (state, action) => {
             state.error = action.payload
         },
+        throwUser: (state, action) => {
+            state.username = null;
+            state.email = null;
+            state.activated_email = false;
+            state.dark_theme = false;
+            state.number_of_false_set = null;
+            state.levels = null;
+            state.count_word_in_round = null;
+            state.time_to_view_result = null;
+            state.loading = false;
+            state.error = null;
+            state.putLoading = false;
+            state.putError = null;
+        },
+        
     },
     extraReducers: (builder) => {
         builder
@@ -116,5 +131,5 @@ const userSlice = createSlice({
     },
 });
 
-export const { settingsLoaded, settingsPutLoaded, updateLevels, addLevel, deleteLevel, setError } = userSlice.actions;
+export const { settingsLoaded, settingsPutLoaded, updateLevels, addLevel, deleteLevel, setError, throwUser } = userSlice.actions;
 export default userSlice.reducer;

@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { host, login, refresh, verify } from "../../../public/urls";
+import { host, login, registration, refresh, verify } from "../../../public/urls";
 import { headers } from "../../../public/urls";
 
 export const fetchLogin = createAsyncThunk("auth/fetchLogin", async ({ username, password }, { dispatch }) => {
@@ -26,6 +26,41 @@ export const fetchLogin = createAsyncThunk("auth/fetchLogin", async ({ username,
         throw new Error(response.statusText);
     }
 });
+
+export const fetchRegistration = createAsyncThunk("auth/fetchRegistration", async ({ username, email, password, re_password }, { dispatch }) => {
+
+    const url = new URL(host + registration);
+
+    const response = await fetch(url.toString(), {
+        method: "POST",
+        headers: {
+            ...headers,
+        },
+        body: JSON.stringify({
+            username,
+            email,
+            password,
+            re_password
+        }),
+    });
+
+    console.log("Ответ сервера:", response);
+    
+    if (response.ok) {
+        const data = await response.json();    
+        console.log("Полученные данные:", data);
+        return data;
+    } else if (response.status == 400) {
+        const data = await response.json();
+        dispatch(setError(data))
+    } 
+    
+    else {
+        console.error("Ошибка при регистрации:", response.status, response.statusText);
+        throw new Error(`Ошибка при регистрации: ${response.status} - ${response.statusText}`);
+    }
+});
+
 
 export const fetchRefresh = createAsyncThunk("auth/fetchRefresh", async (refreshToken, { dispatch }) => {
     const url = new URL(host + refresh);
@@ -132,7 +167,19 @@ const authSlice = createSlice({
             .addCase(fetchLogin.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.error.message;
-            });
+            })
+            
+            .addCase(fetchRegistration.pending, (state) => {
+                state.loading = true;
+            })
+            .addCase(fetchRegistration.fulfilled, (state) => {
+                state.loading = false;
+                state.error = null;
+            })
+            .addCase(fetchRegistration.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.error.message;
+            })
     },
 });
 
