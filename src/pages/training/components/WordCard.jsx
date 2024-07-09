@@ -14,7 +14,7 @@ function WordCard({ localType, text }) {
 
     return (
         <div className="card statistic mb-5 pt-4">
-            <h4 className="text-center p-2">{text}</h4>
+            <h4 className="text-center p-2 unselect">{text}</h4>
             <span className="fs-6 ms-1">L{training && getLevel()}</span>
         </div>
     );

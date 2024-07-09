@@ -505,14 +505,21 @@ input[type="number"] {
     margin-bottom: 40px;
     font-size: 22px;
 }
-.sentences {
-    position: relative;
-    display: block;
-    margin-bottom: 10px;
+.unselect {
     user-select: none;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
+}
+.sentences {
+    position: relative;
+    display: block;
+    margin-bottom: 10px;
+    /* Под вопросом */
+    /* user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none; */
     transition: transform 0.3s ease;
 }
 .view-loading::before {
