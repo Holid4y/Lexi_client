@@ -12,6 +12,8 @@ export const fetchBook = createAsyncThunk("book/fetchBook", async (params, { dis
         const data = await response.json();
         if (data) {
             dispatch(bookLoaded(data));
+            const value = {"slug":slug,"page": page};
+            localStorage.setItem('recentlyBook', JSON.stringify(value));
         }
     }
     return data;
@@ -25,6 +27,7 @@ const bookRetrieveSlice = createSlice({
         author: null,
         author_upload: null,
         page_count: null,
+        pages_slice: null,
         slug: null,
         pages: null,
         bookmark: null,
@@ -39,6 +42,7 @@ const bookRetrieveSlice = createSlice({
             state.author = action.payload.author;
             state.author_upload = action.payload.author_upload;
             state.page_count = action.payload.page_count;
+            state.pages_slice = action.payload.pages_slice;
             state.slug = action.payload.slug;
             state.pages = action.payload.pages;
             state.bookmark = action.payload.bookmark;

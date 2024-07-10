@@ -4,58 +4,56 @@ import { useParams, useNavigate } from "react-router-dom";
 import { fetchBook } from "../../common/reducers/bookRetrieveSlice";
 import BookRetrieveHeader from "./components/BookRetrieveHeader";
 import Pages from "./components/Pages";
-import PaginationButton from "../../common/components/Pagination/Pagination";
+import PaginationButton from "../../common/components/Pagination/PagePagination";
 import Loading from "../../common/components/Treatment/Loading";
 import ProgressBar from "./components/ProgressBar";
 
 function BookRetrieve() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const { pk, pages, page_count, loading } = useSelector((state) => state.book);
-    const [isNext, setIsNext] = useState(true);
+
+    const { pk, pages, page_count, pages_slice, loading } = useSelector((state) => state.book);
     const { slug, page } = useParams();
+    const [currentPage, setCurrentPage] = useState(parseInt(page));
 
     useEffect(() => {
-        let pageNumber = parseInt(page, 10);
-        if (isNaN(pageNumber) || !/^\d+$/.test(page) || pageNumber < 1) {
-            pageNumber = 1;
-        } else if (page_count && pageNumber > page_count) {
-            pageNumber = page_count;
-        }
+        navigate(`/book/${slug}/${currentPage}`);
+    }, [currentPage]);
 
-        if (pageNumber !== parseInt(page, 10)) {
-            navigate(`/book/${slug}/${pageNumber}`, { replace: true });
-        } else {
-            localStorage.setItem('recentlyBook', JSON.stringify({ slug, page: pageNumber }));
-            if (isNext && (pageNumber !== 1)) {
-                if ((pageNumber - 1) % 50 === 0) { 
-                    dispatch(fetchBook({ slug: slug, page: pageNumber }));
-                }
-            } else {
-                if (pageNumber % 50 === 0) { 
-                    dispatch(fetchBook({ slug: slug, page: pageNumber - 1 }));
-                }
+    useEffect(() => {
+        if (pages){
+            const minPage = pages_slice && pages_slice[0];
+            const maxPage = pages_slice && pages_slice[1];
+
+            if (currentPage < minPage || currentPage > maxPage) {
+                // только когда выдет за range
+                dispatch(fetchBook({ slug: slug, page: currentPage }));
             }
         }
-    }, [dispatch, page, page_count, slug, navigate, isNext]);
+        // при каждом изменение страницы 
+        const value = {"slug":slug,"page": page};
+        localStorage.setItem('recentlyBook', JSON.stringify(value));
+
+    }, [dispatch, page]);
 
     useEffect(() => {
-        if (page && page > 0) {
-            dispatch(fetchBook({ slug: slug, page: parseInt(page, 10) }));
-        }
-    }, [dispatch, slug, page]);
 
+        dispatch(fetchBook({ slug: slug, page: currentPage }));
+
+    }, [dispatch, slug]);
 
     const LoadingView = <Loading />;
     const Header = <BookRetrieveHeader pk={pk} page={page} />;
-    const Page = <Pages page={page}/>;
-    const Pagination = <PaginationButton page={page} page_count={page_count} slug={slug} setIsNext={setIsNext} />;
+    const Page = <Pages page={page} />;
+    const Pagination = <PaginationButton currentPage={currentPage} pageCount={page_count} setCurrentPage={setCurrentPage} />;
 
     return (
         <div className="align-items-center">
             {Header}
             <ProgressBar />
-            {loading ? ( LoadingView ) : (
+            {loading ? (
+                LoadingView
+            ) : (
                 <main className="container pb-5">
                     {pages && Page}
                     {Pagination}

@@ -8,7 +8,7 @@ import BooksLinkCard from "./components/BooksLinkCard";
 import WorsHistory from "./components/WorsHistory";
 import Headers from "../../common/components/Headers/Header";
 import Loading from "../../common/components/Treatment/Loading";
-import BtnReadBook from "./components/BtnReadBook";
+import BtmRecentlyBook from "./components/BtmRecentlyBook";
 
 function Home() {
     const dispatch = useDispatch();
@@ -23,7 +23,7 @@ function Home() {
     const InfoCardView = <InfoCard />
     const BooksLinkCardView = <BooksLinkCard />
     const WordHistoryView = <WorsHistory />
-    const BtnReadBookView = <BtnReadBook/>
+    const BtmRecentlyBookView = <BtmRecentlyBook/>
 
     return (
         <div className="align-items-center">
@@ -39,7 +39,7 @@ function Home() {
                     {InfoCardView}
                     {BooksLinkCardView}
                     {WordHistoryView}
-                    {BtnReadBookView}
+                    {BtmRecentlyBookView}
                 </main>
             )}
         </div>
