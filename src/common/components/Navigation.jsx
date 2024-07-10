@@ -4,7 +4,6 @@ import { Link, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
 import { fetchTrainingInfo } from "../reducers/training/trainingSlice";
-import { fetchSettings } from "../reducers/userSlice";
 
 import { isActivatedEmail } from "../../pages/profile/utils.js/utils";
 
@@ -31,7 +30,6 @@ function Navigation() {
 
     useEffect(() => {
         dispatch(fetchTrainingInfo())
-        dispatch(fetchSettings());
     }, []);
 
     const getLinkClass = (path) => {

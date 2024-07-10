@@ -8,7 +8,6 @@ import authReducer from './common/reducers/authSlice';
 import userReducer from './common/reducers/userSlice';
 import homeReducer from './common/reducers/homeSlice';
 import vocabularyReducer from './common/reducers/vocabularySlice';
-import themeReducer from './common/reducers/themeSlice';
 import wordReducer from './common/reducers/wordSlice'
 // training
 import trainingReducer from './common/reducers/training/trainingSlice';
@@ -26,7 +25,6 @@ export const store = configureStore({
     user: userReducer,
     home: homeReducer,
     vocabulary: vocabularyReducer,
-    theme: themeReducer,
     word: wordReducer,
     // training
     training: trainingReducer,

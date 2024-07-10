@@ -3,7 +3,8 @@ import { BrowserRouter as Router, Routes, Route, useLocation } from "react-route
 import { useDispatch, useSelector } from "react-redux";
 
 import { checkAccessTokenValidity } from "./common/reducers/authSlice";
-import { setTheme } from "./common/reducers/themeSlice";
+import { fetchSettings } from "./common/reducers/userSlice";
+
 
 import Navigation from "./common/components/Navigation";
 import Home from "./pages/home/Home";
@@ -23,8 +24,6 @@ import LandingMain from "./pages/landing/LandingMain";
 
 function App() {
     const dispatch = useDispatch();
-    const { isAuth } = useSelector((state) => state.auth);
-    const { theme } = useSelector((state) => state.theme);
     const { dark_theme } = useSelector((state) => state.user);
 
     function getColorScheme() {
@@ -37,38 +36,32 @@ function App() {
         }
     }
 
-
-
     useEffect(() => {
         dispatch(checkAccessTokenValidity());
+        dispatch(fetchSettings());
+    }, []);
+
+    useEffect(() => {
+        
         
         const storedTheme = localStorage.getItem("theme");
 
-        // Проверка хранилища на наличие темы
-        if (storedTheme) {
-            dispatch(setTheme(storedTheme));
-        } else if (isAuth) {
-            // Пользователь зарегистрирован
-            dispatch(fetchSettings());
-            if (dark_theme !== undefined) {
-                // Если есть настройки пользователя, то устанавливаем их и сохраняем в локальном хранилище
-                dispatch(setTheme(dark_theme ? "dark" : "light"));
-                localStorage.setItem("theme", dark_theme ? "dark" : "light");
-                return;
-            }
+
+            
+        if (dark_theme !== undefined) {
+            // Если есть настройки пользователя, то устанавливаем их и сохраняем в локальном хранилище
+            localStorage.setItem("theme", dark_theme ? "dark" : "light");
+            return;
         }
+
 
         // Если хранилище пустое и пользователь не зарегистрирован, то устанавливаем тему в зависимости от системной настройки
-        if (storedTheme == null && isAuth == null) {
+        if (storedTheme == null ) {
             const systemTheme = getColorScheme();
-            dispatch(setTheme(systemTheme));
             localStorage.setItem("theme", systemTheme);
         }
-    }, [dispatch, isAuth, dark_theme]);
+    }, [dispatch, dark_theme]);
 
-    useEffect(() => {
-        document.documentElement.setAttribute("data-bs-theme", theme);
-    }, [theme]);
 
 
     return (
