@@ -628,5 +628,6 @@ input[type="number"] {
   }
 
 .selected {
-    background-color: #ff6464;
+    background-color: var(--disabled-bg);
+    border-color: var(--disabled-bg);
 }

@@ -3174,7 +3174,7 @@ fieldset:disabled .btn {
   --bs-btn-hover-color: #fff;
   --bs-btn-hover-bg: var(--bg-btn-primary-hover);
   --bs-btn-hover-border-color: var(--bg-btn-primary-hover);
-  --bs-btn-focus-shadow-rgb: 49, 132, 253;
+  --bs-btn-focus-shadow-rgb: 130, 138, 145;
   --bs-btn-active-color: #fff;
   --bs-btn-active-bg: var(--bg-btn-primary-hover);
   --bs-btn-active-border-color: var(--bg-btn-primary-hover);
@@ -3188,7 +3188,7 @@ fieldset:disabled .btn {
   --bs-btn-bg: var(--input-color);
   --bs-btn-border-color: var(--input-color);
   --bs-btn-hover-color: #fff;
-  --bs-btn-hover-bg: var(--bs-body-color);
+  --bs-btn-hover-bg: var(--disabled-bg);
   --bs-btn-hover-border-color: var(--box-shadow-color);
   --bs-btn-focus-shadow-rgb: 49, 132, 253;
   --bs-btn-active-color: #fff;
