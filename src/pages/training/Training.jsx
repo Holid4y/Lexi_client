@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchTrainingInfo } from "../../common/reducers/training/trainingSlice";
+import { throwState, setIsEnd } from "../../common/reducers/training/trainingRoundSlice";
 
 import TrainingCard from "./TrainingCard";
 
@@ -11,6 +12,8 @@ function Training() {
 
     useEffect(() => {
         dispatch(fetchTrainingInfo())
+        dispatch(throwState()); // очищаем текущий state
+        dispatch(setIsEnd(false));
     }, [dispatch]);
 
 
