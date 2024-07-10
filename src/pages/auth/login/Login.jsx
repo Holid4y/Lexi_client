@@ -8,6 +8,7 @@ import Loading from "../../../common/components/Treatment/Loading";
 const Login = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const { loading, error } = useSelector((state) => state.auth);
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
 

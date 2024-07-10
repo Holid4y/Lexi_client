@@ -11,7 +11,7 @@ export const fetchSettings = createAsyncThunk("user/fetchSettings", async (_, { 
         const data = await response.json();
         if (data) {
             dispatch(settingsLoaded(data));
-            // console.log(data.activated_email);
+            console.log(data);
         }
     }
     return data;
@@ -43,7 +43,7 @@ const userSlice = createSlice({
         email: null,
         activated_email: null,
         // settings
-        dark_theme: false,
+        theme: null,
         number_of_false_set: null,
         levels: null,
         count_word_in_round: null,
@@ -60,14 +60,14 @@ const userSlice = createSlice({
             state.username = action.payload.username;
             state.email = action.payload.email;
             state.activated_email = action.payload.activated_email;
-            state.dark_theme = action.payload.settings.dark_theme;
+            state.theme = action.payload.settings.theme;
             state.number_of_false_set = action.payload.settings.number_of_false_set;
             state.levels = action.payload.settings.levels;
             state.count_word_in_round = action.payload.settings.count_word_in_round;
             state.time_to_view_result = action.payload.settings.time_to_view_result;
         },
         settingsPutLoaded: (state, action) => {
-            state.dark_theme = action.payload.dark_theme;
+            state.theme = action.payload.theme;
             state.number_of_false_set = action.payload.number_of_false_set;
             state.levels = action.payload.levels;
             state.count_word_in_round = action.payload.count_word_in_round;
@@ -92,8 +92,8 @@ const userSlice = createSlice({
         throwUser: (state, action) => {
             state.username = null;
             state.email = null;
-            state.activated_email = false;
-            state.dark_theme = false;
+            state.activated_email = null;
+            state.theme = null;
             state.number_of_false_set = null;
             state.levels = null;
             state.count_word_in_round = null;

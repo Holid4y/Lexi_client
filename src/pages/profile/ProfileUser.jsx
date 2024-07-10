@@ -16,10 +16,10 @@ function Profile() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const { username, email, activated_email, number_of_false_set, levels, count_word_in_round, time_to_view_result, loading, error, putLoading } = useSelector(
+    const { username, email, activated_email, theme, number_of_false_set, count_word_in_round, time_to_view_result, loading, error, putLoading } = useSelector(
         (state) => state.user
     );
-    const [themeState, setThemeState] = useState("ligth");
+    const [themeState, setThemeState] = useState(null);
     const [falseSetLevel, setFalseSetLevel] = useState();
     const [countWordInRoundState, setCountWordInRoundState] = useState();
     const [timeToViewResultState, setTimeToViewResultState] = useState();
@@ -38,13 +38,14 @@ function Profile() {
         skinColor: "Light",
         avatarStyle: "Transparent",
     });
-
     useEffect(() => {
         if (!username) {
             dispatch(fetchSettings());
         }
-    }, [dispatch, username]);
-
+    }, [username]);
+    useEffect(() => {
+        setThemeState(theme)
+    }, [theme]);
     // заполняем state когда он появится в redux
     useEffect(() => {
         if (username) {
@@ -58,6 +59,7 @@ function Profile() {
         const value = event.target.value;
         setThemeState(value);
         localStorage.setItem("theme", value);
+        document.documentElement.setAttribute("data-bs-theme", value);
     };
 
     const handleIncrementLevel = () => {
@@ -98,12 +100,11 @@ function Profile() {
 
     function handleSave() {
         const data = {
-            dark_theme: themeState,
+            theme: themeState,
             number_of_false_set: falseSetLevel,
             count_word_in_round: countWordInRoundState,
             time_to_view_result: timeToViewResultState,
         };
-        console.log(data, "input data");
         dispatch(fetchPutSettings(data));
     }
 
@@ -116,7 +117,7 @@ function Profile() {
 
     const LoadingView = <Loading />;
 
-    const hasChanges = falseSetLevel !== number_of_false_set || countWordInRoundState !== count_word_in_round || timeToViewResultState !== time_to_view_result;
+    const hasChanges = falseSetLevel !== number_of_false_set || countWordInRoundState !== count_word_in_round || timeToViewResultState !== time_to_view_result || themeState !== theme;
 
     const Header = (
         <div className="container sticky-top mb-4 pt-2">
@@ -164,6 +165,7 @@ function Profile() {
 
     const FormTheme = (
         <div className="form-control mb-3 py-2 d-flex justify-content-between align-items-center">
+            {themeState === theme ? "" : "(не сохранено)"}
             <select className="form-select" value={themeState} onChange={handleThemeChange}>
                 <option value="light">Светлая</option>
                 <option value="dark">Темная</option>

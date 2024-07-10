@@ -24,9 +24,9 @@ import LandingMain from "./pages/landing/LandingMain";
 
 function App() {
     const dispatch = useDispatch();
-    const { dark_theme } = useSelector((state) => state.user);
+    const { theme } = useSelector((state) => state.user);
 
-    function getColorScheme() {
+    function getOSColorScheme() {
         if (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) {
             return "dark";
         } else if (window.matchMedia && window.matchMedia("(prefers-color-scheme: light)").matches) {
@@ -42,25 +42,26 @@ function App() {
     }, []);
 
     useEffect(() => {
-        
-        
+
         const storedTheme = localStorage.getItem("theme");
+        document.documentElement.setAttribute("data-bs-theme", storedTheme);
 
-
-            
-        if (dark_theme !== undefined) {
+        if (theme !== null) {
             // Если есть настройки пользователя, то устанавливаем их и сохраняем в локальном хранилище
-            localStorage.setItem("theme", dark_theme ? "dark" : "light");
+            localStorage.setItem("theme", theme);
+            document.documentElement.setAttribute("data-bs-theme", theme);
             return;
         }
 
 
-        // Если хранилище пустое и пользователь не зарегистрирован, то устанавливаем тему в зависимости от системной настройки
-        if (storedTheme == null ) {
-            const systemTheme = getColorScheme();
+        // Если хранилище пустое и у пользователя нет темы, то устанавливаем тему в зависимости от системной настройки
+        if (storedTheme == null & theme == null) {
+            
+            const systemTheme = getOSColorScheme();
             localStorage.setItem("theme", systemTheme);
+            document.documentElement.setAttribute("data-bs-theme", systemTheme);
         }
-    }, [dispatch, dark_theme]);
+    }, [dispatch, theme]);
 
 
 

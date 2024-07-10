@@ -7,7 +7,7 @@ import Errors from "../../common/components/Treatment/Errors";
 
 function lvlSettings() {
     const dispatch = useDispatch();
-    const { username, email, activated_email, number_of_false_set, dark_theme, levels, loading, error, putLoading, putError } = useSelector((state) => state.user);
+    const { levels, loading, error, putLoading, putError } = useSelector((state) => state.user);
     const [levelsState, setLevelsState] = useState();
 
     useEffect(() => {
