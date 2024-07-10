@@ -22,9 +22,9 @@ function Navigation() {
         const { activated_email } = useSelector((state) => state.user);
         if (isActivatedEmail(activated_email) == false){
             return true
-        }
+        } 
         // проблем может быть множество а иконка проблемы одна
-        // if (somethign is problem) {
+        // if (something is problem) {
         //     return true
         // }
     }
@@ -39,7 +39,6 @@ function Navigation() {
     };
     const TrainigBadge = viewCountSumm ? <small className="position-absolute translate-middle badge badge-position bg-success">{viewCountSumm}</small> : null;
 
-    // тут нужно сделать проверку на активацию email 
     const ProblemBadge = isThereProblem() ? <small className="position-absolute translate-middle badge badge-position bg-warning text-dark">!</small> : null;
 
     return (
