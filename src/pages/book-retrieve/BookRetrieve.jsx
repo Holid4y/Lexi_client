@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
+
+import { useDispatch, useSelector } from "react-redux";
 import { fetchBook } from "../../common/reducers/bookRetrieveSlice";
+
+import { setRecentlyBookToLocalStorage } from "./utils/utils";
+
 import BookRetrieveHeader from "./components/BookRetrieveHeader";
 import Pages from "./components/Pages";
 import PaginationButton from "../../common/components/Pagination/PagePagination";
@@ -20,19 +24,22 @@ function BookRetrieve() {
         navigate(`/book/${slug}/${currentPage}`);
     }, [currentPage]);
 
+    function isOutRange() {
+        const minPage = pages_slice && pages_slice[0];
+        const maxPage = pages_slice && pages_slice[1];
+        return currentPage < minPage || currentPage > maxPage
+    }
+
     useEffect(() => {
-        if (pages){
-            const minPage = pages_slice && pages_slice[0];
-            const maxPage = pages_slice && pages_slice[1];
-            if (currentPage < minPage || currentPage > maxPage) {
+        if (pages){        
+            if (isOutRange()) {
                 // только когда выйдет за range
                 dispatch(fetchBook({ slug: slug, page: currentPage }));
             }
         }
-        // при каждом изменение страницы 
-        const value = {"slug":slug,"page": page};
-        localStorage.setItem('recentlyBook', JSON.stringify(value));
-    }, [page]);
+        
+        setRecentlyBookToLocalStorage(slug, currentPage )
+    }, [page]); // при каждом изменение страницы 
 
     useEffect(() => {
         dispatch(fetchBook({ slug: slug, page: currentPage }));
