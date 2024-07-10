@@ -11,7 +11,6 @@ function WordList() {
   const { words, loading } = useSelector((state) => state.vocabulary);
   const [currentPage, setCurrentPage] = useState(1);
 
-  console.log(words)
 
   useEffect(() => {
     dispatch(fetchVocabulary(currentPage));
@@ -42,7 +41,7 @@ function WordList() {
               <div>No words found.</div>
             )}
           </div>
-          <PaginationButton currentPage={currentPage} pageCount={words ? Math.ceil(words.count / 10) : 1} onPageChange={handlePageChange} setIsNext={(isNext) => {}}/>
+          <PaginationButton currentPage={currentPage} pageCount={words?.page_count} onPageChange={handlePageChange} setIsNext={(isNext) => {}}/>
         </main>
       )}
     </div>

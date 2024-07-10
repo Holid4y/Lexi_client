@@ -56,7 +56,7 @@ function BookList() {
                 </div>
             )}
           </div>
-          <PaginationButton currentPage={currentPage} pageCount={books ? Math.ceil(books.count / 2) : 1} onPageChange={handlePageChange} setIsNext={(isNext) => {}}/>
+          <PaginationButton currentPage={currentPage} pageCount={books?.page_count} onPageChange={handlePageChange} setIsNext={(isNext) => {}}/>
         </main>
       )}
     </div>

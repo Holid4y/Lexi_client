@@ -67,7 +67,7 @@ function BookmarkList() {
             {loading ? ( LoadingView ) : (
                 <main className="container pb-5">
                     {BooksMarkView}
-                    <PaginationButton currentPage={currentPage} pageCount={bookmarks ? Math.ceil(bookmarks.count / 2) : 1} onPageChange={handlePageChange} setIsNext={(isNext) => {}}/>
+                    <PaginationButton currentPage={currentPage} pageCount={bookmarks?.page_count} onPageChange={handlePageChange} setIsNext={(isNext) => {}}/>
                     {BtnAddBook}
                 </main>
             )}
