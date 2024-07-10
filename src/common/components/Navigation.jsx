@@ -37,7 +37,7 @@ function Navigation() {
     const getLinkClass = (path) => {
         return location.pathname === path ? "nav-link navigation-custome active_link" : "nav-link navigation-custome";
     };
-    const TrainigBadge = viewCountSumm ? <small className="position-absolute translate-middle badge badge-position bg-success">{viewCountSumm}</small> : null;
+    const TrainigBadge = viewCountSumm ? <small className="position-absolute translate-middle badge badge-position bg-success">c</small> : null;
 
     const ProblemBadge = isThereProblem() ? <small className="position-absolute translate-middle badge badge-position bg-warning text-dark">!</small> : null;
 
