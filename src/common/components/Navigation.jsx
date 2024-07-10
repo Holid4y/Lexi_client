@@ -4,29 +4,43 @@ import { Link, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
 import { fetchTrainingInfo } from "../reducers/training/trainingSlice";
+import { fetchSettings } from "../reducers/userSlice";
+
+import { isActivatedEmail } from "../../pages/profile/utils.js/utils";
 
 import WordBlockTranslate from "./WordBlockTranslate";
 import SVG from "../components/Icons/SVG";
 
 function Navigation() {
     const dispatch = useDispatch()
-
+    
     const { viewCountSumm } = useSelector((state) => state.training);
 
     const location = useLocation();
 
+    function isThereProblem() {
+        const { activated_email } = useSelector((state) => state.user);
+        if (isActivatedEmail(activated_email) == false){
+            return true
+        }
+        // проблем может быть множество а иконка проблемы одна
+        // if (somethign is problem) {
+        //     return true
+        // }
+    }
+
     useEffect(() => {
         dispatch(fetchTrainingInfo())
-    }, [dispatch]);
+        dispatch(fetchSettings());
+    }, []);
 
     const getLinkClass = (path) => {
         return location.pathname === path ? "nav-link navigation-custome active_link" : "nav-link navigation-custome";
     };
     const TrainigBadge = viewCountSumm ? <small className="position-absolute translate-middle badge badge-position bg-success">{viewCountSumm}</small> : null;
 
-
     // тут нужно сделать проверку на активацию email 
-    const ActivateEmail = viewCountSumm ? <small className="position-absolute translate-middle badge badge-position bg-warning text-dark">!</small> : null;
+    const ProblemBadge = isThereProblem() ? <small className="position-absolute translate-middle badge badge-position bg-warning text-dark">!</small> : null;
 
     return (
         <nav className="container fixed-bottom py-2">
@@ -51,7 +65,7 @@ function Navigation() {
                     </li>
                     <li className="nav-item">
                         <Link to="/profile" className={`${getLinkClass("/profile")} position-relative `}>
-                            {ActivateEmail}
+                            {ProblemBadge}
                             <SVG name="profile" />
                         </Link>
                     </li>

@@ -41,7 +41,7 @@ const userSlice = createSlice({
         // user
         username: null,
         email: null,
-        activated_email: false,
+        activated_email: null,
         // settings
         dark_theme: false,
         number_of_false_set: null,

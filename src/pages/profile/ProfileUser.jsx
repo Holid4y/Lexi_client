@@ -8,6 +8,9 @@ import { fetchSettings, fetchPutSettings, throwUser } from "../../common/reducer
 import { setIsAuth } from "../../common/reducers/authSlice";
 import { setTheme } from "../../common/reducers/themeSlice";
 import { renderResponse } from "../../../public/urls";
+
+import { isActivatedEmail } from "./utils.js/utils";
+
 import Loading from "../../common/components/Treatment/Loading";
 
 function Profile() {
@@ -157,7 +160,7 @@ function Profile() {
                 Email
             </label> */}
             <input type="email" className="form-control py-2-5" id="email" defaultValue={renderResponse(email, "", loading, error)} />
-            {activated_email ? (
+            {isActivatedEmail(activated_email) ? (
                 ""
             ) : (
                 <div>
@@ -440,7 +443,8 @@ function Profile() {
                                 Безопасность
 
                                 {/* Проверка почты small */}
-                                <small className="ms-2 badge bg-warning text-dark">!</small>
+                                {isActivatedEmail(activated_email) ? null : <small className="ms-2 badge bg-warning text-dark">!</small>}
+                                
                             </button>
                             
                         </li>
@@ -456,13 +460,17 @@ function Profile() {
                         <div className="tab-pane fade my-4" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabIndex="0">
 
                             {/* Проверка почты */}
-                            <div className="d-flex justify-content-between mb-3">
+                            {isActivatedEmail(activated_email) ? 
+                            ""  :
+                            (<div className="d-flex justify-content-between mb-3">
                                 <p className="pt-2">
                                     <small className="me-2 badge bg-warning text-dark">!</small>
                                     <span>Ваша почта не подтверждена</span>
                                 </p>
                                 <button className="btn btn-primary ms-2">Отправит письмо</button>
-                            </div>
+                            </div>)  
+                        }
+                            
                             <Link to="#" className="form-control mb-3 py-2-5 d-flex justify-content-between">
                                 <span className="text-start">Изменить пароль</span>
                                 <span className="text-end">
