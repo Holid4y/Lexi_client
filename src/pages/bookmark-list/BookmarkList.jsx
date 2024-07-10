@@ -17,9 +17,6 @@ function BookmarkList() {
         dispatch(fetchBookmarks(currentPage));
     }, [dispatch, currentPage]);
 
-    const handlePageChange = (page) => {
-        setCurrentPage(page);
-    };
 
     const filteredBookmarks = bookmarks?.results?.filter((bookmark) => bookmark.book_cover.title.toLowerCase());
     const LoadingView = <Loading/>;
@@ -67,7 +64,7 @@ function BookmarkList() {
             {loading ? ( LoadingView ) : (
                 <main className="container pb-5">
                     {BooksMarkView}
-                    <PaginationButton currentPage={currentPage} pageCount={bookmarks?.page_count} onPageChange={handlePageChange} setIsNext={(isNext) => {}}/>
+                    <PaginationButton currentPage={currentPage} pageCount={bookmarks?.page_count} setCurrentPage={setCurrentPage}/>
                     {BtnAddBook}
                 </main>
             )}

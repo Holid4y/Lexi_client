@@ -19,9 +19,6 @@ function WordList() {
   const Header = <Headers title="Все слова" />;
   const LoadingView = <Loading />;
 
-  const handlePageChange = (page) => {
-    setCurrentPage(page);
-  };
 
   return (
     <div className="align-items-center">
@@ -41,7 +38,7 @@ function WordList() {
               <div>No words found.</div>
             )}
           </div>
-          <PaginationButton currentPage={currentPage} pageCount={words?.page_count} onPageChange={handlePageChange} setIsNext={(isNext) => {}}/>
+          <PaginationButton currentPage={currentPage} pageCount={words?.page_count} setCurrentPage={setCurrentPage}/>
         </main>
       )}
     </div>

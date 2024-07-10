@@ -628,3 +628,7 @@ input[type="number"] {
     word-wrap: break-all !important;
     word-break: break-all !important;
   }
+
+.selected {
+    background-color: #ff6464;
+}

@@ -19,9 +19,7 @@ function BookList() {
   const LoadingView = <Loading />;
   const SearchView = <Search />;
 
-  const handlePageChange = (page) => {
-    setCurrentPage(page);
-  };
+  
 
   return (
     <div className="align-items-center">
@@ -56,7 +54,7 @@ function BookList() {
                 </div>
             )}
           </div>
-          <PaginationButton currentPage={currentPage} pageCount={books?.page_count} onPageChange={handlePageChange} setIsNext={(isNext) => {}}/>
+          <PaginationButton currentPage={currentPage} pageCount={books?.page_count} setCurrentPage={setCurrentPage}/>
         </main>
       )}
     </div>
