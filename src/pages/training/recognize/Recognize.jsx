@@ -10,6 +10,8 @@ import FalseSet from "./components/FalseSet";
 import End from "../components/End";
 import AnswerButton from "../components/AnswerButton";
 import Loading from "../../../common/components/Treatment/Loading";
+import NoMoreWordToTrainingPage from "../components/NoMoreWordToTrainingPage";
+import NoWordPage from "../components/NoWordPage";
 
 function Recognize() {
     const dispatch = useDispatch();
@@ -50,46 +52,16 @@ function Recognize() {
     };
 
     const ErrorView = <p>Error: {error}</p>;
-    const isNoMoreWordToTraining = count_word_to_training_recognize == 0
-    const NoMoreWordToTrainingPage = (
-        <div className="align-items-center">
-            <div className="container sticky-top mb-3 pt-2">
-                <nav className="navbar dark-nav">
-                    <div className="container-fluid">
-                        <span className="navbar-brand">Тестирование</span>
-                    </div>
-                </nav>
-            </div>
-            <div className="container">
-                <div className="text-center mt-5">
-                    <div className="px-4 pt-5 mt-5 text-center">
-                        <h1 className="fw-bold mt-3 text-body-emphasis">Все слова повторены 🥰</h1>
-                        <div className="col-lg-8 mx-auto">
-                            <p className="lead mb-4">
-                                <br />
-                                <span>Читайте больше и добавляйте новые слова</span>
-                            </p>
-                            <div className="d-grid gap-2 d-sm-flex justify-content-sm-center mb-5">
-                                <Link to="/books" className="btn btn-primary px-4">
-                                    Выбрать из списка
-                                </Link>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    );
-    const isNoWord = learning_words == 0
-    const NoWordPage = <p>У вас вообще нет слов, их надо добавить</p>;
 
+    const isNoMoreWordToTraining = count_word_to_training_recognize == 0
+    const isNoWord = learning_words == 0
 
     return (
         <div className="align-items-center">
             {loading ? LoadingView : 
             TrainingPage() ||
-            ((isNoMoreWordToTraining & !isEnd) && NoMoreWordToTrainingPage) ||
-            (isNoWord && NoWordPage)
+            ((isNoMoreWordToTraining & !isEnd) && <NoMoreWordToTrainingPage />) ||
+            (isNoWord && <NoWordPage />)
             }
             {isEnd && EndPage}
 
