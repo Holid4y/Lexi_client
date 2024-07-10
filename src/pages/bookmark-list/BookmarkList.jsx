@@ -23,7 +23,7 @@ function BookmarkList() {
     const SearchView = <Search/>;
     const BooksMarkView = 
     <div>
-        <h3 className="pb-0">Мои закладки</h3>
+        <h3 className="pb-0 ps-2">Мои закладки</h3>
         {filteredBookmarks && filteredBookmarks.length > 0 ? (
             <div className="row g-4">
                 {filteredBookmarks.map((bookmark, index) => (
@@ -55,7 +55,7 @@ function BookmarkList() {
 
     const BooksMyView = 
     <div className="mb-4">
-        <h3 className="pb-0">Мои книги</h3>
+        <h3 className="pb-0 ps-2">Мои книги</h3>
         <div className="row g-4">
             <div className="col-12 col-md-6">
                 <button type="button" className="card card-btn bg-card-dark w-100 h-100 d-flex justify-content-center align-items-center" data-bs-toggle="modal" data-bs-target="#exampleModal1">

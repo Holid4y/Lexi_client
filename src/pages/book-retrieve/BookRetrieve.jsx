@@ -24,23 +24,19 @@ function BookRetrieve() {
         if (pages){
             const minPage = pages_slice && pages_slice[0];
             const maxPage = pages_slice && pages_slice[1];
-
             if (currentPage < minPage || currentPage > maxPage) {
-                // только когда выдет за range
+                // только когда выйдет за range
                 dispatch(fetchBook({ slug: slug, page: currentPage }));
             }
         }
         // при каждом изменение страницы 
         const value = {"slug":slug,"page": page};
         localStorage.setItem('recentlyBook', JSON.stringify(value));
-
-    }, [dispatch, page]);
+    }, [page]);
 
     useEffect(() => {
-
         dispatch(fetchBook({ slug: slug, page: currentPage }));
-
-    }, [dispatch, slug]);
+    }, [slug]);
 
     const LoadingView = <Loading />;
     const Header = <BookRetrieveHeader pk={pk} page={page} />;

@@ -270,8 +270,8 @@ function Profile() {
     const OptionsAvatar = 
     <div className="avatar-options">
         <div>
-            <label class="form-label">Тип волос:</label>
-            <select class="form-select" onChange={(e) => handleAvatarChange('topType', e.target.value)}>
+            <label className="form-label">Тип волос:</label>
+            <select className="form-select" onChange={(e) => handleAvatarChange('topType', e.target.value)}>
                 <option value="NoHair">No Hair</option>
                 <option value="Eyepatch">Eyepatch</option>
                 <option value="Hat">Hat</option>
@@ -311,8 +311,8 @@ function Profile() {
         </div>
 
         <div>
-            <label class="form-label">Цвет волос:</label>
-            <select class="form-select" onChange={(e) => handleAvatarChange('hairColor', e.target.value)}>
+            <label className="form-label">Цвет волос:</label>
+            <select className="form-select" onChange={(e) => handleAvatarChange('hairColor', e.target.value)}>
                 <option value="Auburn">Auburn</option>
                 <option value="Black">Black</option>
                 <option value="Blonde">Blonde</option>
@@ -327,8 +327,8 @@ function Profile() {
         </div>
 
         <div>
-            <label class="form-label">Тип глаз:</label>
-            <select class="form-select" onChange={(e) => handleAvatarChange('eyeType', e.target.value)}>
+            <label className="form-label">Тип глаз:</label>
+            <select className="form-select" onChange={(e) => handleAvatarChange('eyeType', e.target.value)}>
                 <option value="Default">По умолчанию</option>
                 <option value="Close">Закрытые</option>
                 <option value="Cry">Плачит</option>
@@ -345,8 +345,8 @@ function Profile() {
         </div>
 
         <div>
-            <label class="form-label">Тип рта:</label>
-            <select class="form-select" onChange={(e) => handleAvatarChange('mouthType', e.target.value)}>
+            <label className="form-label">Тип рта:</label>
+            <select className="form-select" onChange={(e) => handleAvatarChange('mouthType', e.target.value)}>
                 <option value="Default">По умолчанию</option>
                 <option value="Concerned">Обеспокоенный</option>
                 <option value="Disbelief">Сомнение</option>
@@ -363,8 +363,8 @@ function Profile() {
         </div>
 
         <div>
-            <label class="form-label">Тип одежды:</label>
-            <select class="form-select" onChange={(e) => handleAvatarChange('clotheType', e.target.value)}>
+            <label className="form-label">Тип одежды:</label>
+            <select className="form-select" onChange={(e) => handleAvatarChange('clotheType', e.target.value)}>
                 <option value="BlazerShirt">Blazer Свитер</option>
                 <option value="BlazerSweater">Blazer Рубашка</option>
                 <option value="CollarSweater">Рубашка</option>
@@ -376,8 +376,8 @@ function Profile() {
         </div>
 
         <div>
-            <label class="form-label">Цвет одежды:</label>
-            <select class="form-select" onChange={(e) => handleAvatarChange('clotheColor', e.target.value)}>
+            <label className="form-label">Цвет одежды:</label>
+            <select className="form-select" onChange={(e) => handleAvatarChange('clotheColor', e.target.value)}>
                 <option value="Black">Черный</option>
                 <option value="Blue01">Синий 1</option>
                 <option value="Blue02">Синий 2</option>
@@ -405,8 +405,8 @@ function Profile() {
                     <div className="row g-4 mb-4 align-items-stretch">
                         <div className="col-4 col-sm-2 d-flex align-items-center position-relative avatar-block">
                             {renderAvatar()}
-                            <button type="button" class="position-absolute top-0 translate-middle badge rounded-pill bg-primary hover-opacity btn" data-bs-toggle="modal" data-bs-target="#avatarModal">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
+                            <button type="button" className="position-absolute top-0 translate-middle badge rounded-pill bg-primary hover-opacity btn" data-bs-toggle="modal" data-bs-target="#avatarModal">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-pencil-fill" viewBox="0 0 16 16">
                                     <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.5.5 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11z"/>
                                 </svg>
                             </button>
@@ -436,7 +436,13 @@ function Profile() {
                             <button className="nav-link w-100 active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Настройки</button>
                         </li>
                         <li className="nav-item w-50 text-center" role="presentation">
-                            <button className="nav-link w-100" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Безопасность</button>
+                            <button className="nav-link w-100" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">
+                                Безопасность
+
+                                {/* Проверка почты small */}
+                                <small className="ms-2 badge bg-warning text-dark">!</small>
+                            </button>
+                            
                         </li>
                     </ul>
                     <div className="tab-content" id="myTabContent">
@@ -448,6 +454,15 @@ function Profile() {
                             {FormTimeToViewResult}
                         </div>
                         <div className="tab-pane fade my-4" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabIndex="0">
+
+                            {/* Проверка почты */}
+                            <div className="d-flex justify-content-between mb-3">
+                                <p className="pt-2">
+                                    <small className="me-2 badge bg-warning text-dark">!</small>
+                                    <span>Ваша почта не подтверждена</span>
+                                </p>
+                                <button className="btn btn-primary ms-2">Отправит письмо</button>
+                            </div>
                             <Link to="#" className="form-control mb-3 py-2-5 d-flex justify-content-between">
                                 <span className="text-start">Изменить пароль</span>
                                 <span className="text-end">
@@ -471,21 +486,21 @@ function Profile() {
                     </div>
 
                     {/* AvatarModal */}
-                    <div class="modal fade" id="avatarModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                            <div class="modal-header">
-                                <h1 class="modal-title fs-5" id="exampleModalLabel">Редактирование</h1>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <div className="modal fade" id="avatarModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div className="modal-dialog">
+                            <div className="modal-content">
+                            <div className="modal-header">
+                                <h1 className="modal-title fs-5" id="exampleModalLabel">Редактирование</h1>
+                                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
-                            <div class="modal-body">
-                                <div class="row g-4">
+                            <div className="modal-body">
+                                <div className="row g-4">
                                     <div className="col-5">{renderAvatar()}</div>
                                     <div className="col-7">{OptionsAvatar}</div>
                                 </div>
                             </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-primary">Сохранить</button>
+                            <div className="modal-footer">
+                                <button type="button" className="btn btn-primary">Сохранить</button>
                             </div>
                             </div>
                         </div>

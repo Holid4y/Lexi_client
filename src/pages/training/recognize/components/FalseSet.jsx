@@ -38,10 +38,7 @@ function FalseSet({ training, round, correctWord }) {
             {falseSet &&
                 falseSet.map((word, index) => (
                     <>
-                        <RadioInput 
-                            word={word} 
-                            index={index} 
-                        />
+                        <RadioInput word={word} index={index} />
 
                         <Lable word={word} index={index} correctWord={correctWord} />
                     </>

@@ -12,6 +12,7 @@ function Navigation() {
     const dispatch = useDispatch()
 
     const { viewCountSumm } = useSelector((state) => state.training);
+
     const location = useLocation();
 
     useEffect(() => {
@@ -22,6 +23,10 @@ function Navigation() {
         return location.pathname === path ? "nav-link navigation-custome active_link" : "nav-link navigation-custome";
     };
     const TrainigBadge = viewCountSumm ? <small className="position-absolute translate-middle badge badge-position bg-success">{viewCountSumm}</small> : null;
+
+
+    // тут нужно сделать проверку на активацию email 
+    const ActivateEmail = viewCountSumm ? <small className="position-absolute translate-middle badge badge-position bg-warning text-dark">!</small> : null;
 
     return (
         <nav className="container fixed-bottom py-2">
@@ -45,7 +50,8 @@ function Navigation() {
                         </Link>
                     </li>
                     <li className="nav-item">
-                        <Link to="/profile" className={getLinkClass("/profile")}>
+                        <Link to="/profile" className={`${getLinkClass("/profile")} position-relative `}>
+                            {ActivateEmail}
                             <SVG name="profile" />
                         </Link>
                     </li>
