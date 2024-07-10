@@ -1,4 +1,3 @@
-// РЕГИСТРАЦИЯ
 import React, { useState, useEffect } from "react";
 import { fetchRegistration } from "../../../common/reducers/authSlice";
 import { useDispatch, useSelector } from "react-redux";
@@ -68,6 +67,9 @@ const Register = () => {
             })
             .catch((error) => {
                 console.error("Ошибка при выполнении запроса:", error);
+                if (error.response && error.response.data) {
+                    console.error("Ошибка сервера:", error.response.data);
+                }
             });
     };
 
@@ -82,26 +84,26 @@ const Register = () => {
                 <form>
                     <h2 className="mb-4 text-center">Регистрация</h2>
                     <div className="mb-2">
-                        <label for="login" className="form-label">
+                        <label htmlFor="login" className="form-label">
                             Login
                         </label>
                         <input type="text" className="form-control py-2-5" id="login" value={username} onChange={handleUsernameChange} />
                     </div>
 
                     <div className="mb-2">
-                        <label for="email" className="form-label">
+                        <label htmlFor="email" className="form-label">
                             Email
                         </label>
                         <input type="email" className="form-control py-2-5" id="email" value={email} onChange={handleEmailChange} />
                     </div>
 
                     <div className="mb-4">
-                        <label for="password1" className="form-label">
+                        <label htmlFor="password1" className="form-label">
                             Пароль
                         </label>
                         <input type="password" className="form-control py-2-5 mb-2" id="password1" value={password} onChange={handlePasswordChange} />
 
-                        <label for="password2" className="form-label">
+                        <label htmlFor="password2" className="form-label">
                             Повторите пароль
                         </label>
                         <input type="password" className="form-control py-2-5" id="password2" value={rePassword} onChange={handleRePasswordChange} />

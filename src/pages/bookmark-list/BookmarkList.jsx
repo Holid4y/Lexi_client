@@ -23,13 +23,9 @@ function BookmarkList() {
     const SearchView = <Search/>;
     const BooksMarkView = 
     <div>
+        <h3 className="pb-0">Мои закладки</h3>
         {filteredBookmarks && filteredBookmarks.length > 0 ? (
             <div className="row g-4">
-                <div className="col-12 col-md-6">
-                    <button type="button" className="card card-btn bg-card-dark w-100 h-100 d-flex justify-content-center align-items-center" data-bs-toggle="modal" data-bs-target="#exampleModal1">
-                        <b className="fs-1">+</b>
-                    </button>
-                </div>
                 {filteredBookmarks.map((bookmark, index) => (
                     <BookmarkCard bookmark={bookmark} key={index} />
                 ))}
@@ -56,6 +52,64 @@ function BookmarkList() {
             </div>
         )}
     </div>
+
+    const BooksMyView = 
+    <div className="mb-4">
+        <h3 className="pb-0">Мои книги</h3>
+        <div className="row g-4">
+            <div className="col-12 col-md-6">
+                <button type="button" className="card card-btn bg-card-dark w-100 h-100 d-flex justify-content-center align-items-center" data-bs-toggle="modal" data-bs-target="#exampleModal1">
+                    <b className="fs-1">+</b>
+                </button>
+            </div>
+            <div className="col-12 col-md-6">
+                <div className="card text-end bg-card-dark w-100">
+                    <div className="card-body">
+                        <h5 className="card-title text-start mb-3">
+                            <b>Моя книга</b>
+                        </h5>
+                        <div className="card-text card-text-lr">
+                            <span>
+                                <b className="fs-1">12</b> стр
+                            </span>
+                            <span>Мой автор</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div className="col-12 col-md-6">
+                <div className="card text-end bg-card-dark w-100">
+                    <div className="card-body">
+                        <h5 className="card-title text-start mb-3">
+                            <b>Моя книга</b>
+                        </h5>
+                        <div className="card-text card-text-lr">
+                            <span>
+                                <b className="fs-1">12</b> стр
+                            </span>
+                            <span>Мой автор</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div className="col-12 col-md-6">
+                <div className="card text-end bg-card-dark w-100">
+                    <div className="card-body">
+                        <h5 className="card-title text-start mb-3">
+                            <b>Моя книга</b>
+                        </h5>
+                        <div className="card-text card-text-lr">
+                            <span>
+                                <b className="fs-1">12</b> стр
+                            </span>
+                            <span>Мой автор</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     const BtnAddBook = <AddBook />
 
     return (
@@ -63,6 +117,7 @@ function BookmarkList() {
             {SearchView}
             {loading ? ( LoadingView ) : (
                 <main className="container pb-5">
+                    {BooksMyView}
                     {BooksMarkView}
                     <PaginationButton currentPage={currentPage} pageCount={bookmarks?.page_count} setCurrentPage={setCurrentPage}/>
                     {BtnAddBook}

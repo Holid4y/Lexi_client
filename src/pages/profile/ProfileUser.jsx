@@ -173,7 +173,7 @@ function Profile() {
     );
 
     const FormTheme = (
-        <div className="form-control p-0 mb-3 d-flex justify-content-between align-items-center">
+        <div className="form-control mb-3 py-2 d-flex justify-content-between align-items-center">
             <select className="form-select" value={themeState} onChange={handleThemeChange}>
                 <option value="light">Светлая</option>
                 <option value="dark">Темная</option>
@@ -199,12 +199,12 @@ function Profile() {
             <span className="ps-2">{falseSetLevel === number_of_false_set ? "Кол-во ложных вариантов" : "Кол-во ложных вариантов (не сохранено)"}</span>
             <div className="input-group mb-2">
                 <input type="number" className="form-control py-2-5" defaultValue={falseSetLevel} />
-                <button className="btn btn-plus-minus box-shadow" onClick={handleIncrementLevel} type="button">
+                <button className="btn btn-primary-light" onClick={handleIncrementLevel} type="button">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" className="bi bi-plus" viewBox="0 0 16 16">
                         <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
                     </svg>
                 </button>
-                <button className="btn btn-plus-minus box-shadow" onClick={handleDecrementLevel} type="button">
+                <button className="btn btn-primary-light" onClick={handleDecrementLevel} type="button">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" className="bi bi-dash" viewBox="0 0 16 16">
                         <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8" />
                     </svg>
@@ -218,13 +218,13 @@ function Profile() {
             <span className="ps-2">{countWordInRoundState === count_word_in_round ? "Кол-во слов в раунде" : "Кол-во слов в раунде (не сохранено)"}</span>
             <div className="input-group mb-2">
                 <input type="number" className="form-control py-2-5" defaultValue={countWordInRoundState} />
-                <button className="btn btn-plus-minus box-shadow" onClick={handleIncrementCountWordInRound} type="button">
+                <button className="btn btn-primary-light" onClick={handleIncrementCountWordInRound} type="button">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" className="bi bi-plus" viewBox="0 0 16 16">
                         <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
                     </svg>
                 </button>
-                <button className="btn btn-plus-minus box-shadow" onClick={handleDecrementCountWordInRound} type="button">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" className="bi bi-dash" viewBox="0 16 16">
+                <button className="btn btn-primary-light" onClick={handleDecrementCountWordInRound} type="button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" className="bi bi-dash" viewBox="0 0 16 16">
                         <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8" />
                     </svg>
                 </button>
@@ -236,12 +236,12 @@ function Profile() {
             <span className="ps-2">{timeToViewResultState === time_to_view_result ? "Время отображения результата ответа" : "Время отображения результата ответа (не сохранено)"}</span>
             <div className="input-group mb-2">
                 <input type="number" className="form-control py-2-5" defaultValue={timeToViewResultState} />
-                <button className="btn btn-plus-minus box-shadow" onClick={handleIncrementTimeToViewResultState} type="button">
+                <button className="btn btn-primary-light" onClick={handleIncrementTimeToViewResultState} type="button">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" className="bi bi-plus" viewBox="0 0 16 16">
                         <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
                     </svg>
                 </button>
-                <button className="btn btn-plus-minus box-shadow" onClick={handleDecrementTimeToViewResultState} type="button">
+                <button className="btn btn-primary-light" onClick={handleDecrementTimeToViewResultState} type="button">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" className="bi bi-dash" viewBox="0 0 16 16">
                         <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8" />
                     </svg>

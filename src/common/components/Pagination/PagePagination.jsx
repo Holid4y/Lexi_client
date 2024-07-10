@@ -79,6 +79,7 @@ const PaginationButton = ({ currentPage, pageCount, setCurrentPage }) => {
 
     return (
         <div>
+            {ModalListPages}
             <nav className="pagination-position d-flex justify-content-center">
                 {LeftButton}
 
@@ -89,7 +90,7 @@ const PaginationButton = ({ currentPage, pageCount, setCurrentPage }) => {
                 {RightButton}
             </nav>
 
-            {ModalListPages}
+            
         </div>
     );
 };

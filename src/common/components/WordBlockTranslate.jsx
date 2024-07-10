@@ -56,7 +56,7 @@ function WordBlockTranslate() {
 
     const renderContent = () => {
         if (loading) {
-            return <Loading />;
+            return <div className="dark-nav mb-2"><Loading/></div>;
         }
 
         if ((translations && translations.length > 0) || (synonyms && synonyms.length > 0) || (meanings && meanings.length > 0)) {
