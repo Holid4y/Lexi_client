@@ -150,9 +150,9 @@ function Profile() {
         </div>
     );
 
-    const UserName = <h1 className="text-uppercase text-break mb-4">{renderResponse(username, "...", loading, error)}</h1>
+    const UserName = <h1 className="text-uppercase text-break mb-2">{renderResponse(username, "...", loading, error)}</h1>
 
-    const UserEmail = <h4 className="text-secondary text-break">{renderResponse(email, "", loading, error)}</h4>
+    const UserEmail = <span className="fs-5 text-secondary text-break">{renderResponse(email, "", loading, error)}</span>
 
     const FormEmail = (
         <div>
@@ -414,7 +414,7 @@ function Profile() {
                                 </svg>
                             </button>
                         </div>
-                        <div className="col-8 col-sm-10 d-flex flex-column justify-content-between">
+                        <div className="col-8 col-sm-10">
                             {UserName}
                             {UserEmail}
                         </div>
@@ -441,10 +441,7 @@ function Profile() {
                         <li className="nav-item w-50 text-center" role="presentation">
                             <button className="nav-link w-100" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">
                                 Безопасность
-
-                                {/* Проверка почты small */}
                                 {isActivatedEmail(activated_email) ? null : <small className="ms-2 badge bg-warning text-dark">!</small>}
-                                
                             </button>
                             
                         </li>
