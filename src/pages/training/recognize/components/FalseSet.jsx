@@ -6,6 +6,7 @@ import Lable from "./Lable";
 function FalseSet({ training, round, correctWord }) {
     // массив ложных ответов
     const [falseSet, setFalseSet] = useState(null);
+
     // Функция для создания массива ложных ответов
     function makeFalseSet(falseAnswers, correctAnswer) {
         const falseSet = [...falseAnswers];
@@ -32,6 +33,31 @@ function FalseSet({ training, round, correctWord }) {
             }
         }
     }, [round, training]);
+
+    // Обработчик для нажатий клавиш 1-6
+    useEffect(() => {
+        const handleKeyPress = (event) => {
+            if (event.key >= '1' && event.key <= '6') {
+                const index = parseInt(event.key, 10) - 1;
+                if (index < falseSet.length) {
+                    // Проверяем существование элемента перед вызовом click()
+                    const radioElement = document.getElementById(`option_${index}`);
+                    if (radioElement) {
+                        console.warn(`option_${index} выбран`);
+                        radioElement.click();
+                    } else {
+                        console.warn(`option_${index} не найдено`);
+                    }
+                }
+            }
+        };
+
+        window.addEventListener('keydown', handleKeyPress);
+
+        return () => {
+            window.removeEventListener('keydown', handleKeyPress);
+        };
+    }, [falseSet]);
 
     return (
         <div>
