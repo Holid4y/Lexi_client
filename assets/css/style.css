@@ -20,12 +20,12 @@ body {
 body.no-scroll {
     overflow: hidden;
 }
-html, body, .toggle-block {
+html, body, .toggle-block, #section-2 {
     scrollbar-width: none;
     overflow-y: auto;
     overflow-x: hidden;
 }
-html::-webkit-scrollbar, body::-webkit-scrollbar, .toggle-block::-webkit-scrollbar {
+html::-webkit-scrollbar, body::-webkit-scrollbar, .toggle-block::-webkit-scrollbar, #section-2::-webkit-scrollbar {
     display: none;
 }
 
@@ -212,7 +212,11 @@ a {
 }
 .toggle-block.show {
     max-height: 500px;
-    overflow-y: auto;
+    overflow: hidden;
+}
+
+#section-2 {
+    max-height: 300px;
 }
 
 .modal-backdrop {

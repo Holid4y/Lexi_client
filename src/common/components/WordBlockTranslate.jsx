@@ -61,7 +61,7 @@ function WordBlockTranslate() {
 
         if ((translations && translations.length > 0) || (synonyms && synonyms.length > 0) || (meanings && meanings.length > 0)) {
             return (
-                <>
+                <div>
                     <div className="dark-nav mb-2 p-3">
                         <div style={{ display: "flex", alignItems: "center" }}>
                             <span className="fs-2 pe-3 text-capitalize">
@@ -134,7 +134,7 @@ function WordBlockTranslate() {
                             )}
                         </div>
                     )}
-                </>
+                </div>
             );
         }
 
