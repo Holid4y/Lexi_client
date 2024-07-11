@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-
 import { getTrainig, getLeargingWord } from "../common/utils";
 
 import Header from "../components/Header";
@@ -18,7 +17,7 @@ function Recognize() {
     const { count_word_to_training_recognize, loading, patchLoading, error } = useSelector((state) => state.training);
     const { training, round, score, isEnd } = useSelector((state) => state.trainingRound);
     const { learning_words } = useSelector((state) => state.home);
-    console.log(training, round, score, isEnd, loading)
+    const [selectedAnswer, setSelectedAnswer] = useState(null);
     const localType = "recognize";
 
     // Используем эффект для отправки запроса на получение тренировки
@@ -26,6 +25,23 @@ function Recognize() {
         getTrainig(dispatch, isEnd, patchLoading, localType);
         getLeargingWord(dispatch, learning_words);
     }, [dispatch, isEnd]);
+
+    useEffect(() => {
+        const handleKeyPress = (event) => {
+            if (event.key >= '1' && event.key <= '4') {
+                const answerIndex = parseInt(event.key) - 1;
+                setSelectedAnswer(answerIndex);
+                // тут можешь вызвать функцию которая будет выбирать ответ по answerIndex, проверь в консоли что выдает
+                console.log(`Selected answer: ${answerIndex}`);
+            }
+        };
+
+        window.addEventListener('keydown', handleKeyPress);
+
+        return () => {
+            window.removeEventListener('keydown', handleKeyPress);
+        };
+    }, []);
 
     const LoadingView = <Loading />;
     const EndPage = <End type={localType} count_word_to_training={count_word_to_training_recognize} score={score} />;
@@ -53,8 +69,8 @@ function Recognize() {
 
     const ErrorView = <p>Error: {error}</p>;
 
-    const isNoMoreWordToTraining = count_word_to_training_recognize == 0
-    const isNoWord = learning_words == 0
+    const isNoMoreWordToTraining = count_word_to_training_recognize == 0;
+    const isNoWord = learning_words == 0;
 
     return (
         <div className="align-items-center">
@@ -64,7 +80,6 @@ function Recognize() {
             (isNoWord && <NoWordPage />)
             }
             {isEnd && EndPage}
-
         </div>
     );
 }
