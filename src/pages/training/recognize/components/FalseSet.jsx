@@ -1,11 +1,18 @@
 import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 import RadioInput from "./RadioInput";
 import Lable from "./Lable";
+import { setAnswer } from "../../../../common/reducers/training/trainingRoundSlice";
+import { handleFinalAnswer } from "../../common/utils";
 
+// Компонент FalseSet отвечает за отображение вариантов ответа, включая правильный ответ
 function FalseSet({ training, round, correctWord }) {
-    // массив ложных ответов
+    const dispatch = useDispatch();
+    
     const [falseSet, setFalseSet] = useState(null);
+    const [selectedRadioIndex, setSelectedRadioIndex] = useState(null);
+    const { answer } = useSelector((state) => state.trainingRound);
 
     // Функция для создания массива ложных ответов
     function makeFalseSet(falseAnswers, correctAnswer) {
@@ -37,14 +44,14 @@ function FalseSet({ training, round, correctWord }) {
     // Обработчик для нажатий клавиш 1-6
     useEffect(() => {
         const handleKeyPress = (event) => {
-            if (event.key >= '1' && event.key <= '6') {
+            if (event.key >= "1" && event.key <= "6") {
                 const index = parseInt(event.key, 10) - 1;
                 if (index < falseSet.length) {
                     // Проверяем существование элемента перед вызовом click()
                     const radioElement = document.getElementById(`option_${index}`);
                     if (radioElement) {
-                        console.warn(`option_${index} выбран`);
                         radioElement.click();
+                        setSelectedRadioIndex(index);
                     } else {
                         console.warn(`option_${index} не найдено`);
                     }
@@ -52,22 +59,25 @@ function FalseSet({ training, round, correctWord }) {
             }
         };
 
-        window.addEventListener('keydown', handleKeyPress);
+        window.addEventListener("keydown", handleKeyPress);
 
         return () => {
-            window.removeEventListener('keydown', handleKeyPress);
+            window.removeEventListener("keydown", handleKeyPress);
         };
     }, [falseSet]);
+
+    useEffect(() => {
+        handleFinalAnswer(answer, "recognize", training, round, dispatch);
+    }, [answer]);
 
     return (
         <div>
             {falseSet &&
                 falseSet.map((word, index) => (
-                    <>
+                    <React.Fragment key={index}>
                         <RadioInput word={word} index={index} />
-
-                        <Lable word={word} index={index} correctWord={correctWord} />
-                    </>
+                        <Lable word={word} index={index} correctWord={correctWord} selectedRadioIndex={selectedRadioIndex} />
+                    </React.Fragment>
                 ))}
         </div>
     );

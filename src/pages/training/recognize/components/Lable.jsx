@@ -1,16 +1,27 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-
 import { handleFinalAnswer } from "../../common/utils";
 
-function Lable({ word, index, correctWord }) {
+// Компонент Lable отвечает за отображение варианта ответа и стилей во время ответа
+function Lable({ word, index, correctWord, selectedRadioIndex }) {
     const dispatch = useDispatch();
-    const { answer, training, round, isViewResult } = useSelector((state) => state.trainingRound);
-    const [classState, setClassState] = useState("");
+    const { training, round, isViewResult } = useSelector((state) => state.trainingRound);
 
+    const [classState, setClassState] = useState("");
     const [localSelectedAnswer, setLocalSelectedAnswer] = useState(null);
     const [localCorrectWord, setLocalCorrectWord] = useState(correctWord);
 
+    // Обновляем состояние classState в зависимости от выбранного ответа
+    useEffect(() => {
+        if (index === selectedRadioIndex) {
+            setClassState(`${classState} box-danger`);
+            if (word.text === localCorrectWord) {
+                setClassState(`${classState} box-success`);
+            }
+        }
+    }, [selectedRadioIndex]);
+
+    // Инициализируем состояние classState и localCorrectWord
     useEffect(() => {
         setClassState("btn btn-dark-list w-100 mb-3 py-3");
         setLocalCorrectWord(correctWord);
@@ -19,9 +30,8 @@ function Lable({ word, index, correctWord }) {
         }
     }, [isViewResult]);
 
-
+    // Функция для установки класса в зависимости от выбранного и правильного ответа
     function setClass() {
-        // подсветить выбранный ответ красным, а правельный зеленым по верх красного
         if (word.text === localSelectedAnswer) {
             setClassState(`${classState} box-danger`);
         }

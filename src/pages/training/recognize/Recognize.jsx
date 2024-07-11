@@ -18,7 +18,7 @@ function Recognize() {
     const { count_word_to_training_recognize, loading, patchLoading, error } = useSelector((state) => state.training);
     const { training, round, score, isEnd } = useSelector((state) => state.trainingRound);
     const { learning_words } = useSelector((state) => state.home);
-    console.log(training, round, score, isEnd, loading)
+
     const localType = "recognize";
 
     // Используем эффект для отправки запроса на получение тренировки
