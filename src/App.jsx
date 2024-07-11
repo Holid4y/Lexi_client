@@ -17,6 +17,7 @@ import Reproduce from "./pages/training/reproduce/Reproduce";
 import Training from "./pages/training/Training";
 import Login from "./pages/auth/login/Login";
 import Register from "./pages/auth/register/Register";
+import ChangePass from "./pages/auth/changepass/ChangePass";
 import Profile from "./pages/profile/ProfileUser";
 import LvlSettings from "./pages/profile/lvlSettings";
 import WordList from "./pages/word-list-user/WordList";
@@ -84,6 +85,7 @@ function App() {
                     <Route path="/bookmarks" element={<BookmarkList />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/register" element={<Register />} />
+                    <Route path="/change_pass" element={<ChangePass />} />
                     <Route path="/training/recognize" element={<Recognize />} />
                     <Route path="/training/reproduce" element={<Reproduce />} />
                     <Route path="/training" element={<Training />} />
@@ -101,7 +103,7 @@ function App() {
 
 function ConditionalNavigation() {
     const location = useLocation();
-    const hideNavigationPaths = ["/login", "/register", "/landing"]; // пути, на которых не нужно показывать навигацию
+    const hideNavigationPaths = ["/login", "/register", "/landing", "/change_pass"]; // пути, на которых не нужно показывать навигацию
 
     return hideNavigationPaths.includes(location.pathname) ? null : <Navigation />;
 }

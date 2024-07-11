@@ -58,20 +58,20 @@ const Login = () => {
                         <label htmlFor="password" className="form-label me-2">
                             Пароль
                         </label>
-                        <span className="change link-color">
-                            <a href="/html/change_pass.html">
-                                <small>Забыл пароль</small>
-                            </a>
+                        <span className="change">
+                            <Link to="/change_pass">
+                                <small className="link-color">Забыл пароль</small>
+                            </Link>
                         </span>
                         <input type="password" className="form-control py-2-5" id="password" value={password} onChange={(e) => setPassword(e.target.value)} />
-                        <p className="fs-8 link-color text-center mt-2">
+                        <p className="fs-8 text-center mt-2">
                             <span className="pe-2">Не зарегистрированы?</span>
-                            <Link to="/register">Регистрация</Link>
+                            <Link className="link-color" to="/register">Регистрация</Link>
                         </p>
                     </div>
 
                     <div className="d-flex justify-content-center my-4">
-                        <button type="button" className="btn btn-primary save-btn py-2 w-50" onClick={handleLogin}>
+                        <button type="button" className="btn btn-primary save-btn py-2 w-75" onClick={handleLogin}>
                             <span>
                                 <b>Войти</b>
                             </span>
