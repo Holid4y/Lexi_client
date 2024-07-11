@@ -632,3 +632,7 @@ input[type="number"] {
     background-color: var(--disabled-bg);
     border-color: var(--disabled-bg);
 }
+
+.highlight-letter {
+    opacity: 0.3;
+}
