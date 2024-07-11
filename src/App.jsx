@@ -95,7 +95,7 @@ function App() {
 
 function ConditionalNavigation() {
     const location = useLocation();
-    const hideNavigationPaths = ["/login", "/register", "/landing", "/change_pass"]; // пути, на которых не нужно показывать навигацию
+    const hideNavigationPaths = ["/login", "/register", "/landing"]; // пути, на которых не нужно показывать навигацию
 
     return hideNavigationPaths.includes(location.pathname) ? null : <Navigation />;
 }
