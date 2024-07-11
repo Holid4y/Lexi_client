@@ -11,7 +11,6 @@ export const fetchSettings = createAsyncThunk("user/fetchSettings", async (_, { 
         const data = await response.json();
         if (data) {
             dispatch(settingsLoaded(data));
-            console.log(data);
         }
     }
     return data;
