@@ -5,14 +5,14 @@ import Sentences from "./page-components/Sentences";
 
 const Pages = ({ page }) => {
 
-    const { pages } = useSelector((state) => state.book);
+    const { pages, slice_length } = useSelector((state) => state.book);
 
-    function remainder(num) {
-        return num % 50;
+    function remainder(num, sliceLength) {
+        return num % sliceLength;
     }
 
     const getPage = (pages, pageIndex) => {
-        return pages[remainder(pageIndex - 1)];
+        return pages[remainder(pageIndex - 1, slice_length)];
     };
 
     

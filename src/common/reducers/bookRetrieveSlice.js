@@ -28,6 +28,7 @@ const bookRetrieveSlice = createSlice({
         author_upload: null,
         page_count: null,
         pages_slice: null,
+        slice_length: null,
         slug: null,
         pages: null,
         bookmark: null,
@@ -43,6 +44,7 @@ const bookRetrieveSlice = createSlice({
             state.author_upload = action.payload.author_upload;
             state.page_count = action.payload.page_count;
             state.pages_slice = action.payload.pages_slice;
+            state.slice_length = action.payload.slice_length;
             state.slug = action.payload.slug;
             state.pages = action.payload.pages;
             state.bookmark = action.payload.bookmark;
