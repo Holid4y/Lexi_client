@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { host, login, registration, refresh, verify } from "../../../public/urls";
-import { headers } from "../../../public/urls";
+import { headers, getResponse } from "../../../public/urls";
 
 export const fetchLogin = createAsyncThunk("auth/fetchLogin", async ({ username, password }, { dispatch }) => {
 
@@ -64,7 +64,7 @@ export const fetchRegistration = createAsyncThunk("auth/fetchRegistration", asyn
 
 export const fetchRefresh = createAsyncThunk("auth/fetchRefresh", async (refreshToken, { dispatch }) => {
     const url = new URL(host + refresh);
-
+    console.log('fetchRefresh')
     const response = await fetch(url.toString(), {
         method: "POST",
         headers: {
@@ -85,24 +85,23 @@ export const fetchRefresh = createAsyncThunk("auth/fetchRefresh", async (refresh
         throw new Error(response.statusText);
     }
 });
-
+function checkResponseStatus(response) {
+    if (response.status === 200) {
+      return true;
+    } else if (response.status === 401) {
+      // Обработка статуса 401
+      console.log('Ошибка авторизации (401)');
+      return false;
+    } else {
+      // Обработка других статусов ошибок
+      console.log(`Ошибка ${response.status}: ${response.statusText}`);
+      return false;
+    }
+  }
 const fetchVerify = async (token) => {
     const url = new URL(host + verify);
-    const response = await fetch(url.toString(), {
-        method: "POST",
-        headers: {
-            ...headers,
-        },
-        body: JSON.stringify({ token }),
-    });
- 
-    if (response.status === 200) {
-        return true;
-    } else if (response.status === 401) {
-        return false; // Обработка статуса 401
-    } else {
-        throw new Error("Ошибка при запросе: " + response.status);
-    }
+    const response = await getResponse(url, "POST", JSON.stringify({ token }));
+    return checkResponseStatus(response)
 };
 
 export const checkAccessTokenValidity = () => async (dispatch) => {

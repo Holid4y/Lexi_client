@@ -402,9 +402,10 @@ input[type="number"] {
 }
 
 .badge-position {
-    font-size: 12px;
+    font-size: 7px;
     top: 5%;
-    left: 80%;
+    left: 90%;
+    color: #5ab45d;
 }
 
 .box-shadow {
@@ -630,4 +631,8 @@ input[type="number"] {
 .selected {
     background-color: var(--disabled-bg);
     border-color: var(--disabled-bg);
+}
+
+.highlight-letter {
+    opacity: 0.3;
 }

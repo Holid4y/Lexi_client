@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchTrainingInfo } from "../../common/reducers/training/trainingSlice";
+import { throwState, setIsEnd } from "../../common/reducers/training/trainingRoundSlice";
 
 import TrainingCard from "./TrainingCard";
 
@@ -11,6 +12,8 @@ function Training() {
 
     useEffect(() => {
         dispatch(fetchTrainingInfo())
+        dispatch(throwState()); // очищаем текущий state
+        dispatch(setIsEnd(false));
     }, [dispatch]);
 
 
@@ -36,16 +39,16 @@ function Training() {
                         </div>
                     </div>
                 </div>
-                <div class="accordion" id="accordionExample">
+                <div className="accordion" id="accordionExample">
                 <h5 className="mb-3 ps-2">Наш сайт предлагает возможность проверить свои знания английского языка с помощью двух видов тестов:</h5>
-                    <div class="accordion-item">
-                        <h2 class="accordion-header">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                    <div className="accordion-item">
+                        <h2 className="accordion-header">
+                        <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
                             Тестирование с выбором ответа
                         </button>
                         </h2>
-                        <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                        <div class="accordion-body">
+                        <div id="collapseOne" className="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                        <div className="accordion-body">
                             <p>
                                 Эти тесты позволяют вам выбирать правильный ответ из нескольких предложенных вариантов. Вы можете настроить количество ложных вариантов от 3 до 10, чтобы сделать тесты более сложными или, наоборот, упрощенными. Такой формат идеально подходит для тех, кто хочет быстро проверить свои знания и потренировать навыки понимания английского языка.
                             </p>
@@ -57,14 +60,14 @@ function Training() {
                         </div>
                         </div>
                     </div>
-                    <div class="accordion-item">
-                        <h2 class="accordion-header">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                    <div className="accordion-item">
+                        <h2 className="accordion-header">
+                        <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                             Тестирование на узнаваемость
                         </button>
                         </h2>
-                        <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                            <div class="accordion-body">
+                        <div id="collapseTwo" className="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                            <div className="accordion-body">
                                 <p>
                                     В этом виде тестов вам предлагается перевести русское слово на английский язык. Этот формат тестирования помогает улучшить словарный запас и навыки перевода, что является важным для свободного владения языком.
                                 </p>

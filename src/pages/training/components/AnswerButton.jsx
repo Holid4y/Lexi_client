@@ -1,16 +1,13 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-
 import { setIsCorrect } from "../../../common/reducers/training/trainingRoundSlice";
-
 
 import { handleFinalAnswer, performRoundSwitch } from "../common/utils";
 
 function AnswerButton({ localType }) {
     const dispatch = useDispatch();
     const { answer, training, round, isCorrect } = useSelector((state) => state.trainingRound);
-
 
     const AnswerButton = (
         <button
@@ -38,12 +35,11 @@ function AnswerButton({ localType }) {
             </span>
         </button>
     );
-    return <div className="d-flex justify-content-center my-4">
-        {localType === "recognize" ? (isCorrect == false ? NextButton : "") 
-        : 
-        (isCorrect == null ? AnswerButton : isCorrect == false ? NextButton : '')}
-        
-        </div>;
+    return (
+        <div className="d-flex justify-content-center my-4">
+            {localType === "recognize" ? (isCorrect == false ? NextButton : "") : isCorrect == null ? AnswerButton : isCorrect == false ? NextButton : ""}
+        </div>
+    );
 }
 
 export default AnswerButton;

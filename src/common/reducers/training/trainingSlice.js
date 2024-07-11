@@ -19,12 +19,13 @@ export const fetchTraining = createAsyncThunk("training/fetchTraining", async (t
         const data = await response.json();
         if (data) {
             dispatch(trainingLoaded(data));
+            return data
         } 
     } else {
         console.log("слов для повторения нет");
     }
 
-    return 
+    
 });
 
 export const fetchTrainingInfo = createAsyncThunk("training/fetchTrainingInfo", async (_, { dispatch }) => {
@@ -36,9 +37,10 @@ export const fetchTrainingInfo = createAsyncThunk("training/fetchTrainingInfo", 
         const data = await response.json();
         if (data) {
             dispatch(trainingInfoLoaded(data));
+            return data;
         }
     }
-    return data;
+    
 });
 
 export const fetchTrainingPatch = createAsyncThunk("training/fetchTrainingPatch", async ({ type, pk, is_correct }, { dispatch }) => {
@@ -84,9 +86,6 @@ const trainingSlice = createSlice({
 
             state.viewCountSumm = action.payload.count_word_to_training_recognize + action.payload.count_word_to_training_reproduce;
         },
-        decrementTrainingInfo: (state) => {
-            state.viewCountSumm = state.viewCountSumm - 1;
-        },
     },
     extraReducers: (builder) => {
         builder
@@ -125,5 +124,5 @@ const trainingSlice = createSlice({
     },
 });
 
-export const { trainingInfoLoaded, decrementTrainingInfo } = trainingSlice.actions;
+export const { trainingInfoLoaded } = trainingSlice.actions;
 export default trainingSlice.reducer;

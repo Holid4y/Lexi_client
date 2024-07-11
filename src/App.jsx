@@ -4,8 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { checkAccessTokenValidity } from "./common/reducers/authSlice";
 import { fetchSettings } from "./common/reducers/userSlice";
-import { fetchTrainingInfo } from "./common/reducers/training/trainingSlice";
-import { setTheme } from "./common/reducers/themeSlice";
+
 
 import Navigation from "./common/components/Navigation";
 import Home from "./pages/home/Home";
@@ -26,11 +25,9 @@ import LandingMain from "./pages/landing/LandingMain";
 
 function App() {
     const dispatch = useDispatch();
-    const { isAuth } = useSelector((state) => state.auth);
-    const { theme } = useSelector((state) => state.theme);
-    const { dark_theme } = useSelector((state) => state.user);
+    const { theme } = useSelector((state) => state.user);
 
-    function getColorScheme() {
+    function getOSColorScheme() {
         if (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) {
             return "dark";
         } else if (window.matchMedia && window.matchMedia("(prefers-color-scheme: light)").matches) {
@@ -40,38 +37,33 @@ function App() {
         }
     }
 
-    
-
     useEffect(() => {
         dispatch(checkAccessTokenValidity());
-        
-        const storedTheme = localStorage.getItem("theme");
-
-        // Проверка хранилища на наличие темы
-        if (storedTheme) {
-            dispatch(setTheme(storedTheme));
-        } else if (isAuth) {
-            // Пользователь зарегистрирован
-            dispatch(fetchSettings());
-            if (dark_theme !== undefined) {
-                // Если есть настройки пользователя, то устанавливаем их и сохраняем в локальном хранилище
-                dispatch(setTheme(dark_theme ? "dark" : "light"));
-                localStorage.setItem("theme", dark_theme ? "dark" : "light");
-                return;
-            }
-        }
-
-        // Если хранилище пустое и пользователь не зарегистрирован, то устанавливаем тему в зависимости от системной настройки
-        if (storedTheme == null && isAuth == null) {
-            const systemTheme = getColorScheme();
-            dispatch(setTheme(systemTheme));
-            localStorage.setItem("theme", systemTheme);
-        }
-    }, [dispatch, isAuth, dark_theme]);
+        dispatch(fetchSettings());
+    }, []);
 
     useEffect(() => {
-        document.documentElement.setAttribute("data-bs-theme", theme);
-    }, [theme]);
+
+        const storedTheme = localStorage.getItem("theme");
+        document.documentElement.setAttribute("data-bs-theme", storedTheme);
+
+        if (theme !== null) {
+            // Если есть настройки пользователя, то устанавливаем их и сохраняем в локальном хранилище
+            localStorage.setItem("theme", theme);
+            document.documentElement.setAttribute("data-bs-theme", theme);
+            return;
+        }
+
+
+        // Если хранилище пустое и у пользователя нет темы, то устанавливаем тему в зависимости от системной настройки
+        if (storedTheme == null & theme == null) {
+            
+            const systemTheme = getOSColorScheme();
+            localStorage.setItem("theme", systemTheme);
+            document.documentElement.setAttribute("data-bs-theme", systemTheme);
+        }
+    }, [dispatch, theme]);
+
 
 
     return (

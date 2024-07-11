@@ -3,7 +3,7 @@ import { fetchHome } from "../../../common/reducers/homeSlice";
 
 import { clearScore, clearRound } from "../../../common/reducers/training/trainingRoundSlice";
 
-import { fetchTrainingPatch, decrementTrainingInfo } from "../../../common/reducers/training/trainingSlice";
+import { fetchTrainingPatch } from "../../../common/reducers/training/trainingSlice";
 
 import { setAnswer, addScore, setIsViewResult, setIsCorrect, throwOneRoundState, setIsEnd, nextRound } from "../../../common/reducers/training/trainingRoundSlice";
 
@@ -72,8 +72,7 @@ export function handleFinalAnswer(answer, localType, currentTraining, round, dis
             pk: currentTraining[round].pk,
             is_correct: is_correct,
         };
-        // отнимаем от информационного счетчика 1
-        dispatch(decrementTrainingInfo());
+
 
         dispatch(fetchTrainingPatch(data)); // отбовляет бд
 
