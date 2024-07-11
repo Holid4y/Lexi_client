@@ -17,6 +17,7 @@ const reproduceSlice = createSlice({
 
         // hint
         hintIsOpen: false,
+        hintTextListTuple: null
     },
     reducers: {
         trainingLoaded: (state, action) => {
@@ -68,6 +69,9 @@ const reproduceSlice = createSlice({
         setIsCorrect: (state, action) => {
             state.isCorrect = action.payload;
         },
+        setHintTextListTuple: (state, action) => {
+            state.hintTextListTuple = action.payload;
+        },
         
     },
 });
@@ -84,6 +88,7 @@ export const {
     setAnswer,
     setIsEnd,
     setIsViewResult,
-    setIsCorrect 
+    setIsCorrect,
+    setHintTextListTuple 
 } = reproduceSlice.actions;
 export default reproduceSlice.reducer;

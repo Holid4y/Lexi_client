@@ -1,24 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setHintIsOpen } from "../../../../common/reducers/training/trainingRoundSlice";
+import { setHintIsOpen, setHintTextListTuple } from "../../../../common/reducers/training/trainingRoundSlice";
 
 function Hint({ text }) {
     const dispatch = useDispatch();
-    const { hintIsOpen } = useSelector((state) => state.trainingRound);
+    const { hintIsOpen, hintTextListTuple } = useSelector((state) => state.trainingRound);
     const { round, answer } = useSelector((state) => state.trainingRound);
 
-    const [hintText, setHintText] = useState(null);
+    function letterToSpan(hintTextListTuple) {
 
-
-
-    function letterToSpan(word, answer) {
-
-        if (answer === null) {
-            answer = "";
-        }
- 
-        return word.split("").map((letter, index) => {
-            const className = answer.includes(letter)  ? "highlight-letter" : "";
+        return hintTextListTuple.map((item, index) => {
+            const letter = item[0]
+            const isStyled = item[1]
+            const className = isStyled  ? "highlight-letter" : "";
 
             return (
                 <span key={index} className={className}>
@@ -27,26 +21,43 @@ function Hint({ text }) {
             );
         });
     }
-    // renderLetterToSpan:
-    // принимает hintTextListTuple[(h, true), (e, false), (l, true), (l, false), (o, false)]
-    // for letter in hintTextListTuple:
 
-        // const className = letter[1]  ? "highlight-letter" : "";
-        // <span key={index} className={className}>
-        //      {letter}
-        // </span>
-    // checkIncludes {
-    // 
-    // }
-    function checkIncludes(word, answer) {
-        // last_answer_letter
-        // for letter in word:
-        //      
-    }
+    function updateHintList(hintTextListTuple, input) {
+        let inputList = input.split('');
+        
+        let updatedList = JSON.parse(JSON.stringify(hintTextListTuple));
+        console.log(updatedList, input)
+        for (let tuple of updatedList) {
+          for (let i = 0; i < inputList.length; i++) {
+            if (tuple[0] === inputList[i]) {
+              tuple[1] = true;
+              inputList.splice(i, 1);
+              break;
+            }
+          }
+        }
+      
+        return updatedList;
+      }
+    
     useEffect(() => {
-        // checkIncludes(hintText, answer)
+        
+        if ((hintTextListTuple !== null & hintTextListTuple !== undefined) & (answer !== null & answer !== '')) {
+            dispatch(setHintTextListTuple(updateHintList(hintTextListTuple, answer)))
+        }
+        
     }, [answer]);
 
+    
+
+    useEffect(() => {
+        dispatch(setHintIsOpen(false));
+        dispatch(setHintTextListTuple(null))
+    }, [round]);
+
+    function wordToListTuple(word) {
+        return word.split('').map(letter => [letter, false]);
+    }
     function shuffleText(text) {
         let shuffledText = text
             .split("")
@@ -60,17 +71,12 @@ function Hint({ text }) {
 
         return shuffledText;
     }
-
-    useEffect(() => {
-        dispatch(setHintIsOpen(false));
-        setHintText(null);
-    }, [round]);
-
     function handleClick() {
-        setHintText(shuffleText(text));
+        const shuffledText = shuffleText(text)
+        dispatch(setHintTextListTuple(wordToListTuple(shuffledText)))
         dispatch(setHintIsOpen(true));
     }
-    // {hintIsOpen ? "form-control p-0 py-2 position-relative h-65" : "form-control p-0 py-2 disabled placeholder position-relative h-65"}
+    
     const CloseHint = (
         <button type="text" className="form-control p-0 py-2 disabled placeholder position-relative h-65" onClick={() => handleClick()}>
             <small className="small-text-hint top-50 start-50 translate-middle w-100 text-center ps-3">Нажмите, если затрудняетесь ответить</small>
@@ -78,7 +84,7 @@ function Hint({ text }) {
     );
     const OpenHint = (
         <button type="text" className="form-control p-0 py-2 position-relative h-65">
-            <h1 className="p-0 m-0">{hintText ? letterToSpan(hintText, answer) : ""}</h1>
+            <h1 className="p-0 m-0">{hintTextListTuple ? letterToSpan(hintTextListTuple) : ""}</h1>
         </button>
     );
 
