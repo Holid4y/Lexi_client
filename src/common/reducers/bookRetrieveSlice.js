@@ -2,21 +2,47 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { host, books } from "../../../public/urls";
 import { getResponse } from "../../../public/urls";
 
+function getPageFromUrl(url) {
+    // Разбиваем URL на части
+    const parts = url.split("/");
+
+    // Находим индекс последней части URL
+    const lastPartIndex = parts.length - 1;
+
+    // Получаем последнюю часть URL
+    const lastPart = parts[lastPartIndex];
+
+    // Проверяем, является ли последняя часть числом
+    if (!isNaN(parseInt(lastPart))) {
+        // Если да, возвращаем ее как номер страницы
+        return parseInt(lastPart);
+    } else {
+        // Если нет, возвращаем null или значение по умолчанию
+        return null;
+    }
+}
+
 export const fetchBook = createAsyncThunk("book/fetchBook", async (params, { dispatch }) => {
-    const { slug, page } = params;
+    const { slug, page, isPageSwitch } = params;
     const url = new URL(host + books + slug + "/" + page);
 
-    const response = await getResponse(url, "GET")
-    
+    const response = await getResponse(url, "GET");
+    console.log(response);
     if (response.ok) {
         const data = await response.json();
         if (data) {
             dispatch(bookLoaded(data));
-            const value = {"slug":slug,"page": page};
-            localStorage.setItem('recentlyBook', JSON.stringify(value));
+            const value = { slug: slug, page: page };
+            localStorage.setItem("recentlyBook", JSON.stringify(value));
+
+            if (!isPageSwitch & response.redirected) {
+                const redirectedPage = getPageFromUrl(response.url);
+                return { ...data, redirected: true, redirectedPage: redirectedPage };
+            } else {
+                return data;
+            }
         }
     }
-    return data;
 });
 
 const bookRetrieveSlice = createSlice({
