@@ -19,7 +19,8 @@ function BookRetrieve() {
     const { pk, pages, page_count, pages_slice, loading } = useSelector((state) => state.book);
     const { slug, page } = useParams();
     const [currentPage, setCurrentPage] = useState(parseInt(page));
-
+    const [isFirstInit, setIsFirstInit] = useState(true);
+    
     useEffect(() => {
         navigate(`/book/${slug}/${currentPage}`);
     }, [currentPage]);
@@ -31,7 +32,7 @@ function BookRetrieve() {
     }
 
     useEffect(() => {
-        if (pages){        
+        if (!isFirstInit){        
             if (isOutRange()) {
                 // только когда выйдет за range
                 dispatch(fetchBook({ slug: slug, page: currentPage }));
@@ -42,7 +43,12 @@ function BookRetrieve() {
     }, [page]); // при каждом изменение страницы 
 
     useEffect(() => {
-        dispatch(fetchBook({ slug: slug, page: currentPage }));
+        
+        if (isFirstInit){
+            dispatch(fetchBook({ slug: slug, page: currentPage }));
+            setIsFirstInit(false)
+        }
+        
     }, [slug]);
 
     const LoadingView = <Loading />;
