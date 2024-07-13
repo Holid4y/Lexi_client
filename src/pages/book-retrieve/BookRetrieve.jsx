@@ -45,7 +45,12 @@ function BookRetrieve() {
     useEffect(() => {
         
         if (isFirstInit){
-            dispatch(fetchBook({ slug: slug, page: currentPage }));
+            dispatch(fetchBook({ slug: slug, page: currentPage }))
+            .then((data) => {
+                if (data.payload.redirected) {
+                    setCurrentPage(data.payload.redirectedPage)
+                } 
+            })
             setIsFirstInit(false)
         }
         
