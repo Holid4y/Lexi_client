@@ -116,7 +116,7 @@ function BookmarkList() {
         <div className="align-items-center">
             {SearchView}
             {loading ? ( LoadingView ) : (
-                <main className="container pb-5">
+                <main className="container">
                     {BooksMyView}
                     {BooksMarkView}
                     <PaginationButton currentPage={currentPage} pageCount={bookmarks?.page_count} setCurrentPage={setCurrentPage}/>

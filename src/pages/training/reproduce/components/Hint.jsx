@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setHintIsOpen, setHintTextListTuple } from "../../../../common/reducers/training/trainingRoundSlice";
 
@@ -6,6 +6,22 @@ function Hint({ text }) {
     const dispatch = useDispatch();
     const { hintIsOpen, hintTextListTuple } = useSelector((state) => state.trainingRound);
     const { round, answer } = useSelector((state) => state.trainingRound);
+    const hintButtonRef = useRef(null);
+
+    // Обработчик, при нажатии на Tab открывается подсказка
+    useEffect(() => {
+        const handleKeyDown = (event) => {
+            if (event.key === "Tab") {
+                if (hintButtonRef.current && !hintButtonRef.current.disabled) {
+                    hintButtonRef.current.click();
+                }
+            }
+        };
+        window.addEventListener("keydown", handleKeyDown);
+        return () => {
+            window.removeEventListener("keydown", handleKeyDown);
+        };
+    }, []);
 
     function letterToSpan(hintTextListTuple) {
 
@@ -48,16 +64,23 @@ function Hint({ text }) {
         
     }, [answer]);
 
-    
-
     useEffect(() => {
         dispatch(setHintIsOpen(false));
         dispatch(setHintTextListTuple(null))
     }, [round]);
 
+    useEffect(() => {
+        const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+        const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
+        return () => {
+            tooltipList.forEach(tooltip => tooltip.dispose());
+        };
+    }, [hintIsOpen]);
+
     function wordToListTuple(word) {
         return word.split('').map(letter => [letter, false]);
     }
+
     function shuffleText(text) {
         let shuffledText = text
             .split("")
@@ -65,12 +88,12 @@ function Hint({ text }) {
             .join("");
 
         if (shuffledText === text) {
-            // If the shuffled text is the same as the original, shuffle it again
             shuffledText = shuffleText(text);
         }
 
         return shuffledText;
     }
+
     function handleClick() {
         const shuffledText = shuffleText(text)
         dispatch(setHintTextListTuple(wordToListTuple(shuffledText)))
@@ -78,7 +101,15 @@ function Hint({ text }) {
     }
     
     const CloseHint = (
-        <button type="text" className="form-control p-0 py-2 disabled placeholder position-relative h-65" onClick={() => handleClick()}>
+        <button 
+            ref={hintButtonRef} 
+            type="text" 
+            className="form-control p-0 py-2 disabled placeholder position-relative h-65" 
+            data-bs-toggle="tooltip"
+            data-bs-html="true"
+            data-bs-title="Нажмите <b>TAB</b> чтобы открыть подсказку"
+            onClick={() => handleClick()}
+        >
             <small className="small-text-hint top-50 start-50 translate-middle w-100 text-center ps-3">Нажмите, если затрудняетесь ответить</small>
         </button>
     );

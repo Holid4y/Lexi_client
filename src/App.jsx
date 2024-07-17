@@ -65,6 +65,21 @@ function App() {
     }, [dispatch, theme]);
 
 
+    // Убирает стандартное поведение Tab на сайте
+    useEffect(() => {
+        const handleKeyDown = (event) => {
+            if (event.key === "Tab") {
+                event.preventDefault();
+            }
+        };
+
+        window.addEventListener("keydown", handleKeyDown);
+        return () => {
+            window.removeEventListener("keydown", handleKeyDown);
+        };
+    }, []);
+
+
 
     return (
         <Router>
