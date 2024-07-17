@@ -23,19 +23,19 @@ const ChangePass = () => {
                     <h2 className="mb-4 text-center">Смена пароля</h2>
                     <div className="mb-4">
                         <div className="mb-2">
-                            <label htmlFor="email" className="form-label">
-                                Email
+                            <label htmlFor="password" className="form-label">
+                                Текущий пароль
                             </label>
-                            <input type="email" className="form-control py-2-5" id="email" />
+                            <input type="password" className="form-control py-2-5" id="password" />
                         </div>
 
                         <label htmlFor="password1" className="form-label">
-                            Пароль
+                            Новый пароль
                         </label>
                         <input type="password" className="form-control py-2-5 mb-2" id="password1" />
 
                         <label htmlFor="password2" className="form-label">
-                            Повторите пароль
+                            Повторите новый пароль
                         </label>
                         <input type="password" className="form-control py-2-5" id="password2" />
 
