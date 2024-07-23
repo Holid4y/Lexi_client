@@ -2,7 +2,7 @@ export const host = "http://127.0.0.1:8000/api/";
 
 // books
 export const books = "books/";
-export const bookmarks = "users/bookmarks/";
+export const bookmarks = books + "bookmarks/";
 
 // JWT
 export const login = "jwt/create/";
