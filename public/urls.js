@@ -106,7 +106,7 @@ export async function getResponse(url, method, body) {
         body: body
     });
 
-    
-    console.log(`${method} Запрос на ${url}. OK: ${response.ok}`);
+
+        
     return response;
 }

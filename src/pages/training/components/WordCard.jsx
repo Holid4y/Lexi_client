@@ -8,8 +8,7 @@ function WordCard({ localType, text }) {
 
 
     function getLevel() {
-        // в зависимости от localType ключ lvl меняется на `localType_lvl` 
-        return training[round][`${localType}_lvl`];
+        return training[round].training.lvl;
     }
 
     return (

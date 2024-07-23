@@ -69,7 +69,7 @@ export function handleFinalAnswer(answer, localType, currentTraining, round, dis
         const is_correct = checkAnswer(dispatch, answer, currentTraining, round);
         const data = {
             type: localType,
-            pk: currentTraining[round].pk,
+            pk: currentTraining[round].training.pk,
             is_correct: is_correct,
         };
 
