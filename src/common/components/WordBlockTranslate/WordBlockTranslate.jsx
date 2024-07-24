@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { toggleWordBlock } from "../reducers/wordSlice";
-import { fetchVocabularyPost, fetchVocabularyDelete } from "../reducers/vocabularySlice";
+import { toggleWordBlock } from "../../reducers/wordSlice";
+import { fetchVocabularyPost, fetchVocabularyDelete } from "../../reducers/vocabularySlice";
 
-import Loading from "../components/Treatment/Loading";
-import SVG from "../../common/components/Icons/SVG";
+import Loading from "../Treatment/Loading";
+import SVG from "../Icons/SVG";
+import SmallTranslationWord from "./SmallTranslationWord";
 
 function WordBlockTranslate() {
     const dispatch = useDispatch();
@@ -13,12 +14,14 @@ function WordBlockTranslate() {
     const { pk, text, part_of_speech, transcription, translations, synonyms, meanings, related_pk, isVisible, loading, error } = useSelector(
         (state) => state.word
     );
-
     const [isRelatedWord, setIsRelatedWord] = useState(false);
     const [showSection2, setShowSection2] = useState(false);
 
     useEffect(() => {
-        setIsRelatedWord(related_pk);
+        if (translations){
+            setIsRelatedWord(related_pk.includes(translations[0].pk));
+        }   
+        
     }, [text]);
     
     useEffect(() => {   
@@ -101,10 +104,7 @@ function WordBlockTranslate() {
                                     <b>Переводы:</b>
                                     <br />
                                     {translations.map((translation, index) => (
-                                        <button className="btn btn-secondary m-1" key={index}>
-                                            <span className="pe-2">{translation.text}</span>
-                                            <SVG name="Unfill_star_btn" />
-                                        </button>
+                                        <SmallTranslationWord related_pk={related_pk} translation={translation} key={index}/>
                                     ))}
                                 </div>
                             )}

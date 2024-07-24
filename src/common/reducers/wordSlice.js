@@ -46,7 +46,7 @@ const wordSlice = createSlice({
         translations: null,
         synonyms: null,
         meanings: null,
-        related_pk: false,
+        related_pk: [],
 
         // WordBlockTranslation
         isVisible: false,

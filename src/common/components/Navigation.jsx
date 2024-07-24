@@ -7,7 +7,7 @@ import { fetchTrainingInfo } from "../reducers/training/trainingSlice";
 
 import { isActivatedEmail } from "../../pages/profile/utils.js/utils";
 
-import WordBlockTranslate from "./WordBlockTranslate";
+import WordBlockTranslate from "./WordBlockTranslate/WordBlockTranslate";
 import SVG from "../components/Icons/SVG";
 
 function Navigation() {
