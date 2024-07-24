@@ -53,8 +53,12 @@ function WordBlockTranslate() {
         setIsRelatedWord(true);
     };
 
-    const handleDeleteWordToVocabulary = (related_pk) => {
-        dispatch(fetchVocabularyDelete(related_pk));
+    const handleDeleteWordToVocabulary = (wordPk, translationPk) => {
+        const body = {
+            word: wordPk,
+            translation: translationPk,
+        };
+        dispatch(fetchVocabularyDelete(body));
         setIsRelatedWord(false);
     };
 
@@ -77,7 +81,7 @@ function WordBlockTranslate() {
                             </span>
                             <div style={{ marginLeft: "auto", display: "flex", alignItems: "center" }}>
                                 {isRelatedWord ? (
-                                    <button className="btn" onClick={() => handleDeleteWordToVocabulary(related_pk)}>
+                                    <button className="btn" onClick={() => handleDeleteWordToVocabulary(pk, translations[0].pk)}>
                                         <SVG name="fill_star" />
                                     </button>
                                 ) : (
@@ -109,7 +113,7 @@ function WordBlockTranslate() {
                                     <b>Переводы:</b>
                                     <br />
                                     {translations.map(
-                                        (translation, index) => index !== 0 && <SmallTranslationWord related_pk={related_pk} translation={translation} key={index} />
+                                        (translation, index) => index !== 0 && <SmallTranslationWord wordPk={pk} related_pk={related_pk} translation={translation} key={index} />
                                     )}
                                 </div>
                             )}

@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { host, vocabulary, stats } from "../../../public/urls";
+import { host, vocabulary, stats, _delete } from "../../../public/urls";
 import { getResponse } from "../../../public/urls";
 
 export const fetchVocabulary = createAsyncThunk("vocabulary/fetchVocabulary", async (page, { dispatch }) => {
@@ -51,10 +51,11 @@ export const fetchVocabularyPost = createAsyncThunk("vocabulary/fetchVocabularyP
 
 });
 
-export const fetchVocabularyDelete = createAsyncThunk("vocabulary/fetchVocabularyDelete", async (pk, { dispatch }) => {
-    const url = new URL(host + vocabulary + pk);
-
-    await getResponse(url, "DELETE");
+export const fetchVocabularyDelete = createAsyncThunk("vocabulary/fetchVocabularyDelete", async (body, { dispatch }) => {
+    const url = new URL(host + vocabulary + _delete);
+    
+    const bodyString = JSON.stringify(body);
+    await getResponse(url, "DELETE", bodyString);
     
     return
 

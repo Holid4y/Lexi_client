@@ -17,6 +17,7 @@ export const settings = "users/settings/";
 
 // vocabulary
 export const vocabulary = "vocabulary/";
+export const _delete = "delete/"
 export const stats = vocabulary + "stats/";
 
 // words

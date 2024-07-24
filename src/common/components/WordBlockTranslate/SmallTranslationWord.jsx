@@ -7,7 +7,7 @@ import { fetchVocabularyPost, fetchVocabularyDelete } from "../../reducers/vocab
 import Loading from "../Treatment/Loading";
 import SVG from "../Icons/SVG";
 
-function SmallTranslationWord({ translation, related_pk }) {
+function SmallTranslationWord({ wordPk, translation, related_pk }) {
     const dispatch = useDispatch();
     const [isRelatedWord, setIsRelatedWord] = useState(false);
 
@@ -18,13 +18,21 @@ function SmallTranslationWord({ translation, related_pk }) {
         }  
     }, []);
 
-    const handleAddWordToVocabulary = (pk) => {
-        dispatch(fetchVocabularyPost(pk));
+    const handleAddWordToVocabulary = (wordPk, translationPk) => {
+        const body = {
+            word: wordPk,
+            translation: translationPk,
+        };
+        dispatch(fetchVocabularyPost(body));
         setIsRelatedWord(true);
     };
 
-    const handleDeleteWordToVocabulary = (related_pk) => {
-        dispatch(fetchVocabularyDelete(related_pk));
+    const handleDeleteWordToVocabulary = (wordPk, translationPk) => {
+        const body = {
+            word: wordPk,
+            translation: translationPk,
+        };
+        dispatch(fetchVocabularyDelete(body));
         setIsRelatedWord(false);
     };
 
@@ -32,11 +40,11 @@ function SmallTranslationWord({ translation, related_pk }) {
         <button className="btn btn-secondary m-1">
             <span className="pe-2">{translation.text}</span>
             {isRelatedWord ? (
-                <button className="btn" onClick={() => handleDeleteWordToVocabulary(related_pk)}>
+                <button className="btn" onClick={() => handleDeleteWordToVocabulary(wordPk, translation.pk)}>
                     <SVG name="fill_star" />
                 </button>
             ) : (
-                <button className="btn" onClick={() => handleAddWordToVocabulary(pk)}>
+                <button className="btn" onClick={() => handleAddWordToVocabulary(wordPk, translation.pk)}>
                     <SVG name="Unfill_star" />
                 </button>
             )}
