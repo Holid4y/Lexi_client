@@ -35,11 +35,10 @@ export const fetchVocabularyStats = createAsyncThunk("vocabulary/fetchVocabulary
     return data;
 });
 
-export const fetchVocabularyPost = createAsyncThunk("vocabulary/fetchVocabularyPost", async (pk, { dispatch }) => {
+export const fetchVocabularyPost = createAsyncThunk("vocabulary/fetchVocabularyPost", async (body, { dispatch }) => {
     const url = new URL(host + vocabulary);
-    const body = { 
-        word: pk
-    }
+
+    
     const bodyString = JSON.stringify(body);
     await getResponse(url, "POST", bodyString);
 

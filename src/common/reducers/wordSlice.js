@@ -10,7 +10,7 @@ export const fetchWordGet = createAsyncThunk("word/fetchWordGet", async (pk, { d
     if (response.ok) {
         const data = await response.json();
         if (data) {
-            dispatch(wordGetLoaded(data));
+            dispatch(wordLoaded(data));
         }
     }
 
@@ -28,7 +28,7 @@ export const fetchWordPost = createAsyncThunk("word/fetchWordPost", async (word,
     if (response.ok) {
         const data = await response.json();
         if (data) {
-            dispatch(wordPostLoaded(data));
+            dispatch(wordLoaded(data));
         }
     }
 
@@ -55,16 +55,7 @@ const wordSlice = createSlice({
         error: null,
     },
     reducers: {
-        wordGetLoaded: (state, action) => {
-            state.pk = action.payload.pk;
-            state.text = action.payload.text;
-            state.part_of_speech = action.payload.part_of_speech;
-            state.transcription = action.payload.transcription;
-            state.translations = action.payload.translations;
-            state.synonyms = action.payload.synonyms;
-            state.meanings = action.payload.meanings;
-        },
-        wordPostLoaded: (state, action) => {
+        wordLoaded: (state, action) => {
             state.pk = action.payload.word.pk;
             state.text = action.payload.word.text;
             state.part_of_speech = action.payload.word.part_of_speech;
@@ -117,5 +108,5 @@ const wordSlice = createSlice({
     },
 });
 
-export const { wordGetLoaded, wordPostLoaded, toggleWordBlock, cleanStateWord, setReletedPk } = wordSlice.actions;
+export const { wordLoaded, toggleWordBlock, cleanStateWord, setReletedPk } = wordSlice.actions;
 export default wordSlice.reducer;

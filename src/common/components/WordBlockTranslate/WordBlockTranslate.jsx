@@ -11,20 +11,17 @@ import SmallTranslationWord from "./SmallTranslationWord";
 function WordBlockTranslate() {
     const dispatch = useDispatch();
 
-    const { pk, text, part_of_speech, transcription, translations, synonyms, meanings, related_pk, isVisible, loading, error } = useSelector(
-        (state) => state.word
-    );
+    const { pk, text, part_of_speech, transcription, translations, synonyms, meanings, related_pk, isVisible, loading, error } = useSelector((state) => state.word);
     const [isRelatedWord, setIsRelatedWord] = useState(false);
     const [showSection2, setShowSection2] = useState(false);
 
     useEffect(() => {
-        if (translations){
+        if (translations) {
             setIsRelatedWord(related_pk.includes(translations[0].pk));
-        }   
-        
+        }
     }, [text]);
-    
-    useEffect(() => {   
+
+    useEffect(() => {
         function handleClickOutside(event) {
             const wordBlock = document.getElementById("wordBlock");
             if (wordBlock && !wordBlock.contains(event.target)) {
@@ -47,8 +44,12 @@ function WordBlockTranslate() {
         };
     }, [isVisible, dispatch]);
 
-    const handleAddWordToVocabulary = (pk) => {
-        dispatch(fetchVocabularyPost(pk));
+    const handleAddWordToVocabulary = (wordPk, translationPk) => {
+        const body = {
+            word: wordPk,
+            translation: translationPk,
+        };
+        dispatch(fetchVocabularyPost(body));
         setIsRelatedWord(true);
     };
 
@@ -59,9 +60,13 @@ function WordBlockTranslate() {
 
     const renderContent = () => {
         if (loading) {
-            return <div className="dark-nav mb-2"><Loading/></div>;
+            return (
+                <div className="dark-nav mb-2">
+                    <Loading />
+                </div>
+            );
         }
-
+        
         if ((translations && translations.length > 0) || (synonyms && synonyms.length > 0) || (meanings && meanings.length > 0)) {
             return (
                 <div>
@@ -76,7 +81,7 @@ function WordBlockTranslate() {
                                         <SVG name="fill_star" />
                                     </button>
                                 ) : (
-                                    <button className="btn" onClick={() => handleAddWordToVocabulary(pk)}>
+                                    <button className="btn" onClick={() => handleAddWordToVocabulary(pk, translations[0].pk)}>
                                         <SVG name="Unfill_star" />
                                     </button>
                                 )}
@@ -103,9 +108,9 @@ function WordBlockTranslate() {
                                 <div>
                                     <b>Переводы:</b>
                                     <br />
-                                    {translations.map((translation, index) => (
-                                        <SmallTranslationWord related_pk={related_pk} translation={translation} key={index}/>
-                                    ))}
+                                    {translations.map(
+                                        (translation, index) => index !== 0 && <SmallTranslationWord related_pk={related_pk} translation={translation} key={index} />
+                                    )}
                                 </div>
                             )}
                             {synonyms.length > 0 && (
@@ -149,9 +154,7 @@ function WordBlockTranslate() {
         <div>
             <div className="modal-backdrop fade show" style={{ display: isVisible ? "block" : "none" }}></div>
             <div id="wordBlock" className={`toggle-block ${isVisible ? "show" : ""}`}>
-                <div id="section-1">
-                    {renderContent()}
-                </div>
+                <div id="section-1">{renderContent()}</div>
             </div>
         </div>
     );

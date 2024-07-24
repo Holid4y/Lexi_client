@@ -12,7 +12,10 @@ function SmallTranslationWord({ translation, related_pk }) {
     const [isRelatedWord, setIsRelatedWord] = useState(false);
 
     useEffect(() => {
-        setIsRelatedWord(related_pk.includes(translation.pk));
+
+        if (related_pk) {
+            setIsRelatedWord(related_pk.includes(translation.pk));
+        }  
     }, []);
 
     const handleAddWordToVocabulary = (pk) => {
