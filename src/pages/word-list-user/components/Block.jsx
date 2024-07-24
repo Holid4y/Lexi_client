@@ -2,17 +2,17 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { fetchWordGet, toggleWordBlock, setReletedPk } from "../../../common/reducers/wordSlice";
 
-function Block({ word, pk }) {
+function Block({ word }) {
     const dispatch = useDispatch();
 
     function handleBlockClick(wordPk) {
         dispatch(toggleWordBlock());
         dispatch(fetchWordGet(wordPk));
-        dispatch(setReletedPk(pk))
+        dispatch(setReletedPk(wordPk))
     }
 
     return (
-        <div role="button" onClick={() => handleBlockClick(word.pk)}>
+        <div role="button" onClick={() => handleBlockClick(word.id)}>
             <div className="card card-btn statistic-block d-flex flex-column justify-content-center align-items-center position-relative">
                 <h4 className="text-center">{word.text}</h4>
                 <div className="position-absolute bottom-0 start-0 ms-2 mb-2">

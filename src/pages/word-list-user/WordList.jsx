@@ -31,7 +31,7 @@ function WordList() {
             {words && words.results && words.results.length > 0 ? (
               words.results.map((word, index) => (
                 <div key={index} className="col">
-                  <Block pk={word.pk} word={word.word} />
+                  <Block word={word.word} />
                 </div>
               ))
             ) : (
