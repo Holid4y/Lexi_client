@@ -7,23 +7,26 @@ import { fetchBookmarksDelete, fetchBookmarksCreateUpdate } from "../../../commo
 const BookmarkCard = ({ bookmark }) => {
     const dispatch = useDispatch();
     const [isBookmarked, setIsBookmarked] = useState(true);
+    const [bookmarkPk, setBookmarkPk] = useState(bookmark.pk);
 
-    const handleIconClick = (bookmarkId, bookId, targetPage) => {
+    const handleIconClick = (bookmarkPk, bookId, targetPage) => {
         if (isBookmarked) {
             setIsBookmarked(false);
-            dispatch(fetchBookmarksDelete(bookmarkId));
+            dispatch(fetchBookmarksDelete(bookmarkPk));
         } else {
             setIsBookmarked(true);
             const data = {
                 bookId: bookId,
                 targetPage: targetPage,
             };
-            dispatch(fetchBookmarksCreateUpdate(data));
+            dispatch(fetchBookmarksCreateUpdate(data)).then((response) => {
+                setBookmarkPk(response.payload.pk)
+            });
         }
     };
 
     const styleCardisBookmark = {
-        opacity: isBookmarked? "1" : ".3"
+        opacity: isBookmarked ? "1" : ".3",
     };
 
     return (
@@ -43,12 +46,8 @@ const BookmarkCard = ({ bookmark }) => {
                     </div>
                 </Link>
                 {/* на это надо нажимать и должна меняться иконка */}
-                <span className="position-absolute translate-middle mark" onClick={() => handleIconClick(bookmark.pk, bookmark.book_cover.book_id, bookmark.target_page)}>
-                    {isBookmarked ? (
-                        <SVG name="marklist_fill"/>
-                    ) : (
-                        <SVG name="marklist_Unfill"/>
-                    )}
+                <span className="position-absolute translate-middle mark" onClick={() => handleIconClick(bookmarkPk, bookmark.book_cover.book_id, bookmark.target_page)}>
+                    {isBookmarked ? <SVG name="marklist_fill" /> : <SVG name="marklist_Unfill" />}
                 </span>
             </div>
         </div>

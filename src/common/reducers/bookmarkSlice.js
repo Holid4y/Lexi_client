@@ -36,7 +36,7 @@ export const fetchBookmarksCreateUpdate = createAsyncThunk("bookmarks/fetchBookm
 });
 
 export const fetchBookmarksDelete = createAsyncThunk("bookmarks/fetchBookmarksDelete", async (bookmarkId, { dispatch }) => {
-    const url = new URL(host + bookmarks + bookmarkId);
+    const url = new URL(host + bookmarks + bookmarkId + '/');
 
     const response = await getResponse(url, "DELETE")
 

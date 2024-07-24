@@ -8,6 +8,8 @@ const BookRetrieveHeader = ({ pk, page }) => {
     const dispatch = useDispatch();
     const { title, page_count, author, bookmark, loading, error } = useSelector((state) => state.book);
     const [isBookmarked, setIsBookmarked] = useState(false);
+    const [bookmarkPk, setBookmarkPk] = useState(bookmark && bookmark.pk);
+
     const [previousPage, setPreviousPage] = useState(page);
 
     useEffect(() => {
@@ -33,17 +35,19 @@ const BookRetrieveHeader = ({ pk, page }) => {
         }
     }, [dispatch, page]);
 
-    const handleIconClick = (bookmarkId, bookId, targetPage) => {
+    const handleIconClick = (bookmarkPk, bookId, targetPage) => {
         if (isBookmarked) {
             setIsBookmarked(false);
-            dispatch(fetchBookmarksDelete(bookmarkId));
+            dispatch(fetchBookmarksDelete(bookmarkPk));
         } else {
             setIsBookmarked(true);
             const data = {
                 bookId: bookId,
                 targetPage: targetPage,
             };
-            dispatch(fetchBookmarksCreateUpdate(data));
+            dispatch(fetchBookmarksCreateUpdate(data)).then((response) => {
+                setBookmarkPk(response.payload.pk)
+            });
         }
     };
     
@@ -56,7 +60,7 @@ const BookRetrieveHeader = ({ pk, page }) => {
                             <b>{renderResponse(title, "...", loading, error)}</b>
                         </h5>
                         {isBookmarked ? (
-                            <label className="btn" htmlFor="btn-check-4" onClick={() => handleIconClick(bookmark.pk, null, null)}>
+                            <label className="btn" htmlFor="btn-check-4" onClick={() => handleIconClick(bookmarkPk, null, null)}>
                                 <SVG name="marklist_fill"/>
                             </label>
                         ) : (
