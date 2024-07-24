@@ -42,7 +42,6 @@ function Hint({ text }) {
         let inputList = input.split('');
         
         let updatedList = JSON.parse(JSON.stringify(hintTextListTuple));
-        console.log(updatedList, input)
         for (let tuple of updatedList) {
           for (let i = 0; i < inputList.length; i++) {
             if (tuple[0] === inputList[i]) {

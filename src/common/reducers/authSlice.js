@@ -64,7 +64,6 @@ export const fetchRegistration = createAsyncThunk("auth/fetchRegistration", asyn
 
 export const fetchRefresh = createAsyncThunk("auth/fetchRefresh", async (refreshToken, { dispatch }) => {
     const url = new URL(host + refresh);
-    console.log('fetchRefresh')
     const response = await fetch(url.toString(), {
         method: "POST",
         headers: {

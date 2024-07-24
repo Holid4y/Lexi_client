@@ -27,7 +27,6 @@ export const fetchBook = createAsyncThunk("book/fetchBook", async (params, { dis
     const url = new URL(host + books + slug + "/" + page);
 
     const response = await getResponse(url, "GET");
-    console.log(response);
     if (response.ok) {
         const data = await response.json();
         if (data) {

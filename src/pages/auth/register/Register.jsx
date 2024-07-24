@@ -39,10 +39,6 @@ const Register = () => {
     };
 
     const handleRegistration = () => {
-        console.log("Начало регистрации");
-        console.log("Отправляемые данные:");
-        console.log({ username, email, password, rePassword });
-
         dispatch(
             fetchRegistration({
                 username: username,
