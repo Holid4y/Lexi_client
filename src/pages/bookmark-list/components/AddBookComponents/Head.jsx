@@ -8,7 +8,7 @@ const Head = ({ doClose }) => (
             className="btn-close" 
             data-bs-dismiss="modal" 
             aria-label="Close"
-            onClick={() => doClose(null)}
+            onClick={() => doClose()}
         >
         </button>
     </div>
