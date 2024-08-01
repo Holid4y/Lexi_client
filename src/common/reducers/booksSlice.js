@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { host, books } from "../../../public/urls";
+import { host, books, myBooks } from "../../../public/urls";
 import { getResponse } from "../../../public/urls";
 
 export const fetchBooks = createAsyncThunk("books/fetchBooks", async (page, { dispatch }) => {
@@ -9,6 +9,20 @@ export const fetchBooks = createAsyncThunk("books/fetchBooks", async (page, { di
         page,
     });
     url.search = params.toString();
+    
+    const response = await getResponse(url, "GET")
+    
+    if (response.ok) {
+        const data = await response.json();
+        if (data) {
+            dispatch(booksLoaded(data));
+        }
+    }
+    return data;
+});
+
+export const fetchMyBooks = createAsyncThunk("books/fetchMyBooks", async (page, { dispatch }) => {
+    const url = new URL(host + myBooks);
     
     const response = await getResponse(url, "GET")
     
@@ -42,6 +56,17 @@ const booksSlice = createSlice({
                 state.loading = false;
             })
             .addCase(fetchBooks.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.error.message;
+            })
+
+            .addCase(fetchMyBooks.pending, (state) => {
+                state.loading = true;
+            })
+            .addCase(fetchMyBooks.fulfilled, (state) => {
+                state.loading = false;
+            })
+            .addCase(fetchMyBooks.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.error.message;
             });
