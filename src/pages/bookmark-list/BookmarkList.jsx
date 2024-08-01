@@ -82,8 +82,6 @@ function BookmarkList() {
         </div>
     </div>
 
-    const BtnAddBook = <AddBook />
-
     return (
         <div className="align-items-center">
             {SearchView}
@@ -92,7 +90,7 @@ function BookmarkList() {
                     {BooksMyView}
                     {BooksMarkView}
                     <PaginationButton currentPage={currentPage} pageCount={bookmarks?.page_count} setCurrentPage={setCurrentPage}/>
-                    {BtnAddBook}
+                    <AddBook />
                 </main>
             )}
         </div>

@@ -10,7 +10,7 @@ const Choices = ({ onChoiceSelect }) => (
     >
       <SVG name="txt_file" />
       <div>
-        <h5 className="mb-0">Выбрать файл</h5>
+        <h5 className="mb-0">Загрузить файл</h5>
         .txt
       </div>
     </li>

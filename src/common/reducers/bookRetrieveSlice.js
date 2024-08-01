@@ -44,6 +44,20 @@ export const fetchBook = createAsyncThunk("book/fetchBook", async (params, { dis
     }
 });
 
+export const fetchBookPost = createAsyncThunk("book/fetchBookPost", async (body, { dispatch }) => {
+    const url = new URL(host + books);
+
+    const bodyString = JSON.stringify(body);
+    const response = await getResponse(url, "POST", bodyString)
+
+    if (response.ok) {
+        const data = await response.json();
+        if (data) {
+            return data
+        }
+    } 
+});
+
 const bookRetrieveSlice = createSlice({
     name: "book",
     initialState: {
