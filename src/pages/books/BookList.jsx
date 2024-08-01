@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
+
 import { useDispatch, useSelector } from "react-redux";
 import { fetchBooks } from "../../common/reducers/booksSlice.js";
+
 import BookCard from "./components/BookCard.jsx";
 import Search from "../../common/components/Headers/Search.jsx";
 import Loading from "../../common/components/Treatment/Loading.jsx";
 import PaginationButton from "../../common/components/Pagination/PagePagination.jsx";
-import { Link } from "react-router-dom";
+
 
 function BookList() {
   const dispatch = useDispatch();
@@ -31,9 +33,7 @@ function BookList() {
           <div className="row g-4">
             {books && books.results && books.results.length > 0 ? (
               books.results.map((book, index) => (
-                <Link key={`${book.pk}-${index}`} to={`/book/${book.slug}/${(book.bookmark && book.bookmark.target_page) || 1}`} className="col-12 col-md-6">
-                    <BookCard book={book} />
-                </Link>
+                <BookCard book={book} key={index}/>
               ))
             ) : (
                 <div className="text-center mt-5">

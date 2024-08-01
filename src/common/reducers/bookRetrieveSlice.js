@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { host, books } from "../../../public/urls";
+import { host, books, myBooks } from "../../../public/urls";
 import { getResponse } from "../../../public/urls";
 
 function getPageFromUrl(url) {
@@ -56,6 +56,14 @@ export const fetchBookPost = createAsyncThunk("book/fetchBookPost", async (body,
             return data
         }
     } 
+});
+
+export const fetchBookDelete = createAsyncThunk("book/fetchBookDelete", async (pk, { dispatch }) => {
+    const url = new URL(host + myBooks + pk + '/');
+
+    const response = await getResponse(url, "DELETE")
+
+    return
 });
 
 const bookRetrieveSlice = createSlice({

@@ -61,9 +61,7 @@ function BookmarkList() {
         <div className="row g-4">
             {books && books.results.length > 0 ? (
               books.results.map((book, index) => (
-                <Link key={`${book.pk}-${index}`} to={`/book/${book.slug}/${(book.bookmark && book.bookmark.target_page) || 1}`} className="col-12 col-md-6">
-                    <BookCard book={book} />
-                </Link>
+                <BookCard book={book} isMyBook={true} key={index}/>
               ))
             ) : (
                 <p className="lead mb-4">
