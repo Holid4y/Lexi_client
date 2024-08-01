@@ -1,5 +1,5 @@
 import React from 'react';
-import SVG from '../../../../common/components/Icons/SVG';
+import SVG from '../../../common/components/Icons/SVG';
 
 const Header = () => (
     <header className="navbar sticky-top position-absolute">

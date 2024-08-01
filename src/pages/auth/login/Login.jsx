@@ -4,11 +4,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 
 import Loading from "../../../common/components/Treatment/Loading";
-import Header from "./components/Header";
-import LoginInput from "./components/LoginInput";
-import PasswordInput from "./components/PasswordInput";
+import Header from "../common/Header";
+import Input from "../common/Input";
 import RegistrationSmallBlock from "./components/RegistrationSmallBlock";
-import EnterButton from "./components/EnterButton";
+import SubmitButton from "../common/SubmitButton";
 
 const Login = () => {
     const dispatch = useDispatch();
@@ -43,12 +42,13 @@ const Login = () => {
                     <h2 className="mb-4 text-center">Войти в аккаунт</h2>
 
                     <div className="mb-4">
-                        <LoginInput username={username} setUsername={setUsername} />
-                        <PasswordInput password={password} setPassword={setPassword} />
+                        <Input htmlFor={"login"} label={"Логин или Email"} type={"text"} value={username} setter={setUsername} />
+                        <Input htmlFor={"password"} label={"Пароль"} type={"password"} value={password} setter={setPassword} />
                         <RegistrationSmallBlock />
                     </div>
 
-                    <EnterButton handleLogin={handleLogin} />
+                    <SubmitButton text={"Войти"} handle={handleLogin} />
+                    
                 </form>
             </main>
         </div>
