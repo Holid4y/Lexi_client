@@ -8,15 +8,22 @@ import { fetchSettings } from "./common/reducers/userSlice";
 
 import Navigation from "./common/components/Navigation";
 import Home from "./pages/home/Home";
+
 import BookList from "./pages/books/BookList";
 import BookRetrieve from "./pages/book-retrieve/BookRetrieve";
 import BookmarkList from "./pages/bookmark-list/BookmarkList";
+
 import Recognize from "./pages/training/recognize/Recognize";
 import Reproduce from "./pages/training/reproduce/Reproduce";
 import Training from "./pages/training/Training";
+
 import Login from "./pages/auth/login/Login";
 import Register from "./pages/auth/register/Register";
 import ChangePass from "./pages/auth/changepass/ChangePass";
+import ForgotPass from "./pages/auth/forgotpass/ForgotPass";
+import ChangeEmail from "./pages/auth/change-email/ChangeEmail";
+import ActivationEmail from "./pages/auth/activation-email/ActivationEmail";
+
 import Profile from "./pages/profile/ProfileUser";
 import LvlSettings from "./pages/profile/lvlSettings";
 import WordList from "./pages/word-list-user/WordList";
@@ -87,15 +94,22 @@ function App() {
                 <ConditionalNavigation />
                 <Routes>
                     <Route path="/" element={<Home />} />
+                    
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/register" element={<Register />} />
+                    <Route path="/change-pass" element={<ChangePass />} />
+                    <Route path="/forgot-password" element={<ForgotPass />} />
+                    <Route path="/change-email" element={<ChangeEmail />} />
+                    <Route path="/activation/:uid/:token" element={<ActivationEmail />} />
+                    
                     <Route path="/books" element={<BookList />} />
                     <Route path="/book/:slug/:page" element={<BookRetrieve />} />
                     <Route path="/bookmarks" element={<BookmarkList />} />
-                    <Route path="/login" element={<Login />} />
-                    <Route path="/register" element={<Register />} />
-                    <Route path="/change_pass" element={<ChangePass />} />
+
                     <Route path="/training/recognize" element={<Recognize />} />
                     <Route path="/training/reproduce" element={<Reproduce />} />
                     <Route path="/training" element={<Training />} />
+
                     <Route path="/word-list" element={<WordList />} />
                     <Route path="/profile" element={<Profile />} />
                     <Route path="/statistic" element={<Statistic />} />
@@ -110,7 +124,7 @@ function App() {
 
 function ConditionalNavigation() {
     const location = useLocation();
-    const hideNavigationPaths = ["/login", "/register", "/landing"]; // пути, на которых не нужно показывать навигацию
+    const hideNavigationPaths = ["/login", "/register", "/landing", "/forgot-password"]; // пути, на которых не нужно показывать навигацию
 
     return hideNavigationPaths.includes(location.pathname) ? null : <Navigation />;
 }

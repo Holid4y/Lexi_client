@@ -8,7 +8,7 @@ const RegistrationSmallBlock = () => (
             Регистрация 
         </Link>
         <span className="change">
-            <Link to="/change_pass">
+            <Link to="/forgot-password">
                 <small className="link-color"> / Забыл пароль</small>
             </Link>
         </span>

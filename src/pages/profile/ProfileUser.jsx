@@ -39,10 +39,8 @@ function Profile() {
         avatarStyle: "Transparent",
     });
     useEffect(() => {
-        if (!username) {
-            dispatch(fetchSettings());
-        }
-    }, [username]);
+        dispatch(fetchSettings());
+    }, []);
     useEffect(() => {
         setThemeState(theme)
     }, [theme]);
@@ -153,6 +151,7 @@ function Profile() {
             ) : (
                 <div>
                     <span className="text-danger mb-4 ps-2">Почта не подтверждена</span>
+                    {/* FIXME: href="/html/change_pass.html" */}
                     <span className="change pe-2">
                         <a className="btn btn-primary" href="/html/change_pass.html">
                             Подтвердить
@@ -491,7 +490,7 @@ function Profile() {
                                     </svg>
                                 </span>
                             </Link>
-                            <Link to="#" className="form-control mb-3 py-2-5 d-flex justify-content-between">
+                            <Link to="/change-email" className="form-control mb-3 py-2-5 d-flex justify-content-between">
                                 <span className="text-start">Изменить почту</span>
                                 <span className="text-end">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" className="bi bi-chevron-right" viewBox="0 0 16 16">
