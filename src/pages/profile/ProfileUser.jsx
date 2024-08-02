@@ -6,7 +6,7 @@ import Avatar from "avataaars";
 
 import { fetchSettings, fetchPutSettings, throwUser } from "../../common/reducers/userSlice";
 
-import { renderResponse } from "../../../public/urls";
+import { host, renderResponse, resend, getResponse } from "../../../public/urls";
 
 import { isActivatedEmail } from "./utils.js/utils";
 
@@ -23,6 +23,7 @@ function Profile() {
     const [falseSetLevel, setFalseSetLevel] = useState();
     const [countWordInRoundState, setCountWordInRoundState] = useState();
     const [timeToViewResultState, setTimeToViewResultState] = useState();
+    const [message, setMessage] = useState(null);
 
     // State для хранения настроек аватара
     const [avatarOptions, setAvatarOptions] = useState({
@@ -59,6 +60,21 @@ function Profile() {
         localStorage.setItem("theme", value);
         document.documentElement.setAttribute("data-bs-theme", value);
     };
+    async function handleSendActivationEmail(params) {
+        const url = new URL(host + resend);
+        const body = { email: email };
+        const bodyString = JSON.stringify(body);
+
+        const response = await getResponse(url, "POST", bodyString);
+        if (response.ok) {
+            setMessage("Письмо отправлено, подтвердите его.");
+            setIsButtonDisabled(true);
+            startTimer();
+        } else if (response.status == 400) {
+            const data = await response.json();
+            setMessage(data);
+        }
+    }
 
     const handleIncrementLevel = () => {
         if (falseSetLevel < 5) {
@@ -471,11 +487,12 @@ function Profile() {
                                 ""
                             ) : (
                                 <div className="d-flex justify-content-between mb-3">
-                                    <p className="pt-2">
+                                    {message ? <div className="alert alert-success">{message}</div> : <p className="pt-2">
                                         <small className="me-2 badge bg-warning text-dark">!</small>
                                         <span>Ваша почта не подтверждена</span>
-                                    </p>
-                                    <button className="btn btn-primary ms-2">Отправит письмо</button>
+                                    </p>}
+                                    
+                                    <button className="btn btn-primary ms-2" onClick={handleSendActivationEmail}>Отправит письмо</button>
                                 </div>
                             )}
 

@@ -10,7 +10,7 @@ import Header from "../common/Header";
 
 const ActivationEmail = () => {
     const dispatch = useDispatch();
-
+    const navigate = useNavigate();
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
 
@@ -27,7 +27,7 @@ const ActivationEmail = () => {
         const response = await getResponse(url, "GET");
 
         if (response.ok) {
-            console.log('redirect')
+            navigate("/profile");
         } else {
             const data = await response.json();
             console.log(data)
