@@ -63,9 +63,15 @@ const ChangeEmail = () => {
                         <Input htmlFor={"email"} label={"Email"} type={"text"} value={email} setter={setEmail} />
                     </div>
                     <p>На вашу почту будет отправлено письмо подтверждения.</p>
-                    <small> Если письма нет, то проверьте раздел <b>"спам"</b> </small>
+                    
 
-                    {message && <div className="alert alert-success">{message}</div>}
+                    {message && (
+                        <div className="alert alert-success">
+                            {message}
+                            <small>Если письма нет, то проверьте раздел <b>"спам"</b></small>
+                        </div>
+                    )}
+
                     
                     <SubmitButton text={"Отправить"} handle={handleSetEmail} disabled={isButtonDisabled} />
                     
