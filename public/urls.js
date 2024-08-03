@@ -37,6 +37,7 @@ export const registration = auth + "users/"
 export const changeEmail = "users/set_email/"
 export const activation = "users/activation/"
 export const resend = "users/resend_activation/"
+export const changePassword = "users/set_password/"
 
 // Эта функция полезна для получения значения определенного cookie
 // из браузера, а именно для csrf токена.

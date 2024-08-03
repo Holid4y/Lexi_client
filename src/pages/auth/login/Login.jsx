@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { fetchLogin } from "../../../common/reducers/authSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import Loading from "../../../common/components/Treatment/Loading";
 import Header from "../common/Header";

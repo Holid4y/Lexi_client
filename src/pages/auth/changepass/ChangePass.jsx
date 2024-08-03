@@ -1,16 +1,55 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
+import { useDispatch } from "react-redux";
+
+import { host, changePassword, getResponse } from "../../../../public/urls";
+import { throwUser } from "../../../common/reducers/userSlice";
 
 import Header from "../common/Header"
 import Input from "../common/Input";
-import RegistrationSmallBlock from "../register/components/RegistrationSmallBlock";
+import Loading from "../../../common/components/Treatment/Loading";
 
+import SubmitButton from "../common/SubmitButton";
 
 const ChangePass = () => {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const [password, setPassword] = useState("");
     const [rePassword, setRePassword] = useState("");
     const [newPassword, setNewPassword] = useState("");
+
+    const [loading, setLoading] = useState(false);
+    const [message, setMessage] = useState("");
+
+    async function handleSubmit() {
+        const url = new URL(host + changePassword);
+        const body = {
+            new_password: newPassword,
+            re_new_password: rePassword,
+            current_password: password
+        }
+        const bodyString = JSON.stringify(body);
+        setLoading(true)
+
+        const response = await getResponse(url, "POST", bodyString);
+
+        if (response.ok) {
+            doLogout()
+        } else {
+            const data = await response.json();
+            setMessage(JSON.stringify(data));
+            setLoading(false)
+        }
+    };
+
+    const doLogout = () => {
+        localStorage.removeItem("access");
+        localStorage.removeItem("refresh");
+        dispatch(throwUser()); 
+        navigate("/login"); // Переход на страницу логина
+    };
 
     return (
         <div className="body-auth">
@@ -25,16 +64,18 @@ const ChangePass = () => {
 
                         
 
-                        <RegistrationSmallBlock />
+                        <small>После изменения пароля нажно будет войди в аккаунт заново.</small>
                     </div>
+                    {loading && <Loading />}
+                    {message && (
+                        <div className="alert alert-success">
+                            {message}
+                        </div>
+                    )}
+                    
+                    <SubmitButton text={'Изменить пароль'} handle={handleSubmit} />
 
-                    <div className="d-flex justify-content-center my-4">
-                        <button type="button" className="btn btn-primary save-btn py-2 w-75">
-                            <span>
-                                <b>Изменить пароль</b>
-                            </span>
-                        </button>
-                    </div>
+                    
                 </form>
             </main>
         </div>
