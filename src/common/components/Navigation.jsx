@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 
 import { fetchTrainingInfo } from "../reducers/training/trainingSlice";
 
-import { isActivatedEmail } from "../../pages/profile/utils.js/utils";
+import { isActivatedEmail } from "../../pages/profile/utils/utils";
 
 import WordBlockTranslate from "./WordBlockTranslate/WordBlockTranslate";
 import SVG from "../components/Icons/SVG";
