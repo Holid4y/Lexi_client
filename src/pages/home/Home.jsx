@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { fetchHome } from "../../common/reducers/homeSlice";
@@ -18,31 +18,22 @@ function Home() {
         dispatch(fetchHome());
     }, [dispatch]);
 
-    const LoadingView = <Loading/>
-    const Header = <Headers title="Главная"/>
-    const InfoCardView = <InfoCard />
-    const BooksLinkCardView = <BooksLinkCard />
-    const WordHistoryView = <WorsHistory />
-    const BtmRecentlyBookView = <BtmRecentlyBook/>
-
     return (
         <div className="align-items-center">
-            {Header}
+            <Headers title="Главная" />
 
-            {/* {loading ? ( LoadingView ) : error ? ( ErrorView ) : (
-                            <div>
-                                
-                            </div>
-                        )} */}
-            {loading ? ( LoadingView ) : (
+            {loading ? (
+                <Loading />
+            ) : (
                 <main className="container pb-5">
-                    {InfoCardView}
-                    {BooksLinkCardView}
-                    {WordHistoryView}
-                    {BtmRecentlyBookView}
+                    <InfoCard />
+                    <BooksLinkCard />
+                    <WorsHistory />
+                    <BtmRecentlyBook />
                 </main>
             )}
         </div>
     );
 }
+
 export default Home;
