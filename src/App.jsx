@@ -25,7 +25,7 @@ import ChangeEmail from "./pages/auth/change-email/ChangeEmail";
 import ActivationEmail from "./pages/auth/activation-email/ActivationEmail";
 
 import Profile from "./pages/profile/ProfileUser";
-import LvlSettings from "./pages/profile/lvlSettings";
+import LevelSettings from "./pages/levels-settings/levelSettings"
 import WordList from "./pages/word-list-user/WordList";
 import Statistic from "./pages/statistic-user/Statistic";
 import LandingMain from "./pages/landing/LandingMain";
@@ -113,7 +113,7 @@ function App() {
                     <Route path="/word-list" element={<WordList />} />
                     <Route path="/profile" element={<Profile />} />
                     <Route path="/statistic" element={<Statistic />} />
-                    <Route path="/lvl-settings" element={<LvlSettings />} />
+                    <Route path="/level-settings" element={<LevelSettings />} />
                     <Route path="/landing" element={<LandingMain />} />
                     {/* Другие маршруты */}
                 </Routes>
