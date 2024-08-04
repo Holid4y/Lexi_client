@@ -67,22 +67,22 @@ const UserEmail = () => {
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                        <form>
-                            <div className="mb-4">
-                                <Input htmlFor={"email"} label={"Email"} type={"text"} value={email} setter={setEmail} />
-                            </div>
-                            <p>На вашу почту будет отправлено письмо подтверждения.</p>
-                            
-                            {message && (
-                                <div className="alert alert-success">
-                                    {message}<br/>
-                                    <small>Если письма нет, то проверьте раздел <b>"спам"</b></small>
+                            <form>
+                                <div className="mb-4">
+                                    <Input htmlFor={"email"} label={"Email"} type={"text"} value={email} setter={setEmail} />
                                 </div>
-                            )}
+                                <p>На вашу почту будет отправлено письмо подтверждения.</p>
+                                
+                                {message && (
+                                    <div className="alert alert-success">
+                                        {message}<br/>
+                                        <small>Если письма нет, то проверьте раздел <b>"спам"</b></small>
+                                    </div>
+                                )}
 
-                            <SubmitButton text={"Отправить"} handle={handleSetEmail} disabled={isButtonDisabled} />
-                            {isButtonDisabled && <div>Кнопка будет активна через {timer} секунд.</div>}
-                        </form>
+                                <SubmitButton text={"Отправить"} handle={handleSetEmail} disabled={isButtonDisabled} />
+                                {isButtonDisabled && <div>Кнопка будет активна через {timer} секунд.</div>}
+                            </form>
                         </div>
                     </div>
                 </div>
