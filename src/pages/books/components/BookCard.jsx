@@ -9,13 +9,37 @@ import { fetchBookDelete } from "../../../common/reducers/bookRetrieveSlice";
 const BookCard = ({ book, isMyBook }) => {
     const dispatch = useDispatch()
 
-    function handleDelete(pk) {
-
-        dispatch(fetchBookDelete(pk))
+    function handleDelete(pk, slug) {
         // отобразить модальное окно подсверждения
+        // если пользователь подтвердил то:
+        dispatch(fetchBookDelete(pk))
+
+        if (isBookRecently(slug)) {
+            throwRecentlyBook()
+        }
     }
+
+    function throwRecentlyBook()  {
+        localStorage.removeItem("recentlyBook");
+    };
+    function isBookRecently(slug) {
+        const recentlyBook = localStorage.getItem("recentlyBook");
+        
+        if (recentlyBook) {
+            const recentlyBookData = JSON.parse(recentlyBook);
+            
+            if (recentlyBookData.slug) {
+                return recentlyBookData.slug === slug;
+            }
+        }
+        
+
+        return false;
+    }
+    
+
     const Trash = (
-        <span className="position-absolute translate-middle mark" onClick={() => handleDelete(book.pk)}>
+        <span className="position-absolute translate-middle mark" onClick={() => handleDelete(book.pk, book.slug)}>
             <SVG name="trash" />
         </span>
     );
