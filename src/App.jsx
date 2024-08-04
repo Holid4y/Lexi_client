@@ -21,6 +21,7 @@ import Login from "./pages/auth/login/Login";
 import Register from "./pages/auth/register/Register";
 import ChangePass from "./pages/auth/changepass/ChangePass";
 import ForgotPass from "./pages/auth/forgotpass/ForgotPass";
+import SendResetPassword from "./pages/auth/forgotpass/SendResetPassword";
 import ChangeEmail from "./pages/auth/change-email/ChangeEmail";
 import ActivationEmail from "./pages/auth/activation-email/ActivationEmail";
 
@@ -98,7 +99,8 @@ function App() {
                     <Route path="/login" element={<Login />} />
                     <Route path="/register" element={<Register />} />
                     <Route path="/change-pass" element={<ChangePass />} />
-                    <Route path="/forgot-password" element={<ForgotPass />} />
+                    <Route path="/forgot-password/:uid/:token" element={<ForgotPass />} />
+                    <Route path="/send-reset-password" element={<SendResetPassword />} />
                     <Route path="/change-email" element={<ChangeEmail />} />
                     <Route path="/activation/:uid/:token" element={<ActivationEmail />} />
                     
@@ -124,7 +126,7 @@ function App() {
 
 function ConditionalNavigation() {
     const location = useLocation();
-    const hideNavigationPaths = ["/login", "/register", "/landing", "/forgot-password"]; // пути, на которых не нужно показывать навигацию
+    const hideNavigationPaths = ["/login", "/register", "/landing", "/forgot-password", "/send-reset-password"]; // пути, на которых не нужно показывать навигацию
 
     return hideNavigationPaths.includes(location.pathname) ? null : <Navigation />;
 }

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import { useDispatch } from "react-redux";
 
@@ -65,6 +66,9 @@ const ChangePass = () => {
                         
 
                         <small>После изменения пароля нажно будет войди в аккаунт заново.</small>
+                        <Link to="/send-reset-password">
+                            <small className="link-color"> / Забыл пароль</small>
+                        </Link>
                     </div>
                     {loading && <Loading />}
                     {message && (

@@ -9,8 +9,8 @@ import Header from "../common/Header";
 
 
 const ActivationEmail = () => {
-    const dispatch = useDispatch();
     const navigate = useNavigate();
+    
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
 

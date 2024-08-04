@@ -39,6 +39,9 @@ export const activation = "users/activation/"
 export const resend = "users/resend_activation/"
 export const changePassword = "users/set_password/"
 
+export const send_reset_password = 'users/reset_password/'
+export const reset_password_confirm = 'users/reset_password_confirm/'
+
 // Эта функция полезна для получения значения определенного cookie
 // из браузера, а именно для csrf токена.
 export function getCookie(name) {
@@ -96,24 +99,19 @@ export async function getResponse(url, method, body) {
     const accessToken = localStorage.getItem("access");
     if (!accessToken) {
         console.warn(`Отсутствует accessToken. Запрос на ${url}`);
-        return null;
     }
 
-    const auth = {
-        Authorization: `Beare ${accessToken}`,
-    };
+    const auth = accessToken ? { Authorization: `Bearer ${accessToken}` } : {};
+
     
     const response = await fetch(url.toString(), {
-        method: method,
-        headers: {
-            ...headers,
-            ...auth,
-        },
-        body: body
+        method,
+        headers: { ...headers, ...auth },
+        body,
     });
 
     if (response.ok){
-        console.log(`${method} Запрос на ${url}`);
+        console.log(`${method} запрос на ${url}`);
     }
         
     return response;
