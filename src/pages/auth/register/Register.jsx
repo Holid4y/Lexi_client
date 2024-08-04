@@ -13,6 +13,7 @@ const Register = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const { loading, error } = useSelector((state) => state.auth);
+
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -40,7 +41,6 @@ const Register = () => {
 
                 if (response.meta.requestStatus === "fulfilled") {
                     if (response.payload) {
-                        console.log("Успешная регистрация, переход на страницу логина");
                         navigate("/login");
                     } else {
                         console.log("Ошибка: Нет пользователя");
@@ -60,8 +60,7 @@ const Register = () => {
     return (
         <div className="body-auth">
             <Header />
-            {loading && <Loading />}
-            {errorState && errorState}
+            
             <main className="form-signin w-100 m-auto">
                 <form>
                     <h2 className="mb-4 text-center">Регистрация</h2>
@@ -73,6 +72,10 @@ const Register = () => {
 
                         <RegistrationSmallBlock />
                     </div>
+
+                    {loading && <Loading />}
+                    {errorState && errorState}
+
                     <SubmitButton text={"Регистрация"} handle={handleRegistration} />
                 </form>
             </main>

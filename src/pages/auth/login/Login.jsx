@@ -12,9 +12,10 @@ import SubmitButton from "../common/SubmitButton";
 const Login = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const { loading, error } = useSelector((state) => state.auth);
+    const { loading } = useSelector((state) => state.auth);
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const [message, setMessage] = useState("");
 
     const handleLogin = () => {
         dispatch(fetchLogin({ username: username, password: password }))
@@ -24,19 +25,15 @@ const Login = () => {
                         navigate("/");
                     }
                 } else if (response.meta.requestStatus === "rejected") {
-                    console.log("Что-то не верно");
+                    setMessage('Такого пользователя несуществует либо не верный пароль.')
                 }
             })
-            .catch((error) => {
-                console.error("Ошибка при выполнении запроса:", error);
-            });
     };
 
     return (
         <div className="body-auth">
             <Header />
-            {loading && <Loading />}
-            {error && <div>{error}</div>}
+            
             <main className="form-signin w-100 m-auto">
                 <form>
                     <h2 className="mb-4 text-center">Войти в аккаунт</h2>
@@ -46,6 +43,12 @@ const Login = () => {
                         <Input htmlFor={"password"} label={"Пароль"} type={"password"} value={password} setter={setPassword} />
                         <RegistrationSmallBlock />
                     </div>
+                    {loading && <Loading />}
+                    {message && (
+                        <div className="alert alert-success">
+                            {message}
+                        </div>
+                    )}
 
                     <SubmitButton text={"Войти"} handle={handleLogin} />
                     
