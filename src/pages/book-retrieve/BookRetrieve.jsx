@@ -16,11 +16,11 @@ function BookRetrieve() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const { pk, pages, page_count, pages_slice, loading } = useSelector((state) => state.book);
+    const { pk, pages, page_count, pages_slice, loading, error } = useSelector((state) => state.book);
     const { slug, page } = useParams();
     const [currentPage, setCurrentPage] = useState(parseInt(page));
     const [isFirstInit, setIsFirstInit] = useState(true);
-    
+
     useEffect(() => {
         navigate(`/book/${slug}/${currentPage}`);
     }, [currentPage]);
@@ -28,32 +28,29 @@ function BookRetrieve() {
     function isOutRange() {
         const minPage = pages_slice && pages_slice[0];
         const maxPage = pages_slice && pages_slice[1];
-        return currentPage < minPage || currentPage > maxPage
+        return currentPage < minPage || currentPage > maxPage;
     }
 
     useEffect(() => {
-        if (!isFirstInit){        
+        if (!isFirstInit) {
             if (isOutRange()) {
                 // только когда выйдет за range
                 dispatch(fetchBook({ slug: slug, page: currentPage }));
             }
         }
-        
-        setRecentlyBookToLocalStorage(slug, currentPage )
-    }, [page]); // при каждом изменение страницы 
+
+        setRecentlyBookToLocalStorage(slug, currentPage);
+    }, [page]); // при каждом изменение страницы
 
     useEffect(() => {
-        
-        if (isFirstInit){
-            dispatch(fetchBook({ slug: slug, page: currentPage }))
-            .then((data) => {
+        if (isFirstInit) {
+            dispatch(fetchBook({ slug: slug, page: currentPage })).then((data) => {
                 if (data.payload.redirected) {
-                    setCurrentPage(data.payload.redirectedPage)
-                } 
-            })
-            setIsFirstInit(false)
+                    setCurrentPage(data.payload.redirectedPage);
+                }
+            });
+            setIsFirstInit(false);
         }
-        
     }, [slug]);
 
     const LoadingView = <Loading />;
@@ -63,15 +60,21 @@ function BookRetrieve() {
 
     return (
         <div className="align-items-center">
-            {Header}
-            <ProgressBar />
-            {loading ? (
-                LoadingView
+            {error === 404 ? (
+                "PageNotFound"
             ) : (
-                <main className="container pb-5">
-                    {pages && Page}
-                    {Pagination}
-                </main>
+                <>
+                    {Header}
+                    <ProgressBar />
+                    {loading ? (
+                        LoadingView
+                    ) : (
+                        <main className="container pb-5">
+                            {pages && Page}
+                            {Pagination}
+                        </main>
+                    )}
+                </>
             )}
         </div>
     );

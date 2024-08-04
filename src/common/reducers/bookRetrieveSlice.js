@@ -41,6 +41,8 @@ export const fetchBook = createAsyncThunk("book/fetchBook", async (params, { dis
                 return data;
             }
         }
+    } else if (response.status === 404){
+        dispatch(setError(404))
     }
 });
 
@@ -96,6 +98,9 @@ const bookRetrieveSlice = createSlice({
             state.pages = action.payload.pages;
             state.bookmark = action.payload.bookmark;
         },
+        setError: (state, action) => {
+            state.error = action.payload
+        },
     },
     extraReducers: (builder) => {
         builder
@@ -112,5 +117,5 @@ const bookRetrieveSlice = createSlice({
     },
 });
 
-export const { bookLoaded } = bookRetrieveSlice.actions;
+export const { bookLoaded, setError } = bookRetrieveSlice.actions;
 export default bookRetrieveSlice.reducer;
