@@ -16,13 +16,13 @@ function WordList() {
     dispatch(fetchVocabulary(currentPage));
   }, [dispatch, currentPage]);
 
-  const Header = <Headers title="Все слова" />;
+
   const LoadingView = <Loading />;
 
 
   return (
     <div className="align-items-center">
-      {Header}
+      <Headers title="Все слова" svgName={"words"} />
       {loading ? (
         LoadingView
       ) : (

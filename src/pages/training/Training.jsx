@@ -5,6 +5,7 @@ import { fetchTrainingInfo } from "../../common/reducers/training/trainingSlice"
 import { throwState, setIsEnd } from "../../common/reducers/training/trainingRoundSlice";
 
 import TrainingCard from "./TrainingCard";
+import Headers from "../../common/components/Headers/Header";
 
 function Training() {
     const dispatch = useDispatch();
@@ -19,13 +20,7 @@ function Training() {
 
     return (
         <div className="align-items-center">
-            <div className="container sticky-top mb-3 pt-2">
-                <nav className="navbar dark-nav">
-                    <div className="container-fluid">
-                        <span className="navbar-brand">Тестирование</span>
-                    </div>
-                </nav>
-            </div>
+            <Headers title="Повторение слов" svgName={"training"} />
             <main className="container">
                 <div className="py-4">
                     <div className="row align-items-center g-lg-4">

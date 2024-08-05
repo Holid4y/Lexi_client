@@ -8,9 +8,11 @@ import SVG from "../../common/components/Icons/SVG";
 
 import BookmarkCard from "./components/BookmarkCard";
 
+import Headers from "../../common/components/Headers/Header";
 import Search from "../../common/components/Headers/Search";
 import Loading from "../../common/components/Treatment/Loading";
 import PaginationButton from "../../common/components/Pagination/PagePagination";
+
 import BookCard from "../books/components/BookCard";
 
 import AddBookModal from "./components/AddBookModal";
@@ -81,6 +83,7 @@ function BookmarkList() {
 
     return (
         <div className="align-items-center">
+            <Headers title={'Закладки'} svgName={'marklist_fill'}/>
             {SearchView}
             {bookmarksLoading | booksLoading ? (
                 LoadingView

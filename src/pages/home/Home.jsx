@@ -7,7 +7,6 @@ import InfoCard from "./components/InfoCard";
 import BooksLinkCard from "./components/BooksLinkCard";
 import WorsHistory from "./components/WorsHistory";
 import Headers from "../../common/components/Headers/Header";
-import Loading from "../../common/components/Treatment/Loading";
 
 function Home() {
     const dispatch = useDispatch();
@@ -19,7 +18,7 @@ function Home() {
 
     return (
         <div className="align-items-center">
-            <Headers title="Главная" />
+            <Headers title="Главная" svgName={"home"} />
 
             <main className="container pb-5">
                 <InfoCard />

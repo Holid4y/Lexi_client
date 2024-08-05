@@ -1,13 +1,15 @@
-import React from 'react';
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchPutSettings } from '../../../common/reducers/userSlice'; 
+import { fetchPutSettings } from "../../../common/reducers/userSlice";
+
+import SVG from "../../../common/components/Icons/SVG";
 
 const Header = ({ hasChanges, dataToSave }) => {
-    const dispatch = useDispatch(); 
+    const dispatch = useDispatch();
     const { putLoading } = useSelector((state) => state.user);
 
     const handleSave = () => {
-        dispatch(fetchPutSettings(dataToSave)); 
+        dispatch(fetchPutSettings(dataToSave));
     };
 
     return (
@@ -15,15 +17,18 @@ const Header = ({ hasChanges, dataToSave }) => {
             <nav className="navbar dark-nav">
                 <div className="container-fluid px-1">
                     <span className="navbar-brand">Профиль</span>
-                    {putLoading ? (
-                        <button className="btn mx-0 text-success" disabled>
-                            <span className="visually-hidden">Загрузка...</span>
-                        </button>
-                    ) : hasChanges ? (
-                        <button className="btn mx-0 text-success" onClick={handleSave}>
-                            Сохранить
-                        </button>
-                    ) : null}
+                    <div>
+                        {putLoading ? (
+                            <button className="btn mx-0 text-success" disabled>
+                                <span className="visually-hidden">Загрузка...</span>
+                            </button>
+                        ) : hasChanges ? (
+                            <button className="btn mx-0 text-success" onClick={handleSave}>
+                                Сохранить
+                            </button>
+                        ) : null}
+                        <SVG name="profile" />
+                    </div>
                 </div>
             </nav>
         </div>

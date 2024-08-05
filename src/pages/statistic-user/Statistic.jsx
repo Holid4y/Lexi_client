@@ -50,7 +50,6 @@ function Statistic() {
         ],
     };
 
-    const Header = <Headers title="Статистика" />;
     const LoadingView = <Loading />;
 
     const BlockWordStatistic = <div className="row mb-4">
@@ -121,7 +120,7 @@ function Statistic() {
 
     return (
         <div className="align-items-center">
-            {Header}
+            <Headers title="Статистика" svgName={'statistic'}/>
             {loading ? (
                 LoadingView
             ) : (
