@@ -46,6 +46,10 @@ function WordHistory() {
         );
     };
 
+    function getContentOrLoading(content) {
+        return loading === null ? <Loading /> : content
+    }
+
     return (
         <div className="hover-text-opacity">
             <p className="w-100 mb-0 d-flex justify-content-between px-2">
@@ -55,7 +59,7 @@ function WordHistory() {
                     <SVG name={"arrow_right"} />
                 </Link>
             </p>
-            <div className="card mb-4 p-4 word-history">{loading ? <Loading /> : <WordLinesView />}</div>
+            <div className="card mb-4 p-4 word-history">{getContentOrLoading(<WordLinesView />)}</div>
         </div>
     );
 }
