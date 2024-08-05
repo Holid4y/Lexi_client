@@ -20,15 +20,14 @@ function BookList() {
         dispatch(fetchBooks(currentPage));
     }, [dispatch, currentPage]);
 
-    const LoadingView = <Loading />;
-    const SearchView = <Search />;
+    const PaginationButtonView = books?.page_count > 1 && <PaginationButton currentPage={currentPage} pageCount={books?.page_count} setCurrentPage={setCurrentPage} />
 
     return (
         <div className="align-items-center">
             <Headers title="Все книги" svgName={"book"} />
-            {SearchView}
+            <Search />
             {loading ? (
-                LoadingView
+                <Loading />
             ) : (
                 <main className="container pb-5">
                     <div className="row g-4">
@@ -50,7 +49,7 @@ function BookList() {
                             </div>
                         )}
                     </div>
-                    <PaginationButton currentPage={currentPage} pageCount={books?.page_count} setCurrentPage={setCurrentPage} />
+                    {PaginationButtonView}
                 </main>
             )}
         </div>

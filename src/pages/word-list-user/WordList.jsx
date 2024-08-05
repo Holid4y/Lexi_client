@@ -17,14 +17,15 @@ function WordList() {
   }, [dispatch, currentPage]);
 
 
-  const LoadingView = <Loading />;
+
+  const PaginationButtonView = words?.page_count > 1 && <PaginationButton currentPage={currentPage} pageCount={words?.page_count} setCurrentPage={setCurrentPage} />
 
 
   return (
     <div className="align-items-center">
       <Headers title="Все слова" svgName={"words"} />
       {loading ? (
-        LoadingView
+        <Loading />
       ) : (
         <main className="container pb-5">
           <div className="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-5 g-3 mb-5">
@@ -38,7 +39,7 @@ function WordList() {
               <div>No words found.</div>
             )}
           </div>
-          <PaginationButton currentPage={currentPage} pageCount={words?.page_count} setCurrentPage={setCurrentPage}/>
+          {PaginationButtonView}
         </main>
       )}
     </div>

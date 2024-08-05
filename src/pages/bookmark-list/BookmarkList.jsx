@@ -81,6 +81,8 @@ function BookmarkList() {
         </div>
     );
 
+    const PaginationButtonView = bookmarks?.page_count > 1 && <PaginationButton currentPage={currentPage} pageCount={bookmarks?.page_count} setCurrentPage={setCurrentPage} />
+
     return (
         <div className="align-items-center">
             <Headers title={'Закладки'} svgName={'marklist_fill'}/>
@@ -91,7 +93,7 @@ function BookmarkList() {
                 <main className="container">
                     {BooksMyView}
                     {BooksMarkView}
-                    <PaginationButton currentPage={currentPage} pageCount={bookmarks?.page_count} setCurrentPage={setCurrentPage} />
+                    {PaginationButtonView}
                     <div>
                         <AddBookModal />
                         <BaseModal idName={'AddBookModalFile'} childComponent={<FileModal />} ariaLabelledby={"AddBookModalFileSelected"} title={'Файл'}/>
