@@ -12,6 +12,7 @@ import Home from "./pages/home/Home";
 import BookList from "./pages/books/BookList";
 import BookRetrieve from "./pages/book-retrieve/BookRetrieve";
 import BookmarkList from "./pages/bookmark-list/BookmarkList";
+import MyBookList from "./pages/my-books/MyBookList"
 
 import Recognize from "./pages/training/recognize/Recognize";
 import Reproduce from "./pages/training/reproduce/Reproduce";
@@ -107,6 +108,8 @@ function App() {
                     <Route path="/books" element={<BookList />} />
                     <Route path="/book/:slug/:page" element={<BookRetrieve />} />
                     <Route path="/bookmarks" element={<BookmarkList />} />
+                    <Route path="/my-books" element={<MyBookList />} />
+
 
                     <Route path="/training/recognize" element={<Recognize />} />
                     <Route path="/training/reproduce" element={<Reproduce />} />

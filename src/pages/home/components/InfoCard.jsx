@@ -23,7 +23,7 @@ function InfoCard() {
             </div>
             <div className="col-6 col-md-3 hover-text-opacity">
                 <span className="ps-2" id="uploadBooks">Добавленных книг</span>
-                <Link to={"/"}>
+                <Link to={"/my-books"}>
                     <div className="card card-btn">
                         {getContentOrLoading(upload_books)}
                     </div>
