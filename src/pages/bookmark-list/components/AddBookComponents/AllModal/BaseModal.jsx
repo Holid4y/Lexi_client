@@ -1,5 +1,9 @@
 import React from "react";
 
+import AuthorBookInput from "../common/AuthorBookInput";
+import NameBookInput from "../common/NameBookInput";
+import AddButton from "../common/AddButton";
+
 function BaseModal({ childComponent, ariaLabelledby, title, idName }) {
     return (
         <div class="modal fade" id={idName} aria-hidden="true" aria-labelledby={ariaLabelledby} tabindex="-1">
@@ -14,6 +18,10 @@ function BaseModal({ childComponent, ariaLabelledby, title, idName }) {
                     <div class="modal-body">
                         
                     {childComponent}
+
+                    <AuthorBookInput />
+                    <NameBookInput />
+                    <AddButton />
 
                     </div>
                     <div class="modal-footer">

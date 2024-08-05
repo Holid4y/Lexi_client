@@ -657,3 +657,6 @@ input[type="number"] {
 .btn-card:hover{
     background-color: var(--input-color);
 }
+.form-control-lg {
+    margin: 20px 0;
+}

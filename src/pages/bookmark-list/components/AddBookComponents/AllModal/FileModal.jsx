@@ -1,8 +1,14 @@
 import React from "react";
 
+import FileButton from "../FileButton";
+
+
 function FileModal() {
     return (
-        'Файл'
+        <>
+            <p>Загрузите файл формата <b>.txt</b></p>
+            <FileButton />
+        </>
     );
 }
 

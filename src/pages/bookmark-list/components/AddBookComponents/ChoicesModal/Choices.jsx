@@ -1,7 +1,7 @@
 import React from "react";
 import TypeUploadOnChoices from "./TypeUploadOnChoices";
 
-const Choices = ({ onChoiceSelect }) => {
+const Choices = () => {
     return (
         <ul className="d-grid gap-4 list-unstyled small">
             <TypeUploadOnChoices dataBsTarget={"#AddBookModalFile"} title={'Файл'} description={'Выберите файл с расширением .txt'} svgName={"txt_file"}/>

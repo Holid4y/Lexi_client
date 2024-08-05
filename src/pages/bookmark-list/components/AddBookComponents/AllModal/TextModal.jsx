@@ -1,8 +1,12 @@
 import React from "react";
+import TextArea from "../TextArea";
 
 function TextModal() {
     return (
-        'Текст'
+        <>
+            <p>Вставьте текст или напишите его сами</p>
+            <TextArea />
+        </>
     );
 }
 
