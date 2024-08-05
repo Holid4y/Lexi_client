@@ -647,3 +647,13 @@ input[type="number"] {
 .highlight-letter {
     opacity: 0.3;
 }
+
+.btn-card{
+    background-color: transparent;
+    border-radius: 10px;
+    padding: 10px;
+    transition: .3s all;
+}
+.btn-card:hover{
+    background-color: var(--input-color);
+}

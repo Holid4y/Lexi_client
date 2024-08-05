@@ -3,7 +3,7 @@ import React from "react";
 function BaseModal({ childComponent, ariaLabelledby, title, idName }) {
     return (
         <div class="modal fade" id={idName} aria-hidden="true" aria-labelledby={ariaLabelledby} tabindex="-1">
-            <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h1 class="modal-title fs-5" id={ariaLabelledby}>

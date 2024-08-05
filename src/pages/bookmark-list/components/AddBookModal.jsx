@@ -60,8 +60,9 @@ const AddBookModal = () => {
             <div className="modal-dialog" role="document">
                 <div className="modal-content rounded-4 shadow">
                     <div className="modal-body p-5">
-                        <h2 class="fw-bold mb-0">Выберите вариант</h2>
+                        <h2 class="fw-bold mb-5">Выберите вариант</h2>
                         <Choices onChoiceSelect={handleChoiceSelect} />
+                        <button type="button" class="btn btn-lg btn-primary mt-5 w-100" data-bs-dismiss="modal">Закрыть</button>
                     </div>
                 </div>
             </div>

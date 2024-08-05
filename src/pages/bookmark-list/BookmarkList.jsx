@@ -89,14 +89,10 @@ function BookmarkList() {
                     {BooksMyView}
                     {BooksMarkView}
                     <PaginationButton currentPage={currentPage} pageCount={bookmarks?.page_count} setCurrentPage={setCurrentPage} />
-
                     <div>
                         <AddBookModal />
-
                         <BaseModal idName={'AddBookModalFile'} childComponent={<FileModal />} ariaLabelledby={"AddBookModalFileSelected"} title={'Файл'}/>
-
                         <BaseModal idName={'AddBookModalText'} childComponent={<TextModal />} ariaLabelledby={"AddBookModalTextSelected"} title={'Текст'}/>
-
                         <BaseModal idName={'AddBookModalVideo'} childComponent={<VideoModal />} ariaLabelledby={"AddBookModalVideoSelected"} title={'Видео'}/>
                     </div>
                 </main>

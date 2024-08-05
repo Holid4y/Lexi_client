@@ -8,13 +8,7 @@ function TypeUploadOnChoices({ dataBsTarget, title, description, svgName }) {
     };
 
     return (
-        <li
-            type="button"
-            className="d-flex gap-4 align-items-center"
-            data-bs-target={dataBsTarget}
-            data-bs-toggle="modal"
-            onClick={handleClick} // Добавляем обработчик клика
-        >
+        <li type="button" className="d-flex gap-4 align-items-center btn-card" data-bs-target={dataBsTarget} data-bs-toggle="modal" onClick={handleClick}>
             <div className="icon-40x40">
                 <SVG name={svgName} />
             </div>

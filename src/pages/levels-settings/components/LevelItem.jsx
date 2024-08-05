@@ -14,10 +14,10 @@ function LevelItem({ level, index, handleIncrementLevel, handleDecrementLevel, h
             </label>
             <div className="input-group mb-3">
                 <input type="number" className="form-control py-2-5 fw-bolder ps-3" id={`lvl${index}`} value={level} readOnly/>
-                <button className="btn btn-plus-minus box-shadow" onClick={() => handleIncrementLevel(index)} type="button">
+                <button className="btn btn-plus-minus" onClick={() => handleIncrementLevel(index)} type="button">
                     <SVG name={"plus"} />
                 </button>
-                <button className="btn btn-plus-minus rounded-end box-shadow" onClick={() => handleDecrementLevel(index)} type="button">
+                <button className="btn btn-plus-minus rounded-end" onClick={() => handleDecrementLevel(index)} type="button">
                     <SVG name={"minus"} />
                 </button>
                 {index >= 4 && (
