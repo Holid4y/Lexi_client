@@ -17,7 +17,7 @@ function BtmRecentlyBook() {
 
 
     return (
-        <div className="pagination-position d-flex justify-content-center">
+        <div className="">
             {continueReadingUrl && (
                 <Link to={continueReadingUrl}>
                     <button type="button" className="btn btn-primary px-4">

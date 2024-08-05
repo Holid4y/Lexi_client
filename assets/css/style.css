@@ -89,7 +89,7 @@ a {
 .book-text {
     font-size: 40px;
     font-weight: bold;
-    color: var(--text-header);
+    /* color: var(--text-header); */
 }
 .game-text{
     cursor: pointer;
@@ -125,6 +125,10 @@ a {
 .card {
     transition: transform 0.1s linear;
     color: var(--card-text-header);
+}
+.card > .justify-content-center {
+    height: 64px;
+    align-items: center;
 }
 
 .card-btn:hover {

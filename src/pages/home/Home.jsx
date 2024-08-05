@@ -8,7 +8,6 @@ import BooksLinkCard from "./components/BooksLinkCard";
 import WorsHistory from "./components/WorsHistory";
 import Headers from "../../common/components/Headers/Header";
 import Loading from "../../common/components/Treatment/Loading";
-import BtmRecentlyBook from "./components/BtmRecentlyBook";
 
 function Home() {
     const dispatch = useDispatch();
@@ -22,16 +21,13 @@ function Home() {
         <div className="align-items-center">
             <Headers title="Главная" />
 
-            {loading ? (
-                <Loading />
-            ) : (
-                <main className="container pb-5">
-                    <InfoCard />
-                    <BooksLinkCard />
-                    <WorsHistory />
-                    <BtmRecentlyBook />
-                </main>
-            )}
+            <main className="container pb-5">
+                <InfoCard />
+                <BooksLinkCard />
+                <WorsHistory />
+                
+            </main>
+
         </div>
     );
 }

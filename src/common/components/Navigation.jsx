@@ -50,8 +50,8 @@ function Navigation() {
                         </Link>
                     </li>
                     <li className="nav-item">
-                        <Link to="/bookmarks" className={getLinkClass("/bookmarks")}>
-                            <SVG name="marklist_fill" />
+                        <Link to="/word-list" className={getLinkClass("/word-list")}>
+                            <SVG name="words" />
                         </Link>
                     </li>
                     <li className="nav-item">
