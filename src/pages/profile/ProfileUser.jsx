@@ -19,7 +19,7 @@ import SecurityTab from "./components/security/SecurityTab";
 function Profile() {
     const dispatch = useDispatch();
 
-    const { loading } = useSelector((state) => state.user);
+    const { fulfilled, loading } = useSelector((state) => state.user);
 
     const [hasChanges, setHasChanges] = useState(false);
     const [dataToSave, setDataToSave] = useState(null);
@@ -30,7 +30,7 @@ function Profile() {
 
     return (
         <div className="align-items-center">
-            <Header hasChanges={hasChanges} dataToSave={dataToSave} />
+            <Header hasChanges={hasChanges} dataToSave={dataToSave} setHasChanges={setHasChanges} />
             {loading ? (
                 <Loading />
             ) : (

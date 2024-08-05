@@ -4,12 +4,13 @@ import { fetchPutSettings } from "../../../common/reducers/userSlice";
 
 import SVG from "../../../common/components/Icons/SVG";
 
-const Header = ({ hasChanges, dataToSave }) => {
+const Header = ({ hasChanges, dataToSave, setHasChanges }) => {
     const dispatch = useDispatch();
     const { putLoading } = useSelector((state) => state.user);
 
     const handleSave = () => {
         dispatch(fetchPutSettings(dataToSave));
+        setHasChanges(false)
     };
 
     return (

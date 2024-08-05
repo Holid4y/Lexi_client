@@ -23,6 +23,7 @@ const Form = ({ setHasChanges, setDataToSave }) => {
         }
         
     }, [theme]);
+
     useEffect(() => {
         if (number_of_false_set) {
             setFalseSetLevel(number_of_false_set);
@@ -31,8 +32,13 @@ const Form = ({ setHasChanges, setDataToSave }) => {
         }
     }, [number_of_false_set, count_word_in_round, time_to_view_result]);
 
+    
+    
     function checkHasChanges() {
-        return falseSetLevel !== number_of_false_set || countWordInRoundState !== count_word_in_round || timeToViewResultState !== time_to_view_result || themeState !== theme;
+        if (number_of_false_set !== undefined & falseSetLevel !== undefined) {
+            return falseSetLevel !== number_of_false_set || countWordInRoundState !== count_word_in_round || timeToViewResultState !== time_to_view_result || themeState !== theme;
+        } 
+        return false
     }
     useEffect(() => {
         setHasChanges(checkHasChanges())
