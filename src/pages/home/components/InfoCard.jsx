@@ -13,24 +13,24 @@ function InfoCard() {
 
     return (
         <div className="row mb-4">
-            <div className="col-6 col-md-3 hover-text-opacity">
-                <span className="ps-2" id="wordsToLearn">Изученных слов</span>
+            <div className="col-6 col-md-3 hover-text-opacity animated-block-leftright">
+                <span className="ps-2 span_hover" id="wordsToLearn">Изученных слов</span>
                 <Link to={"/word-list"}>
                     <div className="card card-btn">
                         {getContentOrLoading(learning_words)}
                     </div>
                 </Link>
             </div>
-            <div className="col-6 col-md-3 hover-text-opacity">
-                <span className="ps-2" id="uploadBooks">Добавленных книг</span>
+            <div className="col-6 col-md-3 hover-text-opacity animated-block-leftright">
+                <span className="ps-2 span_hover" id="uploadBooks">Добавленных книг</span>
                 <Link to={"/my-books"}>
                     <div className="card card-btn">
                         {getContentOrLoading(upload_books)}
                     </div>
                 </Link>
             </div>
-            <div className="col-6 col-md-3 hover-text-opacity">
-                <span className="ps-2" id="statistics">Статистика</span>
+            <div className="col-6 col-md-3 hover-text-opacity animated-block-leftright">
+                <span className="ps-2 span_hover" id="statistics">Статистика</span>
                 <Link to="/statistic">
                     <div className="card w-100 border-none card-btn">
                         <h4 className="book-text text-center py-2">
@@ -39,8 +39,8 @@ function InfoCard() {
                     </div>
                 </Link>
             </div>
-            <div className="col-6 col-md-3 hover-text-opacity">
-                <span className="ps-2" id="bookmarks">Закладки</span>
+            <div className="col-6 col-md-3 hover-text-opacity animated-block-leftright">
+                <span className="ps-2 span_hover" id="bookmarks">Закладки</span>
                 <Link to="/bookmarks">
                     <div className="card w-100 border-none card-btn">
                         <h4 className="book-text text-center py-2">

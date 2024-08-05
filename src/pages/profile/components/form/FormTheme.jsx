@@ -1,7 +1,7 @@
 import React from 'react';
 
 const FormTheme = ({ themeState, theme, handleThemeChange }) => (
-    <div className="form-control mb-3 py-2 d-flex justify-content-between align-items-center">
+    <div className="form-control mb-3 py-2 d-flex justify-content-between align-items-center animated-block-leftright">
         {themeState === theme ? "" : "*"}
         <select className="form-select" value={themeState} onChange={handleThemeChange}>
             <option value="light">Светлая</option>

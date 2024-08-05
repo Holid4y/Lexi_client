@@ -53,8 +53,8 @@ function WordHistory() {
     return (
         <div className="hover-text-opacity">
             <p className="w-100 mb-0 d-flex justify-content-between px-2">
-                <span className="" id="wordsToLearn">История слов</span>
-                <Link to="/word-list" className="text-end ms-auto link-color" id="wordsToLearn">
+                <span className="span_hover">История слов</span>
+                <Link to="/word-list" className="text-end ms-auto link-color span_hover">
                     Смотреть все
                     <SVG name={"arrow_right"} />
                 </Link>

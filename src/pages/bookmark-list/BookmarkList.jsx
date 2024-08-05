@@ -29,7 +29,7 @@ function BookmarkList() {
         <div className="mb-4">
             <p className="w-100 mb-2 d-flex justify-content-between align-items-center px-2">
                 <h4 className="p-0">Мои закладки</h4>
-                <Link to="/books" className="p-0 mb-0 text-end ms-auto link-color">
+                <Link to="/books" className="p-0 mb-0 text-end ms-auto link-color animated-btn-focus">
                     Выбрать книгу
                 </Link>
             </p>

@@ -31,7 +31,7 @@ function WordList() {
           <div className="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-5 g-3 mb-5">
             {words && words.results && words.results.length > 0 ? (
               words.results.map((word, index) => (
-                <div key={index} className="col">
+                <div key={index} className="col animated-card-scale">
                   <Block word={word.word} />
                 </div>
               ))

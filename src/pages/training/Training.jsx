@@ -22,7 +22,7 @@ function Training() {
         <div className="align-items-center">
             <Headers title="Повторение слов" svgName={"training"} />
             <main className="container">
-                <div className="py-4">
+                <div className="py-4 animated-block-leftright">
                     <div className="row align-items-center g-lg-4">
                         <div className="col-lg-7 text-lg-start mb-3">
                             <h1 className="display-4 fw-bold lh-1 text-body-emphasis">Необходимо пройти</h1>
@@ -34,7 +34,7 @@ function Training() {
                         </div>
                     </div>
                 </div>
-                <div className="accordion" id="accordionExample">
+                <div className="accordion animated-block-rightleft" id="accordionExample">
                 <h5 className="mb-3 ps-2">Наш сайт предлагает возможность проверить свои знания английского языка с помощью двух видов тестов:</h5>
                     <div className="accordion-item">
                         <h2 className="accordion-header">

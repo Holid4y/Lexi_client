@@ -141,14 +141,14 @@ a {
 }
 
 /* Стили для более прозрачного цвета на главной */
-.hover-text-opacity #wordsToLearn {
+.hover-text-opacity .span_hover {
     opacity: 0.4;
     transition: opacity 0.5s ease;
 }
-.hover-text-opacity:hover #wordsToLearn {
+.hover-text-opacity:hover .span_hover {
     opacity: 1;
 }
-.hover-text-opacity:active #wordsToLearn {
+.hover-text-opacity:active .span_hover {
     opacity: 1;
 }
 
@@ -663,4 +663,44 @@ input[type="number"] {
 }
 .form-control-lg {
     margin: 20px 0;
+}
+
+
+
+/* Анимация вылет слева на право */
+@keyframes animation_div_left {
+    from { transform: translateX(-10%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+/* Анимация вылет справа налево */
+@keyframes animation_div_right {
+    from { transform: translateX(10%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+.animated-block-leftright {
+    animation: animation_div_left 0.3s ease-out forwards;
+}
+.animated-block-rightleft {
+    animation: animation_div_right 0.3s ease-out forwards;
+}
+
+/* Анимация для карточек - эффект хлопок */
+@keyframes animation_card_scale {
+    0% { transform: scale(.6); }
+    100% { transform: scale(1); }
+}
+.animated-card-scale {
+    animation: animation_card_scale 0.2s ease-out forwards;
+}
+
+/* Анимация для кнопок - эффект пульсации */
+@keyframes animation_btn_focus {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.03); }
+    100% { transform: scale(1); }
+}
+.animated-btn-focus {
+    animation: animation_btn_focus 1s infinite;
 }

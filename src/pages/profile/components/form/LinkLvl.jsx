@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const LinkLvl = () => (
-    <Link to="/level-settings" className="form-control mb-3 py-2-5 d-flex justify-content-between">
+    <Link to="/level-settings" className="form-control mb-3 py-2-5 d-flex justify-content-between animated-block-leftright">
         <span className="text-start">Настроить уровни словаря</span>
         <span className="text-end">
             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" className="bi bi-chevron-right" viewBox="0 0 16 16">
