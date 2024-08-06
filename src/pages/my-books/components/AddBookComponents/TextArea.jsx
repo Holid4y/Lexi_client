@@ -1,9 +1,11 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setTextArea } from "../../../../common/reducers/addBookModalSlice";
 
 function TextArea() {
     const dispatch = useDispatch();
+
+    const { textArea } = useSelector((state) => state.addBookModal);
 
     function onTextChange(value) {
         // Диспатчим экшен для обновления текста в textarea
@@ -18,6 +20,7 @@ function TextArea() {
                 id="exampleFormControlTextarea1"
                 rows="3"
                 onChange={(e) => onTextChange(e.target.value)}
+                value={textArea}
             ></textarea>
         </div>
     );

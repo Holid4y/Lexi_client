@@ -1,9 +1,11 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setAuthorName } from "../../../../../common/reducers/addBookModalSlice";
 
 function AuthorBookInput() {
     const dispatch = useDispatch();
+
+    const { authorName } = useSelector((state) => state.addBookModal);
 
     function onTextChange(value) {
         dispatch(setAuthorName(value));
@@ -16,7 +18,7 @@ function AuthorBookInput() {
             type="text"
             placeholder="Автор книги"
             onChange={(e) => onTextChange(e.target.value)}
-
+            value={authorName}
         />
     );
 }

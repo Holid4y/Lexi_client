@@ -4,10 +4,10 @@ const addBookModal = createSlice({
     name: "addBookModal",
     initialState: {
         type: null,
-        textArea: null,
+        textArea: "",
         file: null,
-        authorName: null,
-        title: null,
+        authorName: "",
+        title: "",
         isPrivet: false,
     },
     reducers: {
@@ -28,6 +28,14 @@ const addBookModal = createSlice({
         },
         setIsPrivet: (state, action) => {
             state.isPrivet = action.payload;
+        },
+
+        throwState: (state, action) => {
+            console.log(state.authorName)
+            state.type = null
+            state.authorName = ""
+            state.title = ""
+            state.isPrivet = false
         }
     }
 });
@@ -38,6 +46,7 @@ export const {
     setFile,
     setAuthorName,
     setTitle,
-    setIsPrivet
+    setIsPrivet,
+    throwState
 } = addBookModal.actions;
 export default addBookModal.reducer;
