@@ -7,7 +7,7 @@ const CounterInput = ({ localState, state, handleIncrement, handleDecrement, lab
         <div className='animated-block-leftright'>
             <span className="ps-2">{localState === state ? label : `${label} *`}</span>
             <div className="input-group mb-2">
-                <input type="number" className="form-control py-2-5" defaultValue={localState} />
+                <input readOnly type="number" className="form-control py-2-5" defaultValue={localState} />
                 <button className="btn btn-primary-light" onClick={handleIncrement} type="button">
                     <SVG name={'plus'} />
                 </button>
