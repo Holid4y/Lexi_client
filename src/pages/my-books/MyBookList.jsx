@@ -20,7 +20,6 @@ import VideoModal from "./components/AddBookComponents/AllModal/VideoModal";
 
 function MyBookList() {
     const dispatch = useDispatch();
-
     const { books, loading } = useSelector((state) => state.books);
     const [currentPage, setCurrentPage] = useState(1);
 

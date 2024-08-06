@@ -679,17 +679,6 @@ input[type="number"] {
     to { transform: translateX(0); opacity: 1; }
 }
 
-/*   */
-
-/* Анимация для карточек - эффект хлопок */
-/* @keyframes animation_card_scale {
-    0% { transform: scale(.6); }
-    100% { transform: scale(1); }
-}
-.animated-card-scale {
-    animation: animation_card_scale 0.2s ease-out forwards;
-} */
-
 /* Анимация для карточек - эффект хлопок */
 @keyframes animation_card_scale {
     0% { transform: scale(.95); }
