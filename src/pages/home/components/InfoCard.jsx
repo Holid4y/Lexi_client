@@ -14,7 +14,7 @@ function InfoCard() {
     return (
         <div className="row mb-4">
             <div className="col-6 col-md-3 hover-text-opacity animated-block-leftright">
-                <span className="ps-2 span_hover" id="wordsToLearn">Изученных слов</span>
+                <span className="ps-2 span_hover" id="wordsToLearn">Всего слов</span>
                 <Link to={"/word-list"}>
                     <div className="card card-btn">
                         {getContentOrLoading(learning_words)}
