@@ -9,6 +9,7 @@ function NameBookInput() {
         dispatch(setTitle(value));
     }
 
+
     return (
         <input 
             className="form-control form-control-lg" 
@@ -16,6 +17,7 @@ function NameBookInput() {
             placeholder="Название книги" 
             style={{ marginBottom: "10px" }} 
             onChange={(e) => onTextChange(e.target.value)} 
+
         />
     );
 }
