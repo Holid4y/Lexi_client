@@ -5,6 +5,7 @@ import { toggleWordBlock } from "../../reducers/wordSlice";
 
 import LoadingComponent from "./components/LoadingComponent";
 import WordTranslation from "./components/WordTranslation";
+import TranslationsList from "./components/TranslationsList";
 import SynonymsList from "./components/SynonymsList";
 import MeaningsList from "./components/MeaningsList";
 import NotFound from "./components/NotFound";
@@ -41,15 +42,7 @@ function WordBlockTranslate() {
     function renderSectionTwo() {
         return (
             <div id="section-2" className="dark-nav mb-2 p-3">
-                {translations.length > 0 && (
-                    <div>
-                        <b>Переводы:</b>
-                        <br />
-                        {translations.map(
-                            (translation, index) => index !== 0 && <SmallTranslationWord wordPk={pk} related_pk={related_pk} translation={translation} key={index} />
-                        )}
-                    </div>
-                )}
+                <TranslationsList />
                 <SynonymsList />
                 <MeaningsList />
             </div>
@@ -60,7 +53,6 @@ function WordBlockTranslate() {
         if (loading) {
             return <LoadingComponent />;
         }
-
         if (translations?.length > 0) {
             return (
                 <div>

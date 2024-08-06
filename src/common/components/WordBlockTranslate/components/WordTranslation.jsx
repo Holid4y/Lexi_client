@@ -5,7 +5,7 @@ import { fetchVocabularyPost, fetchVocabularyDelete } from "../../../reducers/vo
 
 function WordTranslation({ text, translation, showSection2, setShowSection2 }) {
     const dispatch = useDispatch();
-    const { pk, related_pk, transcription } = useSelector((state) => state.word);
+    const { pk, related_pk, transcription, translations, synonyms, meanings } = useSelector((state) => state.word);
     const isRelatedWord = related_pk.includes(translation?.pk);
 
     const handleAddWordToVocabulary = () => {
@@ -17,6 +17,18 @@ function WordTranslation({ text, translation, showSection2, setShowSection2 }) {
         const body = { word: pk, translation: translation.pk };
         dispatch(fetchVocabularyDelete(body));
     };
+
+    function isMetaExist() {
+        return (translations.length > 1) | (synonyms.length > 0) | (meanings.length > 0);
+    }
+
+    const ShowButtonView = (
+        <div style={{ marginLeft: "auto", display: "flex", alignItems: "center" }}>
+            <button className="btn btn-link" onClick={() => setShowSection2(!showSection2)}>
+                {showSection2 ? "Скрыть" : "Подробнее"}
+            </button>
+        </div>
+    );
 
     return (
         <div className="dark-nav mb-2 p-3">
@@ -43,11 +55,7 @@ function WordTranslation({ text, translation, showSection2, setShowSection2 }) {
                         <SVG name="voice_min" />
                     </button>
                 </span>
-                <div style={{ marginLeft: "auto", display: "flex", alignItems: "center" }}>
-                    <button className="btn btn-link" onClick={() => setShowSection2(!showSection2)}>
-                        {showSection2 ? "Скрыть" : "Подробнее"}
-                    </button>
-                </div>
+                {isMetaExist() ? ShowButtonView : null}
             </div>
         </div>
     );

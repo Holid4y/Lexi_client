@@ -4,7 +4,11 @@ import { useSelector } from 'react-redux';
 function MeaningsList() {
     const { meanings } = useSelector((state) => state.word);
 
-    return (
+    function isExist() {
+        return meanings.length > 0;
+    }
+
+    const MeaningsView = (
         <div>
             <hr />
             <b>Значения:</b>
@@ -16,6 +20,8 @@ function MeaningsList() {
             ))}
         </div>
     );
+
+    return <>{isExist() && MeaningsView}</>;
 }
 
 export default MeaningsList;

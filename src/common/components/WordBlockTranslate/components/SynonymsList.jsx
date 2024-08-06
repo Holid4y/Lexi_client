@@ -4,7 +4,11 @@ import { useSelector } from 'react-redux';
 function SynonymsList() {
     const { synonyms } = useSelector((state) => state.word);
 
-    return (
+    function isExist() {
+        return synonyms.length > 0;
+    }
+
+    const SynonymsView = (
         <div>
             <hr />
             <b>Синонимы:</b>
@@ -16,6 +20,8 @@ function SynonymsList() {
             ))}
         </div>
     );
+
+    return <>{isExist() && SynonymsView}</>;
 }
 
 export default SynonymsList;
