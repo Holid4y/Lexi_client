@@ -1,25 +1,19 @@
 import React, { useEffect, useState } from "react";
+
 import { useDispatch, useSelector } from "react-redux";
-
 import { toggleWordBlock } from "../../reducers/wordSlice";
-import { fetchVocabularyPost, fetchVocabularyDelete } from "../../reducers/vocabularySlice";
 
-import Loading from "../Treatment/Loading";
-import SVG from "../Icons/SVG";
-import SmallTranslationWord from "./SmallTranslationWord";
+import LoadingComponent from "./components/LoadingComponent";
+import WordTranslation from "./components/WordTranslation";
+import SynonymsList from "./components/SynonymsList";
+import MeaningsList from "./components/MeaningsList";
+import NotFound from "./components/NotFound";
+import SmallTranslationWord from "./components/SmallTranslationWord";
 
 function WordBlockTranslate() {
     const dispatch = useDispatch();
-
-    const { pk, text, part_of_speech, transcription, translations, synonyms, meanings, related_pk, isVisible, loading, error } = useSelector((state) => state.word);
-    const [isRelatedWord, setIsRelatedWord] = useState(false);
+    const { pk, related_pk, text, translations, isVisible, loading } = useSelector((state) => state.word);
     const [showSection2, setShowSection2] = useState(false);
-
-    useEffect(() => {
-        if (translations) {
-            setIsRelatedWord(related_pk.includes(translations[0].pk));
-        }
-    }, [text]);
 
     useEffect(() => {
         function handleClickOutside(event) {
@@ -35,7 +29,7 @@ function WordBlockTranslate() {
         } else {
             document.removeEventListener("mousedown", handleClickOutside);
             document.body.classList.remove("no-scroll");
-            setShowSection2(false); // Если добавить комментарий этой строки, Section-2 будет отображаться всегда, пока не нажмут на кнопку
+            setShowSection2(false);
         }
 
         return () => {
@@ -44,114 +38,44 @@ function WordBlockTranslate() {
         };
     }, [isVisible, dispatch]);
 
-    const handleAddWordToVocabulary = (wordPk, translationPk) => {
-        const body = {
-            word: wordPk,
-            translation: translationPk,
-        };
-        dispatch(fetchVocabularyPost(body));
-        setIsRelatedWord(true);
-    };
-
-    const handleDeleteWordToVocabulary = (wordPk, translationPk) => {
-        const body = {
-            word: wordPk,
-            translation: translationPk,
-        };
-        dispatch(fetchVocabularyDelete(body));
-        setIsRelatedWord(false);
-    };
+    function renderSectionTwo() {
+        return (
+            <div id="section-2" className="dark-nav mb-2 p-3">
+                {translations.length > 0 && (
+                    <div>
+                        <b>Переводы:</b>
+                        <br />
+                        {translations.map(
+                            (translation, index) => index !== 0 && <SmallTranslationWord wordPk={pk} related_pk={related_pk} translation={translation} key={index} />
+                        )}
+                    </div>
+                )}
+                <SynonymsList />
+                <MeaningsList />
+            </div>
+        );
+    }
 
     const renderContent = () => {
         if (loading) {
-            return (
-                <div className="dark-nav mb-2">
-                    <Loading />
-                </div>
-            );
+            return <LoadingComponent />;
         }
-        
-        if ((translations && translations.length > 0) || (synonyms && synonyms.length > 0) || (meanings && meanings.length > 0)) {
+
+        if (translations?.length > 0) {
             return (
                 <div>
-                    <div className="dark-nav mb-2 p-3">
-                        <div style={{ display: "flex", alignItems: "center" }}>
-                            <span className="fs-2 pe-3 text-capitalize">
-                                <b>{text}</b> - <b>{translations[0]?.text}</b>
-                            </span>
-                            <div style={{ marginLeft: "auto", display: "flex", alignItems: "center" }}>
-                                {isRelatedWord ? (
-                                    <button className="btn" onClick={() => handleDeleteWordToVocabulary(pk, translations[0].pk)}>
-                                        <SVG name="fill_star" />
-                                    </button>
-                                ) : (
-                                    <button className="btn" onClick={() => handleAddWordToVocabulary(pk, translations[0].pk)}>
-                                        <SVG name="Unfill_star" />
-                                    </button>
-                                )}
-                            </div>
-                        </div>
-                        <div style={{ display: "flex", alignItems: "center" }}>
-                            <span className="pe-2 text-capitalize">
-                                <span>[ {transcription} ]</span>
-                                {/* {part_of_speech} */}
-                                <button className="btn">
-                                    <SVG name="voice_min" />
-                                </button>
-                            </span>
-                            <div style={{ marginLeft: "auto", display: "flex", alignItems: "center" }}>
-                                <button className="btn btn-link" onClick={() => setShowSection2(!showSection2)}>
-                                    {showSection2 ? "Скрыть" : "Подробнее"}
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    {showSection2 && (
-                        <div id="section-2" className="dark-nav mb-2 p-3">
-                            {translations.length > 0 && (
-                                <div>
-                                    <b>Переводы:</b>
-                                    <br />
-                                    {translations.map(
-                                        (translation, index) => index !== 0 && <SmallTranslationWord wordPk={pk} related_pk={related_pk} translation={translation} key={index} />
-                                    )}
-                                </div>
-                            )}
-                            {synonyms.length > 0 && (
-                                <div>
-                                    <hr />
-                                    <b>Синонимы:</b>
-                                    <br />
-                                    {synonyms.map((synonym, index) => (
-                                        <span className="pe-2 text-break" key={index}>
-                                            {synonym.text}
-                                        </span>
-                                    ))}
-                                </div>
-                            )}
-                            {meanings.length > 0 && (
-                                <div>
-                                    <hr />
-                                    <b>Значения:</b>
-                                    <br />
-                                    {meanings.map((meaning, index) => (
-                                        <span className="pe-2 text-break word-for-text" key={index}>
-                                            {meaning.text}
-                                        </span>
-                                    ))}
-                                </div>
-                            )}
-                        </div>
-                    )}
+                    <WordTranslation 
+                        text={text} 
+                        translation={translations[0]} 
+                        showSection2={showSection2} 
+                        setShowSection2={setShowSection2} 
+                    />
+                    {showSection2 && renderSectionTwo()}
                 </div>
             );
         }
 
-        return (
-            <div className="text-center dark-nav mb-2 p-3">
-                <span className="text-danger">Не найдено</span>
-            </div>
-        );
+        return <NotFound />;
     };
 
     return (

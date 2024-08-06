@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { toggleWordBlock } from "../../reducers/wordSlice";
-import { fetchVocabularyPost, fetchVocabularyDelete } from "../../reducers/vocabularySlice";
+import { toggleWordBlock } from "../../../reducers/wordSlice";
+import { fetchVocabularyPost, fetchVocabularyDelete } from "../../../reducers/vocabularySlice";
 
-import Loading from "../Treatment/Loading";
-import SVG from "../Icons/SVG";
+import Loading from "../../Treatment/Loading";
+import SVG from "../../Icons/SVG";
 
 function SmallTranslationWord({ wordPk, translation, related_pk }) {
     const dispatch = useDispatch();
