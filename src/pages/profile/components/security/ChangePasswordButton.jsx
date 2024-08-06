@@ -12,7 +12,7 @@ import Loading from "../../../../common/components/Treatment/Loading";
 
 import SubmitButton from "./SubmitButton";
 
-const UserEmail = () => {
+const ChangePasswordButton = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -62,14 +62,14 @@ const UserEmail = () => {
                 </span>
             </button>
 
-            <div class="modal fade" id="changepass" tabindex="-1" aria-labelledby="changepassLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="changepassLabel">Смена пароля</h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div className="modal fade" id="changepass" tabIndex="-1" aria-labelledby="changepassLabel" aria-hidden="true">
+                <div className="modal-dialog">
+                    <div className="modal-content">
+                        <div className="modal-header">
+                            <h1 className="modal-title fs-5" id="changepassLabel">Смена пароля</h1>
+                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <div class="modal-body">
+                        <div className="modal-body">
                             <form>
                                 <div className="my-4">
                                     <Input htmlFor={"password"} label={"Текуций пароль"} type={"password"} value={password} setter={setPassword} />
@@ -94,4 +94,4 @@ const UserEmail = () => {
     );
 };
 
-export default UserEmail;
+export default ChangePasswordButton;

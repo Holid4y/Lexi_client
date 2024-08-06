@@ -1,10 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-
-import { toggleWordBlock } from "../../../reducers/wordSlice";
+import { useDispatch } from "react-redux";
 import { fetchVocabularyPost, fetchVocabularyDelete } from "../../../reducers/vocabularySlice";
-
-import Loading from "../../Treatment/Loading";
 import SVG from "../../Icons/SVG";
 
 function SmallTranslationWord({ wordPk, translation, related_pk }) {
@@ -12,11 +8,10 @@ function SmallTranslationWord({ wordPk, translation, related_pk }) {
     const [isRelatedWord, setIsRelatedWord] = useState(false);
 
     useEffect(() => {
-
         if (related_pk) {
             setIsRelatedWord(related_pk.includes(translation.pk));
-        }  
-    }, []);
+        }
+    }, [related_pk, translation.pk]);
 
     const handleAddWordToVocabulary = (wordPk, translationPk) => {
         const body = {
@@ -40,13 +35,13 @@ function SmallTranslationWord({ wordPk, translation, related_pk }) {
         <button className="btn btn-secondary m-1">
             <span className="pe-2">{translation.text}</span>
             {isRelatedWord ? (
-                <button className="btn" onClick={() => handleDeleteWordToVocabulary(wordPk, translation.pk)}>
+                <span className="btn" onClick={() => handleDeleteWordToVocabulary(wordPk, translation.pk)}>
                     <SVG name="fill_star" />
-                </button>
+                </span>
             ) : (
-                <button className="btn" onClick={() => handleAddWordToVocabulary(wordPk, translation.pk)}>
+                <span className="btn" onClick={() => handleAddWordToVocabulary(wordPk, translation.pk)}>
                     <SVG name="Unfill_star" />
-                </button>
+                </span>
             )}
         </button>
     );

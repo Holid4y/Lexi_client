@@ -22,7 +22,7 @@ function BaseModal({ childComponent, ariaLabelledby, title, idName }) {
         };
     }, []);
     return (
-        <div className="modal fade" id={idName} data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby={ariaLabelledby} aria-hidden="true">
+        <div className="modal fade" id={idName} data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby={ariaLabelledby} aria-hidden="true">
             <div className="modal-dialog">
                 <div className="modal-content rounded-4 shadow">
                     <div className="modal-header ps-0">
