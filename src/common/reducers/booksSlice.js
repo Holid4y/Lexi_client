@@ -46,6 +46,10 @@ const booksSlice = createSlice({
         booksLoaded: (state, action) => {
             state.books = action.payload;
         },
+        unshiftBooksList: (state, action) => {
+            state.books.results.unshift(action.payload);
+        },
+        
     },
     extraReducers: (builder) => {
         builder
@@ -73,5 +77,5 @@ const booksSlice = createSlice({
     },
 });
 
-export const { booksLoaded } = booksSlice.actions;
+export const { booksLoaded, unshiftBooksList } = booksSlice.actions;
 export default booksSlice.reducer;

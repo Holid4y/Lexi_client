@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { fetchBookPost } from "../../../../../common/reducers/bookRetrieveSlice";
+import { unshiftBooksList } from "../../../../../common/reducers/booksSlice";
 
 import Loading from "../../../../../common/components/Treatment/Loading";
 
@@ -25,9 +26,8 @@ function AddButton() {
         dispatch(fetchBookPost(data)).then((response) => {
             if (response.meta.requestStatus === "fulfilled") {
                 setLoading(false);
-                // to do
-                // updateMyBookList(response.payload) обнавить список книг
-                // throwState()
+                console.log(response.payload)
+                dispatch(unshiftBooksList(response.payload))
                 // sendMessege(ok)
             } 
         });
