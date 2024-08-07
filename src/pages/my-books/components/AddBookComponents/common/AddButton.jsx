@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { fetchBookPost } from "../../../../../common/reducers/bookRetrieveSlice";
+import { fetchBookPost, setError } from "../../../../../common/reducers/bookRetrieveSlice";
 import { unshiftBooksList } from "../../../../../common/reducers/booksSlice";
+
+import InformationNotification from "../../../../../common/components/Notification/InformationNotification";
 
 import Loading from "../../../../../common/components/Treatment/Loading";
 
@@ -13,7 +15,11 @@ function AddButton() {
     const { error } = useSelector((state) => state.book);
 
     const [loading, setLoading] = useState(false);
-    const [message, setMessage] = useState("");
+    const [notification, setNotification] = useState(null)
+    
+    useEffect(() => {
+        dispatch(setError(null))
+    }, [authorName, title]);
 
     const onSubmit = () => {
         const data = {
@@ -28,10 +34,16 @@ function AddButton() {
                 setLoading(false);
                 console.log(response.payload)
                 dispatch(unshiftBooksList(response.payload))
-                // sendMessege(ok)
+                setNotification(InformationNotificationView)
             } 
         });
     };
+
+    const InformationNotificationView = <InformationNotification 
+    message={`Книга ${title} создана`}
+    onClose={() => setNotification(null)} 
+    timeout={2000}
+    />;
 
     return (
         <>
@@ -39,6 +51,7 @@ function AddButton() {
             <button type="button" className="btn btn-lg btn-primary mt-4 w-100" onClick={() => onSubmit()} disabled={loading}>
                 {loading ? <Loading /> : "Добавить"}
             </button>
+            {notification}
         </>
     );
 }
