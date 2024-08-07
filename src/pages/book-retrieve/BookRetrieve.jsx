@@ -34,7 +34,7 @@ function BookRetrieve() {
         if (!isFirstInit) {
             if (isOutRange()) {
                 // только когда выйдет за range
-                dispatch(fetchBook({ slug: slug, page: currentPage, maxPage: page_count, title: title }));
+                dispatch(fetchBook({ slug: slug, page: currentPage}));
             }
         }
 
@@ -43,11 +43,18 @@ function BookRetrieve() {
 
     useEffect(() => {
         if (isFirstInit) {
-            dispatch(fetchBook({ slug: slug, page: currentPage, maxPage: page_count, title: title })).then((data) => {
+            dispatch(fetchBook({ slug: slug, page: currentPage})).then((data) => {
+                
+                const title = data.payload.title
+                const page_count = data.payload.page_count
+                setRecentlyBookToLocalStorage(slug, currentPage, page_count, title);
+                
                 if (data.payload.redirected) {
                     setCurrentPage(data.payload.redirectedPage);
                 }
             });
+            
+            
             setIsFirstInit(false);
         }
     }, [slug]);

@@ -23,7 +23,7 @@ function getPageFromUrl(url) {
 }
 
 export const fetchBook = createAsyncThunk("book/fetchBook", async (params, { dispatch }) => {
-    const { slug, page, isPageSwitch } = params;
+    const { slug, page } = params;
     const url = new URL(host + books + slug + "/" + page);
 
     const response = await getResponse(url, "GET");
@@ -31,10 +31,7 @@ export const fetchBook = createAsyncThunk("book/fetchBook", async (params, { dis
         const data = await response.json();
         if (data) {
             dispatch(bookLoaded(data));
-            const value = { slug: slug, page: page };
-            localStorage.setItem("recentlyBook", JSON.stringify(value));
-
-            if (!isPageSwitch & response.redirected) {
+            if (response.redirected) {
                 const redirectedPage = getPageFromUrl(response.url);
                 return { ...data, redirected: true, redirectedPage: redirectedPage };
             } else {
