@@ -32,18 +32,23 @@ function SmallTranslationWord({ wordPk, translation, related_pk }) {
     };
 
     return (
-        <button className="btn btn-secondary m-1">
-            <span className="pe-2">{translation.text}</span>
+        <>
             {isRelatedWord ? (
-                <span className="btn" onClick={() => handleDeleteWordToVocabulary(wordPk, translation.pk)}>
-                    <SVG name="fill_star" />
-                </span>
+                <button className="btn btn-secondary m-1 small-word-button" onClick={() => handleDeleteWordToVocabulary(wordPk, translation.pk)}>
+                    <span className="text">{translation.text}</span>
+                    <span className="star">
+                        <SVG name="fill_star" />
+                    </span>
+                </button>
             ) : (
-                <span className="btn" onClick={() => handleAddWordToVocabulary(wordPk, translation.pk)}>
-                    <SVG name="Unfill_star" />
-                </span>
+                <button className="btn btn-secondary m-1 small-word-button" onClick={() => handleAddWordToVocabulary(wordPk, translation.pk)}>
+                    <span className="text">{translation.text}</span>
+                    <span className="star">
+                        <SVG name="Unfill_star" />
+                    </span>
+                </button>
             )}
-        </button>
+        </>
     );
 }
 

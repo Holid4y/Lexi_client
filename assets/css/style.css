@@ -755,3 +755,16 @@ input[type="number"] {
     height: 100%;
     box-shadow: none;
 }
+
+.small-word-button {
+    display: inline-block
+}
+.small-word-button > .text{
+    margin: 0 10px 0 0;
+    font-size: 17px;
+    font-weight: 500;
+}
+
+.small-word-button > .star > svg{
+    scale: 0.9;
+}
