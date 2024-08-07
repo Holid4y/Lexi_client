@@ -22,7 +22,7 @@ const PaginationButton = ({ currentPage, pageCount, setCurrentPage }) => {
         for (let i = 1; i <= pageCount; i++) {
             buttons.push(
                 <div className="col-2 col-lg-1" key={i}>
-                    <button className={`btn btn-primary w-100 ${i === currentPage ? "selected" : ""}`} onClick={() => handlePageChange(i)}>
+                    <button className={`btn w-100 ${i === currentPage ? "btn-primary" : "btn-outline-secondary"}`} onClick={() => handlePageChange(i)}>
                         {i}
                     </button>
                 </div>

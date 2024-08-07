@@ -36,7 +36,13 @@ function WordList() {
                   <Block item={item} key={index}/>
               ))
             ) : (
-              <div>No words found.</div>
+              <div className="col-12 w-100">
+                  <div className="card py-3 px-2">
+                      <div className="text-center">
+                          <h4 className="fw-bold mt-3 text-body-emphasis">У вас пока что нет добавленных слов 😔</h4>
+                      </div>
+                  </div>
+              </div>
             )}
           </div>
           {PaginationButtonView}
