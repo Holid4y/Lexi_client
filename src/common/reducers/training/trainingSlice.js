@@ -22,7 +22,7 @@ export const fetchTraining = createAsyncThunk("training/fetchTraining", async (t
             return data
         } 
     } else {
-        console.log("слов для повторения нет");
+        // "слов для повторения нет"
     }
 
     

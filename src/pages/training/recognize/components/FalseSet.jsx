@@ -53,7 +53,7 @@ function FalseSet({ training, round, correctWord }) {
                         radioElement.click();
                         setSelectedRadioIndex(index);
                     } else {
-                        console.warn(`option_${index} не найдено`);
+                        // не найдено
                     }
                 }
             }

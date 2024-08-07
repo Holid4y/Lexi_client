@@ -32,7 +32,6 @@ function AddButton() {
         dispatch(fetchBookPost(data)).then((response) => {
             if (response.meta.requestStatus === "fulfilled") {
                 setLoading(false);
-                console.log(response.payload)
                 dispatch(unshiftBooksList(response.payload))
                 setNotification(InformationNotificationView)
             } 

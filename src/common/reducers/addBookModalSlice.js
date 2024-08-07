@@ -31,7 +31,6 @@ const addBookModal = createSlice({
         },
 
         throwState: (state, action) => {
-            console.log(state.authorName)
             state.type = null
             state.authorName = ""
             state.title = ""

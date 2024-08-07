@@ -80,7 +80,6 @@ export function handleFinalAnswer(answer, localType, currentTraining, round, dis
         checkRound(is_correct, dispatch, round, currentTraining);
     } else {
         // Если ничего не выбрано, можно вывести предупреждение или сделать кнопку неактивной
-        // console.log("Пожалуйста, выберите ответ");
     }
 }
 

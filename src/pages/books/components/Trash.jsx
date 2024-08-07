@@ -51,12 +51,10 @@ const Trash = ({ book, index }) => {
             message={`Вы уверены что хотите удалить книгу ${book.title}`}
             onClose={() => setNotification(null)}
             onConfirm={() => {
-                console.log("Подтверждено");
                 setNotification(null);
                 performDelete();
             }}
             onCancel={() => {
-                console.log("Отменено");
                 setNotification(null);
             }}
         />

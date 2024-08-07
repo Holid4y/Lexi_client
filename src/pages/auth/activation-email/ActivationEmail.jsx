@@ -22,7 +22,6 @@ const ActivationEmail = () => {
 
     async function handleSetEmail() {
         const url = new URL(host + activation + uid + '/' + token + '/');
-        console.log(url)
         setLoading(true)
         const response = await getResponse(url, "GET");
 
@@ -30,7 +29,6 @@ const ActivationEmail = () => {
             navigate("/profile");
         } else {
             const data = await response.json();
-            console.log(data)
         }
         setLoading(false)
     };
