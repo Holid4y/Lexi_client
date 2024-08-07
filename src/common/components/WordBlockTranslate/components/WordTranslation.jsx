@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import SVG from "../../Icons/SVG";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchVocabularyPost, fetchVocabularyDelete } from "../../../reducers/vocabularySlice";
@@ -6,16 +6,23 @@ import { fetchVocabularyPost, fetchVocabularyDelete } from "../../../reducers/vo
 function WordTranslation({ text, translation, showSection2, setShowSection2 }) {
     const dispatch = useDispatch();
     const { pk, related_pk, transcription, translations, synonyms, meanings } = useSelector((state) => state.word);
-    const isRelatedWord = related_pk.includes(translation?.pk);
+
+    const [isRelatedWord, setIsRelatedWord] = useState(false)
+
+    useEffect(() => {
+        setIsRelatedWord(related_pk.includes(translation?.pk))
+    }, [related_pk]);
 
     const handleAddWordToVocabulary = () => {
         const body = { word: pk, translation: translation.pk };
         dispatch(fetchVocabularyPost(body));
+        setIsRelatedWord(true)
     };
 
     const handleDeleteWordToVocabulary = () => {
         const body = { word: pk, translation: translation.pk };
         dispatch(fetchVocabularyDelete(body));
+        setIsRelatedWord(false)
     };
 
     function isMetaExist() {
