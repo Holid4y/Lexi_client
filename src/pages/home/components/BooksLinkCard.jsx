@@ -6,7 +6,7 @@ import BtmRecentlyBook from "./BtmRecentlyBook"
 function BooksLinkCard() {
     return (
         
-            <div className="card text-end mb-3 w-100 bg-card-dark p-2 animated-block-rightleft">
+            <div className="card text-end mb-4 w-100 bg-card-dark p-2 animated-block-rightleft">
                 <div className="card-body">
                     <h4 className="card-title text-start book-text">
                         Книги и тексты

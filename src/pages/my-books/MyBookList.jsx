@@ -43,7 +43,7 @@ function MyBookList() {
                     <div className="col-12">
                         <div className="card py-3">
                             <div className="text-center">
-                                <h4 className="fw-bold mt-3 text-body-emphasis">Вы можете добавить свою книгу или текст 🥰</h4>
+                                <h4 className="fw-bold mt-3 text-body-emphasis px-2">Вы можете добавить свою книгу или текст 🥰</h4>
                             </div>
                         </div>
                     </div>

@@ -595,6 +595,11 @@ input[type="number"] {
     height: 5px;
 }
 
+.bg-progress{
+    background-color: var(--bs-body-bg);
+}
+
+
 .opacity-3 {
     opacity: 0.3;
 }

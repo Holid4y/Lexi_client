@@ -5,7 +5,7 @@ import { fetchHome } from "../../common/reducers/homeSlice";
 
 import InfoCard from "./components/InfoCard";
 import BooksLinkCard from "./components/BooksLinkCard";
-import WorsHistory from "./components/WorsHistory";
+import LastReadBook from "./components/LastReadBook";
 import Headers from "../../common/components/Headers/Header";
 
 function Home() {
@@ -22,7 +22,7 @@ function Home() {
             <main className="container pb-5">
                 <InfoCard />
                 <BooksLinkCard />
-                {/* <WorsHistory /> */}
+                <LastReadBook />
                 
             </main>
 
