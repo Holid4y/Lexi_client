@@ -44,34 +44,15 @@ export const fetchBook = createAsyncThunk("book/fetchBook", async (params, { dis
 });
 
 export const fetchBookPost = createAsyncThunk("book/fetchBookPost", async (body, { dispatch }) => {
-    // Логируем тело запроса
-    console.log('Тело запроса:', body);
-
     const url = new URL(host + books);
-
     const bodyString = JSON.stringify(body);
-    
-    // Логируем URL и тело запроса
-    console.log('URL:', url.toString());
-    console.log('Тело запроса (строка):', bodyString);
 
-    const response = await getResponse(url, "POST", bodyString)
-    
-    // Логируем ответ сервера
-    console.log('Ответ сервера:', response);
-
+    const response = await getResponse(url, "POST", bodyString) 
     const data = await response.json();
-    
-    // Логируем данные из ответа
-    console.log('Данные из ответа:', data);
 
     if (response.ok) {
-        // Логируем успешный ответ
-        console.log('Запрос выполнен успешно');
         return data
     } else {
-        // Логируем ошибку
-        console.error('Ошибка при выполнении запроса:', data);
         dispatch(setError(data))
     }
 });
