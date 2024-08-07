@@ -16,7 +16,8 @@ function BookRetrieve() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const { pk, pages, page_count, pages_slice, loading, error } = useSelector((state) => state.book);
+    const { pk, pages, page_count, title, pages_slice, loading, error } = useSelector((state) => state.book);
+    console.log(page_count, title)
     const { slug, page } = useParams();
     const [currentPage, setCurrentPage] = useState(parseInt(page));
     const [isFirstInit, setIsFirstInit] = useState(true);
@@ -30,7 +31,6 @@ function BookRetrieve() {
         const maxPage = pages_slice && pages_slice[1];
         return currentPage < minPage || currentPage > maxPage;
     }
-
     useEffect(() => {
         if (!isFirstInit) {
             if (isOutRange()) {
