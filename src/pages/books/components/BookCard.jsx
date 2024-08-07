@@ -1,48 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import { useDispatch } from "react-redux";
+import Trash from "./Trash";
 
-import SVG from "../../../common/components/Icons/SVG";
-import { fetchBookDelete } from "../../../common/reducers/bookRetrieveSlice";
 
-const BookCard = ({ book, isMyBook }) => {
-    const dispatch = useDispatch()
-
-    function handleDelete(pk, slug) {
-        // отобразить модальное окно подсверждения
-        // если пользователь подтвердил то:
-        dispatch(fetchBookDelete(pk))
-
-        if (isBookRecently(slug)) {
-            throwRecentlyBook()
-        }
-    }
-
-    function throwRecentlyBook()  {
-        localStorage.removeItem("recentlyBook");
-    };
-    function isBookRecently(slug) {
-        const recentlyBook = localStorage.getItem("recentlyBook");
-        
-        if (recentlyBook) {
-            const recentlyBookData = JSON.parse(recentlyBook);
-            
-            if (recentlyBookData.slug) {
-                return recentlyBookData.slug === slug;
-            }
-        }
-        
-
-        return false;
-    }
-    
-
-    const Trash = (
-        <span className="position-absolute translate-middle mark" onClick={() => handleDelete(book.pk, book.slug)}>
-            <SVG name="trash" />
-        </span>
-    );
+const BookCard = ({ book, isMyBook, index }) => {
 
     return (
         <div className="col-12 col-md-6">
@@ -60,7 +22,7 @@ const BookCard = ({ book, isMyBook }) => {
                         </div>
                     </div>
                 </Link>
-                {isMyBook && Trash}
+                {isMyBook && <Trash book={book} index={index}/>}
             </div>
         </div>
     );

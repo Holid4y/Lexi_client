@@ -38,7 +38,7 @@ function MyBookList() {
             </div>
             <div className="row g-3">
                 {books && books.results.length > 0 ? (
-                    books.results.map((book, index) => <BookCard book={book} isMyBook={true} key={index} />)
+                    books.results.map((book, index) => <BookCard book={book} isMyBook={true} key={index} index={index} />)
                 ) : (
                     <div className="col-12">
                         <div className="card py-3">

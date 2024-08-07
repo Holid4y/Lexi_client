@@ -47,8 +47,22 @@ const booksSlice = createSlice({
             state.books = action.payload;
         },
         unshiftBooksList: (state, action) => {
-            state.books.results.unshift(action.payload);
+            if (action.payload) {
+                state.books.results.unshift(action.payload);
+            }
+            
         },
+        deleteBookByIndex: (state, action) => {
+            // Получаем индекс из action.payload
+            const indexToDelete = action.payload;
+        
+            // Проверяем, что индекс валиден
+            if (indexToDelete >= 0 && indexToDelete < state.books.results.length) {
+                // Создаем новый массив, исключая элемент по указанному индексу
+                state.books.results = state.books.results.filter((_, index) => index !== indexToDelete);
+            }
+        },
+        
         
     },
     extraReducers: (builder) => {
@@ -77,5 +91,5 @@ const booksSlice = createSlice({
     },
 });
 
-export const { booksLoaded, unshiftBooksList } = booksSlice.actions;
+export const { booksLoaded, unshiftBooksList, deleteBookByIndex } = booksSlice.actions;
 export default booksSlice.reducer;
