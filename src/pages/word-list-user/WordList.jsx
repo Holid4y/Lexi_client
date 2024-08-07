@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchVocabulary } from "../../common/reducers/vocabularySlice";
 import Block from "./components/Block";
 import Headers from "../../common/components/Headers/Header";
+import Filter from "../../common/components/Headers/Filter";
 import Loading from "../../common/components/Treatment/Loading";
 import PaginationButton from "../../common/components/Pagination/PagePagination";
 
@@ -23,12 +24,13 @@ function WordList() {
 
   return (
     <div className="align-items-center">
-      <Headers title="Все слова" svgName={"words"} />
+      <Headers title="Все слова"/>
+      <Filter />
       {loading ? (
         <Loading />
       ) : (
         <main className="container pb-5">
-          <div className="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-5 g-3 mb-5">
+          <div className="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-5 g-4 mb-5 my-2">
             {words && words.results && words.results.length > 0 ? (
               words.results.map((word, index) => (
                 <div key={index} className="col animated-card-scale">

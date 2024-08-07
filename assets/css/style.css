@@ -324,15 +324,6 @@ input[type="number"] {
     -moz-appearance: textfield;
 }
 
-.search {
-    background-color: var(--input-color);
-    color: var(--card-text-header);
-    border: none;
-    outline: none;
-    height: 100%;
-    box-shadow: none;
-}
-
 /* Позиционирование по центру над навигацией снизу */
 .pagination-position {
     width: 230px;
@@ -365,33 +356,6 @@ input[type="number"] {
 }
 .btn-plus-minus:hover {
     background-color: var(--disabled-bg);
-}
-
-/* Блоки уровней в статистике */
-.statistic-block {
-    word-break: break-all;
-    aspect-ratio: 1 / 1;
-    background-color: var(--bg-btn-primary);
-}
-.statistic {
-    border-radius: 15px;
-    background-color: var(--book-text);
-}
-.statistic-block h4 {
-    font-size: 25px;
-    font-weight: bold;
-    color: white;
-}
-.statistic h4 {
-    font-size: 40px;
-    font-weight: bold;
-    color: white;
-}
-.statistic span,
-.statistic-block span {
-    padding: 0px 0px 5px 10px;
-    font-size: 12px;
-    color: white;
 }
 
 .w-55px {
@@ -701,4 +665,88 @@ input[type="number"] {
 }
 .animated-btn-focus {
     animation: animation_btn_focus 1s infinite;
+}
+
+
+/* Блоки уровней в статистике */
+.statistic-block {
+    word-break: break-all;
+    aspect-ratio: 1 / 1;
+    background-color: var(--bg-btn-primary);
+}
+.statistic {
+    border-radius: 15px;
+    background-color: var(--book-text);
+}
+.statistic-block h4 {
+    font-size: 25px;
+    font-weight: bold;
+    color: white;
+}
+.statistic h4 {
+    font-size: 40px;
+    font-weight: bold;
+    color: white;
+}
+.statistic span,
+.statistic-block span {
+    padding: 0px 0px 5px 10px;
+    font-size: 12px;
+    color: white;
+}
+
+/* .statistic-block:hover .card_block_lvl{
+    display: block;
+} */
+
+.card_block_lvl{
+    position: absolute;
+    /* display: none; */
+    left: 10%;
+    top: -16px;
+    width: 50%;
+    height: 16px;
+    padding: 0px;
+    text-align: center;
+    color: white;
+    /* z-index: -1; */
+    background-color: var(--card-bg-lvl);
+    border-radius: 10px 10px 0px 0px;
+}
+.card_block_lvl_span{
+    padding: 0px;
+    margin: 0px;
+    margin-top: -2px;
+    font-size: 14px;
+}
+
+
+
+/* Search.css */
+.search-form {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    animation: expand .3s ease-in-out forwards;
+}
+
+@keyframes expand {
+    from {
+        width: 0;
+        opacity: 0;
+    }
+    to {
+        width: 100%;
+        opacity: 1;
+    }
+}
+
+.search {
+    background-color: var(--input-color);
+    color: var(--card-text-header);
+    border: none;
+    width: 100%;
+    outline: none;
+    height: 100%;
+    box-shadow: none;
 }

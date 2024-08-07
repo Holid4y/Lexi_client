@@ -90,6 +90,7 @@
   --box-shadow-color: #E5E9F0; /* Цвет тени блоков */
   --input-color: #FFFFFF; /* Цвет блоков */
   --card-text-header: #6a7388; /* Цвет текста card */
+  --card-bg-lvl: #7F89C2; /* Цвет текста card */
   --disabled-bg: #ced5db;
   --book-text: #A2ABE3;
   --text-header: #A2ABE3;
@@ -155,6 +156,7 @@
   --box-shadow-color: #292640; /* Цвет тени блоков */
   --input-color: #35324E; /* Цвет блоков */
   --card-text-header: #FFFFFF; /* Цвет текста card */
+  --card-bg-lvl: #7F89C2; /* Цвет текста card */
   --bs-secondary-rgb: 108, 117, 125;
   --bs-danger-rgb: 220, 53, 69;
   --disabled-bg: #1f1d2e;
@@ -231,6 +233,7 @@
   --box-shadow-color: #798672; /* Цвет тени блоков */
   --input-color: #798672; /* Цвет блоков */
   --card-text-header: #FFFFFF; /* Цвет текста card */
+  --card-bg-lvl: #7F89C2; /* Цвет текста card */
   --bs-danger-rgb: 44,51,40;
   --bs-secondary-rgb: 227,234,218;
   --disabled-bg: #2c3328;

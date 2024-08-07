@@ -6,6 +6,7 @@ import { Bar } from "react-chartjs-2";
 import "chart.js/auto";
 import Headers from "../../common/components/Headers/Header";
 import Loading from "../../common/components/Treatment/Loading";
+import WordHistory from "../home/components/WorsHistory";
 
 function Statistic() {
     const dispatch = useDispatch();
@@ -52,43 +53,8 @@ function Statistic() {
 
     const LoadingView = <Loading />;
 
-    const BlockWordStatistic = <div className="row mb-4">
-        <div className="col-6 col-md-3 hover-text-opacity">
-            <span className="ps-2" id="wordsToLearn">
-                За день
-            </span>
-            <div className="card">
-                <h4 className="book-text text-center py-2">12</h4>
-            </div>
-        </div>
-        <div className="col-6 col-md-3 hover-text-opacity">
-            <span className="ps-2" id="wordsToLearn">
-                За неделю
-            </span>
-            <div className="card">
-                <h4 className="book-text text-center py-2">148</h4>
-            </div>
-        </div>
-        <div className="col-6 col-md-3 hover-text-opacity">
-            <span className="ps-2" id="wordsToLearn">
-                За месяц
-            </span>
-            <div className="card">
-                <h4 className="book-text text-center py-2">862</h4>
-            </div>
-        </div>
-        <div className="col-6 col-md-3 hover-text-opacity">
-            <span className="ps-2" id="wordsToLearn">
-                За год
-            </span>
-            <div className="card">
-                <h4 className="book-text text-center py-2">3862</h4>
-            </div>
-        </div>
-    </div>
-
     const CanvaViewLvl = (
-        <div className="text-center">
+        <div className="text-center mb-3">
             <h5 className="mt-4 mb-2">Количество слов в уровнях</h5>
             <div className="chart-container" style={{ position: "relative", width: "100%", height: "230px" }}>
                 <Bar data={barDatalvl} options={barOptions} />
@@ -125,8 +91,9 @@ function Statistic() {
                 LoadingView
             ) : (
                 <main className="container pb-5">
-                    {BlockWordStatistic}
                     {CanvaViewLvl}
+                    <WordHistory />
+                    
                     {/* {LinkLVLSettings}
                     {LinkAllWords} */}
                 </main>

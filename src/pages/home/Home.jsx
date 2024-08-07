@@ -18,12 +18,11 @@ function Home() {
 
     return (
         <div className="align-items-center">
-            <Headers title="Главная" svgName={"home"} />
-
+            <Headers title="Главная" />
             <main className="container pb-5">
                 <InfoCard />
                 <BooksLinkCard />
-                <WorsHistory />
+                {/* <WorsHistory /> */}
                 
             </main>
 

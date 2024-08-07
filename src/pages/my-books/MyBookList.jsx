@@ -37,13 +37,15 @@ function MyBookList() {
                     Добавить книгу
                 </span>
             </div>
-            <div className="row g-3 px-2">
+            <div className="row g-3">
                 {books && books.results.length > 0 ? (
                     books.results.map((book, index) => <BookCard book={book} isMyBook={true} key={index} />)
                 ) : (
-                    <div className="card py-3">
-                        <div className="text-center">
-                            <h4 className="fw-bold mt-3 text-body-emphasis">Вы можете добавить свою книгу или текст 🥰</h4>
+                    <div className="col-12">
+                        <div className="card py-3">
+                            <div className="text-center">
+                                <h4 className="fw-bold mt-3 text-body-emphasis">Вы можете добавить свою книгу или текст 🥰</h4>
+                            </div>
                         </div>
                     </div>
                 )}
@@ -55,8 +57,7 @@ function MyBookList() {
 
     return (
         <div className="align-items-center">
-            <Headers title={'Мой контент'} svgName={'book'}/>
-            <Search />
+            <Search title={'Мои книги'} />
             {loading ? (
                 <Loading />
             ) : (

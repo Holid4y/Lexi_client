@@ -6,7 +6,6 @@ import { fetchBookmarks, fetchBookmarksDelete } from "../../common/reducers/book
 
 import BookmarkCard from "./components/BookmarkCard";
 
-import Headers from "../../common/components/Headers/Header";
 import Search from "../../common/components/Headers/Search";
 import Loading from "../../common/components/Treatment/Loading";
 import PaginationButton from "../../common/components/Pagination/PagePagination";
@@ -24,7 +23,7 @@ function BookmarkList() {
 
     const filteredBookmarks = bookmarks?.results?.filter((bookmark) => bookmark.book_cover.title.toLowerCase());
     const LoadingView = <Loading />;
-    const SearchView = <Search />;
+    const SearchView = <Search title={'Мои закладки'} />;
     const BooksMarkView = (
         <div className="mb-4">
             <div className="w-100 mb-2 d-flex justify-content-between align-items-center px-2">
@@ -33,13 +32,15 @@ function BookmarkList() {
                     Выбрать книгу
                 </Link>
             </div>
-            <div className="row g-3 px-2">
+            <div className="row g-3">
                 {filteredBookmarks && filteredBookmarks.length > 0 ? (
                     filteredBookmarks.map((bookmark, index) => <BookmarkCard bookmark={bookmark} key={index} />)
                 ) : (
-                    <div className="card py-3">
-                        <div className="text-center">
-                            <h4 className="fw-bold mt-3 text-body-emphasis">Выберите книгу 😔</h4>
+                    <div className="col-12">
+                        <div className="card py-3">
+                            <div className="text-center">
+                                <h4 className="fw-bold mt-3 text-body-emphasis">Выберите книгу 😔</h4>
+                            </div>
                         </div>
                     </div>
                 )}
@@ -51,7 +52,6 @@ function BookmarkList() {
 
     return (
         <div className="align-items-center">
-            <Headers title={'Закладки'} svgName={'marklist_fill'}/>
             {SearchView}
             {loading ? (
                 LoadingView

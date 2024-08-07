@@ -24,8 +24,7 @@ function BookList() {
 
     return (
         <div className="align-items-center">
-            <Headers title="Все книги" svgName={"book"} />
-            <Search />
+            <Search title="Все книги" />
             {loading ? (
                 <Loading />
             ) : (

@@ -19,6 +19,11 @@ function Block({ word }) {
                     <span className="d-block">[{word.transcription}]</span>
                     {/* <span className="d-block">{word.part_of_speech}</span> */}
                 </div>
+                <div className="card_block_lvl">
+                    <p className="card_block_lvl_span">
+                        2 lvl
+                    </p>
+                </div>
             </div>
         </div>
 
