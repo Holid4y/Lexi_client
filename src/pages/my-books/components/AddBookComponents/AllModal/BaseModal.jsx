@@ -1,13 +1,28 @@
 import React, { useState, useEffect } from "react";
+
+import { useDispatch } from "react-redux";
+import { throwState } from "../../../../../common/reducers/addBookModalSlice";
+
 import AuthorBookInput from "../common/AuthorBookInput";
 import NameBookInput from "../common/NameBookInput";
 import AddButton from "../common/AddButton";
 import SVG from "../../../../../common/components/Icons/SVG";
 
 function BaseModal({ childComponent, ariaLabelledby, title, idName }) {
+    const dispatch = useDispatch();
 
+    useEffect(() => {
+        const modalElement = document.getElementById(idName);
+        const handleModalClose = () => {
+            dispatch(throwState());
+        };
+        modalElement.addEventListener("hidden.bs.modal", handleModalClose);
+        return () => {
+            modalElement.removeEventListener("hidden.bs.modal", handleModalClose);
+        };
+    }, []);
     return (
-        <div className="modal fade" id={idName} data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby={ariaLabelledby} aria-hidden="true">
+        <div className="modal fade" id={idName} data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby={ariaLabelledby} aria-hidden="true">
             <div className="modal-dialog">
                 <div className="modal-content rounded-4 shadow">
                     <div className="modal-header ps-0">

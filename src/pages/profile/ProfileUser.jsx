@@ -19,7 +19,7 @@ import SecurityTab from "./components/security/SecurityTab";
 function Profile() {
     const dispatch = useDispatch();
 
-    const { fulfilled, loading } = useSelector((state) => state.user);
+    const { loading } = useSelector((state) => state.user);
 
     const [hasChanges, setHasChanges] = useState(false);
     const [dataToSave, setDataToSave] = useState(null);

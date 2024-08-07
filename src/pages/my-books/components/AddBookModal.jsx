@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 import { useDispatch } from "react-redux";
-import { fetchBookPost } from "../../../common/reducers/bookRetrieveSlice";
+
 import { fetchMyBooks } from "../../../common/reducers/booksSlice";
 
 import Head from "./AddBookComponents/ChoicesModal/Close";
@@ -24,23 +24,6 @@ const AddBookModal = () => {
             dispatch(fetchMyBooks());
         }
     };
-
-    // Функция для очистки всех полей ввода и файлов
-    const clearFields = () => {
-        console.log("Очистка полей")
-    };
-
-    useEffect(() => {
-        const modalElement = document.getElementById('AddBookModal');
-        const handleModalClose = () => {
-            console.log("Модальное окно закрыто");
-            clearFields();
-        };
-        modalElement.addEventListener('hidden.bs.modal', handleModalClose);
-        return () => {
-            modalElement.removeEventListener('hidden.bs.modal', handleModalClose);
-        };
-    }, []);
 
     return (
         <div className="modal fade" id="AddBookModal" aria-labelledby="AddBookModalLabel" tabIndex="-1">

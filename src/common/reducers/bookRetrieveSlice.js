@@ -51,13 +51,12 @@ export const fetchBookPost = createAsyncThunk("book/fetchBookPost", async (body,
 
     const bodyString = JSON.stringify(body);
     const response = await getResponse(url, "POST", bodyString)
-
+    const data = await response.json();
     if (response.ok) {
-        const data = await response.json();
-        if (data) {
-            return data
-        }
-    } 
+        return data
+    } else {
+        dispatch(setError(data))
+    }
 });
 
 export const fetchBookDelete = createAsyncThunk("book/fetchBookDelete", async (pk, { dispatch }) => {

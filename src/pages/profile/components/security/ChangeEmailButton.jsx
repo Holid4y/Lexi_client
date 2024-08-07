@@ -8,7 +8,7 @@ import Loading from "../../../../common/components/Treatment/Loading";
 
 import SubmitButton from "./SubmitButton";
 
-const UserEmail = () => {
+const ChangeEmailButton = () => {
     const dispatch = useDispatch();
 
     const { loading, error } = useSelector((state) => state.auth);
@@ -59,14 +59,14 @@ const UserEmail = () => {
                 </span>
             </button>
 
-            <div class="modal fade" id="changeEmail" tabindex="-1" aria-labelledby="changeEmailLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="changeEmailLabel">Смена почты</h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div className="modal fade" id="changeEmail" tabIndex="-1" aria-labelledby="changeEmailLabel" aria-hidden="true">
+                <div className="modal-dialog">
+                    <div className="modal-content">
+                        <div className="modal-header">
+                            <h1 className="modal-title fs-5" id="changeEmailLabel">Смена почты</h1>
+                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <div class="modal-body">
+                        <div className="modal-body">
                             <form>
                                 <div className="mb-4">
                                     <Input htmlFor={"email"} label={"Email"} type={"text"} value={email} setter={setEmail} />
@@ -91,4 +91,4 @@ const UserEmail = () => {
     );
 };
 
-export default UserEmail;
+export default ChangeEmailButton;

@@ -4,7 +4,7 @@ import SVG from "../../../../../common/components/Icons/SVG";
 function TypeUploadOnChoices({ dataBsTarget, title, description, svgName }) {
     // Функция для обработки клика
     const handleClick = () => {
-        console.log(dataBsTarget); // Логируем значение title
+        // console.log(dataBsTarget); // Логируем значение title
     };
 
     return (
