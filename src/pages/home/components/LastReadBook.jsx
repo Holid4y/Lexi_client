@@ -32,7 +32,7 @@ function LastReadBook() {
                         <div className="col-6 col-md-8">
                             <div class="progress bg-progress" role="progressbar" aria-label="Example with label" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
                                 <div class="progress-bar" style={{ width: `${progress}%` }}>
-                                    {progress.toFixed(2)}%
+                                    {progress}%
                                 </div>
                             </div>
                         </div>
