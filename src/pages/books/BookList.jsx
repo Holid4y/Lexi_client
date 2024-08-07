@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 import { fetchBooks } from "../../common/reducers/booksSlice.js";
+import { Link } from "react-router-dom";
 
 import BookCard from "./components/BookCard.jsx";
 
@@ -37,12 +38,7 @@ function BookList() {
                                 <div className="px-4 pt-5 mt-5 text-center">
                                     <h1 className="fw-bold mt-3 text-body-emphasis">У нас пока что нет книг 😔</h1>
                                     <div className="col-lg-8 mx-auto">
-                                        <p className="lead mb-4">Вы можете загрузить собственный файл или написать текст непосредственно нажав на кнопку 'Добавить книгу'</p>
-                                        <div className="d-grid gap-2 d-sm-flex justify-content-sm-center mb-5">
-                                            <button type="button" className="btn btn-primary px-4" data-bs-toggle="modal" data-bs-target="#exampleModal1">
-                                                Добавить книгу
-                                            </button>
-                                        </div>
+                                        <p className="lead mb-4">Вы можете загрузить собственный файл или написать текст на странице <Link to="/my-books" className="text-primary">Мои книги</Link></p>
                                     </div>
                                 </div>
                             </div>

@@ -31,7 +31,6 @@ function MyBookList() {
     const BooksMyView = (
         <div className="mb-4">
             <div className="w-100 mb-2 d-flex justify-content-between align-items-center px-2">
-                <h4 className="p-0">Мои книги</h4>
                 <span type="button" className="p-0 mb-0 text-end ms-auto link-color animated-btn-focus" data-bs-toggle="modal" data-bs-target="#AddBookModal">
                     {/* data-bs-target="#exampleModal1" */}
                     Добавить книгу
