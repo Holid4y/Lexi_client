@@ -39,7 +39,7 @@ const BookmarkCard = ({ bookmark }) => {
                         </h5>
                         <div className="card-text card-text-lr">
                             <span>
-                                <b className="fs-1">{bookmark.target_page}</b> стр
+                                <b className="fs-1">{bookmark.target_page}</b> страница
                             </span>
                             <span>{bookmark.book_cover.author}</span>
                         </div>
