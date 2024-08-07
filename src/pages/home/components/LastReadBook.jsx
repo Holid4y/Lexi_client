@@ -10,12 +10,12 @@ function LastReadBook() {
                         Красная шапочка
                     </h3>
                     <div className="row d-flex align-items-end">
-                        <div className="col-8">
+                        <div className="col-6 col-md-8">
                             <div class="progress bg-progress" role="progressbar" aria-label="Example with label" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
                                 <div class="progress-bar w-50">50%</div>
                             </div>
                         </div>
-                        <div className="col-4" >
+                        <div className="col-6 col-md-4">
                             <Link to="/books">
                                 <button type="button" className="btn btn-primary px-4">Продолжить читать</button>
                             </Link>
