@@ -17,7 +17,6 @@ function BookRetrieve() {
     const navigate = useNavigate();
 
     const { pk, pages, page_count, title, pages_slice, loading, error } = useSelector((state) => state.book);
-    console.log(page_count, title)
     const { slug, page } = useParams();
     const [currentPage, setCurrentPage] = useState(parseInt(page));
     const [isFirstInit, setIsFirstInit] = useState(true);
@@ -35,16 +34,16 @@ function BookRetrieve() {
         if (!isFirstInit) {
             if (isOutRange()) {
                 // только когда выйдет за range
-                dispatch(fetchBook({ slug: slug, page: currentPage }));
+                dispatch(fetchBook({ slug: slug, page: currentPage, maxPage: page_count, title: title }));
             }
         }
 
-        setRecentlyBookToLocalStorage(slug, currentPage);
+        setRecentlyBookToLocalStorage(slug, currentPage, page_count, title);
     }, [page]); // при каждом изменение страницы
 
     useEffect(() => {
         if (isFirstInit) {
-            dispatch(fetchBook({ slug: slug, page: currentPage })).then((data) => {
+            dispatch(fetchBook({ slug: slug, page: currentPage, maxPage: page_count, title: title })).then((data) => {
                 if (data.payload.redirected) {
                     setCurrentPage(data.payload.redirectedPage);
                 }
