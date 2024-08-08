@@ -1,71 +1,13 @@
-import React, { useState } from "react";
-
-import { useDispatch } from "react-redux";
+import React, {useState} from "react";
 
 import SVG from "../../../common/components/Icons/SVG";
-import { fetchBookDelete } from "../../../common/reducers/bookRetrieveSlice";
-import { deleteBookByIndex } from "../../../common/reducers/booksSlice";
+import Trash from "./Trash";
 
-import ActionNotification from "../../../common/components/Notification/ActionNotification";
-import InformationNotification from "../../../common/components/Notification/InformationNotification";
-
-const Trash = ({ book, index }) => {
-    const dispatch = useDispatch();
-
+const Dropdown = ({ book, index }) => {
     const [notification, setNotification] = useState(null);
-
-    function handleDelete() {
-        setNotification(ActionNotificationView);
-    }
-
-    function performDelete() {
-        dispatch(fetchBookDelete(book.pk));
-        dispatch(deleteBookByIndex(index));
-        setNotification(InformationNotificationView)
-        if (isBookRecently(book.slug)) {
-            throwRecentlyBook();
-        }
-    }
-
-    function throwRecentlyBook() {
-        localStorage.removeItem("recentlyBook");
-    }
-    function isBookRecently(slug) {
-        const recentlyBook = localStorage.getItem("recentlyBook");
-
-        if (recentlyBook) {
-            const recentlyBookData = JSON.parse(recentlyBook);
-
-            if (recentlyBookData.slug) {
-                return recentlyBookData.slug === slug;
-            }
-        }
-
-        return false;
-    }
-
-    const InformationNotificationView = <InformationNotification message="Книга удалена" onClose={() => setNotification(null)} timeout={2000}/>;
-
-    const ActionNotificationView = (
-        <ActionNotification
-            message={`Вы уверены что хотите удалить книгу ${book.title}`}
-            onClose={() => setNotification(null)}
-            onConfirm={() => {
-                setNotification(null);
-                performDelete();
-            }}
-            onCancel={() => {
-                setNotification(null);
-            }}
-        />
-    );
 
     return (
         <>
-            {/* <span className="position-absolute translate-middle mark" onClick={() => handleDelete()}>
-                <SVG name="trash" />
-            </span>
-            {notification} */}
             <div>
                 <button class="position-absolute translate-middle mark_settings btn" data-bs-toggle="dropdown" aria-expanded="false">
                     <SVG name="dot_settings" />
@@ -73,10 +15,11 @@ const Trash = ({ book, index }) => {
                 <ul class="dropdown-menu text-small shadow p-2">
                     <li><button class="dropdown-item">Редактировать</button></li>
                     <li><hr class="dropdown-divider" /></li>
-                    <li><button class="dropdown-item text-danger" data-bs-toggle="modal" data-bs-target="#modalSheet"><SVG name="trash" /> Удалить</button></li>
+                    <li><Trash book={book} index={index} setNotification={setNotification}/></li>
                 </ul>
             </div>
-            <div class="modal fade" id="modalSheet" tabindex="-1" aria-labelledby="modalSheetLabel" aria-hidden="true">
+            {notification}
+            {/* <div class="modal fade" id="modalSheet" tabindex="-1" aria-labelledby="modalSheetLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content rounded-4 shadow">
                     <div class="modal-header border-bottom-0">
@@ -93,9 +36,9 @@ const Trash = ({ book, index }) => {
                     </div>
                     </div>
                 </div>
-            </div>
+            </div> */}
         </>
     );
 };
 
-export default Trash;
+export default Dropdown;

@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import Trash from "./Trash";
 import Dropdown from "./Dropdown";
 
 const BookCard = ({ book, isMyBook, index }) => {
@@ -24,7 +23,6 @@ const BookCard = ({ book, isMyBook, index }) => {
                     </div>
                 </Link>
                 {isMyBook && <Dropdown book={book} index={index}/>}
-                {/* {isMyBook && <Trash book={book} index={index}/>} */}
             </div>
         </div>
     );

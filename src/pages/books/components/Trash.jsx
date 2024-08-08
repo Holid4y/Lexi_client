@@ -9,10 +9,10 @@ import { deleteBookByIndex } from "../../../common/reducers/booksSlice";
 import ActionNotification from "../../../common/components/Notification/ActionNotification";
 import InformationNotification from "../../../common/components/Notification/InformationNotification";
 
-const Trash = ({ book, index }) => {
+const Trash = ({ book, index, setNotification }) => {
     const dispatch = useDispatch();
 
-    const [notification, setNotification] = useState(null);
+    
 
     function handleDelete() {
         setNotification(ActionNotificationView);
@@ -62,10 +62,7 @@ const Trash = ({ book, index }) => {
 
     return (
         <>
-            <span className="position-absolute translate-middle mark" onClick={() => handleDelete()}>
-                <SVG name="trash" />
-            </span>
-            {notification}
+            <button class="dropdown-item text-danger" onClick={() => handleDelete()}><SVG name="trash" /> Удалить</button>
         </>
     );
 };
