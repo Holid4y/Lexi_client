@@ -34,7 +34,7 @@ function Profile() {
             {loading ? (
                 <Loading />
             ) : (
-                <div className="container pb-5">
+                <div className="container pb-5 mb-3">
                     <div className="row g-4 mb-4 align-items-stretch">
                         {/* <Avatar /> */}
                         <div className="col-8 col-sm-10">

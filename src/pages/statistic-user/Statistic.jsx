@@ -90,7 +90,7 @@ function Statistic() {
             {loading ? (
                 LoadingView
             ) : (
-                <main className="container pb-5">
+                <main className="container pb-5 mb-3">
                     {CanvaViewLvl}
                     <WordHistory />
                     

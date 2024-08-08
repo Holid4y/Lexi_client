@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 import Trash from "./Trash";
-
+import Dropdown from "./Dropdown";
 
 const BookCard = ({ book, isMyBook, index }) => {
 
@@ -11,7 +11,7 @@ const BookCard = ({ book, isMyBook, index }) => {
             <div className="card text-end w-100 bg-card-dark ">
                 <Link to={`/book/${book.slug}/${(book.bookmark && book.bookmark.target_page) || 1}`}>
                     <div className="card-body">
-                        <h5 className="card-title text-start mb-3 d-flex justify-content-between align-items-center">
+                        <h5 className="card-title text-start mb-3 d-flex justify-content-between align-items-center w-85">
                             <b>{book.title}</b>
                         </h5>
                         <div className="card-text card-text-lr">
@@ -20,9 +20,11 @@ const BookCard = ({ book, isMyBook, index }) => {
                             </span>
                             <span>{book.author}</span>
                         </div>
+
                     </div>
                 </Link>
-                {isMyBook && <Trash book={book} index={index}/>}
+                {isMyBook && <Dropdown book={book} index={index}/>}
+                {/* {isMyBook && <Trash book={book} index={index}/>} */}
             </div>
         </div>
     );

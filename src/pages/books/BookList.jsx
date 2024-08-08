@@ -29,7 +29,7 @@ function BookList() {
             {loading ? (
                 <Loading />
             ) : (
-                <main className="container pb-5">
+                <main className="container pb-5 mb-3">
                     <div className="row g-4">
                         {books && books.results && books.results.length > 0 ? (
                             books.results.map((book, index) => <BookCard book={book} key={index} />)

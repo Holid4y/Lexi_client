@@ -19,7 +19,7 @@ function Home() {
     return (
         <div className="align-items-center">
             <Headers title="Главная" />
-            <main className="container pb-5">
+            <main className="container pb-5 mb-3">
                 <InfoCard />
                 <BooksLinkCard />
                 <LastReadBook />

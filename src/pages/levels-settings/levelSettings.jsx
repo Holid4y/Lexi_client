@@ -55,7 +55,7 @@ function LevelSettings() {
             {loading ? (
                 <Loading />
             ) : (
-                <main className="container pb-5">
+                <main className="container pb-5 mb-3">
                     <div className="my-3">
                         <small className="ps-2">Для каждого уровня укажите перерыв (в днях) до следующего повторения</small>
                     </div>

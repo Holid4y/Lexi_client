@@ -19,9 +19,9 @@ function Training() {
 
 
     return (
-        <div className="align-items-center">
+        <div className="align-items-center pb-5 mb-3">
             <Headers title="Повторение слов" svgName={"training"} />
-            <main className="container">
+            <main className="container ">
                 <div className="py-4 animated-block-leftright">
                     <div className="row align-items-center g-lg-4">
                         <div className="col-lg-7 text-lg-start mb-3">

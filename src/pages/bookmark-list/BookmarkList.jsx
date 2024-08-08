@@ -55,7 +55,7 @@ function BookmarkList() {
             {loading ? (
                 LoadingView
             ) : (
-                <main className="container">
+                <main className="container pb-5 mb-3">
                     {BooksMarkView}
                     {PaginationButtonView}
                 </main>

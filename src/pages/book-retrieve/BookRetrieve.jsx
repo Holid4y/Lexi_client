@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
@@ -15,6 +15,8 @@ import ProgressBar from "./components/ProgressBar";
 function BookRetrieve() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+
+    const containerRef = useRef(null);
 
     const { pk, pages, page_count, title, pages_slice, loading, error } = useSelector((state) => state.book);
     const { slug, page } = useParams();
@@ -59,13 +61,19 @@ function BookRetrieve() {
         }
     }, [slug]);
 
+    useEffect(() => {
+        if (containerRef.current) {
+            containerRef.current.scrollIntoView({ behavior: "smooth" }); // прокрутка до контейнера
+        }
+    }, [page]);
+
     const LoadingView = <Loading />;
     const Header = <BookRetrieveHeader pk={pk} page={page} />;
     const Page = <Pages page={page} />;
     const Pagination = <PaginationButton currentPage={currentPage} pageCount={page_count} setCurrentPage={setCurrentPage} />;
 
     return (
-        <div className="align-items-center">
+        <div ref={containerRef} className="align-items-center">
             {error === 404 ? (
                 "PageNotFound"
             ) : (
@@ -75,7 +83,7 @@ function BookRetrieve() {
                     {loading ? (
                         LoadingView
                     ) : (
-                        <main className="container pb-5">
+                        <main className="container pb-5 mb-3">
                             {pages && Page}
                             {Pagination}
                         </main>

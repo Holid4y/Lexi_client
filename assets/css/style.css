@@ -308,8 +308,13 @@ a {
 
 /* Стили закладок в избранном */
 .mark {
-    top: 10%;
+    top: 8%;
     left: 90%;
+    background-color: transparent;
+}
+.mark_settings {
+    top: 20%;
+    left: 92%;
     background-color: transparent;
 }
 

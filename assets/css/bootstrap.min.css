@@ -7375,8 +7375,7 @@ fieldset:disabled .btn {
   position: -webkit-sticky;
   position: sticky;
   top: 0;
-  /* z-index: 1020; */
-  z-index: 0;
+  z-index: 1020;
 }
 .sticky-bottom {
   position: -webkit-sticky;
@@ -7903,6 +7902,9 @@ fieldset:disabled .btn {
 }
 .w-75 {
   width: 75% !important;
+}
+.w-85 {
+  width: 85% !important;
 }
 .w-100 {
   width: 100% !important;
