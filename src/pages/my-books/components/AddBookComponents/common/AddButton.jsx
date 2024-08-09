@@ -13,10 +13,20 @@ function AddButton() {
     const { error } = useSelector((state) => state.book);
 
     const [loading, setLoading] = useState(false);
+    const [isDisabled, setIsDisabled] = useState(true);
 
     useEffect(() => {
         dispatch(setError(null));
     }, [authorName, title]);
+
+    useEffect(() => {
+        // Проверяем, если все поля заполнены
+        if (textArea && authorName && title) {
+            setIsDisabled(false);
+        } else {
+            setIsDisabled(true);
+        }
+    }, [textArea, authorName, title]);
 
     const onSubmit = () => {
         const data = {
@@ -55,7 +65,7 @@ function AddButton() {
     return (
         <>
             {error && <div className="alert alert-success">{error.details}</div>}
-            <button type="button" className="btn btn-lg btn-primary mt-4 w-100" onClick={() => onSubmit()} disabled={loading}>
+            <button type="button" className="btn btn-lg btn-primary mt-4 w-100" onClick={() => onSubmit()} disabled={loading || isDisabled}>
                 {loading ? <Loading /> : "Добавить"}
             </button>
         </>

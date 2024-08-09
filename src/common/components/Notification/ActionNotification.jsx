@@ -4,7 +4,7 @@ import React from 'react';
 
 function ActionNotification({ message, onConfirm, onCancel, nameNotification }) {
     return (
-        <div style={{ position: 'fixed', top: '40%', left: '50%', transform: 'translate(-40%, -50%)', zIndex: 1000 }}>
+        <div style={{ position: 'fixed', top: '40%', left: '50%', transform: 'translate(-50%, -40%)', zIndex: 1000, minWidth: "300px" }}>
             <div className="modal-dialog">
                 <div className="modal-content rounded-4 shadow py-3 px-5 text-start bg-input-color">
                     <div className="modal-header border-bottom-0">
