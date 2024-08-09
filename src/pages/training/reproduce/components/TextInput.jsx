@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setAnswer } from "../../../../common/reducers/training/trainingRoundSlice";
 import { cleanAnswer } from "../../common/utils";
@@ -8,10 +8,12 @@ function TextInput({ correctWord }) {
     const { round, isViewResult } = useSelector((state) => state.trainingRound);
     const [classState, setClassState] = useState("form-control py-2-5 mb-2");
     const [localAnswer, setLocalAnswer] = useState("");
+    const inputRef = useRef(null); // Создаем ссылку на input
 
     useEffect(() => {
         setLocalAnswer("");
         setClassState("form-control py-2-5 mb-2");
+        inputRef.current.focus(); // Устанавливаем фокус на input при смене раунда
     }, [round]);
 
     useEffect(() => {
@@ -81,7 +83,12 @@ function TextInput({ correctWord }) {
     return (
         <div className="mb-4">
             <h3 className="text-center mb-3">Напишите ответ</h3>
-            <input type="text" className={classState} value={localAnswer} onChange={handleInputChange} />
+            <input 
+                type="text" className={classState} 
+                value={localAnswer} 
+                onChange={handleInputChange} 
+                ref={inputRef} // Привязываем input к созданной ссылке
+            />
             {isViewResult && !isCorrectAnswer && <div className="correct-text mt-2">{getCorrectWordStyled()}</div>}
         </div>
     );
