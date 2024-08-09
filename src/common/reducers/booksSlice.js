@@ -23,6 +23,11 @@ export const fetchBooks = createAsyncThunk("books/fetchBooks", async (page, { di
 
 export const fetchMyBooks = createAsyncThunk("books/fetchMyBooks", async (page, { dispatch }) => {
     const url = new URL(host + myBooks);
+
+    const params = new URLSearchParams({
+        page,
+    });
+    url.search = params.toString();
     
     const response = await getResponse(url, "GET")
     

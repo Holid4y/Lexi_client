@@ -24,9 +24,8 @@ function MyBookList() {
     const [currentPage, setCurrentPage] = useState(1);
 
     useEffect(() => {
-        // FIXME пагинация
         dispatch(fetchMyBooks(currentPage));
-    }, []);
+    }, [currentPage]);
 
     const BooksMyView = (
         <div className="mb-4">

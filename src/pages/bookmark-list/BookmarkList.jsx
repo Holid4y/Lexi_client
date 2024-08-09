@@ -18,8 +18,7 @@ function BookmarkList() {
 
     useEffect(() => {
         dispatch(fetchBookmarks(currentPage));
-
-    }, []);
+    }, [currentPage]);
 
     const filteredBookmarks = bookmarks?.results?.filter((bookmark) => bookmark.book_cover.title.toLowerCase());
     const LoadingView = <Loading />;
