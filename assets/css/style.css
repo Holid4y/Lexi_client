@@ -786,3 +786,8 @@ input[type="number"] {
 .bg-input-color{
     background-color: var(--input-color);
 }
+
+.fade-out {
+    opacity: 0;
+    transition: opacity 1s ease-out;
+}

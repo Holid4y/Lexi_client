@@ -7,13 +7,13 @@ import { fetchBookDelete } from "../../../common/reducers/bookRetrieveSlice";
 import { deleteBookByIndex } from "../../../common/reducers/booksSlice";
 
 import ActionNotification from "../../../common/components/Notification/ActionNotification";
-import InformationNotification from "../../../common/components/Notification/InformationNotification";
+import { useNotification } from "../../../common/components/Notification/NotificationContext";
 import Notification from "../../../common/components/Notification/Notification";
 
 const Trash = ({ book, index, setNotification }) => {
     const dispatch = useDispatch();
 
-    
+    const { addNotification } = useNotification();
 
     function handleDelete() {
         setNotification(ActionNotificationView);
@@ -22,7 +22,7 @@ const Trash = ({ book, index, setNotification }) => {
     function performDelete() {
         dispatch(fetchBookDelete(book.pk));
         dispatch(deleteBookByIndex(index));
-        setNotification(InformationNotificationView);
+        addNotification(`Книга "${book.title}" удалена`);
         if (isBookRecently(book.slug)) {
             throwRecentlyBook();
         }
@@ -45,9 +45,6 @@ const Trash = ({ book, index, setNotification }) => {
         return false;
     }
 
-    // const InformationNotificationView = <InformationNotification message={`Книга Удалена`} onClose={() => setNotification(null)}  timeout={2000} nameNotification="Удаление книги" />;
-    const InformationNotificationView = <Notification message={`Книга ${book.title} удалена`} onClose={() => setNotification(null)}  timeout={2000} position="0"/>
-
     const ActionNotificationView = (
         <ActionNotification
             nameNotification="Удаление книги"
@@ -65,7 +62,7 @@ const Trash = ({ book, index, setNotification }) => {
 
     return (
         <>
-            <button class="dropdown-item text-danger" onClick={() => handleDelete()}><SVG name="trash" /> Удалить</button>
+            <button className="dropdown-item text-danger" onClick={() => handleDelete()}><SVG name="trash" /> Удалить</button>
         </>
     );
 };

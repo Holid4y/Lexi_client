@@ -1,17 +1,8 @@
 import React, { useState, useEffect } from "react";
-
 import { useDispatch } from "react-redux";
-
 import { fetchMyBooks } from "../../../common/reducers/booksSlice";
 
-import Head from "./AddBookComponents/ChoicesModal/Close";
 import Choices from "./AddBookComponents/ChoicesModal/Choices";
-import FileButton from "./AddBookComponents/FileButton";
-import TextArea from "./AddBookComponents/TextArea";
-import NameBookInput from "./AddBookComponents/common/NameBookInput";
-import AuthorBookInput from "./AddBookComponents/common/AuthorBookInput";
-import IsPrivetButton from "./AddBookComponents/common/IsPrivetButton";
-import AddButton from "./AddBookComponents/common/AddButton";
 
 const AddBookModal = () => {
     const dispatch = useDispatch();
