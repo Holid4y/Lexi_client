@@ -782,3 +782,7 @@ input[type="number"] {
 .small-word-button > .star > svg{
     scale: 0.9;
 }
+
+.bg-input-color{
+    background-color: var(--input-color);
+}

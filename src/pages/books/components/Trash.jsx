@@ -8,6 +8,7 @@ import { deleteBookByIndex } from "../../../common/reducers/booksSlice";
 
 import ActionNotification from "../../../common/components/Notification/ActionNotification";
 import InformationNotification from "../../../common/components/Notification/InformationNotification";
+import Notification from "../../../common/components/Notification/Notification";
 
 const Trash = ({ book, index, setNotification }) => {
     const dispatch = useDispatch();
@@ -21,7 +22,7 @@ const Trash = ({ book, index, setNotification }) => {
     function performDelete() {
         dispatch(fetchBookDelete(book.pk));
         dispatch(deleteBookByIndex(index));
-        setNotification(InformationNotificationView)
+        setNotification(InformationNotificationView);
         if (isBookRecently(book.slug)) {
             throwRecentlyBook();
         }
@@ -44,10 +45,12 @@ const Trash = ({ book, index, setNotification }) => {
         return false;
     }
 
-    const InformationNotificationView = <InformationNotification message="Книга удалена" onClose={() => setNotification(null)} timeout={2000}/>;
+    // const InformationNotificationView = <InformationNotification message={`Книга Удалена`} onClose={() => setNotification(null)}  timeout={2000} nameNotification="Удаление книги" />;
+    const InformationNotificationView = <Notification message={`Книга ${book.title} удалена`} onClose={() => setNotification(null)}  timeout={2000} position="0"/>
 
     const ActionNotificationView = (
         <ActionNotification
+            nameNotification="Удаление книги"
             message={`Вы уверены что хотите удалить книгу ${book.title}`}
             onClose={() => setNotification(null)}
             onConfirm={() => {

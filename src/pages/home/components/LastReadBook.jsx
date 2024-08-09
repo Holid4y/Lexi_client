@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import SVG from "../../../common/components/Icons/SVG";
 
 function LastReadBook() {
     const dispatch = useDispatch();
     const [continueReadingUrl, setContinueReadingUrl] = useState(null);
     const [titleLastBook, settitleLastBook] = useState("");
+    const [pageLastBook, setpageLastBook] = useState("");
     const [progress, setProgress] = useState(0);
 
     const [isView, setIsView] = useState(false);
@@ -13,7 +15,9 @@ function LastReadBook() {
     function setLastReadBook(storedData) {
         const { slug, page, title, maxPage } = JSON.parse(storedData);
         const url = `/book/${slug}/${page}`;
+        const pageNum = page;
         setContinueReadingUrl(url);
+        setpageLastBook(pageNum);
         settitleLastBook(title);
 
         const progressPercentage = (page / maxPage) * 100;
@@ -32,34 +36,38 @@ function LastReadBook() {
     }, [dispatch]);
 
     const ViewLastReadBookBlock = (
-        <div className="hover-text-opacity animated-block-leftright">
-            <span className="ps-2 span_hover" id="wordsToLearn">
-                Вы читали ранее
-            </span>
-            <div className="card text-end mb-3 w-100 bg-card-dark p-2 animated-block-rightleft">
-                <div className="card-body">
-                    <h3 className="card-title text-start">{titleLastBook}</h3>
-                    <div className="row d-flex align-items-end">
-                        <div className="col-6 col-md-8">
-                            <div class="progress bg-progress" role="progressbar" aria-label="Example with label" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
-                                <div class="progress-bar" style={{ width: `${progress}%` }}>
-                                    {progress}%
+        <Link to={continueReadingUrl}>
+            <div className="hover-text-opacity animated-block-leftright">
+                <p className="w-100 mb-0 d-flex justify-content-between px-2">
+                    <span className="span_hover">Вы читали ранее</span>
+                    <Link to={continueReadingUrl} className="text-end ms-auto link-color span_hover">
+                        Продолжить
+                        <SVG name={"arrow_right"} />
+                    </Link>
+                </p>
+                <div className="card text-end mb-3 w-100 bg-card-dark p-2 animated-block-rightleft">
+                    <div className="card-body">
+                        <div className="row">
+                            <div className="col-12 col-sm-8 col-lg-6">
+                                <div className="text-start text-break mb-4">
+                                    <h3 className="card-title">{titleLastBook}</h3>
+                                </div>
+                            </div>
+                            <div className="col-12 col-sm-4 col-lg-6">
+                                <div className="text-end text-break mb-4 px-0">
+                                    <span>{pageLastBook} страница</span>
                                 </div>
                             </div>
                         </div>
-                        <div className="col-6 col-md-4">
-                            {continueReadingUrl && (
-                                <Link to={continueReadingUrl}>
-                                    <button type="button" className="btn btn-primary px-4">
-                                        Продолжить читать
-                                    </button>
-                                </Link>
-                            )}
+                        <div class="progress bg-progress" role="progressbar" aria-label="Example with label" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                            <div class="progress-bar" style={{ width: `${progress}%` }}>
+                                {progress}%
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </Link>
     );
 
     return <>{isView && ViewLastReadBookBlock}</>;
