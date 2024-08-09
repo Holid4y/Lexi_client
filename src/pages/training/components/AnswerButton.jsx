@@ -32,15 +32,13 @@ function AnswerButton({ localType }) {
         <button
             ref={answerButtonRef}
             type="text"
-            data-bs-toggle="tooltip"
-            data-bs-html="true"
-            data-bs-title="Нажмите <b>Enter</b> чтобы ответить"
-            className={`btn btn-primary save-btn py-2 w-50 ${(answer === null) | (answer === "") ? "disabled" : ""}`}
+            className={`btn btn-primary position-relative save-btn py-2 w-50 ${(answer === null) | (answer === "") ? "disabled" : ""}`}
             onClick={() => handleFinalAnswer(answer, localType, training, round, dispatch)}
         >
             <span>
                 <b>Ответить</b>
             </span>
+            <kbd className="press_button d-none d-sm-block">Enter</kbd>
         </button>
     );
 
@@ -48,10 +46,7 @@ function AnswerButton({ localType }) {
         <button
             ref={nextButtonRef}
             type="text"
-            data-bs-toggle="tooltip"
-            data-bs-html="true"
-            data-bs-title="Нажмите <b>TAB</b> чтобы ответить"
-            className={`btn btn-primary save-btn py-2 w-50`}
+            className={`btn btn-primary position-relative save-btn py-2 w-50`}
             onClick={() => {
                 performRoundSwitch(dispatch, round, training);
                 dispatch(setIsCorrect(null));
@@ -60,6 +55,7 @@ function AnswerButton({ localType }) {
             <span>
                 <b>Продолжить</b>
             </span>
+            <kbd className="press_button d-none d-sm-block">Enter</kbd>
         </button>
     );
     return (

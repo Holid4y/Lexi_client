@@ -104,12 +104,10 @@ function Hint({ text }) {
             ref={hintButtonRef} 
             type="text" 
             className="form-control p-0 py-2 disabled placeholder position-relative h-65" 
-            data-bs-toggle="tooltip"
-            data-bs-html="true"
-            data-bs-title="Нажмите <b>TAB</b> чтобы открыть подсказку"
             onClick={() => handleClick()}
         >
             <small className="small-text-hint top-50 start-50 translate-middle w-100 text-center ps-3">Нажмите, если затрудняетесь ответить</small>
+            <kbd className="press_button d-none d-sm-block">Tab</kbd>
         </button>
     );
     const OpenHint = (

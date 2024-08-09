@@ -422,15 +422,6 @@ input[type="number"] {
     border: none;
     border-bottom: 3px solid var(--bg-error-answer);
 }
-.box-success-input {
-    border: none;
-    border-bottom: 3px solid var(--bg-success-answer);
-}
-.box-danger-input {
-    border: none;
-    border-bottom: 3px solid var(--bg-error-answer);
-}
-
 
 
 .bg-second {
@@ -789,4 +780,12 @@ input[type="number"] {
 .fade-out {
     opacity: 0;
     transition: opacity 1s ease-out;
+}
+
+.press_button{
+    position: absolute;
+    font-size: 12px;
+    opacity: .6;
+    bottom: 8px;
+    right: 10px;
 }
