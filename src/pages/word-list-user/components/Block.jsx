@@ -27,7 +27,7 @@ function Block({ item }) {
     }
 
     return (
-        <div className="col animated-card-scale">
+        <div className="col">
             <div role="button" onClick={() => handleBlockClick(item.word.id)}>
                 <div className="card card-btn statistic-block d-flex flex-column justify-content-center align-items-center position-relative">
                     <h4 className="text-center">{item.word.text}</h4>

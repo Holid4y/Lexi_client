@@ -30,7 +30,7 @@ function WordList() {
         <Loading />
       ) : (
         <main className="container pb-5 mb-3">
-          <div className="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-5 g-4 mb-5 my-2">
+          <div className="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-5 g-4 mb-5 my-2 animated-card-scale">
             {words && words.results && words.results.length > 0 ? (
               words.results.map((item, index) => (
                   <Block item={item} key={index}/>
