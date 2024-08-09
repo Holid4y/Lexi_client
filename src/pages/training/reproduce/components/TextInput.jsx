@@ -37,41 +37,37 @@ function TextInput({ correctWord }) {
 
     const getCorrectWordStyled = () => {
         let result = [];
-        const minLen = Math.min(localAnswer.length, correctWord.length);
 
-        for (let i = 0; i < minLen; i++) {
-            if (localAnswer[i] !== correctWord[i]) {
-                result.push(
-                    <span key={i} className="ans_green_text">
-                        <u>{correctWord[i]}</u>
-                    </span>
-                );
-            } else {
-                result.push(
-                    <span key={i}>
-                        {correctWord[i]}
-                    </span>
-                );
-            }
-        }
+        const maxLength = Math.max(localAnswer.length, correctWord.length);
 
-        // Добавление оставшихся символов
-        if (correctWord.length > localAnswer.length) {
-            for (let i = localAnswer.length; i < correctWord.length; i++) {
-                result.push(
-                    <span key={i} className="ans_green_text">
-                        <u>{correctWord[i]}</u>
-                    </span>
-                );
-            }
-        }
-
-        // Добавление оставшихся символов ответа пользователя
-        if (localAnswer.length > correctWord.length) {
-            for (let i = correctWord.length; i < localAnswer.length; i++) {
+        for (let i = 0; i < maxLength; i++) {
+            const correctLetter = correctWord[i]
+            const localLetter = localAnswer[i]
+            console.log(correctLetter, localLetter)
+            if (!correctLetter) {
+                
                 result.push(
                     <span key={i} className="ans_red_text">
-                        <u>{localAnswer[i]}</u>
+                        {localAnswer[i]}
+                    </span>
+                );
+                continue; // Переход к следующей итерации
+            }
+            if (!localLetter) {
+                
+                result.push(
+                    <span key={i} className="ans_red_text">
+                        _
+                    </span>
+                );
+                continue; // Переход к следующей итерации
+            }
+            if (localLetter.toLowerCase() === correctLetter.toLowerCase()) {
+                result.push(<span key={i}>{localAnswer[i]}</span>);
+            } else {
+                result.push(
+                    <span key={i} className="ans_red_text">
+                        {localAnswer[i]}
                     </span>
                 );
             }
@@ -85,17 +81,8 @@ function TextInput({ correctWord }) {
     return (
         <div className="mb-4">
             <h3 className="text-center mb-3">Напишите ответ</h3>
-            <input
-                type="text"
-                className={classState}
-                value={localAnswer}
-                onChange={handleInputChange}
-            />
-            {isViewResult && !isCorrectAnswer && (
-                <div className="correct-text mt-2">
-                    {getCorrectWordStyled()}
-                </div>
-            )}
+            <input type="text" className={classState} value={localAnswer} onChange={handleInputChange} />
+            {isViewResult && !isCorrectAnswer && <div className="correct-text mt-2">{getCorrectWordStyled()}</div>}
         </div>
     );
 }
