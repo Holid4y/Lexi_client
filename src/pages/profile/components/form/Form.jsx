@@ -11,17 +11,15 @@ const Form = ({ setHasChanges, setDataToSave }) => {
 
     const { theme, number_of_false_set, count_word_in_round, time_to_view_result } = useSelector((state) => state.user);
     
-    const [themeState, setThemeState] = useState("");
+    const [themeState, setThemeState] = useState();
     const [falseSetLevel, setFalseSetLevel] = useState();
     const [countWordInRoundState, setCountWordInRoundState] = useState();
     const [timeToViewResultState, setTimeToViewResultState] = useState();
 
     // заполняем state когда он появится в redux
     useEffect(() => {
-        if (theme){
-            setThemeState(theme);
-        }
-        
+        console.log(theme, 'useEffectForm')
+        setThemeState(theme);
     }, [theme]);
 
     useEffect(() => {
@@ -59,6 +57,7 @@ const Form = ({ setHasChanges, setDataToSave }) => {
         const value = event.target.value;
         setThemeState(value);
         localStorage.setItem("theme", value);
+        console.log(value, 'handle')
         document.documentElement.setAttribute("data-bs-theme", value);
     };
 

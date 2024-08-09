@@ -43,7 +43,7 @@ function App() {
         } else if (window.matchMedia && window.matchMedia("(prefers-color-scheme: light)").matches) {
             return "light";
         } else {
-            return "light"; // По умолчанию выбираем светлую тему, если системная настройка не определена
+            return "dark"; // По умолчанию выбираем темную тему, если системная настройка не определена
         }
     }
 
@@ -60,6 +60,7 @@ function App() {
         if (theme !== null) {
             // Если есть настройки пользователя, то устанавливаем их и сохраняем в локальном хранилище
             localStorage.setItem("theme", theme);
+            console.log(theme, "theme !== null")
             document.documentElement.setAttribute("data-bs-theme", theme);
             return;
         }
@@ -70,6 +71,7 @@ function App() {
             
             const systemTheme = getOSColorScheme();
             localStorage.setItem("theme", systemTheme);
+            console.log(systemTheme, "storedTheme == null & theme == null")
             document.documentElement.setAttribute("data-bs-theme", systemTheme);
         }
     }, [dispatch, theme]);

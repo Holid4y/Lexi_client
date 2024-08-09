@@ -9,11 +9,14 @@ export const fetchSettings = createAsyncThunk("user/fetchSettings", async (_, { 
     
     if (response.ok) {
         const data = await response.json();
+        console.log(data)
         if (data) {
             dispatch(settingsLoaded(data));
         }
+        return data;
     }
-    return data;
+    
+    
 });
 
 export const fetchPutSettings = createAsyncThunk("user/fetchPutSettings", async (data, { dispatch }) => {
