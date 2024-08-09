@@ -48,12 +48,22 @@ export const fetchBookPost = createAsyncThunk("book/fetchBookPost", async (body,
     const bodyString = JSON.stringify(body);
 
     const response = await getResponse(url, "POST", bodyString) 
-    const data = await response.json();
+    const dataJson = await response.json();
+
+    
 
     if (response.ok) {
+        const data = {
+            "book": dataJson,
+            "status": 201
+        }
         return data
     } else {
-        dispatch(setError(data))
+        const data = {
+            "book": null,
+            "status": 401
+        }
+        dispatch(setError(dataJson))
     }
 });
 

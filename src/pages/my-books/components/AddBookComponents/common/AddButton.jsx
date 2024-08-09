@@ -8,7 +8,7 @@ import Loading from "../../../../../common/components/Treatment/Loading";
 function AddButton() {
     const dispatch = useDispatch();
     const { addNotification } = useNotification();
-    
+
     const { textArea, authorName, title } = useSelector((state) => state.addBookModal);
     const { error } = useSelector((state) => state.book);
 
@@ -39,25 +39,30 @@ function AddButton() {
         dispatch(fetchBookPost(data)).then((response) => {
             if (response.meta.requestStatus === "fulfilled") {
                 setLoading(false);
-                dispatch(unshiftBooksList(response.payload));
-                addNotification(`Книга "${title}" добавлена`);
 
-                // Закрываем модальное окно
-                const modalElement = document.getElementById('AddBookModal');
-                const modalInstance = bootstrap.Modal.getInstance(modalElement);
-                if (modalInstance) {
-                    modalInstance.hide();
-                }
-                
-                // Если есть подмодальные окна, также их закрываем
-                const subModals = ['AddBookModalFile', 'AddBookModalText', 'AddBookModalVideo'];
-                subModals.forEach(id => {
-                    const subModalElement = document.getElementById(id);
-                    const subModalInstance = bootstrap.Modal.getInstance(subModalElement);
-                    if (subModalInstance) {
-                        subModalInstance.hide();
+                if (response.payload.status == 201) {
+                    dispatch(unshiftBooksList(response.payload.book));
+                    addNotification(`Книга "${title}" добавлена`);
+
+                    // Закрываем модальное окно
+                    const modalElement = document.getElementById("AddBookModal");
+                    const modalInstance = bootstrap.Modal.getInstance(modalElement);
+                    if (modalInstance) {
+                        modalInstance.hide();
                     }
-                });
+
+                    // Если есть подмодальные окна, также их закрываем
+                    const subModals = ["AddBookModalFile", "AddBookModalText", "AddBookModalVideo"];
+                    subModals.forEach((id) => {
+                        const subModalElement = document.getElementById(id);
+                        const subModalInstance = bootstrap.Modal.getInstance(subModalElement);
+                        if (subModalInstance) {
+                            subModalInstance.hide();
+                        }
+                    });
+                } else if (response.payload.status == 401) {
+                    // do nothing
+                }
             }
         });
     };
