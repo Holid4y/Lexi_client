@@ -23,7 +23,6 @@ function Home() {
                 <InfoCard />
                 <BooksLinkCard />
                 <LastReadBook />
-                
             </main>
 
         </div>

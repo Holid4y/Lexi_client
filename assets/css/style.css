@@ -415,24 +415,23 @@ input[type="number"] {
 }
 
 .box-success {
-    background-color: var(--bg-success-answer);
-    border-color: var(--bg-success-answer);
-    box-shadow: 0px 0px 10px var(--bg-success-answer);
-    color: white;
+    border: none;
+    border-bottom: 3px solid var(--bg-success-answer);
+}
+.box-danger {
+    border: none;
+    border-bottom: 3px solid var(--bg-error-answer);
 }
 .box-success-input {
-    box-shadow: 0px 0px 20px var(--bg-success-answer);
+    border: none;
+    border-bottom: 3px solid var(--bg-success-answer);
 }
 .box-danger-input {
-    box-shadow: 0px 0px 20px var(--bg-error-answer);
+    border: none;
+    border-bottom: 3px solid var(--bg-error-answer);
 }
 
-.box-danger {
-    background-color: var(--bg-error-answer);
-    border-color: var(--bg-error-answer);
-    box-shadow: 0px 0px 10px var(--bg-error-answer);
-    color: white;
-}
+
 
 .bg-second {
     border-color: var(--bg-first-colum);

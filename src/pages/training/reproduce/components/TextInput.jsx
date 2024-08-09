@@ -24,9 +24,9 @@ function TextInput({ correctWord }) {
         const cleanWord = cleanAnswer(localAnswer);
         // Подсветить выбранный ответ красным, а правильный зеленым поверх красного
         if (correctWord === cleanWord) {
-            setClassState("form-control py-2-5 mb-2 box-success-input");
+            setClassState("form-control py-2-5 mb-2 box-success");
         } else {
-            setClassState("form-control py-2-5 mb-2 box-danger-input");
+            setClassState("form-control py-2-5 mb-2 box-danger");
         }
     }
 
