@@ -17,14 +17,14 @@ function WordList() {
     dispatch(fetchVocabulary(currentPage));
   }, [dispatch, currentPage]);
 
-  // Группировка слов по тексту
-  const groupedWords = words?.results?.reduce((acc, word) => {
-    if (!acc[word.word.text]) {
-      acc[word.word.text] = [];
-    }
-    acc[word.word.text].push(word);
-    return acc;
-  }, {});
+  // // Группировка слов по тексту
+  // const groupedWords = words?.results?.reduce((acc, word) => {
+  //   if (!acc[word.word.text]) {
+  //     acc[word.word.text] = [];
+  //   }
+  //   acc[word.word.text].push(word);
+  //   return acc;
+  // }, {});
 
   const PaginationButtonView = words?.page_count > 1 && <PaginationButton currentPage={currentPage} pageCount={words?.page_count} setCurrentPage={setCurrentPage} />
 
@@ -38,13 +38,9 @@ function WordList() {
       ) : (
         <main className="container pb-5 mb-3">
           <div className="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-5 g-4 mb-5 my-2">
-            {groupedWords && Object.keys(groupedWords).length > 0 ? (
-              Object.keys(groupedWords).map((key, index) => (
-                <Block 
-                  item={groupedWords[key][0]} 
-                  key={index}
-                  hasMultipleTranslations={groupedWords[key].length > 1} 
-                />
+            {words && words.results && words.results.length > 0 ? (
+              words.results.map((item, index) => (
+                  <Block item={item} key={index}/>
               ))
             ) : (
               <div className="col-12 w-100">

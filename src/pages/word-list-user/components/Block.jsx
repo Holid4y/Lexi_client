@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { fetchWordGet, toggleWordBlock, setReletedPk } from "../../../common/reducers/wordSlice";
 
-function Block({ item, hasMultipleTranslations }) {
+function Block({ item }) {
     const dispatch = useDispatch();
 
     function handleBlockClick(wordPk) {
@@ -22,7 +22,7 @@ function Block({ item, hasMultipleTranslations }) {
     return (
         <div className="col animated-card-scale">
             <div role="button" onClick={() => handleBlockClick(item.word.id)}>
-                <div className={`card card-btn statistic-block d-flex flex-column justify-content-center align-items-center position-relative ${hasMultipleTranslations ? 'statistic-block-many' : ''}`}>
+                <div className={`card card-btn statistic-block d-flex flex-column justify-content-center align-items-center position-relative`}>
                     <h4 className="text-center">{item.word.text}</h4>
                     <div className="position-absolute bottom-0 start-0 ms-2 mb-2">
                         <span className="d-block">[{item.word.transcription}]</span>

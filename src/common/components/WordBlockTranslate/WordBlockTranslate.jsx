@@ -70,7 +70,7 @@ function WordBlockTranslate() {
         }
         if (translations?.length > 0) {
             // Подсчёт активных переводов
-            const activeTranslationsCount = related_pk ? related_pk.length : 0;
+            // const activeTranslationsCount = related_pk ? related_pk.length : 0;
             return (
                 <div>
                     <WordTranslation 
@@ -78,7 +78,7 @@ function WordBlockTranslate() {
                         translation={translations[0]} 
                         showSection2={showSection2} 
                         setShowSection2={setShowSection2}
-                        activeTranslationsCount={activeTranslationsCount}
+                        // activeTranslationsCount={activeTranslationsCount}
                     />
                     {showSection2 && renderSectionTwo()}
                 </div>
