@@ -48,12 +48,12 @@ function LastReadBook() {
                 <div className="card text-end mb-3 w-100 bg-card-dark p-2 animated-block-rightleft">
                     <div className="card-body">
                         <div className="row">
-                            <div className="col-12 col-sm-8 col-lg-6">
+                            <div className="col-8">
                                 <div className="text-start text-break mb-4">
                                     <h3 className="card-title">{titleLastBook}</h3>
                                 </div>
                             </div>
-                            <div className="col-12 col-sm-4 col-lg-6">
+                            <div className="col-4">
                                 <div className="text-end text-break mb-4 px-0">
                                     <span>{pageLastBook} страница</span>
                                 </div>

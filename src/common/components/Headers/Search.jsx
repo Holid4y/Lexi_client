@@ -33,9 +33,9 @@ function Search({ title, onSearch }) {
             <nav className="navbar dark-nav px-3 position-relative">
                 {!isSearchVisible && (
                     <>
-                        <button className="btn btn-sm d-flex align-items-center px-0" onClick={handleGoBack}>
+                        <button className="btn btn-sm d-flex align-items-center px-2 ps-0" onClick={handleGoBack}>
                             <SVG name="arrow_left" />
-                            <span className="ps-2">Назад</span>
+                            {/* <span className="ps-2">Назад</span> */}
                         </button>
                         <span className="navbar-brand position-absolute top-50 start-50 translate-middle">
                             {title}

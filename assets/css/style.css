@@ -683,14 +683,17 @@ input[type="number"] {
     aspect-ratio: 1 / 1;
     background-color: var(--bg-btn-primary);
 }
-.statistic {
-    border-radius: 15px;
-    background-color: var(--book-text);
+.statistic-block-many{
+    border-right: 5px solid var(--bg-btn-primary-hover);
 }
 .statistic-block h4 {
     font-size: 25px;
     font-weight: bold;
     color: white;
+}
+.statistic {
+    border-radius: 15px;
+    background-color: var(--book-text);
 }
 .statistic h4 {
     font-size: 40px;
@@ -712,15 +715,14 @@ input[type="number"] {
     position: absolute;
     /* display: none; */
     left: 10%;
-    top: -16px;
-    width: 50%;
-    height: 16px;
-    padding: 0px;
+    top: 10%;
+    width: 40px;
+    padding: 2px;
     text-align: center;
     color: white;
     /* z-index: -1; */
     background-color: var(--card-bg-lvl);
-    border-radius: 10px 10px 0px 0px;
+    border-radius: 6px;
 }
 .card_block_lvl_span{
     padding: 0px;

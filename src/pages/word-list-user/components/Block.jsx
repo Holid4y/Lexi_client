@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { fetchWordGet, toggleWordBlock, setReletedPk } from "../../../common/reducers/wordSlice";
 
-function Block({ item }) {
+function Block({ item, hasMultipleTranslations }) {
     const dispatch = useDispatch();
 
     function handleBlockClick(wordPk) {
@@ -10,26 +10,19 @@ function Block({ item }) {
         dispatch(fetchWordGet(wordPk));
         dispatch(setReletedPk(wordPk))
     }
-    console.log(item)
 
     function getAverageLevel(trainingList) {
-        // Проверяем, есть ли элементы в массиве
         if (trainingList.length === 0) {
             return 0; 
         }
-        // Суммируем все уровни
         const totalLevel = trainingList.reduce((sum, item) => sum + item.lvl, 0);
-    
-        // Вычисляем среднее значение
-        const averageLevel = totalLevel / trainingList.length;
-
-        return Math.round(averageLevel);
+        return Math.round(totalLevel / trainingList.length);
     }
 
     return (
         <div className="col animated-card-scale">
             <div role="button" onClick={() => handleBlockClick(item.word.id)}>
-                <div className="card card-btn statistic-block d-flex flex-column justify-content-center align-items-center position-relative">
+                <div className={`card card-btn statistic-block d-flex flex-column justify-content-center align-items-center position-relative ${hasMultipleTranslations ? 'statistic-block-many' : ''}`}>
                     <h4 className="text-center">{item.word.text}</h4>
                     <div className="position-absolute bottom-0 start-0 ms-2 mb-2">
                         <span className="d-block">[{item.word.transcription}]</span>

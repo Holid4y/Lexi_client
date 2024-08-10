@@ -3,7 +3,7 @@ import SVG from "../../Icons/SVG";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchVocabularyPost, fetchVocabularyDelete } from "../../../reducers/vocabularySlice";
 
-function WordTranslation({ text, translation, showSection2, setShowSection2 }) {
+function WordTranslation({ text, translation, showSection2, setShowSection2, activeTranslationsCount }) {
     const dispatch = useDispatch();
     const { pk, related_pk, transcription, translations, synonyms, meanings } = useSelector((state) => state.word);
 
@@ -44,6 +44,9 @@ function WordTranslation({ text, translation, showSection2, setShowSection2 }) {
                     <b>{text}</b> - <b>{translation?.text}</b>
                 </span>
                 <div style={{ marginLeft: "auto", display: "flex", alignItems: "center" }}>
+                    {[...Array(activeTranslationsCount-1)].map((_, index) => (
+                        <div className="px-1" key={index}><SVG name="fill_star_small" /></div> // Дополнительные звезды
+                    ))}
                     {isRelatedWord ? (
                         <button className="btn" onClick={handleDeleteWordToVocabulary}>
                             <SVG name="fill_star" />
