@@ -6,6 +6,7 @@ function Block({ item }) {
     const dispatch = useDispatch();
 
     function handleBlockClick(wordPk) {
+        console.log(wordPk)
         dispatch(toggleWordBlock());
         dispatch(fetchWordGet(wordPk));
         dispatch(setReletedPk(wordPk))
@@ -21,7 +22,7 @@ function Block({ item }) {
 
     return (
         <div className="col animated-card-scale">
-            <div role="button" onClick={() => handleBlockClick(item.word.id)}>
+            <div role="button" onClick={() => handleBlockClick(item.word.pk)}>
                 <div className={`card card-btn statistic-block d-flex flex-column justify-content-center align-items-center position-relative`}>
                     <h4 className="text-center">{item.word.text}</h4>
                     <div className="position-absolute bottom-0 start-0 ms-2 mb-2">
