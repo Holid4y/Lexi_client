@@ -31,17 +31,17 @@ const BookmarkCard = ({ bookmark }) => {
 
     return (
         <div className="col-12 col-md-6">
-            <div className="card text-end bg-card-dark w-100" style={styleCardisBookmark}>
+            <div className="card text-end w-100 bg-card-dark" style={styleCardisBookmark}>
                 <Link to={`/book/${bookmark.book_cover.slug}/${bookmark.target_page}`}>
                     <div className="card-body">
-                        <h5 className="card-title text-start mb-3">
-                            <b>{bookmark.book_cover.title}</b>
+                        <h5 className="card-title text-start mb-3 d-flex justify-content-between align-items-center">
+                            <b className="text-truncate w-75">{bookmark.book_cover.title}</b>
                         </h5>
-                        <div className="card-text card-text-lr">
+                        <div className="card-text card-text-lr align-items-end">
                             <span>
-                                <b className="fs-1">{bookmark.target_page}</b> страница
+                                <b className="fs-2">{bookmark.target_page}</b> стр
                             </span>
-                            <span>{bookmark.book_cover.author}</span>
+                            <span className="text-truncate w-75 pb-1 pe-2">{bookmark.book_cover.author}</span>
                         </div>
                     </div>
                 </Link>
