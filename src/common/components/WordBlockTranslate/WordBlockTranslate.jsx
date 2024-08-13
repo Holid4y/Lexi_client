@@ -6,13 +6,14 @@ import LoadingComponent from "./components/LoadingComponent";
 import WordTranslation from "./components/WordTranslation";
 import TranslationsList from "./components/TranslationsList";
 import SynonymsList from "./components/SynonymsList";
+import FormList from "./components/FormList";
 import MeaningsList from "./components/MeaningsList";
 import NotFound from "./components/NotFound";
 import SmallTranslationWord from "./components/SmallTranslationWord";
 
 function WordBlockTranslate() {
     const dispatch = useDispatch();
-    const { pk, related_pk, text, translations, isVisible, loading } = useSelector((state) => state.word);
+    const { pk, related_pk, text, translations, isVisible, loading, meanings } = useSelector((state) => state.word);
     const [showSection2, setShowSection2] = useState(false);
 
     useEffect(() => {
@@ -58,8 +59,9 @@ function WordBlockTranslate() {
         return (
             <div id="section-2" className="dark-nav mb-2 p-3">
                 <TranslationsList />
+                <FormList />
                 <SynonymsList />
-                <MeaningsList />
+                <MeaningsList meanings={meanings} />
             </div>
         );
     }
@@ -70,7 +72,7 @@ function WordBlockTranslate() {
         }
         if (translations?.length > 0) {
             // Подсчёт активных переводов
-            // const activeTranslationsCount = related_pk ? related_pk.length : 0;
+            const activeTranslationsCount = related_pk ? related_pk.length : 0;
             return (
                 <div>
                     <WordTranslation 
@@ -78,7 +80,7 @@ function WordBlockTranslate() {
                         translation={translations[0]} 
                         showSection2={showSection2} 
                         setShowSection2={setShowSection2}
-                        // activeTranslationsCount={activeTranslationsCount}
+                        activeTranslationsCount={activeTranslationsCount}
                     />
                     {showSection2 && renderSectionTwo()}
                 </div>

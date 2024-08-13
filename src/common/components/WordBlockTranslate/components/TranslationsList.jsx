@@ -12,6 +12,7 @@ function TranslationsList() {
         {translations.map(
             (translation, index) => index !== 0 && <SmallTranslationWord wordPk={pk} related_pk={related_pk} translation={translation} key={index} />
         )}
+        <hr />
     </div>
 
     function isExist() {

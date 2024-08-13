@@ -693,7 +693,7 @@ input[type="number"] {
     background-color: var(--bg-btn-primary);
 }
 .statistic-block-many{
-    border-right: 5px solid var(--bg-btn-primary-hover);
+    border-right: 6px solid var(--bg-btn-primary-hover);
 }
 .statistic-block h4 {
     font-size: 25px;
@@ -771,17 +771,17 @@ input[type="number"] {
     box-shadow: none;
 }
 
-.small-word-button {
+/* .small-word-button {
     display: inline-block
 }
 .small-word-button > .text{
     margin: 0 10px 0 0;
     font-size: 17px;
     font-weight: 500;
-}
+} */
 
-.small-word-button > .star > svg{
-    scale: 0.9;
+.star > svg{
+    scale: .6;
 }
 
 .bg-input-color{

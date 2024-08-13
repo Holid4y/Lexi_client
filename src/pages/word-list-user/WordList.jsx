@@ -12,19 +12,9 @@ function WordList() {
   const { words, loading } = useSelector((state) => state.vocabulary);
   const [currentPage, setCurrentPage] = useState(1);
 
-
   useEffect(() => {
     dispatch(fetchVocabulary(currentPage));
   }, [dispatch, currentPage]);
-
-  // // Группировка слов по тексту
-  // const groupedWords = words?.results?.reduce((acc, word) => {
-  //   if (!acc[word.word.text]) {
-  //     acc[word.word.text] = [];
-  //   }
-  //   acc[word.word.text].push(word);
-  //   return acc;
-  // }, {});
 
   const PaginationButtonView = words?.page_count > 1 && <PaginationButton currentPage={currentPage} pageCount={words?.page_count} setCurrentPage={setCurrentPage} />
 
@@ -40,7 +30,7 @@ function WordList() {
           <div className="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-5 g-4 mb-5 my-2">
             {words && words.results && words.results.length > 0 ? (
               words.results.map((item, index) => (
-                  <Block item={item} key={index}/>
+                  <Block item={item} key={index} />
               ))
             ) : (
               <div className="col-12 w-100">

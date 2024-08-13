@@ -38,7 +38,7 @@ function WordTranslation({ text, translation, showSection2, setShowSection2, act
     );
 
     // Если количество активных переводов больше 1, то вычитаем 1 для отображения звёздочек
-    // const displayStarsCount = activeTranslationsCount > 0 ? activeTranslationsCount - 1 : 0;
+    const displayStarsCount = activeTranslationsCount > 0 ? activeTranslationsCount - 1 : 0;
 
     return (
         <div className="dark-nav mb-2 p-3">
@@ -47,9 +47,9 @@ function WordTranslation({ text, translation, showSection2, setShowSection2, act
                     <b>{text}</b> - <b>{translation?.text}</b>
                 </span>
                 <div style={{ marginLeft: "auto", display: "flex", alignItems: "center" }}>
-                    {/* {[...Array(displayStarsCount)].map((_, index) => (
+                    {[...Array(displayStarsCount)].map((_, index) => (
                         <div className="px-1" key={index}><SVG name="fill_star_small" /></div> // Дополнительные звезды
-                    ))} */}
+                    ))}
                     {isRelatedWord ? (
                         <button className="btn" onClick={handleDeleteWordToVocabulary}>
                             <SVG name="fill_star" />

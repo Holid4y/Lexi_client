@@ -31,7 +31,6 @@ export const fetchWordPost = createAsyncThunk("word/fetchWordPost", async (word,
             dispatch(wordLoaded(data));
         }
     }
-
     return data;
 
 });
@@ -46,6 +45,7 @@ const wordSlice = createSlice({
         translations: null,
         synonyms: null,
         meanings: null,
+        form: null,
         related_pk: [],
 
         // WordBlockTranslation
@@ -63,7 +63,7 @@ const wordSlice = createSlice({
             state.translations = action.payload.word.translations;
             state.synonyms = action.payload.word.synonyms;
             state.meanings = action.payload.word.meanings;
-
+            state.form = action.payload.word.form;
             state.related_pk = action.payload.related_pk
         },
         toggleWordBlock: (state, action) => {
