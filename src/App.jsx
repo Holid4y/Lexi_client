@@ -99,9 +99,9 @@ function App() {
                 <div>
                     <ConditionalNavigation />
                     <Routes>
-                        <Route path="/" element={<Home />} />
+                        <Route path="/" element={<Login />} />
                         
-                        <Route path="/login" element={<Login />} />
+                        <Route path="/main" element={<Home />} />
                         <Route path="/register" element={<Register />} />
                         <Route path="/change-pass" element={<ChangePass />} />
                         <Route path="/forgot-password/:uid/:token" element={<ForgotPass />} />
@@ -132,11 +132,11 @@ function App() {
     );
 }
 
-// function ConditionalNavigation() {
-    // const location = useLocation();
-    // const hideNavigationPaths = ["/login", "/register", "/landing", "/forgot-password", "/send-reset-password"]; // пути, на которых не нужно показывать навигацию
+function ConditionalNavigation() {
+    const location = useLocation();
+    const hideNavigationPaths = ["/", "/register", "/landing", "/forgot-password", "/send-reset-password"]; // пути, на которых не нужно показывать навигацию
 
-    // return hideNavigationPaths.includes(location.pathname) ? null : <Navigation />;
-// }
+    return hideNavigationPaths.includes(location.pathname) ? null : <Navigation />;
+}
 
 export default App;
