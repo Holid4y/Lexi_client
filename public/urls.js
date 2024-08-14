@@ -42,6 +42,13 @@ export const changePassword = "users/set_password/"
 export const send_reset_password = 'users/reset_password/'
 export const reset_password_confirm = 'users/reset_password_confirm/'
 
+//Search
+export const search = 'search/'
+export const searchMybook = search + myBooks //Готово
+export const searchBook = search + books //Готово
+export const searchBookMark = search + "bookmarks/"
+export const searchVocabulary = search + vocabulary
+
 // Эта функция полезна для получения значения определенного cookie
 // из браузера, а именно для csrf токена.
 export function getCookie(name) {
