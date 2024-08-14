@@ -132,11 +132,11 @@ function App() {
     );
 }
 
-function ConditionalNavigation() {
-    const location = useLocation();
-    const hideNavigationPaths = ["/login", "/register", "/landing", "/forgot-password", "/send-reset-password"]; // пути, на которых не нужно показывать навигацию
+// function ConditionalNavigation() {
+    // const location = useLocation();
+    // const hideNavigationPaths = ["/login", "/register", "/landing", "/forgot-password", "/send-reset-password"]; // пути, на которых не нужно показывать навигацию
 
-    return hideNavigationPaths.includes(location.pathname) ? null : <Navigation />;
-}
+    // return hideNavigationPaths.includes(location.pathname) ? null : <Navigation />;
+// }
 
 export default App;
