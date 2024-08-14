@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.2.5",
-    "avataaars": "^2.0.0",
+    // "avataaars": "^2.0.0",
     "chart.js": "^4.4.3",
     "imagesloaded": "^5.0.0",
     "masonry-layout": "^4.2.2",
