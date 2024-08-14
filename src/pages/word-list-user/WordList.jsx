@@ -44,12 +44,12 @@ function WordList() {
   return (
     <div className="align-items-center">
       <Search title="Все слова" endpoint={searchVocabulary} onSearch={handleSearchResults} onClear={handleClearSearch} />
-      <Filter />
+      {/* <Filter /> */}
       {loading ? (
         <Loading />
       ) : (
         <main className="container pb-5 mb-3">
-          <div className="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-5 g-4 mb-5 my-2">
+          <div className="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-5 g-4 mb-5">
             {searchResults.length > 0 ? (
                 searchResults.map((item, index) => (
                     <Block item={item} key={index} />
