@@ -830,3 +830,63 @@ input[type="number"] {
         transform: scale(1);
     }
 }
+
+
+
+.floating-buttons-container {
+    position: relative;
+  }
+  
+  .main-button {
+    position: relative;
+    z-index: 2;
+    box-shadow: inset 0px 0px 10px var(--box-shadow-color);
+  }
+  
+  .floating-button {
+    position: absolute;
+    z-index: 1;
+    opacity: 0;
+    transition: all 0.3s ease;
+    pointer-events: none;
+  }
+  
+  .floating-button.open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  
+  .left-button {
+    top: -60px;
+    left: -40px;
+    transform: translate(40px, 60px);
+    border-radius: 50%;
+    height: 50px;
+    width: 50px;
+    box-shadow: inset 0px 0px 10px var(--box-shadow-color);
+    background-color: var(--input-color);
+  }
+  
+  .right-button {
+    top: -60px;
+    right: -40px;
+    transform: translate(-40px, 60px);
+    border-radius: 50%;
+    height: 50px;
+    width: 50px;
+    box-shadow: inset 0px 0px 10px var(--box-shadow-color);
+    background-color: var(--input-color);
+  }
+
+  .left-button:hover, .right-button:hover, .main-button:hover{
+    background-color: var(--input-color);
+    box-shadow: inset 0px 0px 10px var(--disabled-bg);
+  }
+  
+  .floating-button.open.left-button {
+    transform: translate(0, 0);
+  }
+  
+  .floating-button.open.right-button {
+    transform: translate(0, 0);
+  }

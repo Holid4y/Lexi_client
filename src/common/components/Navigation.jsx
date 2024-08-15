@@ -1,13 +1,11 @@
 // Нижняя навигация
-import React, {useEffect} from "react";
+import {useEffect} from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-
 import { fetchTrainingInfo } from "../reducers/training/trainingSlice";
-
 import { isActivatedEmail } from "../../pages/profile/utils/utils";
-
 import WordBlockTranslate from "./WordBlockTranslate/WordBlockTranslate";
+import FloatingButtons from "./FloatingButtons"
 import SVG from "../components/Icons/SVG";
 
 function Navigation() {
@@ -53,6 +51,9 @@ function Navigation() {
                         <Link to="/word-list" className={getLinkClass("/word-list")}>
                             <SVG name="words" />
                         </Link>
+                    </li>
+                    <li className="nav-item">
+                        <FloatingButtons />
                     </li>
                     <li className="nav-item">
                         <Link to="/training" className={`${getLinkClass("/training")} position-relative `}>
