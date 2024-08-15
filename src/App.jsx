@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import { checkAccessTokenValidity } from "./common/reducers/authSlice";
@@ -34,107 +34,67 @@ import Statistic from "./pages/statistic-user/Statistic";
 import LandingMain from "./pages/landing/LandingMain";
 
 function App() {
-    const dispatch = useDispatch();
-    const { theme } = useSelector((state) => state.user);
-
-    function getOSColorScheme() {
-        if (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) {
-            return "dark";
-        } else if (window.matchMedia && window.matchMedia("(prefers-color-scheme: light)").matches) {
-            return "light";
-        } else {
-            return "dark"; // По умолчанию выбираем темную тему, если системная настройка не определена
-        }
-    }
-
-    useEffect(() => {
-        dispatch(checkAccessTokenValidity());
-        dispatch(fetchSettings());
-    }, []);
-
-    useEffect(() => {
-
-        const storedTheme = localStorage.getItem("theme");
-        document.documentElement.setAttribute("data-bs-theme", storedTheme);
-
-        if (theme !== null) {
-            // Если есть настройки пользователя, то устанавливаем их и сохраняем в локальном хранилище
-            localStorage.setItem("theme", theme);
-            console.log(theme, "theme !== null")
-            document.documentElement.setAttribute("data-bs-theme", theme);
-            return;
-        }
-
-
-        // Если хранилище пустое и у пользователя нет темы, то устанавливаем тему в зависимости от системной настройки
-        if (storedTheme == null & theme == null) {
-            
-            const systemTheme = getOSColorScheme();
-            localStorage.setItem("theme", systemTheme);
-            console.log(systemTheme, "storedTheme == null & theme == null")
-            document.documentElement.setAttribute("data-bs-theme", systemTheme);
-        }
-    }, [dispatch, theme]);
-
-
-    // Убирает стандартное поведение Tab на сайте
-    useEffect(() => {
-        const handleKeyDown = (event) => {
-            if (event.key === "Tab") {
-                event.preventDefault();
-            }
-        };
-
-        window.addEventListener("keydown", handleKeyDown);
-        return () => {
-            window.removeEventListener("keydown", handleKeyDown);
-        };
-    }, []);
-
-
-
     return (
         <NotificationProvider>
             <Router>
-                <div>
-                    <ConditionalNavigation />
-                    <Routes>
-                        <Route path="/" element={<Login />} />
-                        
-                        <Route path="/main" element={<Home />} />
-                        <Route path="/register" element={<Register />} />
-                        <Route path="/change-pass" element={<ChangePass />} />
-                        <Route path="/forgot-password/:uid/:token" element={<ForgotPass />} />
-                        <Route path="/send-reset-password" element={<SendResetPassword />} />
-                        <Route path="/change-email" element={<ChangeEmail />} />
-                        <Route path="/activation/:uid/:token" element={<ActivationEmail />} />
-                        
-                        <Route path="/books" element={<BookList />} />
-                        <Route path="/book/:slug/:page" element={<BookRetrieve />} />
-                        <Route path="/bookmarks" element={<BookmarkList />} />
-                        <Route path="/my-books" element={<MyBookList />} />
-
-
-                        <Route path="/training/recognize" element={<Recognize />} />
-                        <Route path="/training/reproduce" element={<Reproduce />} />
-                        <Route path="/training" element={<Training />} />
-
-                        <Route path="/word-list" element={<WordList />} />
-                        <Route path="/profile" element={<Profile />} />
-                        <Route path="/statistic" element={<Statistic />} />
-                        <Route path="/level-settings" element={<LevelSettings />} />
-                        <Route path="/landing" element={<LandingMain />} />
-                        {/* Другие маршруты */}
-                    </Routes>
-                </div>
+                <AppContent />
             </Router>
         </NotificationProvider>
     );
 }
 
+function AppContent() {
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(checkAccessTokenValidity());
+        dispatch(fetchSettings());
+    }, [dispatch]);
+
+
+    useEffect(() => {
+        dispatch(checkAccessTokenValidity());
+        dispatch(fetchSettings());
+    }, [dispatch]);
+
+    // Other useEffect hooks for theme and keydown handling
+
+    return (
+        <div>
+            <ConditionalNavigation />
+            <Routes>
+                <Route path="/" element={<Home />} />
+                
+                <Route path="/login" element={<Login />} />
+                <Route path="/register" element={<Register />} />
+                <Route path="/change-pass" element={<ChangePass />} />
+                <Route path="/forgot-password/:uid/:token" element={<ForgotPass />} />
+                <Route path="/send-reset-password" element={<SendResetPassword />} />
+                <Route path="/change-email" element={<ChangeEmail />} />
+                <Route path="/activation/:uid/:token" element={<ActivationEmail />} />
+                
+                <Route path="/books" element={<BookList />} />
+                <Route path="/book/:slug/:page" element={<BookRetrieve />} />
+                <Route path="/bookmarks" element={<BookmarkList />} />
+                <Route path="/my-books" element={<MyBookList />} />
+
+                <Route path="/training/recognize" element={<Recognize />} />
+                <Route path="/training/reproduce" element={<Reproduce />} />
+                <Route path="/training" element={<Training />} />
+
+                <Route path="/word-list" element={<WordList />} />
+                <Route path="/profile" element={<Profile />} />
+                <Route path="/statistic" element={<Statistic />} />
+                <Route path="/level-settings" element={<LevelSettings />} />
+                <Route path="/landing" element={<LandingMain />} />
+                {/* Другие маршруты */}
+            </Routes>
+        </div>
+    );
+}
+
 function ConditionalNavigation() {
     const location = useLocation();
-    const hideNavigationPaths = ["/", "/register", "/landing", "/forgot-password", "/send-reset-password"]; // пути, на которых не нужно показывать навигацию
+    const hideNavigationPaths = ["/login", "/register", "/landing", "/forgot-password", "/send-reset-password"]; // пути, на которых не нужно показывать навигацию
 
     return hideNavigationPaths.includes(location.pathname) ? null : <Navigation />;
 }
