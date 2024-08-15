@@ -1,4 +1,4 @@
-export const host = "http://127.0.0.1:8000/api/";
+export const host = "https://lexi-server.onrender.com/api/";
 
 // books
 export const books = "books/";
