@@ -41,7 +41,7 @@ function Navigation() {
         <nav className="container fixed-bottom py-2">
             <div className="">
                 <WordBlockTranslate />
-                <ul className="dark-nav nav justify-content-center">
+                <ul className="dark-nav-down nav justify-content-center">
                     <li className="nav-item">
                         <Link to="/" className={getLinkClass("/")}>
                             <SVG name="home" />

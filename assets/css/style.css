@@ -76,6 +76,14 @@ a {
     box-shadow: 0px 0px 20px var(--box-shadow-color);
 }
 
+.dark-nav-down {
+    padding: 5px 10px;
+    min-height: 55px;
+    background-color: var(--input-color);
+    border-radius: 15px 15px 25px 25px;
+    box-shadow: 0px 0px 20px var(--box-shadow-color);
+}
+
 .link-color {
     color: var(--bs-link-color);
 }
@@ -898,4 +906,9 @@ input[type="number"] {
     /* background-color: var(--disabled-bg); */
     /* border-color: var(--bs-btn-disabled-border-color); */
     opacity: var(--bs-btn-disabled-opacity);
+}
+
+
+.invert-color{
+    fill: var(--input-color);
 }

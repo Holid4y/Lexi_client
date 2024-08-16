@@ -69,28 +69,17 @@ function Audio({ word }) {
     const AudioButton = () => (
         <>
             <button
-                className={`btn ${audioUrls ? "" : "audio-disable"}`}
-                style={{ opacity: audioUrls ? 1 : 0.3 }}
-                onClick={() => handleClick(audioUrls?.audioUrlUk)}
-            >
-                <SVG name="voice_min" />
+                className={`btn btn-sm ${audioUrls?.audioUrlUk ? "" : "audio-disable"}`}
+                style={{ opacity: audioUrls?.audioUrlUk ? 1 : 0.2 }}
+                onClick={() => handleClick(audioUrls.audioUrlUk)}>
+                <SVG name="uk" />
             </button>
-            {audioUrls?.audioUrlUk && (
-                <button
-                    className='btn'
-                    onClick={() => handleClick(audioUrls.audioUrlUk)}
-                >
-                    uk
-                </button>
-            )}
-            {audioUrls?.audioUrlUs && (
-                <button
-                    className='btn'
-                    onClick={() => handleClick(audioUrls.audioUrlUs)}
-                >
-                    us
-                </button>
-            )}
+            <button
+                className={`btn btn-sm ${audioUrls?.audioUrlUs ? "" : "audio-disable"}`}
+                style={{ opacity: audioUrls?.audioUrlUs ? 1 : 0.2 }}
+                onClick={() => handleClick(audioUrls.audioUrlUs)}>
+                <SVG name="us" />
+            </button>
         </>
     );
 

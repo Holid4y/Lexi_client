@@ -32,8 +32,8 @@ function WordTranslation({ text, translation, showSection2, setShowSection2, act
     }
 
     const ShowButtonView = (
-        <div style={{ marginLeft: "auto", display: "flex", alignItems: "center" }}>
-            <button className="btn btn-link" onClick={() => setShowSection2(!showSection2)}>
+        <div style={{ marginLeft: "auto" }}>
+            <button className="btn link-color" onClick={() => setShowSection2(!showSection2)}>
                 {showSection2 ? "Скрыть" : "Подробнее"}
             </button>
         </div>
@@ -63,12 +63,9 @@ function WordTranslation({ text, translation, showSection2, setShowSection2, act
                     )}
                 </div>
             </div>
-            <div style={{ display: "flex", alignItems: "center" }}>
-                <span className="pe-2 text-capitalize">
-                    <span>[ {transcription} ]</span>
-                    <Audio word={text} />    
-                </span>
-                
+            <div className="d-flex align-items-center">
+                <span className="pe-2 fs-5">[ {transcription} ]</span>
+                <Audio word={text} /> 
                 {isMetaExist() ? ShowButtonView : null}
             </div>
         </div>
