@@ -3,6 +3,8 @@ import SVG from "../../Icons/SVG";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchVocabularyPost, fetchVocabularyDelete } from "../../../reducers/vocabularySlice";
 
+import Audio from "../../Audio/Audio";
+
 function WordTranslation({ text, translation, showSection2, setShowSection2, activeTranslationsCount }) {
     const dispatch = useDispatch();
     const { pk, related_pk, transcription, translations, synonyms, meanings } = useSelector((state) => state.word);
@@ -64,10 +66,9 @@ function WordTranslation({ text, translation, showSection2, setShowSection2, act
             <div style={{ display: "flex", alignItems: "center" }}>
                 <span className="pe-2 text-capitalize">
                     <span>[ {transcription} ]</span>
-                    <button className="btn">
-                        <SVG name="voice_min" />
-                    </button>
+                    <Audio word={text} />    
                 </span>
+                
                 {isMetaExist() ? ShowButtonView : null}
             </div>
         </div>

@@ -890,3 +890,12 @@ input[type="number"] {
   .floating-button.open.right-button {
     transform: translate(0, 0);
   }
+
+.audio-disable {
+    color: var(--bs-btn-disabled-color);
+    pointer-events: none;
+    /* cursor: not-allowed; */
+    /* background-color: var(--disabled-bg); */
+    /* border-color: var(--bs-btn-disabled-border-color); */
+    opacity: var(--bs-btn-disabled-opacity);
+}
