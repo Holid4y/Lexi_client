@@ -2,11 +2,11 @@
 import {useEffect} from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchTrainingInfo } from "../reducers/training/trainingSlice";
-import { isActivatedEmail } from "../../pages/profile/utils/utils";
-import WordBlockTranslate from "./WordBlockTranslate/WordBlockTranslate";
-import FloatingButtons from "./FloatingButtons"
-import SVG from "../components/Icons/SVG";
+import { fetchTrainingInfo } from "../../reducers/training/trainingSlice";
+import { isActivatedEmail } from "../../../pages/profile/utils/utils";
+import WordBlockTranslate from "../WordBlockTranslate/WordBlockTranslate";
+// import FloatingButtons from "./FloatingButtons"
+import SVG from "../Icons/SVG";
 
 function Navigation() {
     const dispatch = useDispatch()
@@ -39,6 +39,7 @@ function Navigation() {
 
     return (
         <nav className="container fixed-bottom py-2">
+            <div className="dark-nav-down-blur"></div>
             <div className="">
                 <WordBlockTranslate />
                 <ul className="dark-nav-down nav justify-content-center">
@@ -52,9 +53,7 @@ function Navigation() {
                             <SVG name="words" />
                         </Link>
                     </li>
-                    <li className="nav-item">
-                        <FloatingButtons />
-                    </li>
+                    {/* <li className="nav-item"><FloatingButtons /></li> */}
                     <li className="nav-item">
                         <Link to="/training" className={`${getLinkClass("/training")} position-relative `}>
                             {TrainigBadge}

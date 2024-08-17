@@ -51,13 +51,13 @@ const ChangeEmail = () => {
     };
 
     return (
-        <div className="body-auth">
+        <div className="body-auth position-relative">
             <Header />
             {loading && <Loading />}
             {error && <div>{error}</div>}
             <main className="form-signin w-100 m-auto">
                 <form>
-                    <h2 className="mb-4 text-center">Изменить почту</h2>
+                    <h2 className="my-5 text-center">Изменить почту</h2>
 
                     <div className="mb-4">
                         <Input htmlFor={"email"} label={"Email"} type={"text"} value={email} setter={setEmail} />

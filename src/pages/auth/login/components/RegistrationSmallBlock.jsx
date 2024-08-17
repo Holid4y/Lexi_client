@@ -7,11 +7,11 @@ const RegistrationSmallBlock = () => (
         <Link className="link-color" to="/register">
             Регистрация 
         </Link>
-        <span className="change">
-            <Link to="/send-reset-password">
-                <small className="link-color"> / Забыл пароль</small>
+        {/* <span className="change">
+            <Link className="link-color" to="/send-reset-password">
+                / Забыл пароль
             </Link>
-        </span>
+        </span> */}
     </p>
 );
 

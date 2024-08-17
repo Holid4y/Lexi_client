@@ -69,7 +69,8 @@ function Search({ title, onSearch, onClear, endpoint }) {
 
     return (
         <div className="container sticky-top mb-3 pt-2">
-            <nav className="navbar dark-nav px-3 position-relative">
+            <div className='dark-nav-blur'></div>
+            <nav className="navbar dark-nav px-3 position-relative mx-0">
                 {!isSearchVisible && (
                     <>
                         <button className="btn btn-sm d-flex align-items-center px-2 ps-0" onClick={handleGoBack}>

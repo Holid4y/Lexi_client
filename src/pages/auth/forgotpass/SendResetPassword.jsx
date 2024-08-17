@@ -35,18 +35,17 @@ const SendResetPassword = () => {
     };
 
     return (
-        <div className="body-auth">
+        <div className="body-auth position-relative">
             <Header />
             <main className="form-signin w-100 m-auto">
                 <form>
-                    <h2 className="mb-4 text-center">Востановление пароля</h2>
-                    <small>Введите адрес электронной почты, который вы использовали при регистрации</small>
+                    <h2 className="my-5 text-center">Востановление пароля</h2>
                     <div className="mb-4">
                         <Input htmlFor={"email"} label={"Email"} type={"text"} value={email} setter={setEmail} />
 
                         <RegistrationSmallBlock />
                     </div>
-                    <small>На эту почту прийдет письмо востановления пароля</small>
+                    {/* <small>На вашу почту будет отправлено письмо по востановлению пароля</small> */}
 
                     {loading && <Loading />}
                     {message && (

@@ -65,7 +65,7 @@ function WordTranslation({ text, translation, showSection2, setShowSection2, act
             </div>
             <div className="d-flex align-items-center">
                 <span className="pe-2 fs-5">[ {transcription} ]</span>
-                <Audio word={text} /> 
+                <Audio word={text} />
                 {isMetaExist() ? ShowButtonView : null}
             </div>
         </div>

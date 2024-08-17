@@ -53,11 +53,11 @@ const ChangePass = () => {
     };
 
     return (
-        <div className="body-auth">
+        <div className="body-auth position-relative">
             <Header />
             <main className="form-signin w-100 m-auto">
                 <form>
-                    <h2 className="mb-4 text-center">Смена пароля</h2>
+                    <h2 className="my-5 text-center">Смена пароля</h2>
                     <div className="mb-4">
                         <Input htmlFor={"password"} label={"Текуций пароль"} type={"password"} value={password} setter={setPassword} />
                         <Input htmlFor={"newPassword"} label={"Новый пароль"} type={"password"} value={newPassword} setter={setNewPassword} />
@@ -65,7 +65,7 @@ const ChangePass = () => {
 
                         
 
-                        <small>После изменения пароля нажно будет войди в аккаунт заново.</small>
+                        <small>После изменения пароля необходимо войди в аккаунт заново!</small>
                         <Link to="/send-reset-password">
                             <small className="link-color"> / Забыл пароль</small>
                         </Link>

@@ -56,11 +56,11 @@ const ForgotPass = () => {
     };
 
     return (
-        <div className="body-auth">
+        <div className="body-auth position-relative">
             <Header />
             <main className="form-signin w-100 m-auto">
                 <form>
-                    <h2 className="mb-4 text-center">Востановление пароля</h2>
+                    <h2 className="my-5 text-center">Востановление пароля</h2>
                     <div className="mb-4">
                         <Input htmlFor={"newPassword"} label={"Новый пароль"} type={"password"} value={newPassword} setter={setNewPassword} />
                         <Input htmlFor={"rePassword"} label={"Повторите пароль"} type={"password"} value={rePassword} setter={setRePassword} />

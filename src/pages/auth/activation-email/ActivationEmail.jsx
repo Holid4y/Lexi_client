@@ -35,7 +35,7 @@ const ActivationEmail = () => {
 
 
     return (
-        <div className="body-auth">
+        <div className="body-auth position-relative">
             <Header />
             
             <main className="form-signin w-100 m-auto">
