@@ -19,7 +19,6 @@ function WordList() {
   }, [dispatch, currentPage]);
 
   const handleSearchResults = (results) => {
-      console.log("Search results received:", results);
       if (Array.isArray(results) && results.length > 0) {
           setSearchResults(results);
       } else if (results && results.results && Array.isArray(results.results)) {

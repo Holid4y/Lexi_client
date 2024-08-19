@@ -2,21 +2,17 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { host, settings } from "../../../public/urls";
 import { getResponse, headers } from "../../../public/urls";
 
-
 export const fetchSettings = createAsyncThunk("user/fetchSettings", async (_, { dispatch }) => {
     const url = new URL(host + settings);
-    const response = await getResponse(url, "GET")
-    
+    const response = await getResponse(url, "GET");
+
     if (response.ok) {
         const data = await response.json();
-        console.log(data)
         if (data) {
             dispatch(settingsLoaded(data));
         }
         return data;
     }
-    
-    
 });
 
 export const fetchPutSettings = createAsyncThunk("user/fetchPutSettings", async (data, { dispatch }) => {
@@ -24,8 +20,8 @@ export const fetchPutSettings = createAsyncThunk("user/fetchPutSettings", async 
 
     const bodyString = JSON.stringify(data);
 
-    const response = await getResponse(url, "PUT", bodyString)
-    
+    const response = await getResponse(url, "PUT", bodyString);
+
     if (response.ok) {
         const data = await response.json();
         if (data) {
@@ -33,7 +29,7 @@ export const fetchPutSettings = createAsyncThunk("user/fetchPutSettings", async 
         }
     } else {
         const data = await response.json();
-        dispatch(setError(data))
+        dispatch(setError(data));
     }
 });
 
@@ -89,7 +85,7 @@ const userSlice = createSlice({
         },
         // error
         setError: (state, action) => {
-            state.error = action.payload
+            state.error = action.payload;
         },
         throwUser: (state, action) => {
             state.username = null;
@@ -105,7 +101,6 @@ const userSlice = createSlice({
             state.putLoading = false;
             state.putError = null;
         },
-        
     },
     extraReducers: (builder) => {
         builder
