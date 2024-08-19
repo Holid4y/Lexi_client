@@ -105,6 +105,8 @@ function MainComponent({ dispatch, theme }) {
         } else if (!publicPaths.includes(currentPath)) {
             dispatch(checkAccessTokenValidity());
             dispatch(fetchSettings());
+            // FIXME 
+            // делай запрос на верификацию токена и обновления настроек каждый раз при обновлении location не нужно. это делается на 46 стр. только при монтировании компонента
         }
     }, [dispatch, navigate, location]);
 
