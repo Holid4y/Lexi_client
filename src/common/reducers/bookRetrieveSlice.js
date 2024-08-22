@@ -2,29 +2,16 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { host, books, myBooks } from "../../../public/urls";
 import { getResponse } from "../../../public/urls";
 
-function getPageFromUrl(url) {
-    // Разбиваем URL на части
-    const parts = url.split("/");
-
-    // Находим индекс последней части URL
-    const lastPartIndex = parts.length - 1;
-
-    // Получаем последнюю часть URL
-    const lastPart = parts[lastPartIndex];
-
-    // Проверяем, является ли последняя часть числом
-    if (!isNaN(parseInt(lastPart))) {
-        // Если да, возвращаем ее как номер страницы
-        return parseInt(lastPart);
-    } else {
-        // Если нет, возвращаем null или значение по умолчанию
-        return null;
-    }
+function getPageFromUrl(url) {   
+    const parts = url.split("/").filter(part => part !== "");
+    const lastPart = parts.pop(); 
+    const pageNumber = parseInt(lastPart, 10);
+    return !isNaN(pageNumber) ? pageNumber : 1; 
 }
 
 export const fetchBook = createAsyncThunk("book/fetchBook", async (params, { dispatch }) => {
     const { slug, page } = params;
-    const url = new URL(host + books + slug + "/" + page);
+    const url = new URL(host + books + slug + "/" + page + "/");
 
     const response = await getResponse(url, "GET");
     if (response.ok) {
