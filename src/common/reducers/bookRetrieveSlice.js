@@ -55,8 +55,8 @@ export const fetchBookPost = createAsyncThunk("book/fetchBookPost", async (body,
 });
 
 
-export const fetchBookDelete = createAsyncThunk("book/fetchBookDelete", async (pk, { dispatch }) => {
-    const url = new URL(host + myBooks + pk + '/');
+export const fetchBookDelete = createAsyncThunk("book/fetchBookDelete", async (slug, { dispatch }) => {
+    const url = new URL(host + myBooks + slug + '/');
 
     const response = await getResponse(url, "DELETE")
 

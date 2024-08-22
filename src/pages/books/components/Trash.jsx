@@ -20,7 +20,7 @@ const Trash = ({ book, index, setNotification }) => {
     }
 
     function performDelete() {
-        dispatch(fetchBookDelete(book.pk));
+        dispatch(fetchBookDelete(book.slug));
         dispatch(deleteBookByIndex(index));
         addNotification(`Книга "${book.title}" удалена`);
         if (isBookRecently(book.slug)) {
