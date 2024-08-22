@@ -6,7 +6,8 @@ import Search from "../../common/components/Headers/Search";
 import Filter from "../../common/components/Headers/Filter";
 import Loading from "../../common/components/Treatment/Loading";
 import PaginationButton from "../../common/components/Pagination/PagePagination";
-import { searchVocabulary } from "../../../public/urls";
+
+import { vocabulary as vocabularyPath } from "../../../public/urls";
 
 function WordList() {
   const dispatch = useDispatch();
@@ -42,7 +43,7 @@ function WordList() {
 
   return (
     <div className="align-items-center">
-      <Search title="Все слова" endpoint={searchVocabulary} onSearch={handleSearchResults} onClear={handleClearSearch} />
+      <Search title="Все слова" endpoint={vocabularyPath} onSearch={handleSearchResults} onClear={handleClearSearch} />
       {/* <Filter /> */}
       {loading ? (
         <Loading />
