@@ -6,7 +6,7 @@ import { Bar } from "react-chartjs-2";
 import "chart.js/auto";
 import Headers from "../../common/components/Headers/Header";
 import Loading from "../../common/components/Treatment/Loading";
-import WordHistory from "../home/components/WorsHistory";
+import WordHistory from "./components/WorsHistory";
 
 function Statistic() {
     const dispatch = useDispatch();
