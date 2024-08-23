@@ -15,6 +15,7 @@ import trainingRoundReducer from './common/reducers/training/trainingRoundSlice'
 
 import googletransReducer from './common/reducers/googletransSlice';
 import addBookModalReducer from './common/reducers/addBookModalSlice';
+import statsReducer from './common/reducers/statsSlice'
 
 export const store = configureStore({
   reducer: {
@@ -32,7 +33,8 @@ export const store = configureStore({
     trainingRound: trainingRoundReducer,
 
     googletrans: googletransReducer,
-    addBookModal: addBookModalReducer
+    addBookModal: addBookModalReducer,
+    stats: statsReducer
   },
 });
 

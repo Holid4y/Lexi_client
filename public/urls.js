@@ -22,7 +22,6 @@ export const settings = "users/settings/";
 // vocabulary
 export const vocabulary = "vocabulary/";
 export const _delete = "delete/"
-export const stats = vocabulary + "stats/";
 
 // words
 export const words = "words/";
@@ -44,6 +43,10 @@ export const changePassword = "users/set_password/"
 
 export const send_reset_password = 'users/reset_password/'
 export const reset_password_confirm = 'users/reset_password_confirm/'
+
+// stats
+export const stats = 'stats/'
+export const recently_words = 'recently-words/'
 
 
 
