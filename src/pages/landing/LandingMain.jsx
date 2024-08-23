@@ -1,8 +1,5 @@
 import SVG from "../../common/components/Icons/SVG";
 import "./assets/Landing.css";
-import video_src from "./assets/main.mp4";
-import video_src_test1 from "./assets/test1.mp4";
-import video_src_test2 from "./assets/test2.mp4";
 
 const Landing = () => {
 
@@ -72,7 +69,7 @@ const Landing = () => {
                     <div class="row flex-lg-row-reverse align-items-center g-2 py-5">
                         <div class="col-12 col-sm-7 col-lg-6 d-flex justify-content-center">
                             <video className="rounded" height={"426px"} loop autoplay="True" muted>
-                                <source src={video_src} type="video/mp4" />
+                                {/* <source src={video_src} type="video/mp4" /> */}
                             </video>
                         </div>
                         <div class="col-lg-6">
@@ -426,10 +423,10 @@ const Landing = () => {
                     <div class="row align-items-center g-2 py-5 text-end">
                         <div class="col-12 col-sm-7 col-lg-4 d-flex justify-content-center">
                             <video className="w-100 rounded" autoplay="True" muted>
-                                <source src={video_src_test1} type="video/mp4" />
+                                {/* <source src={video_src_test1} type="video/mp4" /> */}
                             </video>
                             <video className="w-100 rounded" autoplay="True" muted>
-                                <source src={video_src_test2} type="video/mp4" />
+                                {/* <source src={video_src_test2} type="video/mp4" /> */}
                             </video>
                         </div>
                         <div class="col-lg-8">
@@ -487,10 +484,10 @@ const Landing = () => {
                     <div class="row align-items-center g-2 py-5 text-end">
                         <div class="col-12 col-sm-7 col-lg-4 d-flex justify-content-center">
                             <video className="w-100 rounded" autoplay="True" muted>
-                                <source src={video_src_test1} type="video/mp4" />
+                                {/* <source src={video_src_test1} type="video/mp4" /> */}
                             </video>
                             <video className="w-100 rounded" autoplay="True" muted>
-                                <source src={video_src_test2} type="video/mp4" />
+                                {/* <source src={video_src_test2} type="video/mp4" /> */}
                             </video>
                         </div>
                         <div class="col-lg-8">
