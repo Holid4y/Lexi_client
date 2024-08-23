@@ -1,14 +1,20 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { fetchRecentlyWords } from "../../../common/reducers/statsSlice";
 import SVG from "../../../common/components/Icons/SVG";
 import Loading from "../../../common/components/Treatment/Loading";
 
 function WordHistory() {
-    const { recently_added_words, loading } = useSelector((state) => state.home);
+    const dispatch = useDispatch();
+    const { recently_added_words, loading } = useSelector((state) => state.stats);
 
     const dateOptions = { month: "long", day: "numeric" };
     const dateOptionsToday = { hour: "numeric", minute: "numeric", timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone };
+
+    useEffect(() => {
+        dispatch(fetchRecentlyWords());
+    }, [dispatch]);
 
     const getFormattedDate = (date) => {
         const dateObj = new Date(date.slice(0, -1));

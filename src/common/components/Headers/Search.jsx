@@ -8,9 +8,17 @@ function Search({ title, onSearch, onClear, endpoint }) {
     const [isSearchVisible, setIsSearchVisible] = useState(false);
 
     const fetchData = async () => {
-        if (searchValue.trim()) {
+        if (searchValue) {
             try {
                 const fullUrl = host + endpoint;
+
+                const params = new URLSearchParams({
+                    search: searchValue.trim(), // Добавляем параметр search
+                });
+
+                // Обновляем URL с параметрами
+                const fullUrlWithParams = `${fullUrl}?${params.toString()}`;
+
                 const accessToken = localStorage.getItem("access");
 
                 const headers = {
@@ -22,11 +30,10 @@ function Search({ title, onSearch, onClear, endpoint }) {
                 } else {
                     console.warn("Отсутствует accessToken. Запрос на", fullUrl);
                 }
-
-                const response = await fetch(fullUrl, {
-                    method: "POST",
-                    headers: headers,
-                    body: JSON.stringify({ value: searchValue }),
+                console.log(fullUrlWithParams)
+                const response = await fetch(fullUrlWithParams, {
+                    method: "GET",
+                    headers: headers
                 });
 
                 if (!response.ok) {

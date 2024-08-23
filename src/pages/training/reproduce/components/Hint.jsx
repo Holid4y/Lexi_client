@@ -40,7 +40,6 @@ function Hint({ text }) {
 
     function updateHintList(hintTextListTuple, input) {
         let inputList = input.split('');
-        
         let updatedList = JSON.parse(JSON.stringify(hintTextListTuple));
         for (let tuple of updatedList) {
           for (let i = 0; i < inputList.length; i++) {
@@ -58,7 +57,8 @@ function Hint({ text }) {
     useEffect(() => {
         
         if ((hintTextListTuple !== null & hintTextListTuple !== undefined) & (answer !== null & answer !== '')) {
-            dispatch(setHintTextListTuple(updateHintList(hintTextListTuple, answer)))
+            const lowerAnswer = String(answer).toLowerCase()
+            dispatch(setHintTextListTuple(updateHintList(hintTextListTuple, lowerAnswer)))
         }
         
     }, [answer]);

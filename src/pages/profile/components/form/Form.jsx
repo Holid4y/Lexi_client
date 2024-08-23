@@ -18,7 +18,6 @@ const Form = ({ setHasChanges, setDataToSave }) => {
 
     // заполняем state когда он появится в redux
     useEffect(() => {
-        console.log(theme, 'useEffectForm')
         setThemeState(theme);
     }, [theme]);
 
@@ -57,7 +56,6 @@ const Form = ({ setHasChanges, setDataToSave }) => {
         const value = event.target.value;
         setThemeState(value);
         localStorage.setItem("theme", value);
-        console.log(value, 'handle')
         document.documentElement.setAttribute("data-bs-theme", value);
     };
 

@@ -16,7 +16,6 @@ function Audio({ word }) {
                 setAudioUrls(audioUrls); // Сохраняем объект с URL аудио
                 setLoading(false);
             } catch (error) {
-                console.error("Error fetching data:", error);
                 setLoading(false);
             }
         }
@@ -36,10 +35,8 @@ function Audio({ word }) {
                     // Проверяем окончание аудио файла и сохраняем в соответствующие переменные
                     if (phonetic.audio.endsWith("uk.mp3")) {
                         audioUrlUk = phonetic.audio;
-                        console.log(audioUrlUk);
                     } else if (phonetic.audio.endsWith("us.mp3")) {
                         audioUrlUs = phonetic.audio;
-                        console.log(audioUrlUs);
                     }
                 }
             }

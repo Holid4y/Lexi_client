@@ -8,7 +8,7 @@ import Search from "../../common/components/Headers/Search.jsx";
 import Loading from "../../common/components/Treatment/Loading.jsx";
 import PaginationButton from "../../common/components/Pagination/PagePagination.jsx";
 
-import { searchBook } from "../../../public/urls.js";
+import { books as booksPath } from "../../../public/urls.js";
 
 function BookList() {
     const dispatch = useDispatch();
@@ -36,7 +36,7 @@ function BookList() {
 
     return (
         <div className="align-items-center">
-            <Search title="Все книги" endpoint={searchBook} onSearch={handleSearchResults} onClear={handleClearSearch} />
+            <Search title="Все книги" endpoint={booksPath} onSearch={handleSearchResults} onClear={handleClearSearch} />
             {loading ? (
                 <Loading />
             ) : (

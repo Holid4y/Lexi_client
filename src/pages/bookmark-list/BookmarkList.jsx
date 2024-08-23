@@ -10,7 +10,7 @@ import Search from "../../common/components/Headers/Search";
 import Loading from "../../common/components/Treatment/Loading";
 import PaginationButton from "../../common/components/Pagination/PagePagination";
 
-import { searchBookMark } from "../../../public/urls";
+import { bookmarks as bookmarksPath } from "../../../public/urls";
 
 function BookmarkList() {
     const dispatch = useDispatch();
@@ -37,7 +37,7 @@ function BookmarkList() {
 
     const LoadingView = <Loading />;
     const SearchView = (
-        <Search title="Мои закладки" endpoint={searchBookMark} onSearch={handleSearchResults} onClear={handleClearSearch} />
+        <Search title="Мои закладки" endpoint={bookmarksPath} onSearch={handleSearchResults} onClear={handleClearSearch} />
     );
     const BooksMarkView = (
         <div className="mb-4">

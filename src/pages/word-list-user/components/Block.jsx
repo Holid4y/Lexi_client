@@ -6,7 +6,6 @@ function Block({ item }) {
     const dispatch = useDispatch();
 
     function handleBlockClick(wordPk) {
-        console.log(wordPk)
         dispatch(toggleWordBlock());
         dispatch(fetchWordGet(wordPk));
         dispatch(setReletedPk(wordPk))

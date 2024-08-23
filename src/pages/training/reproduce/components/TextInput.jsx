@@ -45,7 +45,6 @@ function TextInput({ correctWord }) {
         for (let i = 0; i < maxLength; i++) {
             const correctLetter = correctWord[i]
             const localLetter = localAnswer[i]
-            console.log(correctLetter, localLetter)
             if (!correctLetter) {
                 
                 result.push(

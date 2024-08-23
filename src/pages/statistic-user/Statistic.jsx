@@ -1,16 +1,16 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchVocabularyStats } from "../../common/reducers/vocabularySlice";
+import { fetchVocabularyStats } from "../../common/reducers/statsSlice"; 
 import { Bar } from "react-chartjs-2";
 import "chart.js/auto";
 import Headers from "../../common/components/Headers/Header";
 import Loading from "../../common/components/Treatment/Loading";
-import WordHistory from "../home/components/WorsHistory";
+import WordHistory from "./components/WorsHistory";
 
 function Statistic() {
     const dispatch = useDispatch();
-    const { recognize, reproduce, loading, error } = useSelector((state) => state.vocabulary);
+    const { recognize, reproduce, loading, error } = useSelector((state) => state.stats);
 
     useEffect(() => {
         dispatch(fetchVocabularyStats());
@@ -87,17 +87,15 @@ function Statistic() {
     return (
         <div className="align-items-center">
             <Headers title="Статистика" svgName={'statistic'}/>
-            {loading ? (
-                LoadingView
-            ) : (
-                <main className="container pb-5 mb-3">
-                    {CanvaViewLvl}
-                    <WordHistory />
-                    
-                    {/* {LinkLVLSettings}
-                    {LinkAllWords} */}
-                </main>
-            )}
+            {
+            <main className="container pb-5 mb-3">
+                {loading ? LoadingView : CanvaViewLvl}
+                <WordHistory />
+                
+                {/* {LinkLVLSettings}
+                {LinkAllWords} */}
+            </main>
+            }
         </div>
     );
 }

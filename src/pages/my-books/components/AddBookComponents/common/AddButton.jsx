@@ -33,6 +33,8 @@ function AddButton() {
             title: title,
             author: authorName,
             book: textArea,
+            // TODO
+            // надо передавать is_privet: bool (по умолчанию false)
         };
         setLoading(true);
 

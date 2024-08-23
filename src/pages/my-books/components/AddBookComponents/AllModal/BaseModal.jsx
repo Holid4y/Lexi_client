@@ -36,7 +36,9 @@ function BaseModal({ childComponent, ariaLabelledby, title, idName }) {
                         {childComponent}
                         <AuthorBookInput />
                         <NameBookInput  />
-                        <AddButton />
+                        {/* TODO */}
+                        {/* тут должен быть тег IsPrivetButton */}
+                        <AddButton />                        
                     </div>
                 </div>
             </div>
