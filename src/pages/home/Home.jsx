@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 import { fetchHome } from "../../common/reducers/homeSlice";
 
@@ -10,7 +10,6 @@ import Headers from "../../common/components/Headers/Header";
 
 function Home() {
     const dispatch = useDispatch();
-    const { loading } = useSelector((state) => state.home);
 
     useEffect(() => {
         dispatch(fetchHome());

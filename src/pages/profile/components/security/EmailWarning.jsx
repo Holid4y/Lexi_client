@@ -5,7 +5,7 @@ import { getResponse, host, resend } from "../../../../../public/urls";
 
 function EmailWarning() {
     const { email } = useSelector((state) => state.user);
-
+    const [isButtonDisabled, setIsButtonDisabled] = useState(false);
     const [message, setMessage] = useState(null);
 
     async function handleSendActivationEmail() {
@@ -17,7 +17,7 @@ function EmailWarning() {
         if (response.ok) {
             setMessage("Письмо отправлено, подтвердите его.");
             setIsButtonDisabled(true);
-            startTimer();
+            // startTimer();
         } else if (response.status == 400) {
             const data = await response.json();
             setMessage(data);
@@ -35,7 +35,7 @@ function EmailWarning() {
                 </p>
             )}
 
-            <button className="btn btn-primary ms-2" onClick={handleSendActivationEmail}>
+            <button className="btn btn-primary ms-2" onClick={handleSendActivationEmail} disabled={isButtonDisabled}>
                 Отправит письмо
             </button>
         </div>

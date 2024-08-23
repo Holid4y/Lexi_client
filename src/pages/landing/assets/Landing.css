@@ -27,3 +27,7 @@ html > html::-webkit-scrollbar,
 .bg-primary { background-color: #007bff; }
 .bg-danger { background-color: #dc3545; }
 .bg-secondary { background-color: #6c757d; } */
+
+.html{
+    background-color: black;
+}

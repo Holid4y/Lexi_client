@@ -1,8 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import BtmRecentlyBook from "./BtmRecentlyBook"
-
 function BooksLinkCard() {
     return (
         
@@ -15,7 +13,6 @@ function BooksLinkCard() {
                         Читайте, добавляйте новые слова в свой словарь и <b>повторяйте их</b>
                     </h5>
                     <div className="" >
-                        {/* <BtmRecentlyBook /> */}
                         <Link to="/books">
                             <button type="button" className="btn btn-primary px-4">Смотреть все</button>
                         </Link>
