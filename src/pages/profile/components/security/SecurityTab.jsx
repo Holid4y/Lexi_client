@@ -3,8 +3,8 @@ import { useSelector } from "react-redux";
 
 import { isActivatedEmail } from "../../utils/utils";
 
-import EmailWarning from "./EmailWarning";
-import ChangoEmailButton from "./ChangeEmailButton"
+import EmailWarning from "./email/EmailWarning";
+import ChangeEmailButton from "./email/ChangeEmailButton";
 import ChangePasswordButton from "./ChangePasswordButton"
 import ExitButton from "./ExitButton";
 
@@ -20,7 +20,7 @@ function SecurityTab() {
             )}
 
             <ChangePasswordButton />
-            <ChangoEmailButton />
+            <ChangeEmailButton />
             <ExitButton />
             
         </div>

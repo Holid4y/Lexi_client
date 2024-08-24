@@ -4,12 +4,10 @@ import { setIsPrivet } from "../../../../../common/reducers/addBookModalSlice";
 
 function IsPrivetButton() {
     const dispatch = useDispatch();
-
     const handleToggle = (event) => {
         const isChecked = event.target.checked;
         dispatch(setIsPrivet(isChecked))
-        // Здесь вы можете обработать изменение состояния чекбокса
-        console.log(isChecked ? true : false);
+        console.log(isChecked);
     };
 
     return (
