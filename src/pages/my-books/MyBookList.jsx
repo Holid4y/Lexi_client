@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchMyBooks } from "../../common/reducers/booksSlice";
 
@@ -22,6 +22,7 @@ function MyBookList() {
     const { books, loading } = useSelector((state) => state.books);
     const [currentPage, setCurrentPage] = useState(1);
     const [searchResults, setSearchResults] = useState(null);
+    const [file, setFile] = useState(null);  // Добавляем состояние для файла
 
     useEffect(() => {
         if (!searchResults) {
@@ -93,7 +94,7 @@ function MyBookList() {
                         <AddBookModal />
                         <BaseModal
                             idName={"AddBookModalFile"}
-                            childComponent={<FileModal />}
+                            childComponent={<FileModal file={file} setFile={setFile} />}
                             ariaLabelledby={"AddBookModalFileSelected"}
                             title={"Файл"}
                         />

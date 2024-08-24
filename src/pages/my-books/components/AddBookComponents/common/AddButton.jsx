@@ -7,11 +7,11 @@ import Loading from "../../../../../common/components/Treatment/Loading";
 
 import { host, books } from "../../../../../../public/urls";
 
-function AddButton() {
+function AddButton({ file }) { // Получаем file через пропсы
     const dispatch = useDispatch();
     const { addNotification } = useNotification();
 
-    const { textArea, authorName, title, isPrivet, file } = useSelector((state) => state.addBookModal);
+    const { textArea, authorName, title, isPrivet } = useSelector((state) => state.addBookModal);
     const { error } = useSelector((state) => state.book);
 
     const [loading, setLoading] = useState(false);
@@ -90,48 +90,64 @@ function AddButton() {
     const handleResponse = async (response) => {
         setLoading(false);
     
-        try {
-            if (response.ok) {  // Проверка успешного статуса
-                const data = await response.json();
-                dispatch(unshiftBooksList(data.book));  // Передаем книгу в список
+        // Если это ответ от fetch API
+        if (response instanceof Response) {
+            try {
+                if (response.ok) {
+                    const data = await response.json();
+                    dispatch(unshiftBooksList(data.book));  // Передаем книгу в список
+                    addNotification(`Книга "${title}" добавлена`);
+                    closeModals();
+                } else {
+                    const errorData = await response.json();
+                    console.error('Ошибка:', errorData);
+                    addNotification('Ошибка при добавлении книги');
+                    closeModals();
+                }
+            } catch (error) {
+                console.error("Ошибка обработки ответа:", error);
+                addNotification('Ошибка при обработке ответа от сервера');
+            }
+        } else {
+            // Если это данные, полученные через dispatch
+            if (response) {
+                dispatch(unshiftBooksList(response.book));  // Передаем книгу в список
                 addNotification(`Книга "${title}" добавлена`);
                 closeModals();
             } else {
-                // Обработка ошибки
-                const errorData = await response.json();
-                console.error('Ошибка:', errorData);
                 addNotification('Ошибка при добавлении книги');
-                closeModals();
             }
-        } catch (error) {
-            console.error("Ошибка обработки ответа:", error);
-            addNotification('Ошибка при обработке ответа от сервера');
         }
     };
 
-    const closeModals = () => {
-        const modalElement = document.getElementById("AddBookModal");
-        const modalInstance = bootstrap.Modal.getInstance(modalElement);
-        if (modalInstance) {
-            modalInstance.hide();
-        }
 
-        const subModals = ["AddBookModalFile", "AddBookModalText", "AddBookModalVideo"];
-        subModals.forEach((id) => {
-            const subModalElement = document.getElementById(id);
-            const subModalInstance = bootstrap.Modal.getInstance(subModalElement);
-            if (subModalInstance) {
-                subModalInstance.hide();
+    const closeModals = () => {
+        const modals = document.querySelectorAll(".modal");
+        modals.forEach((modal) => {
+            const bootstrapModal = window.bootstrap.Modal.getInstance(modal);
+            if (bootstrapModal) {
+                bootstrapModal.hide();
             }
         });
     };
 
     return (
         <>
-            {error && <div className="alert alert-success">{error.details}</div>}
-            <button type="button" className="btn btn-lg btn-primary mt-4 w-100" onClick={onSubmit} disabled={loading || isDisabled}>
-                {loading ? <Loading /> : "Добавить"}
-            </button>
+            {loading ? <Loading /> : (
+                <button
+                    className="btn btn-lg btn-primary mt-4 w-100"
+                    type="button"
+                    onClick={onSubmit}
+                    disabled={isDisabled}
+                >
+                    Добавить
+                </button>
+            )}
+            {error && (
+                <p className="mt-3 text-danger fw-bold">
+                    Ошибка при добавлении книги: {error.message}
+                </p>
+            )}
         </>
     );
 }

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 
 import { getResponse, host, resend } from "../../../../../../public/urls";
@@ -9,8 +9,24 @@ function EmailWarning() {
     const { email } = useSelector((state) => state.user);
 
     const [isButtonDisabled, setIsButtonDisabled] = useState(false);
-    const [message, setMessage] = useState(null);
     const [loading, setLoading] = useState(false);
+    const [isEmailSent, setIsEmailSent] = useState(false);
+
+    useEffect(() => {
+        // Проверяем наличие сохраненного таймера в localStorage
+        const savedTime = localStorage.getItem("timer");
+        const savedTimestamp = localStorage.getItem("timerTimestamp");
+
+        if (savedTime && savedTimestamp) {
+            const timeElapsed = Math.floor((Date.now() - savedTimestamp) / 1000);
+            const remainingTime = savedTime - timeElapsed;
+
+            if (remainingTime > 0) {
+                setIsEmailSent(true);
+                setIsButtonDisabled(true);
+            }
+        }
+    }, []);
 
     async function handleSendActivationEmail() {
         const url = new URL(host + resend);
@@ -22,30 +38,30 @@ function EmailWarning() {
 
         const response = await getResponse(url, "POST", bodyString);
         if (response.ok) {
-            setMessage("Письмо отправлено, подтвердите его.");
             startTimer();
             setLoading(false);
-        } else if (response.status == 400) {
+            setIsEmailSent(true);
+        } else if (response.status === 400) {
             const data = await response.json();
-            setMessage(data);
             setLoading(false);
         }
     }
 
     const startTimer = () => {
         setIsButtonDisabled(true);
-        setMessage("");
     };
 
     const handleTimerEnd = () => {
         setIsButtonDisabled(false);
-        setMessage("");
+        setIsEmailSent(false);
     };
 
     return (
         <div className="d-flex justify-content-between mb-3">
-            {message ? (
-                <div className="alert alert-success">{message}</div>
+            {isEmailSent ? ( // Если письмо было отправлено или есть активный таймер, показываем таймер
+                <div className="ms-2">
+                    <Timer duration={60} onTimerEnd={handleTimerEnd} />
+                </div>
             ) : (
                 <p className="pt-2">
                     <small className="me-2 badge bg-warning text-dark">!</small>
@@ -53,10 +69,15 @@ function EmailWarning() {
                 </p>
             )}
             {loading && <Loading />}
-            {isButtonDisabled && <Timer duration={60} onTimerEnd={handleTimerEnd} />}
-            <button className="btn btn-primary ms-2" onClick={handleSendActivationEmail} disabled={isButtonDisabled}>
-                Отправит письмо
-            </button>
+            {!isEmailSent && ( // Если письмо не отправлено и нет активного таймера, показываем кнопку
+                <button
+                    className="btn btn-primary ms-2"
+                    onClick={handleSendActivationEmail}
+                    disabled={isButtonDisabled}
+                >
+                    Отправить письмо
+                </button>
+            )}
         </div>
     );
 }

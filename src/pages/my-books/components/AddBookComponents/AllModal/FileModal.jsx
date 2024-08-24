@@ -1,13 +1,9 @@
 import React from "react";
-import { useDispatch } from "react-redux";
-import { setFile } from "../../../../../common/reducers/addBookModalSlice";
 
-function FileModal() {
-    const dispatch = useDispatch();
-
+function FileModal({ file, setFile }) {
     const handleFileChange = (event) => {
-        const file = event.target.files[0];
-        dispatch(setFile(file));
+        const selectedFile = event.target.files[0];
+        setFile(selectedFile);
     };
 
     return (
@@ -20,7 +16,7 @@ function FileModal() {
                 type="file"
                 onChange={handleFileChange}
                 accept=".epub,.txt,.docx,.fb2"
-                required // Ограничиваем типы файлов
+                required
             />
         </>
     );

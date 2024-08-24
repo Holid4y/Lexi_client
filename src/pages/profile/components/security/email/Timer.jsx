@@ -1,14 +1,24 @@
 import React, { useState, useEffect } from "react";
 
 const Timer = ({ duration, onTimerEnd }) => {
-    const [timer, setTimer] = useState(duration);
+    const [timer, setTimer] = useState(() => {
+        const savedTime = localStorage.getItem("timer");
+        const savedTimestamp = localStorage.getItem("timerTimestamp");
+        if (savedTime && savedTimestamp) {
+            const timeElapsed = Math.floor((Date.now() - savedTimestamp) / 1000);
+            const remainingTime = savedTime - timeElapsed;
+            return remainingTime > 0 ? remainingTime : 0;
+        }
+        return duration;
+    });
 
     useEffect(() => {
         const interval = setInterval(() => {
             setTimer((prevTimer) => {
                 if (prevTimer <= 1) {
                     clearInterval(interval);
-                    onTimerEnd();
+                    localStorage.removeItem("timer");
+                    localStorage.removeItem("timerTimestamp");
                     return 0;
                 }
                 return prevTimer - 1;
@@ -16,13 +26,22 @@ const Timer = ({ duration, onTimerEnd }) => {
         }, 1000);
 
         return () => clearInterval(interval);
-    }, [onTimerEnd]);
+    }, []);
 
-    return (
-        <div>
-            Кнопка будет активна через {timer} секунд.
-        </div>
-    );
+    useEffect(() => {
+        if (timer === 0) {
+            onTimerEnd(); // Вызываем onTimerEnd, когда таймер доходит до 0, но только после того, как рендер завершен.
+        }
+    }, [timer, onTimerEnd]);
+
+    useEffect(() => {
+        if (timer > 0) {
+            localStorage.setItem("timer", timer);
+            localStorage.setItem("timerTimestamp", Date.now());
+        }
+    }, [timer]);
+
+    return <div>Повторную отправку можно сделать через {timer} секунд.</div>;
 };
 
 export default Timer;
