@@ -6,6 +6,7 @@ import { throwState } from "../../../../../common/reducers/addBookModalSlice";
 import AuthorBookInput from "../common/AuthorBookInput";
 import NameBookInput from "../common/NameBookInput";
 import AddButton from "../common/AddButton";
+import IsPrivet from "../common/IsPrivetButton";
 import SVG from "../../../../../common/components/Icons/SVG";
 
 function BaseModal({ childComponent, ariaLabelledby, title, idName }) {
@@ -36,8 +37,7 @@ function BaseModal({ childComponent, ariaLabelledby, title, idName }) {
                         {childComponent}
                         <AuthorBookInput />
                         <NameBookInput  />
-                        {/* TODO */}
-                        {/* тут должен быть тег IsPrivetButton */}
+                        <IsPrivet />
                         <AddButton />                        
                     </div>
                 </div>

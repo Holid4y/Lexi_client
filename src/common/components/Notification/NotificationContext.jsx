@@ -35,7 +35,7 @@ export const NotificationProvider = ({ children }) => {
         });
     }, [visibleNotifications]);
 
-    const addNotification = (message, timeout = 2000) => {
+    const addNotification = (message, timeout = 4000) => {
         const id = Date.now();
         setNotifications((prev) => [
             ...prev,

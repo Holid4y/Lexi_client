@@ -9,7 +9,7 @@ function AddButton() {
     const dispatch = useDispatch();
     const { addNotification } = useNotification();
 
-    const { textArea, authorName, title } = useSelector((state) => state.addBookModal);
+    const { textArea, authorName, title, isPrivet } = useSelector((state) => state.addBookModal);
     const { error } = useSelector((state) => state.book);
 
     const [loading, setLoading] = useState(false);
@@ -33,6 +33,7 @@ function AddButton() {
             title: title,
             author: authorName,
             book: textArea,
+            is_privet: isPrivet
             // TODO
             // надо передавать is_privet: bool (по умолчанию false)
         };

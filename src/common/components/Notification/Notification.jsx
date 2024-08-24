@@ -4,7 +4,7 @@ function Notification({ message, onClose, timeout, position }) {
     const [isFadingOut, setIsFadingOut] = useState(false);
 
     useEffect(() => {
-        const fadeOutDuration = 1000; // Длительность анимации исчезновения
+        const fadeOutDuration = 2000; // Длительность анимации исчезновения
         const delay = timeout - fadeOutDuration;
 
         const timer = setTimeout(() => {
