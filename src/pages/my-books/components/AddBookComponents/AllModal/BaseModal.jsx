@@ -9,7 +9,7 @@ import AddButton from "../common/AddButton";
 import IsPrivet from "../common/IsPrivetButton";
 import SVG from "../../../../../common/components/Icons/SVG";
 
-function BaseModal({ childComponent, ariaLabelledby, title, idName, selectedFile }) {
+function BaseModal({ childComponent, ariaLabelledby, title, idName }) {
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -38,7 +38,7 @@ function BaseModal({ childComponent, ariaLabelledby, title, idName, selectedFile
                         <AuthorBookInput />
                         <NameBookInput  />
                         <IsPrivet />
-                        <AddButton selectedFile={selectedFile} />
+                        <AddButton />
                     </div>
                 </div>
             </div>

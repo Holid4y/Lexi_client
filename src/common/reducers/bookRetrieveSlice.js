@@ -52,6 +52,7 @@ export const fetchBookPost = createAsyncThunk("book/fetchBookPost", async (body,
         }
         dispatch(setError(dataJson))
     }
+
 });
 
 

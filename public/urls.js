@@ -91,7 +91,7 @@ export async function getResponse(url, method, body) {
 
     const auth = accessToken ? { Authorization: `Bearer ${accessToken}` } : {};
 
-    
+    console.log(body);
     const response = await fetch(url.toString(), {
         method,
         headers: { ...headers, ...auth },

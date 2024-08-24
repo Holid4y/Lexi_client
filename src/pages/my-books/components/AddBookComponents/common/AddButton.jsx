@@ -5,11 +5,13 @@ import { unshiftBooksList } from "../../../../../common/reducers/booksSlice";
 import { useNotification } from "../../../../../common/components/Notification/NotificationContext";
 import Loading from "../../../../../common/components/Treatment/Loading";
 
-function AddButton({ selectedFile }) {
+import { host, books } from "../../../../../../public/urls";
+
+function AddButton() {
     const dispatch = useDispatch();
     const { addNotification } = useNotification();
 
-    const { textArea, authorName, title, isPrivet } = useSelector((state) => state.addBookModal);
+    const { textArea, authorName, title, isPrivet, file } = useSelector((state) => state.addBookModal);
     const { error } = useSelector((state) => state.book);
 
     const [loading, setLoading] = useState(false);
@@ -21,52 +23,89 @@ function AddButton({ selectedFile }) {
 
     useEffect(() => {
         // Разделение логики в зависимости от выбранного файла
-        if (selectedFile && authorName && title) {
+        if (file && authorName && title) {
             setIsDisabled(false);
         } else if (textArea && authorName && title) {
             setIsDisabled(false);
         } else {
             setIsDisabled(true);
         }
-    }, [textArea, selectedFile, authorName, title]);
+    }, [textArea, file, authorName, title]);
 
-    const onSubmit = () => {
+
+    async function fetchFormData() {
+        const url = new URL(host + books);
+        const formData = new FormData();
+        formData.append("title", title);
+        formData.append("author", authorName);
+        formData.append("book", file);
+        formData.append("is_privet", isPrivet);
+    
+        const accessToken = localStorage.getItem("access");
+        if (!accessToken) {
+            console.warn(`Отсутствует accessToken. Запрос на ${url}`);
+        }
+    
+        const auth = accessToken ? { Authorization: `Bearer ${accessToken}` } : {};
+
+        const response = await fetch(url.toString(), {
+            method: 'POST',
+            headers: { ...auth },
+            body: formData,
+        });
+
+        return(response);
+    }
+
+    const onSubmit = async () => {
         setLoading(true);
-
-        if (selectedFile) {
-            console.log("Выбран файл");
-            const formData = new FormData();
-            formData.append("title", title);
-            formData.append("author", authorName);
-            formData.append("book", selectedFile);
-            formData.append("is_privet", isPrivet);
-
-            dispatch(fetchBookPost(formData)).then((response) => {
-                handleResponse(response);
-            });
-        } else {
-            console.log("Написан текст");
-            const data = {
-                title: title,
-                author: authorName,
-                book: textArea,
-                is_privet: isPrivet,
-            };
-
-            dispatch(fetchBookPost(data)).then((response) => {
-                handleResponse(response);
-            });
+        
+        try {
+            let response;
+    
+            if (file) {
+                // Ждем завершения fetchFormData и получения ответа
+                response = await fetchFormData();
+            } else {
+                console.log("Написан текст");
+                const data = {
+                    title: title,
+                    author: authorName,
+                    book: textArea,
+                    is_privet: isPrivet,
+                };
+    
+                // Ждем завершения dispatch и получения ответа
+                response = await dispatch(fetchBookPost(data)).unwrap();
+            }
+    
+            // Передаем ответ в handleResponse для дальнейшей обработки
+            handleResponse(response);
+        } catch (error) {
+            console.error("Ошибка при отправке данных:", error);
+            setLoading(false);
         }
     };
 
-    const handleResponse = (response) => {
+    const handleResponse = async (response) => {
         setLoading(false);
-        if (response.meta.requestStatus === "fulfilled") {
-            if (response.payload.status === 201) {
-                dispatch(unshiftBooksList(response.payload.book));
+    
+        try {
+            if (response.ok) {  // Проверка успешного статуса
+                const data = await response.json();
+                dispatch(unshiftBooksList(data.book));  // Передаем книгу в список
                 addNotification(`Книга "${title}" добавлена`);
                 closeModals();
+            } else {
+                // Обработка ошибки
+                const errorData = await response.json();
+                console.error('Ошибка:', errorData);
+                addNotification('Ошибка при добавлении книги');
+                closeModals();
             }
+        } catch (error) {
+            console.error("Ошибка обработки ответа:", error);
+            addNotification('Ошибка при обработке ответа от сервера');
         }
     };
 

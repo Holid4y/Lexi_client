@@ -1,9 +1,13 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { setFile } from "../../../../../common/reducers/addBookModalSlice";
 
-function FileModal({ onFileChange }) {
+function FileModal() {
+    const dispatch = useDispatch();
+
     const handleFileChange = (event) => {
         const file = event.target.files[0];
-        onFileChange(file); // Передаем файл в локальное состояние `AddButton`
+        dispatch(setFile(file));
     };
 
     return (
@@ -12,9 +16,11 @@ function FileModal({ onFileChange }) {
             <input
                 className="form-control form-control-lg"
                 id="formFileLg"
+                name="file"
                 type="file"
                 onChange={handleFileChange}
-                accept=".epub,.txt,.docx,.fb2" // Ограничиваем типы файлов
+                accept=".epub,.txt,.docx,.fb2"
+                required // Ограничиваем типы файлов
             />
         </>
     );
