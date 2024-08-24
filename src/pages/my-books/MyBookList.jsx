@@ -22,6 +22,8 @@ function MyBookList() {
     const { books, loading } = useSelector((state) => state.books);
     const [currentPage, setCurrentPage] = useState(1);
     const [searchResults, setSearchResults] = useState(null);
+    // Локальное состояние для файла
+    const [selectedFile, setSelectedFile] = useState(null);
 
     useEffect(() => {
         if (!searchResults) {
@@ -35,6 +37,10 @@ function MyBookList() {
 
     const handleClearSearch = () => {
         setSearchResults(null); // Очистить результаты поиска
+    };
+
+    const handleFileChange = (file) => {
+        setSelectedFile(file);
     };
 
     const filteredBooks = searchResults || books;
@@ -93,9 +99,10 @@ function MyBookList() {
                         <AddBookModal />
                         <BaseModal
                             idName={"AddBookModalFile"}
-                            childComponent={<FileModal />}
+                            childComponent={<FileModal onFileChange={handleFileChange} />}
                             ariaLabelledby={"AddBookModalFileSelected"}
                             title={"Файл"}
+                            selectedFile={selectedFile} // Передаем selectedFile в BaseModal
                         />
                         <BaseModal
                             idName={"AddBookModalText"}

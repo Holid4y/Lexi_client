@@ -5,7 +5,7 @@ import { unshiftBooksList } from "../../../../../common/reducers/booksSlice";
 import { useNotification } from "../../../../../common/components/Notification/NotificationContext";
 import Loading from "../../../../../common/components/Treatment/Loading";
 
-function AddButton() {
+function AddButton({ selectedFile }) {
     const dispatch = useDispatch();
     const { addNotification } = useNotification();
 
@@ -20,52 +20,69 @@ function AddButton() {
     }, [authorName, title]);
 
     useEffect(() => {
-        // Проверяем, если все поля заполнены
-        if (textArea && authorName && title) {
+        // Разделение логики в зависимости от выбранного файла
+        if (selectedFile && authorName && title) {
+            setIsDisabled(false);
+        } else if (textArea && authorName && title) {
             setIsDisabled(false);
         } else {
             setIsDisabled(true);
         }
-    }, [textArea, authorName, title]);
+    }, [textArea, selectedFile, authorName, title]);
 
     const onSubmit = () => {
-        const data = {
-            title: title,
-            author: authorName,
-            book: textArea,
-            is_privet: isPrivet
-            // TODO
-            // надо передавать is_privet: bool (по умолчанию false)
-        };
         setLoading(true);
 
-        dispatch(fetchBookPost(data)).then((response) => {
-            if (response.meta.requestStatus === "fulfilled") {
-                setLoading(false);
+        if (selectedFile) {
+            console.log("Выбран файл");
+            const formData = new FormData();
+            formData.append("title", title);
+            formData.append("author", authorName);
+            formData.append("book", selectedFile);
+            formData.append("is_privet", isPrivet);
 
-                if (response.payload.status == 201) {
-                    dispatch(unshiftBooksList(response.payload.book));
-                    addNotification(`Книга "${title}" добавлена`);
+            dispatch(fetchBookPost(formData)).then((response) => {
+                handleResponse(response);
+            });
+        } else {
+            console.log("Написан текст");
+            const data = {
+                title: title,
+                author: authorName,
+                book: textArea,
+                is_privet: isPrivet,
+            };
 
-                    // Закрываем модальное окно
-                    const modalElement = document.getElementById("AddBookModal");
-                    const modalInstance = bootstrap.Modal.getInstance(modalElement);
-                    if (modalInstance) {
-                        modalInstance.hide();
-                    }
+            dispatch(fetchBookPost(data)).then((response) => {
+                handleResponse(response);
+            });
+        }
+    };
 
-                    // Если есть подмодальные окна, также их закрываем
-                    const subModals = ["AddBookModalFile", "AddBookModalText", "AddBookModalVideo"];
-                    subModals.forEach((id) => {
-                        const subModalElement = document.getElementById(id);
-                        const subModalInstance = bootstrap.Modal.getInstance(subModalElement);
-                        if (subModalInstance) {
-                            subModalInstance.hide();
-                        }
-                    });
-                } else if (response.payload.status == 401) {
-                    // do nothing
-                }
+    const handleResponse = (response) => {
+        setLoading(false);
+        if (response.meta.requestStatus === "fulfilled") {
+            if (response.payload.status === 201) {
+                dispatch(unshiftBooksList(response.payload.book));
+                addNotification(`Книга "${title}" добавлена`);
+                closeModals();
+            }
+        }
+    };
+
+    const closeModals = () => {
+        const modalElement = document.getElementById("AddBookModal");
+        const modalInstance = bootstrap.Modal.getInstance(modalElement);
+        if (modalInstance) {
+            modalInstance.hide();
+        }
+
+        const subModals = ["AddBookModalFile", "AddBookModalText", "AddBookModalVideo"];
+        subModals.forEach((id) => {
+            const subModalElement = document.getElementById(id);
+            const subModalInstance = bootstrap.Modal.getInstance(subModalElement);
+            if (subModalInstance) {
+                subModalInstance.hide();
             }
         });
     };
@@ -73,7 +90,7 @@ function AddButton() {
     return (
         <>
             {error && <div className="alert alert-success">{error.details}</div>}
-            <button type="button" className="btn btn-lg btn-primary mt-4 w-100" onClick={() => onSubmit()} disabled={loading || isDisabled}>
+            <button type="button" className="btn btn-lg btn-primary mt-4 w-100" onClick={onSubmit} disabled={loading || isDisabled}>
                 {loading ? <Loading /> : "Добавить"}
             </button>
         </>
