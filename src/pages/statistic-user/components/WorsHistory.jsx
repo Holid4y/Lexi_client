@@ -44,7 +44,7 @@ function WordHistory() {
                 {recently_added_words &&
                     recently_added_words.map((word, index) => (
                         <div key={index} className="col-12 border-bottom d-flex justify-content-between">
-                            <span className="text-start">{word.text}</span>
+                            <span className="text-start">{word.word__text} - {word.translation__text}</span>
                             <small className="text-end text-secondary">{getFormattedDate(word.date_added)}</small>
                         </div>
                     ))}
