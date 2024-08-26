@@ -36,8 +36,8 @@ const TestFitst = () => {
         <div className='container'>
             <div className="row g-2 py-5">
                 <div className="col-12">
-                    <h1 className="display-2 fw-bold text-body-emphasis mb-3 text-center">Тестирование с выбором ответа</h1>
-                    <p className="lead">Тесты основаны на словах, которые вы добавили в свой словарь. Проходите тесты, чтобы закрепить свои знания.</p>
+                    <h1 className="fw-bold text-body-emphasis mb-3 text-center">Тестирование с выбором ответа</h1>
+                    <p className="lead">Тесты основаны на словах, которые вы добавили в свой словарь. Проходите тесты, чтобы закрепить свои знания. (пример ниже)</p>
                 </div>
                 <div className="col-12">
                     <div>

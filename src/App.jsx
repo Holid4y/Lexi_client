@@ -26,7 +26,8 @@ import Profile from "./pages/profile/ProfileUser";
 import LevelSettings from "./pages/levels-settings/levelSettings";
 import WordList from "./pages/word-list-user/WordList";
 import Statistic from "./pages/statistic-user/Statistic";
-import LandingMain from "./pages/landing/LandingMain";
+import Landing from "./pages/landing/Landing";
+import Instruction from "./pages/landing/InformationUsing";
 
 function App() {
     const dispatch = useDispatch();
@@ -120,7 +121,9 @@ function MainComponent({ dispatch, theme }) {
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/statistic" element={<Statistic />} />
                 <Route path="/level-settings" element={<LevelSettings />} />
-                <Route path="/landing" element={<LandingMain />} />
+                <Route path="/landing" element={<Landing />} />
+                <Route path="/instruction" element={<Instruction />} />
+                
                 {/* Другие маршруты */}
             </Routes>
         </div>
@@ -128,7 +131,7 @@ function MainComponent({ dispatch, theme }) {
 }
 
 function ConditionalNavigation({ location }) {
-    const hideNavigationPaths = ["/login", "/register", "/landing", "/forgot-password", "/send-reset-password"];
+    const hideNavigationPaths = ["/login", "/register", "/landing", "/forgot-password", "/send-reset-password", "/instruction"];
     return hideNavigationPaths.includes(location.pathname) ? null : <Navigation />;
 }
 

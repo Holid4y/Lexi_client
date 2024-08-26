@@ -47,12 +47,12 @@ const TranslateBlock = () => {
             <div>
                 <div className="row flex-lg-row-reverse align-items-center g-2 py-5">
                     <div className="col-12 text-center">
-                        <h1 className="display-2 fw-bold text-body-emphasis mb-3">Перевод слов и предложений</h1>
+                        <h1 className="fw-bold text-body-emphasis mb-3">Перевод слов и предложений</h1>
                     </div>
                     <div className="col-12 mt-4">
                         <div className="d-flex"><SVG name="hand" /><p className="lead ms-3">- нажми на слово, для перевода слова</p></div>
                         <div className="d-flex"><SVG name="translate" /><p className="lead ms-3">- нажми на кнопку, для перевода предложения</p></div>
-                        <h1 className="display-2 fw-bold text-body-emphasis my-3 text-center">Пример</h1>
+                        <h1 className="fw-bold text-body-emphasis my-3 text-center">Пример</h1>
 
                         {[
                             "I’m right-handed.",
