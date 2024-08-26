@@ -7,7 +7,7 @@ import Audio from "../../Audio/Audio";
 
 function WordTranslation({ text, translation, showSection2, setShowSection2, activeTranslationsCount }) {
     const dispatch = useDispatch();
-    const { pk, related_pk, transcription, translations, synonyms, meanings } = useSelector((state) => state.word);
+    const { pk, form, related_pk, transcription, translations, synonyms, meanings } = useSelector((state) => state.word);
 
     const [isRelatedWord, setIsRelatedWord] = useState(false)
 
@@ -48,6 +48,9 @@ function WordTranslation({ text, translation, showSection2, setShowSection2, act
                 <span className="fs-2 pe-3 text-capitalize">
                     <b>{text}</b> - <b>{translation?.text}</b>
                 </span>
+                <small>
+                    {form}
+                </small>
                 <div style={{ marginLeft: "auto", display: "flex", alignItems: "center" }}>
                     {[...Array(displayStarsCount)].map((_, index) => (
                         <div className="px-1" key={index}><SVG name="fill_star_small" /></div> // Дополнительные звезды
