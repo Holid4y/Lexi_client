@@ -23,7 +23,7 @@ const Register = () => {
     useEffect(() => {
         if (error) {
             const formattedErrors = Object.entries(error)
-                .map(([field, messages]) =>`${field}: ${messages.join(', ')}`)
+                .map(([field, messages]) =>`${field}: ${messages?.join(', ')}`)
                 .join('<br>');
     
             addNotification(
