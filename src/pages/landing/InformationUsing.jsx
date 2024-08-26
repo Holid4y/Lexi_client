@@ -15,6 +15,7 @@ const Instruction = () => {
                     <h3 class="float-md-start mb-0">Lexi</h3>
                     <nav class="nav nav-masthead justify-content-center float-md-end">
                         <Link class="nav-link fw-bold py-1 px-0" aria-current="page" to="/landing">Главная</Link>
+                        <Link class="nav-link fw-bold py-1 px-0 active" to="/instruction">Инструкция</Link>
                         <a class="nav-link fw-bold py-1 px-0" href="#">О нас</a>
                     </nav>
                 </header>
