@@ -5,12 +5,12 @@
   text-shadow: none;
 }
 
-.carousel{
+.tab-content{
     max-height: 650px;
 }
 
 .main-box {
-    background: url(./2.jpg) no-repeat;
+    background: url(./6.jpg) no-repeat;
     background-size: cover;
     display: flex;
     align-items: center;

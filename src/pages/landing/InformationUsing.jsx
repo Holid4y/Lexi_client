@@ -9,45 +9,33 @@ import { Link } from "react-router-dom";
 const Instruction = () => {
 
     return (
-        <div class="d-flex text-bg-dark main-box" style={{height: "100vh"}}>
+        <div class="d-flex text-bg-dark main-box">
             <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column" >
-                <header class="mb-auto">
-                    <div>
+                <header class="text-center w-100">
                     <h3 class="float-md-start mb-0">Lexi</h3>
                     <nav class="nav nav-masthead justify-content-center float-md-end">
                         <Link class="nav-link fw-bold py-1 px-0" aria-current="page" to="/landing">Главная</Link>
-                        <Link class="nav-link fw-bold py-1 px-0 active" to="/instruction">Инструкция</Link>
                         <a class="nav-link fw-bold py-1 px-0" href="#">О нас</a>
                     </nav>
-                    </div>
                 </header>
 
-                <main class="px-3">
-                    <div id="carouselExampleIndicators" class="carousel slide">
-                        <div class="carousel-indicators">
-                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-                        </div>
-                        <div class="carousel-inner">
-                            <div class="carousel-item h-100 active">
-                                <TranslateBlock />
-                            </div>
-                            <div class="carousel-item h-100">
-                                <WordBlock />
-                            </div>
-                            <div class="carousel-item h-100">
-                                <TestFitst />
-                            </div>
-                        </div>
-                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Previous</span>
-                        </button>
-                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Next</span>
-                        </button>
+                <ul class="nav nav-masthead justify-content-center mb-4 bg-dark mt-2 rounded">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Перевод</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Словарь</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Тест</a>
+                    </li>
+                </ul>
+                
+                <main class="px-3 h-100">
+                    <div class="tab-content" id="nav-tabContent">
+                        <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0"><TranslateBlock /></div>
+                        <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0"><WordBlock /></div>
+                        <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab" tabindex="0"><TestFitst /></div>
                     </div>
                 </main>
 

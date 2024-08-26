@@ -6,11 +6,11 @@ const TestFitst = () => {
     const [isCorrect, setIsCorrect] = useState(null);
 
     const questions = [
-        { word: 'Table', correctAnswer: 'Стол', options: ['Стол', 'Книга', 'Пол', 'Кресло'] },
-        { word: 'Window', correctAnswer: 'Окно', options: ['Дверь', 'Окно', 'Лампа', 'Потолок'] },
-        { word: 'Chair', correctAnswer: 'Стул', options: ['Кресло', 'Полка', 'Стул', 'Диван'] },
-        { word: 'Book', correctAnswer: 'Книга', options: ['Телевизор', 'Книга', 'Карандаш', 'Ручка'] },
-        { word: 'Lamp', correctAnswer: 'Лампа', options: ['Стол', 'Стул', 'Лампа', 'Кровать'] }
+        { word: 'Table', correctAnswer: 'Стол', options: ['Стол', 'Книга', 'Пол'] },
+        { word: 'Window', correctAnswer: 'Окно', options: ['Дверь', 'Окно', 'Лампа'] },
+        { word: 'Chair', correctAnswer: 'Стул', options: ['Кресло', 'Полка', 'Стул'] },
+        { word: 'Book', correctAnswer: 'Книга', options: ['Телевизор', 'Книга', 'Карандаш'] },
+        { word: 'Lamp', correctAnswer: 'Лампа', options: ['Стол', 'Стул', 'Лампа'] }
         
     ];
 
@@ -34,9 +34,9 @@ const TestFitst = () => {
 
     return (
         <div className='container'>
-            <div className="row g-2 py-5">
+            <div className="row g-2">
                 <div className="col-12">
-                    <h1 className="fw-bold text-body-emphasis mb-3 text-center">Тестирование с выбором ответа</h1>
+                    <h1 className="fw-bold text-body-emphasis mb-3 text-center">Тестирование с выбором</h1>
                     <p className="lead">Тесты основаны на словах, которые вы добавили в свой словарь. Проходите тесты, чтобы закрепить свои знания. (пример ниже)</p>
                 </div>
                 <div className="col-12">

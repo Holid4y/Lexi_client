@@ -7,16 +7,13 @@ const WordBlock = () => {
         { word: 'cherry', transcription: '[ˈtʃer.i]', level: 1 },
         { word: 'date', transcription: '[deɪt]', level: 3 },
         { word: 'elderberry', transcription: '[ˈɛl.dərˌbɛr.i]', level: 1 },
-        { word: 'fig', transcription: '[fɪɡ]', level: 2 },
-        { word: 'grape', transcription: '[ɡreɪp]', level: 1 },
-        { word: 'honeydew', transcription: '[ˈhʌn.i.djuː]', level: 3 },
-        { word: 'kiwi', transcription: '[ˈkiː.wi]', level: 2 },
+        { word: 'fig', transcription: '[fɪɡ]', level: 2 }
     ];
 
     return (
         <div className='container'>
             <div>
-                <div className="row flex-lg-row-reverse align-items-center g-2 py-5">
+                <div className="row flex-lg-row-reverse align-items-center g-2">
                     <div className="col-12">
                         <h1 className="fw-bold text-body-emphasis mb-3 text-center">Умный словарь</h1>
                         <p className="lead text-center mt-4 mb-5">
@@ -24,7 +21,7 @@ const WordBlock = () => {
                         </p>
                     </div>
                     <div className="col-12 d-flex justify-content-center">
-                        <div className="row row-cols-3 g-4 mb-5">
+                        <div className="row row-cols-2 row-cols-md-2 row-cols-lg-3 g-4 mb-5">
                             {words.map((wordObj, index) => (
                                 <div key={index} className="col animated-card-scale">
                                     <div role="button">
