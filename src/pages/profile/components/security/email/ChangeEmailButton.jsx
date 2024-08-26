@@ -24,7 +24,7 @@ const ChangeEmailButton = () => {
         const body = { email: email };
         const bodyString = JSON.stringify(body);
         setLoading(true);
-        setIsButtonDisabled(true);
+        
         const response = await getResponse(url, "POST", bodyString);
 
         if (response.ok) {
