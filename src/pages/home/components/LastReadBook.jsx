@@ -40,10 +40,10 @@ function LastReadBook() {
             <div className="hover-text-opacity animated-block-leftright">
                 <p className="w-100 mb-0 d-flex justify-content-between px-2">
                     <span className="span_hover">Вы читали ранее</span>
-                    <Link to={continueReadingUrl} className="text-end ms-auto link-color span_hover">
+                    <span className="text-end ms-auto link-color span_hover p-0 m-0 mb-1">
                         Продолжить
                         <SVG name={"arrow_right"} />
-                    </Link>
+                    </span>
                 </p>
                 <div className="card text-end mb-3 w-100 bg-card-dark p-2 animated-block-rightleft">
                     <div className="card-body">

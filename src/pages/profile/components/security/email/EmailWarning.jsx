@@ -32,10 +32,10 @@ function EmailWarning() {
         const url = new URL(host + resend);
         const body = { email: email };
         const bodyString = JSON.stringify(body);
-
+    
         setLoading(true);
         setIsButtonDisabled(true);
-
+    
         const response = await getResponse(url, "POST", bodyString);
         if (response.ok) {
             startTimer();
@@ -49,11 +49,15 @@ function EmailWarning() {
 
     const startTimer = () => {
         setIsButtonDisabled(true);
+        localStorage.setItem("timer", 60); // Устанавливаем таймер в 60 секунд
+        localStorage.setItem("timerTimestamp", Date.now());
     };
 
     const handleTimerEnd = () => {
         setIsButtonDisabled(false);
         setIsEmailSent(false);
+        localStorage.removeItem("timer");
+        localStorage.removeItem("timerTimestamp");
     };
 
     return (

@@ -7,7 +7,7 @@ const Timer = ({ duration, onTimerEnd }) => {
         if (savedTime && savedTimestamp) {
             const timeElapsed = Math.floor((Date.now() - savedTimestamp) / 1000);
             const remainingTime = savedTime - timeElapsed;
-            return remainingTime > 0 ? remainingTime : 0;
+            return remainingTime > 0 ? remainingTime : duration;
         }
         return duration;
     });
@@ -17,8 +17,6 @@ const Timer = ({ duration, onTimerEnd }) => {
             setTimer((prevTimer) => {
                 if (prevTimer <= 1) {
                     clearInterval(interval);
-                    localStorage.removeItem("timer");
-                    localStorage.removeItem("timerTimestamp");
                     return 0;
                 }
                 return prevTimer - 1;
@@ -28,9 +26,10 @@ const Timer = ({ duration, onTimerEnd }) => {
         return () => clearInterval(interval);
     }, []);
 
+    // Вызов onTimerEnd после завершения рендеринга, когда таймер достигает 0
     useEffect(() => {
         if (timer === 0) {
-            onTimerEnd(); // Вызываем onTimerEnd, когда таймер доходит до 0, но только после того, как рендер завершен.
+            onTimerEnd(); // Вызываем onTimerEnd только после того, как таймер достигнет 0
         }
     }, [timer, onTimerEnd]);
 

@@ -238,8 +238,8 @@ const icons = {
             <path d="M6.95044 7L0.999957 0.999998" stroke="white" strokeOpacity="0.8" strokeLinecap="round"/>
         </svg>
     ),
-    LogoLanding: (
-        <svg width="330" height="375" viewBox="0 0 440 530" fill="none" xmlns="http://www.w3.org/2000/svg">
+    LogoLG: (
+        <svg width="280" height="280" viewBox="0 0 440 530" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M421.492 68.2508L439.753 37.0269V129.387L421.492 160.61V68.2508Z" fill="url(#paint0_linear_1249_928)"/>
             <path d="M311.767 68.2508L421.492 68.2508V160.61L311.767 160.61V68.2508Z" fill="url(#paint1_linear_1249_928)"/>
             <path d="M297.42 92.7838L311.767 68.2508V160.61L297.42 185.143V92.7838Z" fill="url(#paint2_linear_1249_928)"/>
