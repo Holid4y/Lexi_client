@@ -32,35 +32,36 @@ function Recognize() {
 
     const TrainingPage = () => {
         if (!training) {
-            return null; // или вернуть какой-то другой компонент, если тренировки нет
+            return null;
         }
 
         return (
-            <>
+            <div>
                 <Header />
-                <main className="container px-4">
+                <main className="container pb-0 mb-0">
                     <WordCard localType={localType} text={training[round].word.text} en_text={training[round].word.text} is_view_transctiption={true}/>
-                    <div className="mb-4 px-5">
-                        <FalseSet training={training} round={round} correctWord={training[round].word.text} />
+                    <div className="px-5">
+                        <div className="mb-4">
+                            <FalseSet training={training} round={round} correctWord={training[round].word.text} />
+                        </div>
+                        <AnswerButton localType={localType} />
                     </div>
-
-                    <AnswerButton localType={localType} />
                 </main>
-            </>
+                
+            </div>
         );
     };
-
-    const ErrorView = <p>Error: {error}</p>;
 
     const isNoMoreWordToTraining = count_word_to_training_recognize == 0
     const isNoWord = learning_words == 0
 
     return (
         <div className="align-items-center">
-            {loading ? LoadingView : 
-            TrainingPage() ||
-            ((isNoMoreWordToTraining & !isEnd) && <NoMoreWordToTrainingPage />) ||
-            (isNoWord && <NoWordPage />)
+            {
+                loading ? LoadingView : 
+                TrainingPage() ||
+                ((isNoMoreWordToTraining & !isEnd) && <NoMoreWordToTrainingPage />) ||
+                (isNoWord && <NoWordPage />)
             }
             {isEnd && EndPage}
 
