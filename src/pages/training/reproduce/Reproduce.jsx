@@ -40,7 +40,7 @@ function Reproduce() {
             <div className="container mb-4">
                 <Header />
                 <main className="pb-0 mb-0">
-                    <WordCard localType={localType} text={training[round].word.translation} />
+                    <WordCard localType={localType} text={training[round].word.translation} en_text={training[round].word.text} is_view_transctiption={false}/>
                     <div className="px-5">
                         <TextInput correctWord={training[round].word.text} />
                         <Hint text={training[round].word.text} />

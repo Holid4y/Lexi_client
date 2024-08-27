@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import Audio from "../../../common/components/Audio/Audio";
 
-function WordCard({ localType, text }) {
+function WordCard({ localType, text, en_text, is_view_transctiption }) {
     const { training, round } = useSelector((state) => state.trainingRound);
 
     const word = training[round].word;
@@ -10,6 +10,7 @@ function WordCard({ localType, text }) {
     function getLevel() {
         return training[round].training.lvl;
     }
+    const ViewTranscription = <span>[{word.transcription}]</span>
 
     return (
         <div className="my-5">
@@ -17,10 +18,10 @@ function WordCard({ localType, text }) {
                 <h4 className="text-center">{text}</h4>
                 <span className="text-center p-0 text-warning">{word.word_form}</span>
                 <div className="word_transcription p-0 m-0">
-                    <span>[{word.transcription}]</span>
+                    {is_view_transctiption ? ViewTranscription : null}
                 </div>
                 <div className="card-left-bottom-lg">
-                    <Audio word={text} />
+                    <Audio word={en_text} />
                 </div>
                 <div className="card-left-lg">
                     <div className="card_block_lvl">
