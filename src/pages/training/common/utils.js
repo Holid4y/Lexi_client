@@ -46,15 +46,15 @@ function checkAnswer(dispatch, answerWord, currentTraining, round) {
     return resultBool;
 }
 
-function checkRound(is_correct, dispatch, round, currentTraining) {
+function checkRound(is_correct, dispatch, round, currentTraining, timeToViewResult) {
     if (is_correct) {
         // прибавляем балл за правельный ответ
         dispatch(addScore());
         dispatch(setIsViewResult(true));
         // Это позволяет добавить задержку перед переключением на следующий раунд
-        const correctTime = 1000;
+        const correctTime = timeToViewResult;
         const wrongTime = 0;
-
+        
         const timeCallDown = is_correct ? correctTime : wrongTime;
 
         setTimeout(() => performRoundSwitch(dispatch, round, currentTraining), timeCallDown);
@@ -64,7 +64,7 @@ function checkRound(is_correct, dispatch, round, currentTraining) {
 }
 
 
-export function handleFinalAnswer(answer, localType, currentTraining, round, dispatch) {
+export function handleFinalAnswer(answer, localType, currentTraining, round, dispatch, timeToViewResult) {
     if ((answer !== null) & (answer !== "")) {
         const is_correct = checkAnswer(dispatch, answer, currentTraining, round);
         const data = {
@@ -77,7 +77,7 @@ export function handleFinalAnswer(answer, localType, currentTraining, round, dis
         dispatch(fetchTrainingPatch(data)); // отбовляет бд
 
         dispatch(setAnswer(null)); // Сбрасываем выбранный вариант для следующего раунда
-        checkRound(is_correct, dispatch, round, currentTraining);
+        checkRound(is_correct, dispatch, round, currentTraining, timeToViewResult);
     } else {
         // Если ничего не выбрано, можно вывести предупреждение или сделать кнопку неактивной
     }

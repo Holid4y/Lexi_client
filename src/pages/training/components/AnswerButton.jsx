@@ -6,6 +6,7 @@ import { handleFinalAnswer, performRoundSwitch } from "../common/utils";
 function AnswerButton({ localType }) {
     const dispatch = useDispatch();
     const { answer, training, round, isCorrect } = useSelector((state) => state.trainingRound);
+    const timeToViewResult = useSelector(state => state.user.time_to_view_result);
     const answerButtonRef = useRef(null);
     const nextButtonRef = useRef(null);
 
@@ -33,7 +34,7 @@ function AnswerButton({ localType }) {
             ref={answerButtonRef}
             type="text"
             className={`btn btn-primary position-relative save-btn py-2 w-50 ${(answer === null) | (answer === "") ? "disabled" : ""}`}
-            onClick={() => handleFinalAnswer(answer, localType, training, round, dispatch)}
+            onClick={() => handleFinalAnswer(answer, localType, training, round, dispatch, timeToViewResult)}
         >
             <span>
                 <b>Ответить</b>
