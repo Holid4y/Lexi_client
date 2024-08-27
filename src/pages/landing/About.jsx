@@ -1,7 +1,7 @@
 import "./assets/Landing.css"
 import { Link } from "react-router-dom";
 
-const Landing = () => {
+const About = () => {
 
     return (
         <div className="d-flex text-center text-bg-dark main-box">
@@ -12,9 +12,9 @@ const Landing = () => {
                     </div>
 
                     <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-                        <li><Link to="/landing" class="nav-link px-2 ">Главная</Link></li>
+                        <li><Link to="/landing" class="nav-link px-2 link-secondary">Главная</Link></li>
                         <li><Link to="/instruction" class="nav-link px-2 link-secondary">Интерактив</Link></li>
-                        <li><Link to="/about" class="nav-link px-2 link-secondary">О нас</Link></li>
+                        <li><Link to="/about" class="nav-link px-2">О нас</Link></li>
                     </ul>
 
                     <div class="col-md-4 text-end">
@@ -24,11 +24,7 @@ const Landing = () => {
                 </header>
 
                 <main className="container px-3">
-                    <h1 className="display-2 text-center fw-bold text-body-emphasis mt-5">Изучай <span className="text-primary">English</span> по-новому</h1>
-                    <p className="lead my-4 d-none d-md-block">Чтение — это лишь начало! Добавляйте новые слова в свой личный словарь, проверяйте знания с помощью увлекательных тестов и отслеживайте свой прогресс. Учитесь с удовольствием, шаг за шагом приближаясь к свободному владению английским языком.</p>
-                    <p className="lead mt-5">
-                        <Link to="/register" className="btn btn-lg btn-light fw-bold border-white bg-white w-50">Начать</Link>
-                    </p>
+                    <h1 className="display-2 text-center fw-bold text-body-emphasis mt-5">О нас</h1>
                 </main>
 
                 <footer className="mt-auto text-white-50">
@@ -39,4 +35,4 @@ const Landing = () => {
     );
 };
 
-export default Landing;
+export default About;

@@ -81,15 +81,21 @@ const ForgotPass = () => {
         // </div>
 
         <div className="d-flex text-center text-bg-dark main-box">
-            <div className="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column" >
-                <header className="container mb-auto">
-                    <div>
-                    <h3 className="float-md-start mb-0">Lexi</h3>
-                    <nav className="nav nav-masthead justify-content-center float-md-end">
-                        <Link className="nav-link fw-bold py-1 px-0" to="/landing">Главная</Link>
-                        <Link className="nav-link fw-bold py-1 px-0" to="/instruction">Интерактив</Link>
-                        <a className="nav-link fw-bold py-1 px-0" href="#">О нас</a>
-                    </nav>
+            <div className="container d-flex w-100 h-100 p-3 mx-auto flex-column" >
+                <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between mb-auto">
+                    <div class="col-md-4 mb-2 mb-md-0 d-none d-md-block">
+                        <h3 className="float-md-start mb-0">Lexi</h3>
+                    </div>
+
+                    <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+                        <li><Link to="/landing" class="nav-link px-2 link-secondary">Главная</Link></li>
+                        <li><Link to="/instruction" class="nav-link px-2 link-secondary">Интерактив</Link></li>
+                        <li><Link to="/about" class="nav-link px-2 link-secondary">О нас</Link></li>
+                    </ul>
+
+                    <div class="col-md-4 text-end">
+                        <Link to="/login" class="btn btn-outline-primary me-2">Вход</Link>
+                        <Link to="/register" class="btn btn-primary">Регистрация</Link>
                     </div>
                 </header>
 

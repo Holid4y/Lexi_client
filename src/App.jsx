@@ -28,6 +28,7 @@ import WordList from "./pages/word-list-user/WordList";
 import Statistic from "./pages/statistic-user/Statistic";
 import Landing from "./pages/landing/Landing";
 import Instruction from "./pages/landing/InformationUsing";
+import About from "./pages/landing/About";
 
 function App() {
     const dispatch = useDispatch();
@@ -88,10 +89,10 @@ function MainComponent({ dispatch, theme }) {
 
     useEffect(() => {
         const token = localStorage.getItem("access");
-        const publicPaths = ["/login", "/register", "/landing", "/forgot-password", "/send-reset-password"];
+        const publicPaths = ["/login", "/register", "/landing", "/about", "/instruction", "/forgot-password", "/send-reset-password"];
         
         if (!publicPaths.includes(location.pathname) && !token) {
-            navigate('/login');
+            navigate('/landing');
         }
     }, [dispatch, navigate, location]);
 
@@ -123,6 +124,7 @@ function MainComponent({ dispatch, theme }) {
                 <Route path="/level-settings" element={<LevelSettings />} />
                 <Route path="/landing" element={<Landing />} />
                 <Route path="/instruction" element={<Instruction />} />
+                <Route path="/about" element={<About />} />
                 
                 {/* Другие маршруты */}
             </Routes>
@@ -137,7 +139,8 @@ function ConditionalNavigation({ location }) {
         "/landing", 
         "/forgot-password", 
         "/send-reset-password", 
-        "/instruction"
+        "/instruction",
+        "/about"
     ];
 
     // Проверка на статичные маршруты
