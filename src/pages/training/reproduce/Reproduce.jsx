@@ -37,22 +37,23 @@ function Reproduce() {
         }
 
         return (
-            <div className="container mb-4">
+            <div>
                 <Header />
-                <main className="pb-0 mb-0">
+                <main className="container pb-0 mb-0">
                     <WordCard localType={localType} text={training[round].word.translation} en_text={training[round].word.text} is_view_transctiption={false}/>
                     <div className="px-5">
-                        <TextInput correctWord={training[round].word.text} />
-                        <Hint text={training[round].word.text} />
+                        <div>
+                            <TextInput correctWord={training[round].word.text} />
+                            <Hint text={training[round].word.text} />
+                        </div>
+                        <AnswerButton localType={localType} />
                     </div>
                 </main>
-                <AnswerButton localType={localType} />
             </div>
         )
     };
 
     const isNoMoreWordToTraining = count_word_to_training_reproduce == 0
-
     const isNoWord = learning_words == 0
 
     return (
