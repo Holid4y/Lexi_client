@@ -81,10 +81,10 @@ function TextInput({ correctWord }) {
 
     return (
         <div className="mb-4">
-            <h3 className="text-center mb-3">Напишите ответ</h3>
             <input 
                 type="text" className={classState} 
-                value={localAnswer} 
+                value={localAnswer}
+                placeholder="Напишите ответ"
                 onChange={handleInputChange} 
                 ref={inputRef} // Привязываем input к созданной ссылке
             />
