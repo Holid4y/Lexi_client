@@ -169,7 +169,10 @@ a {
 .btn-primary > .justify-content-center > .pt-2 {
     padding-top: 0px !important;
 }
-.card-btn:hover {
+.card-btn:hover, .statistic-block-many {
+    transform: scale(1.025);
+}
+.card-btn:hover > .statistic-block-many {
     transform: scale(1.025);
 }
 
@@ -721,15 +724,43 @@ input[type="number"] {
 }
 
 
-/* Блоки уровней в статистике */
 .statistic-block {
     word-break: break-all;
     aspect-ratio: 1 / 1;
     background-color: var(--bg-btn-primary);
+    z-index: 2;
+    width: 95%;
+    height: 95%;
+    position: relative;
 }
-.statistic-block-many{
-    border-right: 6px solid var(--bg-btn-primary-hover);
+
+.main-card {
+    box-shadow: none;
+    position: absolute;
+    bottom: -5px;
+    right: -5px;
+    width: 90%;
+    height: 95%;
+    z-index: 2;
 }
+
+.statistic-block-many {
+    position: absolute;
+    top: 0;
+    right: 5px;
+    width: 85%;
+    height: 95%;
+    z-index: 1;
+    background-color: var(--bg-btn-primary-hover);
+    border-radius: 15px;
+}
+
+/* Убедитесь, что родительский элемент имеет правильное позиционирование и высоту */
+.col.animated-card-scale {
+    position: relative;
+    height: 100%;
+}
+
 .statistic-block h4 {
     font-size: 25px;
     font-weight: bold;
@@ -755,18 +786,48 @@ input[type="number"] {
     display: block;
 } */
 
-.card_block_lvl{
+.btn-input-style{
+    background-color: var(--input-color);
+    border-radius: 10px;
+}
+
+.word_transcription{
     position: absolute;
-    /* display: none; */
+    top: 88%;
+    left: 49%;
+    transform: translate(-50%, -50%);
+}
+.word_transcription span{
+    font-size: 13px;
+}
+.card-left{
+    position: absolute;
     left: 10%;
     top: 10%;
+    display: flex;
+    align-items: center;
+}
+.card-left-lg{
+    position: absolute;
+    left: 2%;
+    top: 10%;
+    display: flex;
+    align-items: center;
+}
+.card-left-bottom-lg{
+    position: absolute;
+    left: 1%;
+    bottom: 5%;
+    display: flex;
+    align-items: center;
+}
+.card_block_lvl{
     width: 40px;
     padding: 2px;
     text-align: center;
-    color: white;
-    /* z-index: -1; */
-    background-color: var(--card-bg-lvl);
-    border-radius: 6px;
+    color: var(--bg-btn-primary-hover);
+    background-color: white;
+    border-radius: 7px;
 }
 .card_block_lvl_span{
     padding: 0px;
@@ -775,7 +836,12 @@ input[type="number"] {
     font-size: 14px;
 }
 
-
+.text-center-input{
+    font-weight: 600;
+    text-align: center;
+    font-size: 16px;
+    
+}
 
 /* Search.css */
 .search-form {

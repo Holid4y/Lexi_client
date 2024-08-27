@@ -40,7 +40,7 @@ function Recognize() {
                 <Header />
                 <main className="container px-4">
                     <WordCard localType={localType} text={training[round].word.text} />
-                    <div className="mb-4">
+                    <div className="mb-4 px-5">
                         <h3 className="text-center mb-3">Варианты ответа</h3>
                         <FalseSet training={training} round={round} correctWord={training[round].word.text} />
                     </div>

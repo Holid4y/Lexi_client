@@ -45,16 +45,16 @@ function LastReadBook() {
                         <SVG name={"arrow_right"} />
                     </span>
                 </p>
-                <div className="card text-end mb-3 w-100 bg-card-dark p-2 animated-block-rightleft">
+                <div className="card text-end mb-3 w-100 bg-card-dark animated-block-rightleft">
                     <div className="card-body">
                         <div className="row">
                             <div className="col-8">
-                                <div className="text-start text-break mb-4">
+                                <div className="text-start text-truncate w-100 mb-3 ">
                                     <h3 className="card-title">{titleLastBook}</h3>
                                 </div>
                             </div>
                             <div className="col-4">
-                                <div className="text-end text-break mb-4 px-0">
+                                <div className="text-end text-truncate w-100 mb-3  px-0">
                                     <span>{pageLastBook} страница</span>
                                 </div>
                             </div>

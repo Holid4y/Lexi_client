@@ -23,7 +23,7 @@ function Lable({ word, index, correctWord, selectedRadioIndex }) {
 
     // Инициализируем состояние classState и localCorrectWord
     useEffect(() => {
-        setClassState("btn btn-dark-list position-relative w-100 mb-3 py-3");
+        setClassState("btn btn-dark-list position-relative w-100 mb-4 py-3");
         setLocalCorrectWord(correctWord);
         if (isViewResult) {
             setClass();
@@ -48,11 +48,10 @@ function Lable({ word, index, correctWord, selectedRadioIndex }) {
             onClick={() => {
                 handleFinalAnswer(word.text, "recognize", training, round, dispatch);
                 setLocalSelectedAnswer(word.text);
-            }}
-        >
-            {word.translation}
-            <kbd className="press_button d-none d-sm-block">Num {index+1}</kbd>
-        </label>
+            }}>
+                <b className="fs-5">{word.translation}</b>
+                <kbd className="press_button d-none d-sm-block">Num {index+1}</kbd>
+            </label>
         </div>
     );
 }

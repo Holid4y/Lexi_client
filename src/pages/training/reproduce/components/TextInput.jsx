@@ -12,7 +12,7 @@ function TextInput({ correctWord }) {
 
     useEffect(() => {
         setLocalAnswer("");
-        setClassState("form-control py-2-5 mb-2");
+        setClassState("form-control py-2-5 mb-2 text-center-input");
         inputRef.current.focus(); // Устанавливаем фокус на input при смене раунда
     }, [round]);
 
@@ -26,9 +26,9 @@ function TextInput({ correctWord }) {
         const cleanWord = cleanAnswer(localAnswer);
         // Подсветить выбранный ответ красным, а правильный зеленым поверх красного
         if (correctWord === cleanWord) {
-            setClassState("form-control py-2-5 mb-2 box-success");
+            setClassState("form-control py-2-5 mb-2 box-success text-center-input");
         } else {
-            setClassState("form-control py-2-5 mb-2 box-danger");
+            setClassState("form-control py-2-5 mb-2 box-danger text-center-input");
         }
     }
 

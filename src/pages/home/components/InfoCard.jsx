@@ -8,7 +8,7 @@ function InfoCard() {
     const { learning_words, upload_books, loading } = useSelector((state) => state.home);
 
     const getContentOrLoading = (content) => {
-        return loading && content === null ? <Loading /> : <h4 className="book-text text-center py-2">{content}</h4>;
+        return loading && content === null ? <Loading /> : <h4 className="book-text text-center py-2 mb-0">{content}</h4>;
     };
 
     return (
@@ -33,7 +33,7 @@ function InfoCard() {
                 <span className="ps-2 span_hover" id="statistics">Статистика</span>
                 <Link to="/statistic">
                     <div className="card w-100 border-none card-btn">
-                        <h4 className="book-text text-center py-2">
+                        <h4 className="book-text text-center pb-2 mb-2">
                             <SVG name="statistic" />
                         </h4>
                     </div>
@@ -43,7 +43,7 @@ function InfoCard() {
                 <span className="ps-2 span_hover" id="bookmarks">Закладки</span>
                 <Link to="/bookmarks">
                     <div className="card w-100 border-none card-btn">
-                        <h4 className="book-text text-center py-2">
+                        <h4 className="book-text text-center pb-2 mb-2">
                             <SVG name="marklist_fill" />
                         </h4>
                     </div>
