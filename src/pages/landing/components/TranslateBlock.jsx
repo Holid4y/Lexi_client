@@ -44,42 +44,37 @@ const TranslateBlock = () => {
 
     return (
         <div className='container'>
-            <div className="align-items-center">
-                <div className="text-center">
-                    <h1 className="fw-bold text-body-emphasis mb-3">Перевод слов и предложений</h1>
-                </div>
-                <div className="mt-4">
-                    <div className="d-flex"><SVG name="hand" /><p className="lead ms-3">- нажми на слово, для перевода слова</p></div>
-                    <div className="d-flex"><SVG name="translate" /><p className="lead ms-3">- нажми на кнопку, для перевода предложения</p></div>
-                    <h1 className="fw-bold text-body-emphasis my-3 text-center">Пример</h1>
+            <ol className="list-group list-group-numbered mb-3">
+                <li className="list-group-item bg-transparent">Нажми на слово, для его перевода</li>
+                <li className="list-group-item bg-transparent">Нажми на кнопку <SVG name="translate" />, для перевода всего предложения</li>
+            </ol>
+            <h1 className="fw-bold text-body-emphasis my-3 text-center">Пример</h1>
 
-                    {[
-                        "I’m right-handed.",
-                        "The deputy studied him for a moment.",
-                        "It’s on your record.",
-                        "I could check."
-                    ].map((sentence, index) => (
-                        <div key={index} className='sentences'>
-                            <button className='btn mx-0 px-0 pe-2 pb-3' onClick={() => handleSentenceClick(sentence)}>
-                                <SVG name="translate" />
-                            </button>
-                            {sentence.split(" ").map((word, wordIndex) => (
-                                <span 
-                                    key={wordIndex} 
-                                    className='fs-4 word-for-text' 
-                                    onClick={() => handleWordClick(word)}
-                                >
-                                    {word}{" "}
-                                </span>
-                            ))}
-                            
-                            {selectedSentence === sentence && (
-                                <p className='mt-2 fs-5 text-secondary'>{translations[sentence]}</p>
-                            )}
-                        </div>
+            {[
+                "I’m right-handed.",
+                "The deputy studied him for a moment.",
+                "It’s on your record.",
+                "I could check."
+            ].map((sentence, index) => (
+                <div key={index} className='sentences'>
+                    <button className='btn mx-0 px-0 pe-2 pb-3' onClick={() => handleSentenceClick(sentence)}>
+                        <SVG name="translate" />
+                    </button>
+                    {sentence.split(" ").map((word, wordIndex) => (
+                        <span 
+                            key={wordIndex} 
+                            className='fs-4 word-for-text' 
+                            onClick={() => handleWordClick(word)}
+                        >
+                            {word}{" "}
+                        </span>
                     ))}
+                    
+                    {selectedSentence === sentence && (
+                        <p className='mt-2 fs-5 text-secondary'>{translations[sentence]}</p>
+                    )}
                 </div>
-            </div>
+            ))}
 
             {/* Модальное окно для выбранного слова */}
             {selectedWord && (
