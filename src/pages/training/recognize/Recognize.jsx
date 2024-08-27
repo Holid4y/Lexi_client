@@ -39,7 +39,7 @@ function Recognize() {
             <>
                 <Header />
                 <main className="container px-4">
-                    <WordCard localType={localType} text={training[round].word.text} />
+                    <WordCard localType={localType} text={training[round].word.text} en_text={training[round].word.text} is_view_transctiption={true}/>
                     <div className="mb-4 px-5">
                         <FalseSet training={training} round={round} correctWord={training[round].word.text} />
                     </div>
