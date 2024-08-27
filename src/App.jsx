@@ -131,8 +131,28 @@ function MainComponent({ dispatch, theme }) {
 }
 
 function ConditionalNavigation({ location }) {
-    const hideNavigationPaths = ["/login", "/register", "/landing", "/forgot-password", "/send-reset-password", "/instruction"];
-    return hideNavigationPaths.includes(location.pathname) ? null : <Navigation />;
+    const hideNavigationPaths = [
+        "/login", 
+        "/register", 
+        "/landing", 
+        "/forgot-password", 
+        "/send-reset-password", 
+        "/instruction"
+    ];
+
+    // Проверка на статичные маршруты
+    if (hideNavigationPaths.includes(location.pathname)) {
+        return null;
+    }
+
+    // Проверка на динамические маршруты
+    const isForgotPasswordPath = location.pathname.startsWith("/forgot-password/");
+
+    if (isForgotPasswordPath) {
+        return null;
+    }
+
+    return <Navigation />;
 }
 
 export default App;

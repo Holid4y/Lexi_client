@@ -15,7 +15,7 @@ function WordCard({ localType, text }) {
         <div className="my-5">
             <div className="card statistic py-5">
                 <h4 className="text-center">{text}</h4>
-                <span className="text-center p-0 text-warning">{word.word_form}</span>
+                <span className="text-center p-0 text-warning">{word.form}</span>
                 <div className="word_transcription p-0 m-0">
                     <span>[{word.transcription}]</span>
                 </div>

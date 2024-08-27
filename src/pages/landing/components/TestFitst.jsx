@@ -10,26 +10,26 @@ const TestFitst = () => {
     const [showFinishButton, setShowFinishButton] = useState(false);
 
     const questions = [
-        { word: 'Door', correctAnswer: 'Дверь', options: ['Окно', 'Дверь', 'Кровать'] },
-        { word: 'Bed', correctAnswer: 'Кровать', options: ['Шкаф', 'Кровать', 'Лампа'] },
-        { word: 'Carpet', correctAnswer: 'Ковер', options: ['Диван', 'Зеркало', 'Ковер'] },
-        { word: 'Mirror', correctAnswer: 'Зеркало', options: ['Полка', 'Зеркало', 'Окно'] },
-        { word: 'Shelf', correctAnswer: 'Полка', options: ['Книга', 'Полка', 'Кресло'] },
-        { word: 'Sofa', correctAnswer: 'Диван', options: ['Стол', 'Диван', 'Кровать'] },
-        { word: 'Pencil', correctAnswer: 'Карандаш', options: ['Карандаш', 'Линейка', 'Тетрадь'] },
-        { word: 'Notebook', correctAnswer: 'Тетрадь', options: ['Тетрадь', 'Ручка', 'Линейка'] },
-        { word: 'Pen', correctAnswer: 'Ручка', options: ['Карандаш', 'Ручка', 'Тетрадь'] },
-        { word: 'Ruler', correctAnswer: 'Линейка', options: ['Книга', 'Линейка', 'Карандаш'] },
-        { word: 'Cup', correctAnswer: 'Чашка', options: ['Чашка', 'Тарелка', 'Вилка'] },
-        { word: 'Plate', correctAnswer: 'Тарелка', options: ['Ложка', 'Тарелка', 'Нож'] },
-        { word: 'Spoon', correctAnswer: 'Ложка', options: ['Вилка', 'Ложка', 'Тарелка'] },
-        { word: 'Fork', correctAnswer: 'Вилка', options: ['Нож', 'Вилка', 'Ложка'] },
-        { word: 'Knife', correctAnswer: 'Нож', options: ['Нож', 'Чашка', 'Тарелка'] },
-        { word: 'Television', correctAnswer: 'Телевизор', options: ['Книга', 'Телевизор', 'Окно'] },
-        { word: 'Refrigerator', correctAnswer: 'Холодильник', options: ['Шкаф', 'Холодильник', 'Стол'] },
-        { word: 'Microwave', correctAnswer: 'Микроволновка', options: ['Микроволновка', 'Кухня', 'Полка'] },
-        { word: 'Toaster', correctAnswer: 'Тостер', options: ['Лампа', 'Тостер', 'Чайник'] },
-        { word: 'Kettle', correctAnswer: 'Чайник', options: ['Чашка', 'Тостер', 'Чайник'] }
+        { word: 'Door', correctAnswer: 'Дверь', options: ['Окно', 'Дверь', 'Кровать'], part_of_speech: "сущ" },
+        { word: 'Bed', correctAnswer: 'Кровать', options: ['Шкаф', 'Кровать', 'Лампа'], part_of_speech: "сущ" },
+        { word: 'Carpet', correctAnswer: 'Ковер', options: ['Диван', 'Зеркало', 'Ковер'], part_of_speech: "сущ" },
+        { word: 'Mirror', correctAnswer: 'Зеркало', options: ['Полка', 'Зеркало', 'Окно'], part_of_speech: "сущ" },
+        { word: 'Shelf', correctAnswer: 'Полка', options: ['Книга', 'Полка', 'Кресло'], part_of_speech: "сущ" },
+        { word: 'Sofa', correctAnswer: 'Диван', options: ['Стол', 'Диван', 'Кровать'], part_of_speech: "сущ" },
+        { word: 'Pencil', correctAnswer: 'Карандаш', options: ['Карандаш', 'Линейка', 'Тетрадь'], part_of_speech: "сущ" },
+        { word: 'Notebook', correctAnswer: 'Тетрадь', options: ['Тетрадь', 'Ручка', 'Линейка'], part_of_speech: "сущ" },
+        { word: 'Pen', correctAnswer: 'Ручка', options: ['Карандаш', 'Ручка', 'Тетрадь'], part_of_speech: "сущ" },
+        { word: 'Ruler', correctAnswer: 'Линейка', options: ['Книга', 'Линейка', 'Карандаш'], part_of_speech: "сущ" },
+        { word: 'Cup', correctAnswer: 'Чашка', options: ['Чашка', 'Тарелка', 'Вилка'], part_of_speech: "сущ" },
+        { word: 'Plate', correctAnswer: 'Тарелка', options: ['Ложка', 'Тарелка', 'Нож'], part_of_speech: "сущ" },
+        { word: 'Spoon', correctAnswer: 'Ложка', options: ['Вилка', 'Ложка', 'Тарелка'], part_of_speech: "сущ" },
+        { word: 'Fork', correctAnswer: 'Вилка', options: ['Нож', 'Вилка', 'Ложка'], part_of_speech: "сущ" },
+        { word: 'Knife', correctAnswer: 'Нож', options: ['Нож', 'Чашка', 'Тарелка'], part_of_speech: "сущ" },
+        { word: 'Television', correctAnswer: 'Телевизор', options: ['Книга', 'Телевизор', 'Окно'], part_of_speech: "сущ" },
+        { word: 'Refrigerator', correctAnswer: 'Холодильник', options: ['Шкаф', 'Холодильник', 'Стол'], part_of_speech: "сущ" },
+        { word: 'Microwave', correctAnswer: 'Микроволновка', options: ['Микроволновка', 'Кухня', 'Полка'], part_of_speech: "сущ" },
+        { word: 'Toaster', correctAnswer: 'Тостер', options: ['Лампа', 'Тостер', 'Чайник'], part_of_speech: "сущ" },
+        { word: 'Kettle', correctAnswer: 'Чайник', options: ['Чашка', 'Тостер', 'Чайник'], part_of_speech: "сущ" }
     ];
 
     useEffect(() => {
@@ -92,9 +92,24 @@ const TestFitst = () => {
                         <p className="text-center my-3 mb-4">
                             <b className="fs-2">{currentQuestion + 1}</b> <small className="mx-2 pt-1">из</small> <b className="fs-2">{shuffledQuestions.length}</b>
                         </p>
-                        <div className="card statistic mb-5 pt-4">
-                            <h4 className="text-center p-2 unselect">{shuffledQuestions[currentQuestion]?.word}</h4>
-                            <span className="fs-6 ms-1">L1</span>
+                        <div className="my-5">
+                            <div className="card statistic py-5">
+                                <h4 className="text-center">{shuffledQuestions[currentQuestion]?.word}</h4>
+                                <span className="text-center p-0 text-warning">{shuffledQuestions[currentQuestion]?.word}</span>
+                                <div className="word_transcription p-0 m-0">
+                                    <span>[{shuffledQuestions[currentQuestion]?.word}]</span>
+                                </div>
+                                <div className="card-left-lg">
+                                    <div className="card_block_lvl">
+                                        <p className="card_block_lvl_span">
+                                            <b>{`1 lvl`}</b>
+                                        </p>
+                                    </div>
+                                    <div>
+                                        <span className="ps-2">сущ</span>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div className="mb-4 d-flex justify-content-center">
                             <div className="w-75">

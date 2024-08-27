@@ -4,8 +4,8 @@ const TestSecondary = () => {
     return (
         <div className='container'>
             <div className="d-none d-lg-block">
-                <div class="row align-items-center g-2 py-5 text-end">
-                    <div class="col-12 col-sm-7 col-lg-4 d-flex justify-content-center">
+                <div className="row align-items-center g-2 py-5 text-end">
+                    <div className="col-12 col-sm-7 col-lg-4 d-flex justify-content-center">
                         <video className="w-100 rounded" autoplay="True" muted>
                             {/* <source src={video_src_test1} type="video/mp4" /> */}
                         </video>
@@ -13,19 +13,19 @@ const TestSecondary = () => {
                             {/* <source src={video_src_test2} type="video/mp4" /> */}
                         </video>
                     </div>
-                    <div class="col-lg-8">
-                        <h1 class="display-5 fw-bold text-body-emphasis mb-3">Тестирование</h1>
-                        <p class="lead">Слова автоматически будут Проходите различные тесты, чтобы закрепить свои знания.</p>
+                    <div className="col-lg-8">
+                        <h1 className="display-5 fw-bold text-body-emphasis mb-3">Тестирование</h1>
+                        <p className="lead">Слова автоматически будут Проходите различные тесты, чтобы закрепить свои знания.</p>
                     </div>
                 </div>
             </div>
             <div className="d-block d-lg-none">
-                <div class="row align-items-center g-2 py-5">
-                    <div class="col-lg-8">
-                        <h1 class="display-2 fw-bold text-body-emphasis mb-3 text-center">Тестирование на узнаваемость</h1>
-                        <p class="lead">Тесты основаны на словах, которые вы добавили в свой словарь. Проходите тесты, чтобы закрепить свои знания.</p>
+                <div className="row align-items-center g-2 py-5">
+                    <div className="col-lg-8">
+                        <h1 className="display-2 fw-bold text-body-emphasis mb-3 text-center">Тестирование на узнаваемость</h1>
+                        <p className="lead">Тесты основаны на словах, которые вы добавили в свой словарь. Проходите тесты, чтобы закрепить свои знания.</p>
                     </div>
-                    <div class="col-12">
+                    <div className="col-12">
                         <div>
                             <p className="text-center my-3 mb-4">
                                 <b className="fs-2">1</b> <small className="mx-2 pt-1">из</small> <b className="fs-2">5</b>
