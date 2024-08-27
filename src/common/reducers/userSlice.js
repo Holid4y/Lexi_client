@@ -45,7 +45,7 @@ const userSlice = createSlice({
         number_of_false_set: null,
         levels: null,
         count_word_in_round: null,
-        time_to_view_result: null,
+        time_to_view_result: 1000,
         // settings get
         loading: false,
         error: null,
