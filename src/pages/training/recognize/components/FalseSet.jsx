@@ -16,7 +16,12 @@ function FalseSet({ training, round, correctWord }) {
 
     // Функция для создания массива ложных ответов
     function makeFalseSet(falseAnswers, correctAnswer) {
-        const falseSet = [...falseAnswers];
+        const falseSet = falseAnswers.map(
+            word => ({ 
+                text: '000', // ложный текст, для неправильного ответа
+                translation: word 
+            })
+        );
         falseSet.push(correctAnswer);
 
         // Перемешиваем элементы массива с помощью алгоритма Фишера-Йетса
