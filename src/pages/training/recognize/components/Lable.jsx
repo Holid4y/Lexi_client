@@ -10,6 +10,7 @@ function Lable({ word, index, correctWord, selectedRadioIndex }) {
     const [classState, setClassState] = useState("");
     const [localSelectedAnswer, setLocalSelectedAnswer] = useState(null);
     const [localCorrectWord, setLocalCorrectWord] = useState(correctWord);
+    const timeToViewResult = useSelector(state => state.user.time_to_view_result);
 
     // Обновляем состояние classState в зависимости от выбранного ответа
     useEffect(() => {
@@ -46,7 +47,7 @@ function Lable({ word, index, correctWord, selectedRadioIndex }) {
             className={classState}
             htmlFor={`option_${index}`}
             onClick={() => {
-                handleFinalAnswer(word.text, "recognize", training, round, dispatch);
+                handleFinalAnswer(word.text, "recognize", training, round, dispatch, timeToViewResult);
                 setLocalSelectedAnswer(word.text);
             }}>
                 <b className="fs-5">{word.translation}</b>

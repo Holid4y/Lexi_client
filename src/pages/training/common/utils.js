@@ -52,10 +52,9 @@ function checkRound(is_correct, dispatch, round, currentTraining, timeToViewResu
         dispatch(addScore());
         dispatch(setIsViewResult(true));
         // Это позволяет добавить задержку перед переключением на следующий раунд
-        const correctTime = timeToViewResult;
-        const wrongTime = 0;
+        console.log(timeToViewResult)
         
-        const timeCallDown = is_correct ? correctTime : wrongTime;
+        const timeCallDown = timeToViewResult
 
         setTimeout(() => performRoundSwitch(dispatch, round, currentTraining), timeCallDown);
     } else {
