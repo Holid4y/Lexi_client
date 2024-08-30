@@ -182,6 +182,22 @@ a {
 }
 
 /* Стили для более прозрачного цвета на главной */
+.main-block{
+    min-height: 72px;
+}
+.span_main_block{
+    position: absolute;
+    left: 8px;
+    top: 8px;
+    width: 75%;
+    height: 40px;
+}
+.h4_main_block{
+    position: absolute;
+    right: 18px;
+    bottom: -4px;
+}
+
 .hover-text-opacity .span_hover {
     opacity: 0.4;
     transition: opacity 0.5s ease;

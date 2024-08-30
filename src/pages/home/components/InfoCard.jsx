@@ -8,44 +8,69 @@ function InfoCard() {
     const { learning_words, upload_books, loading } = useSelector((state) => state.home);
 
     const getContentOrLoading = (content) => {
-        return loading && content === null ? <Loading /> : <h4 className="book-text text-center py-2 mb-0">{content}</h4>;
+        // Если загрузка идет и контент не загружен, возвращаем компонент Loading и скрываем карту
+        return loading ? <Loading /> : <h4 className="book-text text-center py-2 mb-0 h4_main_block">{content}</h4>;
     };
 
     return (
-        <div className="row mb-4">
+        <div className="row mb-3 g-3">
             <div className="col-6 col-md-3 hover-text-opacity animated-block-leftright">
-                <span className="ps-2 span_hover" id="wordsToLearn">Всего слов</span>
                 <Link to={"/word-list"}>
-                    <div className="card card-btn">
-                        {getContentOrLoading(learning_words)}
+                    <div className="card card-btn position-relative main-block">
+                        {loading ? (
+                            <Loading />
+                        ) : (
+                            <>
+                                <span className="ps-2 span_main_block text-secondary" id="wordsToLearn">Всего слов</span>
+                                {getContentOrLoading(learning_words)}
+                            </>
+                        )}
                     </div>
                 </Link>
             </div>
             <div className="col-6 col-md-3 hover-text-opacity animated-block-leftright">
-                <span className="ps-2 span_hover" id="uploadBooks">Добавленных книг</span>
                 <Link to={"/my-books"}>
-                    <div className="card card-btn">
-                        {getContentOrLoading(upload_books)}
+                    <div className="card card-btn position-relative main-block">
+                        {loading ? (
+                            <Loading />
+                        ) : (
+                            <>
+                                <span className="ps-2 span_main_block text-secondary" id="uploadBooks">Добавленных книг</span>
+                                {getContentOrLoading(upload_books)}
+                            </>
+                        )}
                     </div>
                 </Link>
             </div>
             <div className="col-6 col-md-3 hover-text-opacity animated-block-leftright">
-                <span className="ps-2 span_hover" id="statistics">Статистика</span>
                 <Link to="/statistic">
-                    <div className="card w-100 border-none card-btn">
-                        <h4 className="book-text text-center pb-2 mb-2">
-                            <SVG name="statistic" />
-                        </h4>
+                    <div className="card card-btn position-relative main-block">
+                    {loading ? (
+                            <Loading />
+                        ) : (
+                            <>
+                                <span className="ps-2 span_main_block text-secondary" id="statistics">Статистика</span>
+                                <h4 className="book-text text-center pb-2 mb-2 h4_main_block">
+                                    <SVG name="statistic" />
+                                </h4>
+                            </>
+                        )}
                     </div>
                 </Link>
             </div>
             <div className="col-6 col-md-3 hover-text-opacity animated-block-leftright">
-                <span className="ps-2 span_hover" id="bookmarks">Закладки</span>
                 <Link to="/bookmarks">
-                    <div className="card w-100 border-none card-btn">
-                        <h4 className="book-text text-center pb-2 mb-2">
-                            <SVG name="marklist_fill" />
-                        </h4>
+                    <div className="card card-btn position-relative main-block">
+                    {loading ? (
+                            <Loading />
+                        ) : (
+                            <>
+                                <span className="ps-2 span_main_block text-secondary" id="bookmarks">Закладки</span>
+                                <h4 className="book-text text-center pb-2 mb-2 h4_main_block">
+                                    <SVG name="marklist_fill" />
+                                </h4>
+                            </>
+                        )}
                     </div>
                 </Link>
             </div>

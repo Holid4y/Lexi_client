@@ -14,12 +14,13 @@ const BookRetrieveHeader = ({ pk, page }) => {
 
     useEffect(() => {
         // проверяет, есть ли закладка на этой странице
-        if (bookmark) {
+        if (!loading && bookmark) {
             setIsBookmarked(true);
+            setBookmarkPk(bookmark.pk);
         } else {
             setIsBookmarked(false);
         }
-    }, [bookmark]);
+    }, [bookmark, loading]);
 
     useEffect(() => {
         // Запускается только после изменения страницы
