@@ -23,7 +23,7 @@ const Login = () => {
                         navigate("/");
                     }
                 } else if (response.meta.requestStatus === "rejected") {
-                    addNotification(`Неверный логин или пароль`)
+                    addNotification(`Неверный логин или пароль`, 7000)
                 }
             })
     };
