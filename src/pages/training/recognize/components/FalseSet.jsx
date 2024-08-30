@@ -13,12 +13,13 @@ function FalseSet({ training, round, correctWord }) {
     const [falseSet, setFalseSet] = useState(null);
     const [selectedRadioIndex, setSelectedRadioIndex] = useState(null);
     const { answer } = useSelector((state) => state.trainingRound);
+    const timeToViewResult = useSelector(state => state.user.time_to_view_result);
 
     // Функция для создания массива ложных ответов
     function makeFalseSet(falseAnswers, correctAnswer) {
         const falseSet = falseAnswers.map(
             word => ({ 
-                text: '000', // ложный текст, для неправильного ответа
+                text: word, // ложный текст, для неправильного ответа
                 translation: word 
             })
         );
@@ -72,7 +73,7 @@ function FalseSet({ training, round, correctWord }) {
     }, [falseSet]);
 
     useEffect(() => {
-        handleFinalAnswer(answer, "recognize", training, round, dispatch);
+        handleFinalAnswer(answer, "recognize", training, round, dispatch, timeToViewResult);
     }, [answer]);
 
     return (
