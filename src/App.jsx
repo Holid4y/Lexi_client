@@ -41,8 +41,11 @@ function App() {
     }
 
     useEffect(() => {
-        dispatch(checkAccessTokenValidity());
-        dispatch(fetchSettings());
+        const token = localStorage.getItem("access");
+        if (token) {
+            dispatch(checkAccessTokenValidity());
+            dispatch(fetchSettings());
+        }
     }, [dispatch]);
 
     useEffect(() => {
