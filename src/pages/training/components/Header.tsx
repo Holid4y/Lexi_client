@@ -1,9 +1,14 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import SVG from '../../../common/components/Icons/SVG';
 
-function Header() {
-    const { training, round } = useSelector((state) => state.trainingRound);
+import { Round } from "../common/round";
+
+interface HeaderProps {
+    roundObj: Round;
+}
+
+const Header: React.FC<HeaderProps> = ({ roundObj }) => {
 
     const handleGoBack = () => {
         window.history.back();
@@ -17,7 +22,7 @@ function Header() {
                         <SVG name="arrow_left" />
                     </button>
                     <span className="navbar-brand position-absolute top-50 start-50 translate-middle">
-                        <b className="fs-3">{round + 1}</b> <small className="mx-2">из</small> <b className="fs-3">{training.length}</b>
+                        <b className="fs-3">{roundObj.getCurrentRound() + 1}</b> <small className="mx-2">из</small> <b className="fs-3">{roundObj.getTrainingLength()}</b>
                     </span>
                 </nav>
             </div>

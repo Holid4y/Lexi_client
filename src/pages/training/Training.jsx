@@ -14,7 +14,6 @@ function Training() {
     useEffect(() => {
         dispatch(fetchTrainingInfo())
         dispatch(throwState()); // очищаем текущий state
-        dispatch(setIsEnd(false));
     }, [dispatch]);
 
 

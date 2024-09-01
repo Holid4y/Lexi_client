@@ -3,9 +3,8 @@ import { fetchHome } from "../../../common/reducers/homeSlice";
 
 import { clearScore, clearRound } from "../../../common/reducers/training/trainingRoundSlice";
 
-import { fetchTrainingPatch } from "../../../common/reducers/training/trainingSlice";
 
-import { setAnswer, addScore, setIsViewResult, setIsCorrect, throwOneRoundState, setIsEnd, nextRound } from "../../../common/reducers/training/trainingRoundSlice";
+import { throwOneRoundState } from "../../../common/reducers/training/trainingRoundSlice";
 
 export function getTrainig(dispatch, isEnd, patchLoading, localType, ) {
     // Проверяем, что выполняются следующие условия:
@@ -33,60 +32,6 @@ export function getLeargingWord(dispatch, learning_words) {
 }
 
 
-export function cleanAnswer(text){
+export function cleanAnswer(text) {
     return text.trim().toLowerCase()
-}
-
-
-// Функция для проверки ответа
-function checkAnswer(dispatch, answerWord, currentTraining, round) {
-    const cleanWord = cleanAnswer(answerWord);
-    const resultBool = currentTraining[round].word.text == cleanWord;
-    dispatch(setIsCorrect(resultBool));
-    return resultBool;
-}
-
-function checkRound(is_correct, dispatch, round, currentTraining, timeToViewResult) {
-    if (is_correct) {
-        // прибавляем балл за правельный ответ
-        dispatch(addScore());
-        dispatch(setIsViewResult(true));
-        // Это позволяет добавить задержку перед переключением на следующий раунд
-        console.log(timeToViewResult)
-        
-        const timeCallDown = timeToViewResult
-
-        setTimeout(() => performRoundSwitch(dispatch, round, currentTraining), timeCallDown);
-    } else {
-        dispatch(setIsViewResult(true));
-    }
-}
-
-
-export function handleFinalAnswer(answer, localType, currentTraining, round, dispatch, timeToViewResult) {
-    if ((answer !== null) & (answer !== "")) {
-        const is_correct = checkAnswer(dispatch, answer, currentTraining, round);
-        const data = {
-            type: localType,
-            pk: currentTraining[round].training.pk,
-            is_correct: is_correct,
-        };
-
-
-        dispatch(fetchTrainingPatch(data)); // отбовляет бд
-
-        dispatch(setAnswer(null)); // Сбрасываем выбранный вариант для следующего раунда
-        checkRound(is_correct, dispatch, round, currentTraining, timeToViewResult);
-    } else {
-        // Если ничего не выбрано, можно вывести предупреждение или сделать кнопку неактивной
-    }
-}
-
-export function performRoundSwitch(dispatch, round, currentTraining) {
-    if (round + 1 === currentTraining.length) {
-        dispatch(setIsEnd(true)); // отображаем страницу окончания
-    } else {
-        dispatch(nextRound()); // отображает следующий раунд
-    }
-    dispatch(throwOneRoundState()) // просле переключения раунда, очищаем state
 }

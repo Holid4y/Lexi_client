@@ -14,6 +14,7 @@ const reproduceSlice = createSlice({
         answer: null,
         isViewResult: false,
         isCorrect: null,
+        selectedLable: null,
 
         // hint
         hintIsOpen: false,
@@ -23,19 +24,23 @@ const reproduceSlice = createSlice({
         trainingLoaded: (state, action) => {
             state.training = action.payload;
         },
-        throwState: (state, action) => {
+        setSelectedLable: (state, action) => {
+            state.selectedLable = action.payload;
+        },
+        throwState: (state) => {
             // выполнять при последней страницы
             state.training = null;
             state.round = 0;
         },
-        throwOneRoundState: (state, action) => {
+        throwOneRoundState: (state) => {
             // выполнять при ответе страницы
             state.answer = null;
             state.isViewResult = false;
             state.isCorrect = null;
+            state.selectedLable = null
         },
         // round
-        nextRound: (state, action) => {
+        nextRound: (state) => {
             state.round = state.round + 1;
         },
         clearRound: (state, action) => {
@@ -43,10 +48,10 @@ const reproduceSlice = createSlice({
             state.round = 0;
         },
         // score
-        addScore: (state, action) => {
+        addScore: (state) => {
             state.score = state.score + 1;
         },
-        clearScore: (state, action) => {
+        clearScore: (state) => {
             state.score = 0;
         },
         // hint
@@ -78,6 +83,7 @@ const reproduceSlice = createSlice({
 
 export const { 
     trainingLoaded, 
+    setSelectedLable,
     throwState, 
     throwOneRoundState,
     nextRound, 

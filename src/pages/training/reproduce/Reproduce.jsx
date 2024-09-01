@@ -5,7 +5,7 @@ import { getTrainig, getLeargingWord } from "../common/utils";
 
 import Header from "../components/Header";
 import WordCard from "../components/WordCard";
-import End from "../components/End";
+import End from "../components/end-page/End";
 import Hint from "./components/Hint";
 import AnswerButton from "../components/AnswerButton";
 import TextInput from "./components/TextInput";
