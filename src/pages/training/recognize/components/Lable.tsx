@@ -30,9 +30,7 @@ const Lable: React.FC<LableProps> = (
         if (roundObj.isViewResult) {
             
             if (roundObj.selectedLable !== null) {
-                console.log(roundObj.selectedLable, index, word.isCorrect)
                 if (roundObj.selectedLable == index) {
-                    console.log(word.isCorrect ? correctClass : wrongClass)
                     setClassName(word.isCorrect ? correctClass : wrongClass)
                 }
             }

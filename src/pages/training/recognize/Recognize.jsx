@@ -19,7 +19,7 @@ import { Round } from "../common/round";
 function Recognize() {
     const dispatch = useDispatch();
     const commonUseSelector = useSelector
-
+    
     const { count_word_to_training_recognize, loading, patchLoading, error } = useSelector((state) => state.training);
 
     const { learning_words } = useSelector((state) => state.home);
@@ -29,12 +29,11 @@ function Recognize() {
     const trainingObj = new RecognizeClass(dispatch, commonUseSelector);
     const roundObj = new Round(dispatch, commonUseSelector);
 
-
     // Используем эффект для отправки запроса на получение тренировки
     useEffect(() => {
         getTrainig(dispatch, roundObj.isEnd, patchLoading, "recognize");
         getLeargingWord(dispatch, learning_words);
-    }, []);
+    }, [roundObj.isEnd]);
 
 
     const EndPage = <End count_word_to_training={count_word_to_training_recognize} roundObj={roundObj} />;
