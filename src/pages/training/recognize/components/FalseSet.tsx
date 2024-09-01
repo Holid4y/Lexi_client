@@ -1,5 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useEffect, useState } from "react";
 
 import Lable from "./Lable";
 
@@ -16,12 +15,10 @@ interface FalseSetProps {
 const FalseSet: React.FC<FalseSetProps> = ({ roundObj, trainingObj }) => {
 
     const [falseSetList, setFalseSetList] = useState<FalseSetItem[]>([]);
-    const [selectedKeyRadioIndex, setSelectedKeyRadioIndex] = useState<null|number>(null);
 
 
     useEffect(() => {
-        const falseSetList = trainingObj.getFalseSetList()
-        setFalseSetList(falseSetList)
+        setFalseSetList(trainingObj.getFalseSetList())
     }, [roundObj.round]);
 
     // Обработчик для нажатий клавиш 1-6
@@ -29,7 +26,7 @@ const FalseSet: React.FC<FalseSetProps> = ({ roundObj, trainingObj }) => {
         const handleKeyPress = (event: KeyboardEvent) => {
             if (event.key >= "1" && event.key <= "6") {
                 const index = parseInt(event.key, 10) - 1;
-                if (index < falseSetList.length && selectedKeyRadioIndex !== index) {
+                if (index < falseSetList.length) {
                     roundObj.setSelectedLable(index)
                     roundObj.setAnswer(falseSetList[index].text)
                     roundObj.handleFinalAnswer(trainingObj)
