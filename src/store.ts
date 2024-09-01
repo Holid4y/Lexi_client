@@ -37,5 +37,6 @@ export const store = configureStore({
     stats: statsReducer
   },
 });
+export type AppDispatch = typeof store.dispatch
 
 export default store;

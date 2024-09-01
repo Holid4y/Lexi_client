@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
+import { AppDispatch } from '../../../../store';
 
 import ResultHeader from './ResultHeader';
 import ResultMessage from './ResultMessage';
@@ -14,7 +15,7 @@ interface ResultProps {
 }
 
 const End: React.FC<ResultProps> = ({ count_word_to_training, roundObj }) => {
-    const dispatch = useDispatch();
+    const dispatch = useDispatch<AppDispatch>();
 
     useEffect(() => {
         dispatch(fetchTrainingInfo())
@@ -22,6 +23,7 @@ const End: React.FC<ResultProps> = ({ count_word_to_training, roundObj }) => {
     }, [dispatch]);
 
     function handleAction() {
+        console.log('handleAction')
         dispatch(clearScore());
         // переключить isEnd на false
         dispatch(setIsEnd(false));
