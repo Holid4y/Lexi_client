@@ -65,7 +65,7 @@ const AnswerButton: React.FC<AnswerButtonProps> = ({ roundObj, trainingObj }) =>
     const getButtonComponent = () => {
         if (trainingObj instanceof Recognize) {
             return roundObj.isCorrect === false ? NextButton : "";
-        } else {
+        } else if (trainingObj instanceof Reproduse) {
             if (roundObj.isCorrect === null) {
                 return AnswerButton;
             } else if (roundObj.isCorrect === false) {

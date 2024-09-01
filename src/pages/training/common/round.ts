@@ -3,7 +3,7 @@ import { TypedUseSelectorHook } from 'react-redux';
 import { addScore, nextRound, setAnswer, setIsCorrect, setIsEnd, setIsViewResult, setSelectedLable, throwOneRoundState } from "../../../common/reducers/training/trainingRoundSlice";
 import { cleanAnswer } from './utils';
 import { fetchTrainingPatch } from '../../../common/reducers/training/trainingSlice';
-import { FalseSetItem, Recognize, Reproduse, Training } from './training';
+import { Training } from './training';
 
 
 export class Round {
@@ -66,9 +66,7 @@ export class Round {
     }
 
     handleFinalAnswer(trainingObj: Training) {
-        
         const isCorrect = this.#checkAnswer(trainingObj);
-
         this.#sendResutToBackend(trainingObj, isCorrect)
         this.#checkRound(isCorrect)
     }
@@ -81,12 +79,7 @@ export class Round {
         return resultBool;
     }
     #sendResutToBackend(trainingObj: Training, isCorrect: boolean) {
-        let typeName = ''
-        if (trainingObj instanceof Recognize) {
-            typeName = 'recognize'
-        } else if (trainingObj instanceof Reproduse) {
-            typeName = 'reproduce'
-        }
+        let typeName = trainingObj.type
   
         const data = {
             type: typeName,

@@ -24,19 +24,17 @@ function Recognize() {
 
     const { learning_words } = useSelector((state) => state.home);
 
-    
-
     const trainingObj = new RecognizeClass(dispatch, commonUseSelector);
     const roundObj = new Round(dispatch, commonUseSelector);
 
     // Используем эффект для отправки запроса на получение тренировки
     useEffect(() => {
-        getTrainig(dispatch, roundObj.isEnd, patchLoading, "recognize");
+        getTrainig(dispatch, roundObj.isEnd, patchLoading, trainingObj.type);
         getLeargingWord(dispatch, learning_words);
     }, [roundObj.isEnd]);
 
 
-    const EndPage = <End count_word_to_training={count_word_to_training_recognize} roundObj={roundObj} />;
+    const EndPage = <End count_word_to_training={count_word_to_training_recognize} roundObj={roundObj} trainingObj={trainingObj} />;
 
     const TrainingPage = () => {
         if (trainingObj.training === null) {
@@ -45,7 +43,7 @@ function Recognize() {
         
         
         return (
-            <div>
+            <div>                   
                 <Header roundObj={roundObj}/>
                 <main className="container pb-0 mb-0">
                     <WordCard trainingObj={trainingObj}/>
@@ -56,7 +54,6 @@ function Recognize() {
                         <AnswerButton roundObj={roundObj} trainingObj={trainingObj} />
                     </div>
                 </main>
-                
             </div>
         );
     };

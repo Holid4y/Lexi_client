@@ -8,13 +8,15 @@ import ActionButtons from './ActionButtons';
 import { fetchTrainingInfo } from '../../../../common/reducers/training/trainingSlice';
 import { clearScore, setIsEnd, throwState } from '../../../../common/reducers/training/trainingRoundSlice';
 import { Round } from '../../common/round';
+import { Training } from '../../common/training';
 
 interface ResultProps {
     count_word_to_training: number;
     roundObj: Round;
+    trainingObj: Training
 }
 
-const End: React.FC<ResultProps> = ({ count_word_to_training, roundObj }) => {
+const End: React.FC<ResultProps> = ({ count_word_to_training, roundObj, trainingObj }) => {
     const dispatch = useDispatch<AppDispatch>();
 
     useEffect(() => {
@@ -38,7 +40,7 @@ const End: React.FC<ResultProps> = ({ count_word_to_training, roundObj }) => {
                             <ResultMessage countWordToTraining={count_word_to_training} />
                             <ActionButtons 
                                 countWordToTraining={count_word_to_training} 
-                                type='recognize' 
+                                type={trainingObj.type} 
                                 handleAction={handleAction} 
                             />
                         </div>

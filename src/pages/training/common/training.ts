@@ -24,12 +24,14 @@ export class Training {
 
     training: TrainingItem[]
     round: number
+    type: string
 
     constructor(dispatch: (action: any) => void, useSelector: TypedUseSelectorHook<any>) {
         this.dispatch = dispatch;
         this.useSelector = useSelector;
         this.training = this.useSelector((state) => state.trainingRound.training);
         this.round = this.useSelector((state) => state.trainingRound.round);
+        this.type = ''; 
     }
 
     getCurrentRound() {
@@ -50,7 +52,13 @@ export interface FalseSetItem {
 }
 
 export class Recognize extends Training {
-    training: RecognizeTrainingItem[]
+    training: RecognizeTrainingItem[];
+    type: string
+
+    constructor(dispatch: (action: any) => void, useSelector: TypedUseSelectorHook<any>) {
+        super(dispatch, useSelector);
+        this.type = 'recognize'; 
+    }
 
     getCurrentRound(): RecognizeTrainingItem {
         const currentRound = super.getCurrentRound();
@@ -92,7 +100,14 @@ export class Recognize extends Training {
 }
 
 export class Reproduse extends Training {
-    getTips() {
+    type: string
 
+    constructor(dispatch: (action: any) => void, useSelector: TypedUseSelectorHook<any>) {
+        super(dispatch, useSelector);
+        this.type = 'reproduce';  
+    }
+
+    getTips() {
+        // Реализация метода getTips
     }
 }
