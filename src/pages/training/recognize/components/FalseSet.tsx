@@ -5,7 +5,6 @@ import Lable from "./Lable";
 import { Recognize, FalseSetItem } from "../../common/training";
 import { Round } from "../../common/round";
 
-
 interface FalseSetProps {
     roundObj: Round;
     trainingObj: Recognize;
@@ -13,23 +12,26 @@ interface FalseSetProps {
 
 // Компонент FalseSet отвечает за отображение вариантов ответа, включая правильный ответ
 const FalseSet: React.FC<FalseSetProps> = ({ roundObj, trainingObj }) => {
-
     const [falseSetList, setFalseSetList] = useState<FalseSetItem[]>([]);
-
+    const [hasSelected, setHasSelected] = useState(false); // Состояние для отслеживания выбора
 
     useEffect(() => {
-        setFalseSetList(trainingObj.getFalseSetList())
+        setFalseSetList(trainingObj.getFalseSetList());
+        setHasSelected(false); // Сбрасываем выбор при новом раунде
     }, [roundObj.round]);
 
     // Обработчик для нажатий клавиш 1-6
     useEffect(() => {
         const handleKeyPress = (event: KeyboardEvent) => {
-            if (event.key >= "1" && event.key <= "6") {
+            if (event.key >= "1" && event.key <= "6" && !hasSelected) { // Проверяем hasSelected
                 const index = parseInt(event.key, 10) - 1;
                 if (index < falseSetList.length) {
-                    roundObj.setSelectedLable(index)
-                    roundObj.setAnswer(falseSetList[index].text)
-                    roundObj.handleFinalAnswer(trainingObj)
+                    console.log(roundObj.isViewResult);
+
+                    roundObj.setSelectedLable(index);
+                    roundObj.setAnswer(falseSetList[index].text);
+                    roundObj.handleFinalAnswer(trainingObj);
+                    setHasSelected(true); // Устанавливаем hasSelected в true после выбора
                 }
             }
         };
@@ -39,25 +41,20 @@ const FalseSet: React.FC<FalseSetProps> = ({ roundObj, trainingObj }) => {
         return () => {
             window.removeEventListener("keydown", handleKeyPress);
         };
-    }, [roundObj.round, falseSetList]);
-
+    }, [roundObj.round, falseSetList, hasSelected]); // Добавляем hasSelected в зависимости
 
     return (
         <div>
-            {
-                falseSetList.map((item, index) => (
-                    <React.Fragment key={index}>
-
-                        <Lable 
-                            word={item} 
-                            index={index} 
-                            roundObj={roundObj}
-                            trainingObj={trainingObj}
-                        />
-                        
-                    </React.Fragment>
-                ))
-            }
+            {falseSetList.map((item, index) => (
+                <React.Fragment key={index}>
+                    <Lable 
+                        word={item} 
+                        index={index} 
+                        roundObj={roundObj}
+                        trainingObj={trainingObj}
+                    />
+                </React.Fragment>
+            ))}
         </div>
     );
 }
