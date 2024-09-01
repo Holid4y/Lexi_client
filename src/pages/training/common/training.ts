@@ -1,5 +1,6 @@
 
 import { TypedUseSelectorHook } from 'react-redux';
+import { stats } from '../../../../public/urls';
 
 interface WordObject {
     part_of_speech: string;
@@ -24,18 +25,25 @@ export class Training {
 
     training: TrainingItem[]
     round: number
+    isViewResult: boolean
     type: string
+    
 
     constructor(dispatch: (action: any) => void, useSelector: TypedUseSelectorHook<any>) {
         this.dispatch = dispatch;
         this.useSelector = useSelector;
         this.training = this.useSelector((state) => state.trainingRound.training);
         this.round = this.useSelector((state) => state.trainingRound.round);
+        this.isViewResult = this.useSelector((state) => state.trainingRound.isViewResult)
         this.type = ''; 
     }
 
     getCurrentRound() {
         return this.training[this.round]
+    }
+
+    getWordView() {
+
     }
 
 }
@@ -69,6 +77,10 @@ export class Recognize extends Training {
         return this.makeFalseSet()
     }
 
+    getWordView(): string {
+        return this.getCurrentRound().word.text
+    }
+
     makeFalseSet() {
         const correctWord = {
             text: this.getCurrentRound().word.text,
@@ -99,13 +111,26 @@ export class Recognize extends Training {
     }
 }
 
-export class Reproduse extends Training {
+export class Reproduce extends Training {
     type: string
 
     constructor(dispatch: (action: any) => void, useSelector: TypedUseSelectorHook<any>) {
         super(dispatch, useSelector);
         this.type = 'reproduce';  
     }
+
+    getCurrentRound(): RecognizeTrainingItem {
+        const currentRound = super.getCurrentRound();
+        return currentRound as RecognizeTrainingItem; 
+    }
+
+    getWordView(): string {
+        const word = this.getCurrentRound().word
+        return this.isViewResult ? 
+        `${word.text} - ${word.translation}` :
+        word.translation
+    }
+
 
     getTips() {
         // Реализация метода getTips

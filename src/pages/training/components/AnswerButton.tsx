@@ -1,12 +1,12 @@
 import React, { useEffect, useRef } from "react";
 
 import { Round } from "../common/round";
-import { Recognize, Reproduse } from "../common/training";
+import { Recognize, Reproduce } from "../common/training";
 
 
 interface AnswerButtonProps {
     roundObj: Round;
-    trainingObj: Recognize | Reproduse;
+    trainingObj: Recognize | Reproduce;
 }
 
 
@@ -65,13 +65,13 @@ const AnswerButton: React.FC<AnswerButtonProps> = ({ roundObj, trainingObj }) =>
     const getButtonComponent = () => {
         if (trainingObj instanceof Recognize) {
             return roundObj.isCorrect === false ? NextButton : "";
-        } else if (trainingObj instanceof Reproduse) {
+        } else if (trainingObj instanceof Reproduce) {
             if (roundObj.isCorrect === null) {
                 return AnswerButton;
             } else if (roundObj.isCorrect === false) {
                 return NextButton;
             } else {
-                return "ошибка"; // Или можно не возвращать ничего
+                return // не отображаем кнопу, так как ответ правильный
             }
         }
     };

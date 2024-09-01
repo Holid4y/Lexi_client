@@ -14,9 +14,11 @@ const reproduceSlice = createSlice({
         answer: null,
         isViewResult: false,
         isCorrect: null,
+
+        // recognize
         selectedLable: null,
 
-        // hint
+        // reproduce
         hintIsOpen: false,
         hintTextListTuple: null
     },

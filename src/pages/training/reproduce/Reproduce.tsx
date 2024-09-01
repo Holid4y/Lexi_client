@@ -13,45 +13,51 @@ import Loading from "../../../common/components/Treatment/Loading";
 import NoMoreWordToTrainingPage from "../components/NoMoreWordToTrainingPage";
 import NoWordPage from "../components/NoWordPage";
 
+import { Round } from "../common/round";
+import { Reproduce as ReproduceClass } from "../common/training"
+
 function Reproduce() {
     const dispatch = useDispatch();
+    const commonUseSelector = useSelector
 
-    const { count_word_to_training_reproduce, loading, patchLoading, error } = useSelector((state) => state.training);
-    const { training, round, score, isEnd } = useSelector((state) => state.trainingRound);
-    const { learning_words } = useSelector((state) => state.home);
+    const { count_word_to_training_reproduce, loading, patchLoading } = useSelector((state: any) => state.training);
 
-    const localType = "reproduce";
+    const { learning_words } = useSelector((state: any) => state.home);
+    
+    const trainingObj = new ReproduceClass(dispatch, commonUseSelector);
+    const roundObj = new Round(dispatch, commonUseSelector);
+
 
     // Используем эффект для отправки запроса на получение тренировки
     useEffect(() => {
-        getTrainig(dispatch, isEnd, patchLoading, localType);
+        getTrainig(dispatch, roundObj.isEnd, patchLoading, trainingObj.type);
         getLeargingWord(dispatch, learning_words);
-    }, [dispatch, isEnd]);
+    }, [roundObj.isEnd]);
 
-    const LoadingView = <Loading />;
-    const EndPage = <End type={localType} count_word_to_training={count_word_to_training_reproduce} score={score} />;
+    const EndPage = <End count_word_to_training={count_word_to_training_reproduce} roundObj={roundObj} trainingObj={trainingObj} />;
 
     const TrainingPage = () => {
-        if (!training) {
+        if (trainingObj.training === null) {
             return null
         }
 
         return (
             <div>
-                <Header />
+                <Header roundObj={roundObj}/>
                 <main className="container pb-0 mb-0">
-                    <WordCard localType={localType} text={training[round].word.translation} en_text={training[round].word.text} is_view_transctiption={false}/>
+                    <WordCard trainingObj={trainingObj}/>
                     <div className="px-5">
                         <div>
-                            <TextInput correctWord={training[round].word.text} />
-                            <Hint text={training[round].word.text} />
+                            <TextInput roundObj={roundObj} trainingObj={trainingObj} />
+                            <Hint trainingObj={trainingObj} />
                         </div>
-                        <AnswerButton localType={localType} />
+                        <AnswerButton roundObj={roundObj} trainingObj={trainingObj} />
                     </div>
                 </main>
             </div>
         )
     };
+  
 
     const isNoMoreWordToTraining = count_word_to_training_reproduce == 0
     const isNoWord = learning_words == 0
@@ -59,12 +65,13 @@ function Reproduce() {
     return (
         <div className="align-items-center">
             {
-                loading ? LoadingView : 
-                TrainingPage() || 
-                ((isNoMoreWordToTraining & !isEnd) && <NoMoreWordToTrainingPage />) ||
+                loading ? <Loading /> : 
+                TrainingPage() ||
+                ((isNoMoreWordToTraining && !roundObj.isEnd) && <NoMoreWordToTrainingPage />) ||
                 (isNoWord && <NoWordPage />)
             }
-            {isEnd && EndPage}
+            {roundObj.isEnd && EndPage}
+
         </div>
     );
 }

@@ -1,16 +1,24 @@
 import React, { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setHintIsOpen, setHintTextListTuple } from "../../../../common/reducers/training/trainingRoundSlice";
+import { Round } from "../../common/round";
+import { Reproduce } from "../../common/training";
 
-function Hint({ text }) {
+interface HintProps {
+    roundObj: Round;
+    trainingObj: Reproduce;
+}
+
+const Hint: React.FC<HintProps> = ({ roundObj, trainingObj }) => {
     const dispatch = useDispatch();
-    const { hintIsOpen, hintTextListTuple } = useSelector((state) => state.trainingRound);
-    const { round, answer } = useSelector((state) => state.trainingRound);
-    const hintButtonRef = useRef(null);
+    const { hintIsOpen, hintTextListTuple } = useSelector((state: any) => state.trainingRound); 
+    const { round, answer } = useSelector((state: any) => state.trainingRound);
+
+    const hintButtonRef = useRef<HTMLButtonElement | null>(null); // Указываем тип для useRef
 
     // Обработчик, при нажатии на Tab открывается подсказка
     useEffect(() => {
-        const handleKeyDown = (event) => {
+        const handleKeyDown = (event: KeyboardEvent) => {
             if (event.key === "Tab") {
                 if (hintButtonRef.current && !hintButtonRef.current.disabled) {
                     hintButtonRef.current.click();
@@ -74,7 +82,7 @@ function Hint({ text }) {
         return () => {
             tooltipList.forEach(tooltip => tooltip.dispose());
         };
-    }, [hintIsOpen]);
+    }, [ ]);
 
     function wordToListTuple(word) {
         return word.split('').map(letter => [letter, false]);

@@ -2,10 +2,10 @@ import React from "react";
 import { useSelector } from "react-redux";
 import Audio from "../../../common/components/Audio/Audio";
 
-import { Recognize, Reproduse } from "../common/training";
+import { Recognize, Reproduce } from "../common/training";
 
 interface WordCardProps {
-    trainingObj: Recognize | Reproduse;
+    trainingObj: Recognize | Reproduce;
 }
 
 const WordCard: React.FC<WordCardProps> = ({ trainingObj }) => {
@@ -21,7 +21,7 @@ const WordCard: React.FC<WordCardProps> = ({ trainingObj }) => {
     return (
         <div className="my-5">
             <div className="card statistic py-5">
-                <h4 className="text-center">{word.text}</h4>
+                <h4 className="text-center">{trainingObj.getWordView()}</h4>
 
                 {/* FIXME */}
                 {/* <span className="text-center p-0 text-warning">{word.form}</span> */}

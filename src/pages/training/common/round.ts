@@ -41,7 +41,7 @@ export class Round {
     }
 
     setAnswer(answer: string) {
-        this.answer = answer
+        this.dispatch(setAnswer(answer))
     }
 
     getCurrentRound() {

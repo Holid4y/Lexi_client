@@ -481,9 +481,15 @@ input[type="number"] {
 }
 
 .ans_red_text {
-    color: red;
-    font-weight: bolder;
-    font-size: 45px;
+    color: #ff4b4b;
+    font-weight: 600;
+    font-size: 35px;
+}
+
+.ans_white_text {
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 35px;
 }
 
 .ans_green_text {
