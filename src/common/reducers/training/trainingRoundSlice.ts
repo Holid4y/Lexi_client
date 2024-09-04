@@ -1,28 +1,12 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { TrainingItem } from "../../../pages/training/common/training";
 
-interface Word {
-    text: string;
-    translation: string;
-    transcription: string;
-    part_of_speech: string;
-}
-
-interface Training {
-    pk: number;
-    lvl: number;
-}
-
-interface TrainingItem {
-    word: Word;
-    training: Training;
-    false_set: string[];
-}
 
 interface TrainingRoundState {
     // common
     training: TrainingItem[] | null;
-    round: number;
-    score: number;
+    round: number | 0;
+    score: number | 0;
     isEnd: boolean;
 
     // one round state

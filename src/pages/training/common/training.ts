@@ -12,7 +12,7 @@ interface TrainingObject {
     lvl: number;
 }
 
-interface TrainingItem {
+export interface TrainingItem {
     training: TrainingObject;
     word: WordObject;
 }

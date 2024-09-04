@@ -46,7 +46,7 @@ function Recognize() {
                     <WordCard trainingObj={trainingObj}/>
                     <div className="px-5">
                         <div className="mb-4">
-                            <FalseSet training={training} round={round} correctWord={training[round].word.text} />
+                            <FalseSet trainingObj={trainingObj} />
                         </div>
                         <AnswerButton localType={localType} />
                     </div>
