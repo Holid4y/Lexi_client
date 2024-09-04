@@ -5,7 +5,7 @@ import { setSelectedLable, setAnswer } from "../../../../common/reducers/trainin
 
 import Lable from "./Lable";
 
-import { Answer } from "../../common/answer";
+import { RoundManager } from "../../common/roundManager";
 import { Recognize, FalseSetItem } from "../../common/training";
 import { RootState } from "../../../../store";
 
@@ -19,7 +19,7 @@ const FalseSet: React.FC<FalseSetProps> = ({ trainingObj }) => {
     const dispatch = useDispatch();
     const { round } = useSelector((state: RootState) => state.trainingRound);
 
-    const answerObj = new Answer(dispatch, round, trainingObj)
+    const roundManagerObj = new RoundManager(dispatch, round, trainingObj)
 
 
     const [falseSetList, setFalseSetList] = useState<FalseSetItem[]>([]);
@@ -37,7 +37,7 @@ const FalseSet: React.FC<FalseSetProps> = ({ trainingObj }) => {
                 const index = parseInt(event.key, 10) - 1;
                 if (index < falseSetList.length) {
                     dispatch(setSelectedLable(index))
-                    answerObj.handleFinalAnswer(falseSetList[index].text)
+                    roundManagerObj.handleFinalAnswer(falseSetList[index].text)
                     setHasSelected(true); 
                 }
             }
@@ -57,7 +57,7 @@ const FalseSet: React.FC<FalseSetProps> = ({ trainingObj }) => {
                     <Lable 
                         word={item} 
                         index={index} 
-                        answerObj={answerObj}
+                        roundManagerObj={roundManagerObj}
                     />
                 </React.Fragment>
             ))}

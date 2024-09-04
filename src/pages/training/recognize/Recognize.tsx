@@ -48,7 +48,7 @@ function Recognize() {
                         <div className="mb-4">
                             <FalseSet trainingObj={trainingObj} />
                         </div>
-                        <AnswerButton localType={localType} />
+                        <AnswerButton trainingObj={trainingObj} />
                     </div>
                 </main>
                 

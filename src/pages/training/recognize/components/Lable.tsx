@@ -4,17 +4,17 @@ import { useDispatch, useSelector } from "react-redux";
 import { FalseSetItem, Recognize } from "../../common/training";
 import { RootState } from "../../../../store";
 import { setSelectedLable } from "../../../../common/reducers/training/trainingRoundSlice";
-import { Answer } from "../../common/answer";
+import { RoundManager } from "../../common/roundManager";
 
 interface LableProps {
     word: FalseSetItem;
     index: number;
-    answerObj: Answer
+    roundManagerObj: RoundManager
 }
 
 // Компонент Lable отвечает за отображение варианта ответа и стилей во время ответа
 const Lable: React.FC<LableProps> = (
-    { word, index, answerObj }
+    { word, index, roundManagerObj }
 ) => {
     const dispatch = useDispatch();
     
@@ -46,7 +46,7 @@ const Lable: React.FC<LableProps> = (
     function handleAnswerClick() {
         if (!isViewResult) { // Проверяем, можно ли кликать
             dispatch(setSelectedLable(index))
-            answerObj.handleFinalAnswer(word.text)
+            roundManagerObj.handleFinalAnswer(word.text)
         }
     }
 

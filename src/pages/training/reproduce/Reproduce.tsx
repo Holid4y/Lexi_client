@@ -50,7 +50,7 @@ function Reproduce() {
                             <TextInput correctWord={training[round].word.text} />
                             <Hint text={training[round].word.text} />
                         </div>
-                        <AnswerButton localType={localType} />
+                        <AnswerButton trainingObj={trainingObj} />
                     </div>
                 </main>
             </div>

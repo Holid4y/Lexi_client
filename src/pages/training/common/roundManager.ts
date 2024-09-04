@@ -6,7 +6,7 @@ import { fetchTrainingPatch } from '../../../common/reducers/training/trainingSl
 import { Training } from './training';
 
 
-export class Answer {
+export class RoundManager {
     dispatch: (action: any) => void;
     round: number
     trainingObj: Training
