@@ -18,7 +18,7 @@ const FloatingButtons = () => {
     <div>
           <div className="floating-buttons-container">
               <button className="btn button-main" data-bs-toggle="modal" data-bs-target="#AddBookModal">
-                  <SVG name="plus" />
+                  <SVG name="plus_btn" />
               </button>
           </div>
 

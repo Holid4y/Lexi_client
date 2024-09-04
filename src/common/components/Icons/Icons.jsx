@@ -185,6 +185,11 @@ const icons = {
         </svg>
     ),
     plus: (
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" className="bi bi-plus" viewBox="0 0 16 16">
+              <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
+        </svg>
+    ),
+    plus_btn: (
         <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="currentColor" className="bi bi-plus">
               <path xmlns="http://www.w3.org/2000/svg" fillRule="evenodd" clipRule="evenodd" d="M0 7C0 3.13403 3.13403 0 7 0H17C20.866 0 24 3.13403 24 7V17C24 20.866 20.866 24 17 24H7C3.13403 24 0 20.866 0 17V7ZM6 12C6 11.4478 6.44775 11 7 11H11V7C11 6.44775 11.4478 6 12 6C12.5522 6 13 6.44775 13 7V11H17C17.5522 11 18 11.4478 18 12C18 12.5522 17.5522 13 17 13H13V17C13 17.5522 12.5522 18 12 18C11.4478 18 11 17.5522 11 17V13H7C6.44775 13 6 12.5522 6 12Z" fill="currentColor"/>
         </svg>
