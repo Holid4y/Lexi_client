@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
+import { setSelectedLable, setAnswer } from "../../../../common/reducers/training/trainingRoundSlice";
 
 import Lable from "./Lable";
 
+import { Answer } from "../../common/answer";
 import { Recognize, FalseSetItem } from "../../common/training";
 import { RootState } from "../../../../store";
-import { useSelector } from "react-redux";
+
 
 interface FalseSetProps {
     trainingObj: Recognize;
@@ -12,7 +16,10 @@ interface FalseSetProps {
 
 // Компонент FalseSet отвечает за отображение вариантов ответа, включая правильный ответ
 const FalseSet: React.FC<FalseSetProps> = ({ trainingObj }) => {
-    const { round, isViewResult } = useSelector((state: RootState) => state.trainingRound);
+    const dispatch = useDispatch();
+    const { round } = useSelector((state: RootState) => state.trainingRound);
+
+    const answerObj = new Answer(dispatch, round, trainingObj)
 
 
     const [falseSetList, setFalseSetList] = useState<FalseSetItem[]>([]);
@@ -29,12 +36,9 @@ const FalseSet: React.FC<FalseSetProps> = ({ trainingObj }) => {
             if (event.key >= "1" && event.key <= "6" && !hasSelected) { // Проверяем hasSelected
                 const index = parseInt(event.key, 10) - 1;
                 if (index < falseSetList.length) {
-                    console.log(isViewResult);
-                    console.log('sent answer')
-                    // roundObj.setSelectedLable(index);
-                    // roundObj.setAnswer(falseSetList[index].text);
-                    // roundObj.handleFinalAnswer(trainingObj);
-                    setHasSelected(true); // Устанавливаем hasSelected в true после выбора
+                    dispatch(setSelectedLable(index))
+                    answerObj.handleFinalAnswer(falseSetList[index].text)
+                    setHasSelected(true); 
                 }
             }
         };
@@ -53,7 +57,7 @@ const FalseSet: React.FC<FalseSetProps> = ({ trainingObj }) => {
                     <Lable 
                         word={item} 
                         index={index} 
-                        trainingObj={trainingObj}
+                        answerObj={answerObj}
                     />
                 </React.Fragment>
             ))}

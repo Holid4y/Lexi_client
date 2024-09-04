@@ -43,25 +43,26 @@ export const fetchTrainingInfo = createAsyncThunk("training/fetchTrainingInfo", 
     
 });
 
-export const fetchTrainingPatch = createAsyncThunk("training/fetchTrainingPatch", async ({ type, pk, is_correct }, { dispatch }) => {
-    const url = new URL(host + training);
+export const fetchTrainingPatch = createAsyncThunk(
+    "training/fetchTrainingPatch",
+    async (data: { type: string; pk: number; is_correct: boolean }, { dispatch }) => {
+        const { type, pk, is_correct } = data;
+        const url = new URL(host + training);
+        const params = new URLSearchParams({
+            type,
+        });
+        url.search = params.toString();
 
-    const params = new URLSearchParams({
-        type,
-    });
-    url.search = params.toString();
+        const body = {
+            pk,
+            is_correct,
+        };
 
-    const body = {
-        pk: pk,
-        is_correct: is_correct,
-    };
+        const bodyString = JSON.stringify(body);
 
-    const bodyString = JSON.stringify(body);
-
-    await getResponse(url, "PATCH", bodyString)
-
-  
-});
+        await getResponse(url, "PATCH", bodyString);
+    }
+);
 
 const trainingSlice = createSlice({
     name: "training",

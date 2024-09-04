@@ -3,18 +3,23 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { FalseSetItem, Recognize } from "../../common/training";
 import { RootState } from "../../../../store";
+import { setSelectedLable } from "../../../../common/reducers/training/trainingRoundSlice";
+import { Answer } from "../../common/answer";
 
 interface LableProps {
     word: FalseSetItem;
     index: number;
-    trainingObj: Recognize;
+    answerObj: Answer
 }
 
 // Компонент Lable отвечает за отображение варианта ответа и стилей во время ответа
 const Lable: React.FC<LableProps> = (
-    { word, index, trainingObj }
+    { word, index, answerObj }
 ) => {
-    const { round, isViewResult } = useSelector((state: RootState) => state.trainingRound);
+    const dispatch = useDispatch();
+    
+    const { round, isViewResult, selectedLable } = useSelector((state: RootState) => state.trainingRound);
+    
     const defaultClass = "btn btn-dark-list position-relative w-100 mb-4 py-3";
     const wrongClass = `${defaultClass} box-danger`;
     const correctClass = `${defaultClass} box-success`;
@@ -27,23 +32,21 @@ const Lable: React.FC<LableProps> = (
 
     useEffect(() => {
         if (isViewResult) {
-            // if (roundObj.selectedLable !== null) {
-            //     if (roundObj.selectedLable === index) {
-            //         setClassName(word.isCorrect ? correctClass : wrongClass);
-            //     }
-            // }
-            // if (word.isCorrect) {
-            //     setClassName(correctClass);
-            // }
+            if (selectedLable !== null) {
+                if (selectedLable === index) {
+                    setClassName(word.isCorrect ? correctClass : wrongClass);
+                }
+            }
+            if (word.isCorrect) {
+                setClassName(correctClass);
+            }
         }
-    }, [isViewResult]);    
+    }, [isViewResult, selectedLable]);    
 
     function handleAnswerClick() {
         if (!isViewResult) { // Проверяем, можно ли кликать
-            console.log('sent answer')
-            // roundObj.setSelectedLable(index);
-            // roundObj.setAnswer(word.text); 
-            // roundObj.handleFinalAnswer(trainingObj);
+            dispatch(setSelectedLable(index))
+            answerObj.handleFinalAnswer(word.text)
         }
     }
 
