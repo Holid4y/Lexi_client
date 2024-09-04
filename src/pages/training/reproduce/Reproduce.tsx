@@ -47,7 +47,7 @@ function Reproduce() {
                     <WordCard trainingObj={trainingObj}/>
                     <div className="px-5">
                         <div>
-                            <TextInput correctWord={training[round].word.text} />
+                            <TextInput trainingObj={trainingObj} />
                             <Hint text={training[round].word.text} />
                         </div>
                         <AnswerButton trainingObj={trainingObj} />

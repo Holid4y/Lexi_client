@@ -4,35 +4,36 @@ import { getResponse } from "../../../../public/urls";
 
 import { trainingLoaded } from "./trainingRoundSlice";
 
-export const fetchTraining = createAsyncThunk("training/fetchTraining", async (type, { dispatch }) => {
-    const url = new URL(host + training);
+export const fetchTraining = createAsyncThunk(
+    "training/fetchTraining",
+    async (type: string, { dispatch }) => { // Указываем, что type - это строка
+        const url = new URL(host + training);
 
-    const params = new URLSearchParams({
-        type,
-    });
-    url.search = params.toString();
+        const params = new URLSearchParams({
+            type,
+        });
+        url.search = params.toString();
 
-    const response = await getResponse(url, "GET")
+        const response = await getResponse(url, "GET");
 
-    // if not no content
-    if (response.status !== 204) {
-        const data = await response.json();
-        if (data) {
-            dispatch(trainingLoaded(data));
-            return data
-        } 
-    } else {
-        // "слов для повторения нет"
+        // if not no content
+        if (response.status !== 204) {
+            const data = await response.json();
+            if (data) {
+                dispatch(trainingLoaded(data));
+                return data;
+            }
+        } else {
+            // "слов для повторения нет"
+        }
     }
-
-    
-});
+);
 
 export const fetchTrainingInfo = createAsyncThunk("training/fetchTrainingInfo", async (_, { dispatch }) => {
     const url = new URL(host + info);
 
     const response = await getResponse(url, "GET")
-    
+
     if (response.ok) {
         const data = await response.json();
         if (data) {
@@ -40,7 +41,7 @@ export const fetchTrainingInfo = createAsyncThunk("training/fetchTrainingInfo", 
             return data;
         }
     }
-    
+
 });
 
 export const fetchTrainingPatch = createAsyncThunk(
@@ -64,21 +65,37 @@ export const fetchTrainingPatch = createAsyncThunk(
     }
 );
 
+interface TrainingRound {
+    // info
+    count_word_to_training_recognize: number | null,
+    count_word_to_training_reproduce: number | null,
+
+    viewCountSumm: number | null,
+
+    patchLoading: boolean,
+    patchError: string | null,
+
+    loading: boolean,
+    error: string | null,
+}
+
+const initialState: TrainingRound = {
+    // info
+    count_word_to_training_recognize: null,
+    count_word_to_training_reproduce: null,
+
+    viewCountSumm: null,
+
+    patchLoading: false,
+    patchError: null,
+
+    loading: false,
+    error: null,
+}
+
 const trainingSlice = createSlice({
     name: "training",
-    initialState: {
-        // info
-        count_word_to_training_recognize: null,
-        count_word_to_training_reproduce: null,
-
-        viewCountSumm: null,
-
-        patchLoading: false,
-        patchError: null,
-
-        loading: false,
-        error: null,
-    },
+    initialState,
     reducers: {
         trainingInfoLoaded: (state, action) => {
             state.count_word_to_training_recognize = action.payload.count_word_to_training_recognize;
@@ -98,7 +115,7 @@ const trainingSlice = createSlice({
             })
             .addCase(fetchTraining.rejected, (state, action) => {
                 state.loading = false;
-                state.error = action.error.message;
+                state.error = action.error.message || null;
             })
 
             .addCase(fetchTrainingPatch.pending, (state) => {
@@ -109,7 +126,7 @@ const trainingSlice = createSlice({
             })
             .addCase(fetchTrainingPatch.rejected, (state, action) => {
                 state.patchLoading = false;
-                state.patchError = action.error.message;
+                state.patchError = action.error.message || null;
             })
 
             .addCase(fetchTrainingInfo.pending, (state) => {
@@ -120,7 +137,7 @@ const trainingSlice = createSlice({
             })
             .addCase(fetchTrainingInfo.rejected, (state, action) => {
                 state.loading = false;
-                state.error = action.error.message;
+                state.error = action.error.message || null;
             });
     },
 });

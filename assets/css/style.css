@@ -499,13 +499,13 @@ input[type="number"] {
 .ans_red_text {
     color: red;
     font-weight: bolder;
-    font-size: 45px;
+    font-size: 35px;
 }
 
 .ans_green_text {
     color: green;
     font-weight: bolder;
-    font-size: 45px;
+    font-size: 35px;
 }
 
 .correct-text {
