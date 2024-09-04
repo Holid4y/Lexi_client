@@ -952,21 +952,24 @@ input[type="number"] {
 
 .floating-buttons-container {
     position: relative;
-  }
+}
+
+.button-main{
+    transition: transform .2s ease;
+}
   
-  .main-button {
-    position: relative;
-    z-index: 2;
-    box-shadow: inset 0px 0px 10px var(--box-shadow-color);
-  }
+
+.button-main:hover{
+    transform: scale(1.2);
+}
   
-  .floating-button {
+.floating-button {
     position: absolute;
     z-index: 1;
     opacity: 0;
     transition: all 0.3s ease;
     pointer-events: none;
-  }
+}
   
   .floating-button.open {
     opacity: 1;
@@ -977,7 +980,7 @@ input[type="number"] {
     top: -60px;
     left: -40px;
     transform: translate(40px, 60px);
-    border-radius: 50%;
+    border-radius: 18px;
     height: 50px;
     width: 50px;
     box-shadow: inset 0px 0px 10px var(--box-shadow-color);
@@ -988,7 +991,7 @@ input[type="number"] {
     top: -60px;
     right: -40px;
     transform: translate(-40px, 60px);
-    border-radius: 50%;
+    border-radius: 18px;
     height: 50px;
     width: 50px;
     box-shadow: inset 0px 0px 10px var(--box-shadow-color);

@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { fetchTrainingInfo } from "../../reducers/training/trainingSlice";
 import { isActivatedEmail } from "../../../pages/profile/utils/utils";
 import WordBlockTranslate from "../WordBlockTranslate/WordBlockTranslate";
-// import FloatingButtons from "./FloatingButtons"
+import FloatingButtons from "./components/FloatingButtons";
 import SVG from "../Icons/SVG";
 
 function Navigation() {
@@ -53,7 +53,17 @@ function Navigation() {
                             <SVG name="words" />
                         </Link>
                     </li>
-                    {/* <li className="nav-item"><FloatingButtons /></li> */}
+                    {/* <li class="nav-item dropup-center dropup">
+                        <a class="nav-link navigation-custome" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <SVG name="plus" />
+                        </a>
+                        <ul class="dropdown-menu mb-2">
+                            <li><a class="dropdown-item" href="#">Добавить слово</a></li>
+                            <li><a class="dropdown-item" href="#">Добавить книгу</a></li>
+                        </ul>
+                    </li> */}
+
+                    <li className="nav-item"><FloatingButtons /></li>
                     <li className="nav-item">
                         <Link to="/training" className={`${getLinkClass("/training")} position-relative `}>
                             {TrainigBadge}

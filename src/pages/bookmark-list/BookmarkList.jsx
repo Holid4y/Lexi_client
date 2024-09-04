@@ -41,11 +41,11 @@ function BookmarkList() {
     );
     const BooksMarkView = (
         <div className="mb-4">
-            <div className="w-100 mb-2 d-flex justify-content-between align-items-center px-2">
+            {/* <div className="w-100 mb-2 d-flex justify-content-between align-items-center px-2">
                 <Link to="/books" className="p-0 mb-0 text-end ms-auto link-color animated-btn-focus">
                     Выбрать книгу
                 </Link>
-            </div>
+            </div> */}
             <div className="row g-3">
                 {filteredBookmarks.length > 0 ? (
                     filteredBookmarks.map((bookmark, index) => (

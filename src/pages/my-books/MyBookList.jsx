@@ -42,7 +42,7 @@ function MyBookList() {
 
     const BooksMyView = (
         <div className="mb-4">
-            <div className="w-100 mb-2 d-flex justify-content-between align-items-center px-2">
+            {/* <div className="w-100 mb-2 d-flex justify-content-between align-items-center px-2">
                 <span
                     type="button"
                     className="p-0 mb-0 text-end ms-auto link-color animated-btn-focus"
@@ -51,7 +51,7 @@ function MyBookList() {
                 >
                     Добавить книгу
                 </span>
-            </div>
+            </div> */}
             <div className="row g-3">
                 {filteredBooks && filteredBooks.results && filteredBooks.results.length > 0 ? (
                     filteredBooks.results.map((book, index) => (
