@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../../store";
 
 import { getTrainig, getLeargingWord } from "../common/utils";
 
@@ -13,12 +14,14 @@ import Loading from "../../../common/components/Treatment/Loading";
 import NoMoreWordToTrainingPage from "../components/NoMoreWordToTrainingPage";
 import NoWordPage from "../components/NoWordPage";
 
+import { Reproduce as ReproduceClass } from "../common/training";
+
 function Reproduce() {
     const dispatch = useDispatch();
 
-    const { count_word_to_training_reproduce, loading, patchLoading, error } = useSelector((state) => state.training);
-    const { training, round, score, isEnd } = useSelector((state) => state.trainingRound);
-    const { learning_words } = useSelector((state) => state.home);
+    const { count_word_to_training_reproduce, loading, patchLoading } = useSelector((state: RootState) => state.training);
+    const { training, round, score, isEnd } = useSelector((state: RootState) => state.trainingRound);
+    const { learning_words } = useSelector((state: RootState) => state.home);
 
     const localType = "reproduce";
 
@@ -35,12 +38,13 @@ function Reproduce() {
         if (!training) {
             return null
         }
+        const trainingObj = new ReproduceClass(training, round)
 
         return (
             <div>
                 <Header />
                 <main className="container pb-0 mb-0">
-                    <WordCard localType={localType} text={training[round].word.translation} en_text={training[round].word.text} is_view_transctiption={false}/>
+                    <WordCard trainingObj={trainingObj}/>
                     <div className="px-5">
                         <div>
                             <TextInput correctWord={training[round].word.text} />
@@ -61,7 +65,7 @@ function Reproduce() {
             {
                 loading ? LoadingView : 
                 TrainingPage() || 
-                ((isNoMoreWordToTraining & !isEnd) && <NoMoreWordToTrainingPage />) ||
+                ((isNoMoreWordToTraining && !isEnd) && <NoMoreWordToTrainingPage />) ||
                 (isNoWord && <NoWordPage />)
             }
             {isEnd && EndPage}

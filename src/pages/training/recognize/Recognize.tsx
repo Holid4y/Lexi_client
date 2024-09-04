@@ -12,12 +12,14 @@ import AnswerButton from "../components/AnswerButton";
 import Loading from "../../../common/components/Treatment/Loading";
 import NoMoreWordToTrainingPage from "../components/NoMoreWordToTrainingPage";
 import NoWordPage from "../components/NoWordPage";
+import { RootState } from "../../../store";
+import { Recognize as RecoginizeClass } from "../common/training";
 
 function Recognize() {
     const dispatch = useDispatch();
-    const { count_word_to_training_recognize, loading, patchLoading, error } = useSelector((state) => state.training);
-    const { training, round, score, isEnd } = useSelector((state) => state.trainingRound);
-    const { learning_words } = useSelector((state) => state.home);
+    const { count_word_to_training_recognize, loading, patchLoading, error } = useSelector((state: RootState) => state.training);
+    const { training, round, score, isEnd } = useSelector((state: RootState) => state.trainingRound);
+    const { learning_words } = useSelector((state: RootState) => state.home);
 
     const localType = "recognize";
 
@@ -35,11 +37,13 @@ function Recognize() {
             return null;
         }
 
+        const trainingObj = new RecoginizeClass(training, round)
+
         return (
             <div>
                 <Header />
                 <main className="container pb-0 mb-0">
-                    <WordCard localType={localType} text={training[round].word.text} en_text={training[round].word.text} is_view_transctiption={true}/>
+                    <WordCard trainingObj={trainingObj}/>
                     <div className="px-5">
                         <div className="mb-4">
                             <FalseSet training={training} round={round} correctWord={training[round].word.text} />
@@ -60,7 +64,7 @@ function Recognize() {
             {
                 loading ? LoadingView : 
                 TrainingPage() ||
-                ((isNoMoreWordToTraining & !isEnd) && <NoMoreWordToTrainingPage />) ||
+                ((isNoMoreWordToTraining && !isEnd) && <NoMoreWordToTrainingPage />) ||
                 (isNoWord && <NoWordPage />)
             }
             {isEnd && EndPage}
