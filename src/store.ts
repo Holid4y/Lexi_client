@@ -1,5 +1,4 @@
-import { configureStore } from '@reduxjs/toolkit';
-
+import { combineReducers } from 'redux';
 import booksReducer from './common/reducers/booksSlice';
 import bookRetrieveReducer from './common/reducers/bookRetrieveSlice';
 import paginationReducer from './common/reducers/paginationSlice';
@@ -8,17 +7,15 @@ import authReducer from './common/reducers/authSlice';
 import userReducer from './common/reducers/userSlice';
 import homeReducer from './common/reducers/homeSlice';
 import vocabularyReducer from './common/reducers/vocabularySlice';
-import wordReducer from './common/reducers/wordSlice'
-// training
+import wordReducer from './common/reducers/wordSlice';
 import trainingReducer from './common/reducers/training/trainingSlice';
 import trainingRoundReducer from './common/reducers/training/trainingRoundSlice';
-
 import googletransReducer from './common/reducers/googletransSlice';
 import addBookModalReducer from './common/reducers/addBookModalSlice';
-import statsReducer from './common/reducers/statsSlice'
+import statsReducer from './common/reducers/statsSlice';
+import { configureStore } from '@reduxjs/toolkit';
 
-export const store = configureStore({
-  reducer: {
+const rootReducer = combineReducers({
     books: booksReducer,
     book: bookRetrieveReducer,
     page: paginationReducer,
@@ -28,14 +25,20 @@ export const store = configureStore({
     home: homeReducer,
     vocabulary: vocabularyReducer,
     word: wordReducer,
-    // training
     training: trainingReducer,
     trainingRound: trainingRoundReducer,
-
     googletrans: googletransReducer,
     addBookModal: addBookModalReducer,
-    stats: statsReducer
-  },
+    stats: statsReducer,
 });
 
-export default store;
+// Определяем интерфейс RootState
+export type RootState = ReturnType<typeof rootReducer>;
+
+export default rootReducer;
+
+export const store = configureStore({
+    reducer: rootReducer,
+});
+
+export type AppDispatch = typeof store.dispatch; // Определите тип для dispatch

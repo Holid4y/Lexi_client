@@ -2,51 +2,79 @@ import React, { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setAnswer } from "../../../../common/reducers/training/trainingRoundSlice";
 import { cleanAnswer } from "../../common/utils";
+import { Reproduce } from "../../common/training";
+import { Round } from "../../common/round";
+import { RootState } from "../../../../store";
 
-function TextInput({ correctWord }) {
+
+interface TextInputProps {
+    trainingObj: Reproduce;
+}
+
+const TextInput: React.FC<TextInputProps> = ({ trainingObj }) => {
     const dispatch = useDispatch();
-    const { round, isViewResult } = useSelector((state) => state.trainingRound);
-    const [classState, setClassState] = useState("form-control py-2-5 mb-2");
-    const [localAnswer, setLocalAnswer] = useState("");
-    const inputRef = useRef(null); // Создаем ссылку на input
 
+    const { isViewResult, round } = useSelector((state: RootState) => state.trainingRound);
+
+    const defaultClass = "form-control py-2-5 mb-2 text-center-input";
+    const wrongClass = `${defaultClass} box-danger`;
+    const correctClass = `${defaultClass} box-success`;
+
+    const [classState, setClassState] = useState(defaultClass);
+    const [localAnswer, setLocalAnswer] = useState("");
+    const [correctWord, setCorrectWord] = useState("");
+
+    const inputRef = useRef<HTMLInputElement | null>(null);
+
+
+    
     useEffect(() => {
-        setLocalAnswer("");
-        setClassState("form-control py-2-5 mb-2 text-center-input");
-        inputRef.current.focus(); // Устанавливаем фокус на input при смене раунда
+        setCorrectWord(trainingObj.getCurrentRound().word.text)
+        setLocalAnswer("")
+        setClassState(defaultClass)
+        setFocus()
     }, [round]);
 
+    // Отобаржаем результат
     useEffect(() => {
         if (isViewResult) {
             setClass();
         }
     }, [isViewResult]);
 
-    function setClass() {
-        const cleanWord = cleanAnswer(localAnswer);
-        // Подсветить выбранный ответ красным, а правильный зеленым поверх красного
-        if (correctWord === cleanWord) {
-            setClassState("form-control py-2-5 mb-2 box-success text-center-input");
-        } else {
-            setClassState("form-control py-2-5 mb-2 box-danger text-center-input");
+    function setFocus() {
+        if (inputRef.current) { 
+            // Устанавливаем фокус на input при смене раунда
+            inputRef.current.focus(); 
         }
     }
 
-    const handleInputChange = (event) => {
-        setLocalAnswer(event.target.value);
-        dispatch(setAnswer(event.target.value));
+    function setClass() {
+        const cleanAnswerWord = cleanAnswer(localAnswer);
+        // Подсветить выбранный ответ красным, а правильный зеленым поверх красного
+        if (correctWord === cleanAnswerWord) {
+            setClassState(correctClass);
+        } else {
+            setClassState(wrongClass);
+        }
+    }
+
+    const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const answer = event.target.value
+        setLocalAnswer(answer);
+        dispatch(setAnswer(answer))
     };
 
-    const getCorrectWordStyled = () => {
-        let result = [];
-
+    const getCorrectWordStyled = (): React.ReactNode[] => {
+        let result: React.ReactNode[] = []; 
+    
         const maxLength = Math.max(localAnswer.length, correctWord.length);
-
+        console.log(localAnswer, correctWord)
         for (let i = 0; i < maxLength; i++) {
-            const correctLetter = correctWord[i]
-            const localLetter = localAnswer[i]
+            const correctLetter = correctWord[i];
+            const localLetter = localAnswer[i];
+    
             if (!correctLetter) {
-                
                 result.push(
                     <span key={i} className="ans_red_text">
                         {localAnswer[i]}
@@ -55,7 +83,6 @@ function TextInput({ correctWord }) {
                 continue; // Переход к следующей итерации
             }
             if (!localLetter) {
-                
                 result.push(
                     <span key={i} className="ans_red_text">
                         _
@@ -64,7 +91,11 @@ function TextInput({ correctWord }) {
                 continue; // Переход к следующей итерации
             }
             if (localLetter.toLowerCase() === correctLetter.toLowerCase()) {
-                result.push(<span key={i}>{localAnswer[i]}</span>);
+                result.push(
+                    <span key={i} className="ans_white_text">
+                        {localAnswer[i]}
+                    </span>
+                );
             } else {
                 result.push(
                     <span key={i} className="ans_red_text">
@@ -73,7 +104,7 @@ function TextInput({ correctWord }) {
                 );
             }
         }
-
+    
         return result;
     };
 
