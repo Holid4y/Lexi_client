@@ -9,8 +9,6 @@ import TextModal from "./components/AddBookComponents/AllModal/TextModal";
 import WordModal from "./components/AddBookComponents/AllModal/WordModal";
 import VideoModal from "./components/AddBookComponents/AllModal/VideoModal";
 
-import { myBooks as myBooksPath } from "../../../../../public/urls";
-
 const FloatingButtons = () => {
   const [file, setFile] = useState(null);
 

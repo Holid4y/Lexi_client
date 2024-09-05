@@ -77,7 +77,7 @@ function BookRetrieve() {
             {error === 404 ? (
                 "PageNotFound"
             ) : (
-                <>
+                <div>
                     {Header}
                     <ProgressBar />
                     {loading ? (
@@ -88,7 +88,7 @@ function BookRetrieve() {
                             {Pagination}
                         </main>
                     )}
-                </>
+                </div>
             )}
         </div>
     );

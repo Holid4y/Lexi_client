@@ -5,16 +5,7 @@ import { fetchMyBooks } from "../../common/reducers/booksSlice";
 import Search from "../../common/components/Headers/Search";
 import Loading from "../../common/components/Treatment/Loading";
 import PaginationButton from "../../common/components/Pagination/PagePagination";
-
 import BookCard from "../books/components/BookCard";
-
-import AddBookModal from "./components/AddBookModal";
-import BaseModal from "./components/AddBookComponents/AllModal/BaseModal";
-
-import FileModal from "./components/AddBookComponents/AllModal/FileModal";
-import TextModal from "./components/AddBookComponents/AllModal/TextModal";
-import VideoModal from "./components/AddBookComponents/AllModal/VideoModal";
-
 import { myBooks as myBooksPath } from "../../../public/urls";
 
 function MyBookList() {
@@ -22,7 +13,6 @@ function MyBookList() {
     const { books, loading } = useSelector((state) => state.books);
     const [currentPage, setCurrentPage] = useState(1);
     const [searchResults, setSearchResults] = useState(null);
-    const [file, setFile] = useState(null);  // Добавляем состояние для файла
 
     useEffect(() => {
         if (!searchResults) {
@@ -42,16 +32,6 @@ function MyBookList() {
 
     const BooksMyView = (
         <div className="mb-4">
-            {/* <div className="w-100 mb-2 d-flex justify-content-between align-items-center px-2">
-                <span
-                    type="button"
-                    className="p-0 mb-0 text-end ms-auto link-color animated-btn-focus"
-                    data-bs-toggle="modal"
-                    data-bs-target="#AddBookModal"
-                >
-                    Добавить книгу
-                </span>
-            </div> */}
             <div className="row g-3">
                 {filteredBooks && filteredBooks.results && filteredBooks.results.length > 0 ? (
                     filteredBooks.results.map((book, index) => (
@@ -90,27 +70,6 @@ function MyBookList() {
                 <main className="container pb-5 mb-3">
                     {BooksMyView}
                     {PaginationButtonView}
-                    <div>
-                        <AddBookModal />
-                        <BaseModal
-                            idName={"AddBookModalFile"}
-                            childComponent={<FileModal file={file} setFile={setFile} />}
-                            ariaLabelledby={"AddBookModalFileSelected"}
-                            title={"Файл"}
-                        />
-                        <BaseModal
-                            idName={"AddBookModalText"}
-                            childComponent={<TextModal />}
-                            ariaLabelledby={"AddBookModalTextSelected"}
-                            title={"Текст"}
-                        />
-                        <BaseModal
-                            idName={"AddBookModalVideo"}
-                            childComponent={<VideoModal />}
-                            ariaLabelledby={"AddBookModalVideoSelected"}
-                            title={"Видео"}
-                        />
-                    </div>
                 </main>
             )}
         </div>

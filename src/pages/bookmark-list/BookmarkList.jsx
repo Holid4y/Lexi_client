@@ -1,11 +1,8 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-
 import { useDispatch, useSelector } from "react-redux";
 import { fetchBookmarks } from "../../common/reducers/bookmarkSlice";
 
 import BookmarkCard from "./components/BookmarkCard";
-
 import Search from "../../common/components/Headers/Search";
 import Loading from "../../common/components/Treatment/Loading";
 import PaginationButton from "../../common/components/Pagination/PagePagination";
@@ -41,11 +38,6 @@ function BookmarkList() {
     );
     const BooksMarkView = (
         <div className="mb-4">
-            {/* <div className="w-100 mb-2 d-flex justify-content-between align-items-center px-2">
-                <Link to="/books" className="p-0 mb-0 text-end ms-auto link-color animated-btn-focus">
-                    Выбрать книгу
-                </Link>
-            </div> */}
             <div className="row g-3">
                 {filteredBookmarks.length > 0 ? (
                     filteredBookmarks.map((bookmark, index) => (
@@ -55,7 +47,7 @@ function BookmarkList() {
                     <div className="col-12">
                         <div className="card py-3">
                             <div className="text-center">
-                                <h4 className="fw-bold mt-3 text-body-emphasis">Выберите книгу 😔</h4>
+                                <h4 className="fw-bold mt-3 text-body-emphasis">Добавьте закладку 😔</h4>
                             </div>
                         </div>
                     </div>
