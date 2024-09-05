@@ -39,7 +39,6 @@ function Navigation() {
 
     return (
         <nav className="container fixed-bottom py-2">
-            <div className="dark-nav-down-blur"></div>
             <div className="">
                 <WordBlockTranslate />
                 <ul className="dark-nav-down nav justify-content-center">

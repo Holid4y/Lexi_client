@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchBookPost, setError } from "../../../../../../reducers/bookRetrieveSlice";
+import { throwState, setTextArea, setFile } from "../../../../../../reducers/addBookModalSlice";
 import { unshiftBooksList } from "../../../../../../reducers/booksSlice";
 import { useNotification } from "../../../../../../components/Notification/NotificationContext";
 import Loading from "../../../../../../components/Treatment/Loading";
-
 import { host, books } from "../../../../../../../../public/urls";
 
 function AddButton({ file }) { // Получаем file через пропсы
@@ -22,7 +22,6 @@ function AddButton({ file }) { // Получаем file через пропсы
     }, [authorName, title]);
 
     useEffect(() => {
-        // Разделение логики в зависимости от выбранного файла
         if (file && authorName && title) {
             setIsDisabled(false);
         } else if (textArea && authorName && title) {
@@ -97,6 +96,7 @@ function AddButton({ file }) { // Получаем file через пропсы
                     const data = await response.json();
                     dispatch(unshiftBooksList(data.book));  // Передаем книгу в список
                     addNotification(`Книга "${title}" добавлена`);
+                    resetForm();
                     closeModals();
                 } else {
                     const errorData = await response.json();
@@ -113,6 +113,7 @@ function AddButton({ file }) { // Получаем file через пропсы
             if (response) {
                 dispatch(unshiftBooksList(response.book));  // Передаем книгу в список
                 addNotification(`Книга "${title}" добавлена`);
+                resetForm();
                 closeModals();
             } else {
                 addNotification('Ошибка при добавлении книги');
@@ -120,6 +121,11 @@ function AddButton({ file }) { // Получаем file через пропсы
         }
     };
 
+    const resetForm = () => {
+        dispatch(throwState());  // Сбрасываем основные поля
+        dispatch(setTextArea(""));  // Очищаем textarea
+        dispatch(setFile(null));  // Очищаем файл
+    };
 
     const closeModals = () => {
         const modals = document.querySelectorAll(".modal");

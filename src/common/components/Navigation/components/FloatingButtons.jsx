@@ -25,6 +25,7 @@ const FloatingButtons = () => {
             <BaseModal
                   idName={"AddBookModalFile"}
                   childComponent={<FileModal file={file} setFile={setFile} />}
+                  file={file}
                   ariaLabelledby={"AddBookModalFileSelected"}
                   title={"Файл"}
               />
