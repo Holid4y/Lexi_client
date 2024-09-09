@@ -11,9 +11,18 @@ import { vocabulary as vocabularyPath } from "../../../public/urls";
 
 function WordList() {
   const dispatch = useDispatch();
+  // ты levels прокидывает в пропсы, хотя их можно сразу в Filter юзать
   const { levels } = useSelector((state) => state.user);
   const { words, loading } = useSelector((state) => state.vocabulary);
   const [currentPage, setCurrentPage] = useState(1);
+
+
+
+  // компонент wordList должен отвечать только за отображения списка слов
+  // тут ты его нагружаешь большим кол-во state, которые никак не относятся 
+  // к данномо компоненту.
+  // это нарушение solid, а именно буквы S
+  // посмотри видосики про принцып solid
 
   // Состояния для сортировки, фильтров и поиска
   const [order, setOrder] = useState("date_added");
@@ -35,6 +44,15 @@ function WordList() {
     setLevel(levels.length);
     const queryString = queryParams.toString(); // формируем строку параметров
     dispatch(fetchVocabulary(`?${queryString}`)); // используем корректный запрос
+
+    // не нужно перегружать useEffect таким большим кол-во prors`ов
+    // он нужен только для того, чтобы подтянуть с бека words при первой загрузке и при переключении страниц. вот его преыдущие зависимости [dispatch, currentPage]
+    // от зависимости dispatch можно отказаться и у нас останется только currentPage
+    // но тут появится след. просблема, когда будут выставленны фильтры, допустим
+    // на order=lvl_sum и мы нажмем "применить фильтр" будет все кулл, и выдаст результат, допустим, на 30 страниц, но если мы переключим стр. на следующую, то фильтр сброситься.
+
+    // лучшим решением, как я считаю, это переложить всю отведственность за формирование параметров запроса на функцию fetchVocabulary
+    // если это сделать, то ни WordList, не Filter не Search дело не будет до того, как там все работает, просто передай нужный параметр и все.
   }, [dispatch, currentPage, order, direction, filter, value, searchQuery, levels]);
 
   const handleSearch = (query) => {
@@ -59,6 +77,7 @@ function WordList() {
     <div className="align-items-center">
       <SearchFilter
         title="Все слова"
+        // vocabularyPath можно было импортировать в SearchFilter а не тут
         endpoint={vocabularyPath}
         onSearch={handleSearch}
         onClear={handleClearSearch}

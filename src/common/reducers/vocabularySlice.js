@@ -3,6 +3,10 @@ import { host, vocabulary, _delete } from "../../../public/urls";
 import { getResponse } from "../../../public/urls";
 
 export const fetchVocabulary = createAsyncThunk("vocabulary/fetchVocabulary", async (queryParams, { dispatch }) => {
+    // тут можно доставать queryParams или localStore 
+    // до этого, установить их в компоненте Filter
+
+    // localStore это имба в данном случае, так как fetchVocabulary становится сомостоятельной + к этому мы получаем фичу: у пользоваетля будет всегда включена фильтрацию, не его это не устраниват, он просто заходит в вкладку с фильтрами и выключает их, и все :)
     const url = new URL(host + vocabulary);
     const params = new URLSearchParams(queryParams); // queryParams будет объектом с параметрами
     url.search = params.toString(); // Преобразуем параметры в строку

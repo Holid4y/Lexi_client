@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 
 const Filter = ({ setOrder, setDirection, setFilter, setValue, levels }) => {
+
+  // const { levels } = useSelector((state) => state.user);  
+
   const [selectedDate, setSelectedDate] = useState("");
   const [selectedForm, setSelectedForm] = useState(false);
   const [selectedLevel, setSelectedLevel] = useState(0); // Начальный уровень "Все уровни"
@@ -8,6 +11,21 @@ const Filter = ({ setOrder, setDirection, setFilter, setValue, levels }) => {
   const [sortOrder, setSortOrder] = useState("date_added");
   const [sortDirection, setSortDirection] = useState("DESC"); // Начальное значение DESC
 
+
+
+  // я всегда стараюсь избегать пропсов в компоенте, так как это создает зависимости, понажает читаемость кода и увеличивать кол-во ререндеров (хотя переменные useSelect тоже делают ререндеры)
+  // чтобы тут избежать пропсов и вообще не трогать бедный WordList можно тут создавать queryParams и прям тут же предавать их в fetchVocabulary
+//   и тут, кстати, нет проблем с преключение страниц, мы уверенны, что применненый фильтр должен отображать список слов с первой стр., а так как по умолчанию page=1 то параметр page вообще можем не применять
+
+//   const nameToApplayFilterAndFetchResult = () => {
+//     
+    // dispatch(fetchVocabulary()); в fetchVocabulary ничего передовать не надо, он должен сам разобарться есть у него фильтры или нет
+//   };
+
+
+
+  // все ниже 4 функции можно прям вызывать в onClick, а точнее сеттеры
+//   пример: onClick={setSelectedDate(event.target.value)}
   const handleDateChange = (event) => {
     setSelectedDate(event.target.value);
   };
@@ -31,6 +49,7 @@ const Filter = ({ setOrder, setDirection, setFilter, setValue, levels }) => {
   };
 
   const handleApplyFilters = () => {
+    // тут надо switch case использовать
     setOrder(sortOrder);
     setDirection(sortDirection);
     if (selectedForm) {
@@ -65,6 +84,7 @@ const Filter = ({ setOrder, setDirection, setFilter, setValue, levels }) => {
     setValue("");
   };
 
+//   можно вынести в отдельный файл, типа utils.js или static.js, чтобы глаза не мазолило, но не критично
   const partOfSpeechOptions = [
     { value: "сущ", label: "Существительное" },
     { value: "гл", label: "Глагол" },
