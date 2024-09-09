@@ -41,7 +41,7 @@ function SearchFilter({ title, onSearch, onClear, endpoint }) {
     return (
       <div className="container sticky-top mb-3 mt-2">
         <div className="row gx-2">
-          <div className="col-10 col--11">
+          <div className="col-10 col-lg-11">
             <nav className="navbar dark-nav px-3 w-100">
               <div className="d-flex align-items-center w-100 justify-content-between">
                 {!isSearchVisible && (
@@ -91,7 +91,7 @@ function SearchFilter({ title, onSearch, onClear, endpoint }) {
               </div>
             </nav>
           </div>
-          <div className="col-2 col--1">
+          <div className="col-2 col-lg-1">
             <button
               className="btn dark-nav w-100"
               type="button"
