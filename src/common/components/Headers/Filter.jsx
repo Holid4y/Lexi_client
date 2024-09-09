@@ -67,9 +67,13 @@ const Filter = ({ setOrder, setDirection, setFilter, setValue }) => {
   };
 
   const partOfSpeechOptions = [
+    { value: "сущ", label: "Существительное" },
+    { value: "гл", label: "Глагол" },
+    { value: "прил", label: "Прилагательное" },
+    { value: "прич", label: "Причастие" },
+    { value: "нареч", label: "Наречие" },
     { value: "союз", label: "Союз" },
     { value: "предл", label: "Предлог" },
-    { value: "нареч", label: "Наречие" },
     { value: "предик", label: "Предикатив" },
     { value: "част", label: "Частица" },
     { value: "неизм", label: "Неизм. слово" },
@@ -77,13 +81,9 @@ const Filter = ({ setOrder, setDirection, setFilter, setValue }) => {
     { value: "межд", label: "Междометие" },
     { value: "числ", label: "Числительное" },
     { value: "вводн", label: "Вводное слово" },
-    { value: "иностр", label: "Заимствованное слово" },
     { value: "дееприч", label: "Деепричастие" },
-    { value: "прил", label: "Прилагательное" },
-    { value: "прич", label: "Причастие" },
-    { value: "сущ", label: "Существительное" },
     { value: "мест", label: "Местоимение" },
-    { value: "гл", label: "Глагол" },
+    { value: "иностр", label: "Заимствованное слово" },
   ];
 
   return (
