@@ -42,7 +42,7 @@ function Recognize() {
         return (
             <div>
                 <Header />
-                <main className="container pb-0 mb-0">
+                <main className="container">
                     <WordCard trainingObj={trainingObj}/>
                     <div className="px-5">
                         <div className="mb-4">
