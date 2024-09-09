@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const Filter = ({ setOrder, setDirection, setFilter, setValue }) => {
+const Filter = ({ setOrder, setDirection, setFilter, setValue, levels }) => {
   const [selectedDate, setSelectedDate] = useState("");
   const [selectedForm, setSelectedForm] = useState(false);
   const [selectedLevel, setSelectedLevel] = useState(0); // Начальный уровень "Все уровни"
@@ -28,7 +28,6 @@ const Filter = ({ setOrder, setDirection, setFilter, setValue }) => {
     // Меняем направление сортировки
     const newDirection = sortDirection === "DESC" ? "ASC" : "DESC";
     setSortDirection(newDirection);
-    setDirection(newDirection);
   };
 
   const handleApplyFilters = () => {
@@ -117,12 +116,12 @@ const Filter = ({ setOrder, setDirection, setFilter, setValue }) => {
                 <div className="accordion-item">
                     <h2 className="accordion-header">
                         <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#lvl" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
-                            {selectedLevel !== "0" ? `Уровень: ${selectedLevel}` : "Уровень: (все)"}
+                            {selectedLevel === 0 || selectedLevel === "0" ? "Уровень: все" : `Уровень: ${selectedLevel}`}
                         </button>
                     </h2>
                     <div id="lvl" className="accordion-collapse collapse">
                         <div className="accordion-body">
-                            <input type="range" className="form-range w-100" min="0" max="5" value={selectedLevel} id="customRange2" onChange={handleLevelChange} />
+                            <input type="range" className="form-range w-100" min="0" max={levels} value={selectedLevel} id="customRange2" onChange={handleLevelChange} />
                         </div>
                     </div>
                 </div>

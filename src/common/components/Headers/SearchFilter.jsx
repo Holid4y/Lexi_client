@@ -1,7 +1,6 @@
 import { useState } from "react";
 import SVG from "../Icons/SVG";
 import PropTypes from 'prop-types';
-import { host } from "../../../../public/urls";
 
 function SearchFilter({ title, onSearch, onClear, endpoint }) {
     const [searchValue, setSearchValue] = useState("");
