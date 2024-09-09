@@ -2,12 +2,11 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { host, vocabulary, _delete } from "../../../public/urls";
 import { getResponse } from "../../../public/urls";
 
-export const fetchVocabulary = createAsyncThunk("vocabulary/fetchVocabulary", async (page, { dispatch }) => {
+export const fetchVocabulary = createAsyncThunk("vocabulary/fetchVocabulary", async (queryParams, { dispatch }) => {
     const url = new URL(host + vocabulary);
-    const params = new URLSearchParams({
-        page,
-    });
-    url.search = params.toString();
+    const params = new URLSearchParams(queryParams); // queryParams будет объектом с параметрами
+    url.search = params.toString(); // Преобразуем параметры в строку
+
     const response = await getResponse(url, "GET");
 
     if (response.ok) {

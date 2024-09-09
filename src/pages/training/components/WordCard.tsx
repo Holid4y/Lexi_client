@@ -13,8 +13,8 @@ interface WordCardProps {
 const WordCard: React.FC<WordCardProps> = ({ trainingObj }) => {
     const { isViewResult } = useSelector((state: RootState) => state.trainingRound);
 
-    const word = trainingObj.getCurrentRound().word
-    const lvl = trainingObj.getCurrentRound().training.lvl
+    const word = trainingObj.getCurrentRound().word;
+    const lvl = trainingObj.getCurrentRound().training.lvl;
 
     function getViewTranscription() {
         if (trainingObj instanceof Recognize) {
