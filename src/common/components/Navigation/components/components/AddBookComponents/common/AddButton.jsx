@@ -157,7 +157,7 @@ function AddButton({ file }) { // Получаем file через пропсы
             )}
             {error && (
                 <p className="mt-3 text-danger fw-bold">
-                    Ошибка при добавлении книги: {error.message}
+                    {typeof error === 'string' ? error : error.details || 'Неизвестная ошибка'}
                 </p>
             )}
         </>

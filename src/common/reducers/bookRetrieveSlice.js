@@ -37,8 +37,6 @@ export const fetchBookPost = createAsyncThunk("book/fetchBookPost", async (body,
     const response = await getResponse(url, "POST", bodyString) 
     const dataJson = await response.json();
 
-    
-
     if (response.ok) {
         const data = {
             "book": dataJson,
@@ -108,7 +106,7 @@ const bookRetrieveSlice = createSlice({
             })
             .addCase(fetchBook.rejected, (state, action) => {
                 state.loading = false;
-                state.error = action.error.message;
+                state.error = action.error.message || action.error;
             });
     },
 });
