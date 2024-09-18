@@ -1,8 +1,7 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 
-const Filter = ({ setOrder, setDirection, setFilter, setValue, levels }) => {
-
-  // const { levels } = useSelector((state) => state.user);  
+const Filter = ({ setOrder, setDirection, setFilter, setValue }) => {
 
   const [selectedDate, setSelectedDate] = useState("");
   const [selectedForm, setSelectedForm] = useState(false);
@@ -10,7 +9,7 @@ const Filter = ({ setOrder, setDirection, setFilter, setValue, levels }) => {
   const [selectedPartOfSpeech, setSelectedPartOfSpeech] = useState("");
   const [sortOrder, setSortOrder] = useState("date_added");
   const [sortDirection, setSortDirection] = useState("DESC"); // Начальное значение DESC
-
+  const { levels } = useSelector((state) => state.user);
 
 
   // я всегда стараюсь избегать пропсов в компоенте, так как это создает зависимости, понажает читаемость кода и увеличивать кол-во ререндеров (хотя переменные useSelect тоже делают ререндеры)
@@ -141,7 +140,7 @@ const Filter = ({ setOrder, setDirection, setFilter, setValue, levels }) => {
                     </h2>
                     <div id="lvl" className="accordion-collapse collapse">
                         <div className="accordion-body">
-                            <input type="range" className="form-range w-100" min="0" max={levels} value={selectedLevel} id="customRange2" onChange={handleLevelChange} />
+                            <input type="range" className="form-range w-100" min="0" max={levels.length} value={selectedLevel} id="customRange2" onChange={handleLevelChange} />
                         </div>
                     </div>
                 </div>

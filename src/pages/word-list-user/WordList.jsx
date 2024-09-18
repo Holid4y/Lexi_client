@@ -11,8 +11,6 @@ import { vocabulary as vocabularyPath } from "../../../public/urls";
 
 function WordList() {
   const dispatch = useDispatch();
-  // ты levels прокидывает в пропсы, хотя их можно сразу в Filter юзать
-  const { levels } = useSelector((state) => state.user);
   const { words, loading } = useSelector((state) => state.vocabulary);
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -30,7 +28,6 @@ function WordList() {
   const [filter, setFilter] = useState(null);
   const [value, setValue] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
-  const [level, setLevel] = useState(0);
 
   useEffect(() => {
     const queryParams = new URLSearchParams({
@@ -41,7 +38,6 @@ function WordList() {
       ...(searchQuery ? { search: searchQuery } : {}),
     });
 
-    setLevel(levels.length);
     const queryString = queryParams.toString(); // формируем строку параметров
     dispatch(fetchVocabulary(`?${queryString}`)); // используем корректный запрос
 
@@ -53,7 +49,7 @@ function WordList() {
 
     // лучшим решением, как я считаю, это переложить всю отведственность за формирование параметров запроса на функцию fetchVocabulary
     // если это сделать, то ни WordList, не Filter не Search дело не будет до того, как там все работает, просто передай нужный параметр и все.
-  }, [dispatch, currentPage, order, direction, filter, value, searchQuery, levels]);
+  }, [dispatch, currentPage, order, direction, filter, value, searchQuery]);
 
   const handleSearch = (query) => {
     setSearchQuery(query); // Обновляем query при поиске
@@ -87,7 +83,6 @@ function WordList() {
         setDirection={setDirection}
         setFilter={setFilter}
         setValue={setValue}
-        levels={level}
       />
       {loading ? (
         <Loading />
