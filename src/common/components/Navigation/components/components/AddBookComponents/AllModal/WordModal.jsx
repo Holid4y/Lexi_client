@@ -13,7 +13,7 @@ function WordModal() {
 
     return (
         <>
-            <p>Вставьте текст или напишите его сами</p>
+            <p>Слово-слово. бла-бла-бла</p>
             <div className="text-center">
                 <input
                     className="form-control form-control-lg py-3"

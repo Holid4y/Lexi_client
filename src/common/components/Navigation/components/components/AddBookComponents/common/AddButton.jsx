@@ -96,8 +96,6 @@ function AddButton({ file }) { // Получаем file через пропсы
                     const data = await response.json();
                     dispatch(unshiftBooksList(data.book));  // Передаем книгу в список
 
-                    // unshiftBooksList вызывает только тогда когда находишся на странице "Мои книги"
-
                     addNotification(`Книга "${title}" добавлена`);
                     resetForm();
                     closeModals();
@@ -115,8 +113,6 @@ function AddButton({ file }) { // Получаем file через пропсы
             // Если это данные, полученные через dispatch
             if (response) {
                 dispatch(unshiftBooksList(response.book));  // Передаем книгу в список
-
-                // вызываем unshiftBooksList только когда на странице !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
                 addNotification(`Книга "${title}" добавлена`);
                 resetForm();

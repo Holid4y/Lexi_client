@@ -35,9 +35,17 @@ function BaseModal({ childComponent, ariaLabelledby, title, idName, file }) {
                     </div>
                     <div className="modal-body">
                         {childComponent}
+
+
+                        {/* BaseModal лучше оставить так как этот компонент отлично закрывет функционал "Назад" и его не приходится писать для всех доченрних модалок */}
+                        {/* но видно то что эти 3 инпута надо распихать по доченрим компонентам и не юзать их в BaseModal */}
                         <AuthorBookInput />
                         <NameBookInput  />
                         <IsPrivet />
+
+
+                        {/* и AddButton прийдется переписать, так как он заточен чисто для добавления книги */}
+                        {/* поэтому хз хз */}
                         <AddButton file={file} />
                     </div>
                 </div>
