@@ -2,10 +2,18 @@ import React, { useState } from "react";
 import SVG from "../../../common/components/Icons/SVG";
 import Trash from "./Trash";
 import EditBookModal from "./EditBookModal"; // Импортируем модальное окно для редактирования
+import { BookCover } from "../../../common/reducers/booksSlice";
 
-const Dropdown = ({ book, index }) => {
-    const [notification, setNotification] = useState(null);
-    const [isEditModalOpen, setEditModalOpen] = useState(false); // Состояние для управления модальным окном
+
+// Определяем интерфейс для пропсов Dropdown
+interface DropdownProps {
+    book: BookCover; // Тип книги
+    index: number; // Индекс книги
+}
+
+const Dropdown: React.FC<DropdownProps> = ({ book, index }) => {
+    const [notification, setNotification] = useState<React.ReactNode>(null);
+    const [isEditModalOpen, setEditModalOpen] = useState<boolean>(false); // Состояние для управления модальным окном
 
     const handleEditClick = () => {
         setEditModalOpen(true); // Открыть модальное окно при клике на "Редактировать"
