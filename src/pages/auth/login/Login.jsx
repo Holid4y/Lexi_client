@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import Input from "../common/Input";
 import SubmitButton from "../common/SubmitButton";
 import { useNotification } from "../../../common/components/Notification/NotificationContext";
+import Footer from "../common/Footer";
 
 
 const Login = () => {
@@ -53,7 +54,7 @@ const Login = () => {
                         <div className="form-container">
                             <form>
                                 <h1 className="mb-5">Авторизация</h1>
-                                <span>используйте свою почту для входа</span>
+                                <span>Используйте свой логин или почту для входа</span>
                                 <Input htmlFor={"login"} label={"Логин или Email"} type={"text"} value={username} setter={setUsername} />
                                 <Input htmlFor={"password"} label={"Пароль"} type={"password"} value={password} setter={setPassword} />
                                 <p className="py-0 my-0"><span className="text-secondary pe-2">Не зарегистрированы?</span><Link className="link" to="/register">Регистрация</Link></p>
@@ -65,9 +66,7 @@ const Login = () => {
                     </div>
                 </div>
 
-                <footer className="mt-auto text-white-50">
-                    <p>Cover template for <a href="https://getbootstrap.com/" className="text-white">Bootstrap</a>, by <a href="https://twitter.com/mdo" className="text-white">@mdo</a>.</p>
-                </footer>
+                <Footer/>
             </div>
         </div>
     );

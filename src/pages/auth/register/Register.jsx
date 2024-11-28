@@ -9,6 +9,7 @@ import Header from "../common/Header";
 import Input from "../common/Input";
 import RegistrationSmallBlock from "./components/RegistrationSmallBlock";
 import SubmitButton from "../common/SubmitButton";
+import Footer from "../common/Footer";
 
 const Register = () => {
     const dispatch = useDispatch();
@@ -102,9 +103,7 @@ const Register = () => {
                     </div>
                 </div>
 
-                <footer className="mt-auto text-white-50">
-                    <p>Cover template for <a href="https://getbootstrap.com/" className="text-white">Bootstrap</a>, by <a href="https://twitter.com/mdo" className="text-white">@mdo</a>.</p>
-                </footer>
+                <Footer/>
             </div>
         </div>
     );

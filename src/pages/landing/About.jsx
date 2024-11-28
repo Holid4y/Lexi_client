@@ -1,3 +1,4 @@
+import Footer from "../auth/common/Footer";
 import "./assets/Landing.css"
 import { Link } from "react-router-dom";
 
@@ -27,9 +28,7 @@ const About = () => {
                     <h1 className="display-2 text-center fw-bold text-body-emphasis mt-5">О нас</h1>
                 </main>
 
-                <footer className="mt-auto text-white-50">
-                    <p>Cover template for <a href="https://getbootstrap.com/" className="text-white">Bootstrap</a>, by <a href="https://twitter.com/mdo" className="text-white">@mdo</a>.</p>
-                </footer>
+                <Footer/>
             </div>
         </div>
     );

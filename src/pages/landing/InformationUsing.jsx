@@ -3,6 +3,7 @@ import TranslateBlock from "./components/TranslateBlock";
 import WordBlock from "./components/WordBlock";
 import TestFitst from "./components/TestFitst";
 import { Link } from "react-router-dom";
+import Footer from "../auth/common/Footer";
 
 const Instruction = () => {
 
@@ -48,9 +49,7 @@ const Instruction = () => {
                     </div>
                 </main>
 
-                <footer className="mt-auto text-white-50 text-center">
-                    <p>Cover template for <a href="https://getbootstrap.com/" className="text-white">Bootstrap</a>, by <a href="https://twitter.com/mdo" className="text-white">@mdo</a>.</p>
-                </footer>
+                <Footer/>
             </div>
         </div>
     );

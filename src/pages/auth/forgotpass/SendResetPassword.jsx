@@ -7,6 +7,7 @@ import RegistrationSmallBlock from "../register/components/RegistrationSmallBloc
 import Input from "../common/Input";
 import SubmitButton from "../common/SubmitButton";
 import Loading from "../../../common/components/Treatment/Loading";
+import Footer from "../common/Footer";
 
 const SendResetPassword = () => {
 
@@ -73,9 +74,7 @@ const SendResetPassword = () => {
                     </div>
                 </div>
 
-                <footer className="mt-auto text-white-50">
-                    <p>Cover template for <a href="https://getbootstrap.com/" className="text-white">Bootstrap</a>, by <a href="https://twitter.com/mdo" className="text-white">@mdo</a>.</p>
-                </footer>
+                <Footer/>
             </div>
         </div>
     );
