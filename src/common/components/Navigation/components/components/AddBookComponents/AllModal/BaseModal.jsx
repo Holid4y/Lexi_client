@@ -3,11 +3,10 @@ import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { throwState } from "../../../../../../reducers/addBookModalSlice";
 
-import AuthorBookInput from "../common/AuthorBookInput";
-import NameBookInput from "../common/NameBookInput";
-import AddButton from "../common/AddButton";
-import IsPrivet from "../common/IsPrivetButton";
 import SVG from "../../../../../../components/Icons/SVG";
+
+
+/* BaseModal отлично закрывет функционал "Назад" и его не приходится писать для всех доченрних модалок */
 
 function BaseModal({ childComponent, ariaLabelledby, title, idName, file }) {
     const dispatch = useDispatch();
@@ -34,19 +33,13 @@ function BaseModal({ childComponent, ariaLabelledby, title, idName, file }) {
                         <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div className="modal-body">
+                        
+                        
+                        {/* Сюда передаются дочерние модалки */}
                         {childComponent}
+                        
 
-
-                        {/* BaseModal лучше оставить так как этот компонент отлично закрывет функционал "Назад" и его не приходится писать для всех доченрних модалок */}
-                        {/* но видно то что эти 3 инпута надо распихать по доченрим компонентам и не юзать их в BaseModal */}
-                        <AuthorBookInput />
-                        <NameBookInput  />
-                        <IsPrivet />
-
-
-                        {/* и AddButton прийдется переписать, так как он заточен чисто для добавления книги */}
-                        {/* поэтому хз хз */}
-                        <AddButton file={file} />
+                        
                     </div>
                 </div>
             </div>

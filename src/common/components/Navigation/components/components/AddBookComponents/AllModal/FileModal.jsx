@@ -1,5 +1,11 @@
 import React from "react";
 
+
+import AuthorBookInput from "../common/AuthorBookInput";
+import NameBookInput from "../common/NameBookInput";
+import IsPrivet from "../common/IsPrivetButton";
+import AddButton from "../common/AddButton";
+
 function FileModal({ file, setFile }) {
     const handleFileChange = (event) => {
         const selectedFile = event.target.files[0];
@@ -18,6 +24,11 @@ function FileModal({ file, setFile }) {
                 accept=".epub,.txt,.docx,.fb2"
                 required
             />
+                <AuthorBookInput />
+                <NameBookInput  />
+                <IsPrivet />
+
+                <AddButton file={file} />
         </>
     );
 }

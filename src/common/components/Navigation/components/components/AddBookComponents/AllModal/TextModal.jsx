@@ -2,6 +2,11 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setTextArea } from "../../../../../../reducers/addBookModalSlice";
 
+import AuthorBookInput from "../common/AuthorBookInput";
+import NameBookInput from "../common/NameBookInput";
+import IsPrivet from "../common/IsPrivetButton";
+import AddButton from "../common/AddButton";
+
 function TextModal() {
     const dispatch = useDispatch();
     const { textArea } = useSelector((state) => state.addBookModal);
@@ -24,6 +29,11 @@ function TextModal() {
                     value={textArea}
                 ></textarea>
             </div>
+            <AuthorBookInput />
+            <NameBookInput  />
+            <IsPrivet />
+
+            <AddButton />
         </>
     );
 }
