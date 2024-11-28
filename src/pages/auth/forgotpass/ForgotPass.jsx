@@ -109,7 +109,7 @@ const ForgotPass = () => {
                                 <Input htmlFor={"newPassword"} label={"Новый пароль"} type={"password"} value={newPassword} setter={setNewPassword} />
                                 <Input htmlFor={"rePassword"} label={"Повторите пароль"} type={"password"} value={rePassword} setter={setRePassword} />
                                 <p className="py-0 my-0"><span className="text-secondary pe-2">Уже зарегистрированы?</span><Link className="link" to="/login">Войти</Link></p>
-                                <SubmitButton text={"Регистрация"} handle={handleSubmit} />
+                                <SubmitButton text={"Регистрация"} handle={handleSubmit} loading={loading} disabled={loading}/>
                             </form>
                         </div>
                     </div>

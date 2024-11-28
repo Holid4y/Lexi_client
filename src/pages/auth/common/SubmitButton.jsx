@@ -1,8 +1,19 @@
 import React from 'react';
+import Loading from '../../../common/components/Treatment/Loading';
 
-const SubmitButton = ({ text, handle, disabled }) => (
-    <button type="button" className="btn-main mt-4 px-5" onClick={handle} disabled={disabled}>
-        <span>{text}</span>
+const SubmitButton = ({ text, handle, disabled, loading }) => (
+    <button 
+        type="button" 
+        className="btn-main mt-4" 
+        onClick={handle} 
+        disabled={disabled}
+        style={{
+            padding: '0px 45px',
+            height: '40px',
+            minWidth: '145px',
+        }}
+    >
+        {loading ? <Loading /> : <span className='fw-bold'>{text}</span>}
     </button>
 );
 

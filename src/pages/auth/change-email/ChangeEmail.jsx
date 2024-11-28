@@ -73,7 +73,9 @@ const ChangeEmail = () => {
                     )}
 
                     
-                    <SubmitButton text={"Отправить"} handle={handleSetEmail} disabled={isButtonDisabled} />
+                    <SubmitButton text={"Отправить"} handle={handleSetEmail} 
+                    loading={loading}
+                    disabled={isButtonDisabled} />
                     
                     {isButtonDisabled && <div>Кнопка будет активна через {timer} секунд.</div>}
                 </form>

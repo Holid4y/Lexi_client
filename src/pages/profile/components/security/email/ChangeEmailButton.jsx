@@ -85,7 +85,8 @@ const ChangeEmailButton = () => {
                                 )}
 
                                 {loading && <Loading />}
-                                <SubmitButton text={"Отправить"} handle={handleSetEmail} disabled={isButtonDisabled} />
+                                <SubmitButton text={"Отправить"} handle={handleSetEmail} 
+                                loading={loading} disabled={isButtonDisabled} />
                                 {isButtonDisabled && <Timer duration={60} onTimerEnd={handleTimerEnd} />}
                             </form>
                         </div>

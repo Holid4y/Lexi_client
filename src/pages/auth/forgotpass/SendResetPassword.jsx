@@ -68,7 +68,7 @@ const SendResetPassword = () => {
                                     </div>
                                 )}
                                 <p className="py-0 my-0"><span className="text-secondary pe-2">Уже зарегистрированы?</span><Link className="link" to="/login">Войти</Link></p>
-                                <SubmitButton text={"Отправить"} handle={handleSubmit} />
+                                <SubmitButton text={"Отправить"} handle={handleSubmit} loading={loading} disabled={loading}/>
                             </form>
                         </div>
                     </div>

@@ -77,7 +77,8 @@ const ChangePass = () => {
                         </div>
                     )}
                     
-                    <SubmitButton text={'Изменить пароль'} handle={handleSubmit} />
+                    <SubmitButton text={'Изменить пароль'} handle={handleSubmit} 
+                    loading={loading} disabled={loading}/>
 
                     
                 </form>

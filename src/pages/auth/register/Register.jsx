@@ -97,7 +97,7 @@ const Register = () => {
                                     <div className="col-12 col-md-6"><Input htmlFor={"password2"} label={"Повторите пароль"} type={"password"} value={rePassword} setter={setRePassword} /></div>
                                 </div>
                                 <p className="py-0 my-0"><span className="text-secondary pe-2">Уже зарегистрированы?</span><Link className="link" to="/login">Войти</Link></p>
-                                <SubmitButton text={"Регистрация"} handle={handleRegistration} />
+                                <SubmitButton text={"Регистрация"} handle={handleRegistration} loading={loading} disabled={loading}/>
                             </form>
                         </div>
                     </div>

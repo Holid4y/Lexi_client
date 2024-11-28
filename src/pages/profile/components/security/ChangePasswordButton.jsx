@@ -83,7 +83,8 @@ const ChangePasswordButton = () => {
                                         {message}
                                     </div>
                                 )}
-                                <SubmitButton text={'Изменить пароль'} handle={handleSubmit} />
+                                <SubmitButton text={'Изменить пароль'} handle={handleSubmit} 
+                                loading={loading} disabled={loading}/>
                             </form>
                         </div>
                     </div>
