@@ -5,7 +5,7 @@ import { fetchVocabularyPost, fetchVocabularyDelete } from "../../../reducers/vo
 
 import Audio from "../../Audio/Audio";
 
-function WordTranslation({ text, translation, showSection2, setShowSection2, activeTranslationsCount }) {
+function WordTranslation({ text, translation, showSection2, setShowSection2, relatedPk }) {
     const dispatch = useDispatch();
     const { pk, form, related_pk, transcription, translations, synonyms, meanings } = useSelector((state) => state.word);
 
@@ -39,8 +39,17 @@ function WordTranslation({ text, translation, showSection2, setShowSection2, act
         </div>
     );
 
-    // Если количество активных переводов больше 1, то вычитаем 1 для отображения звёздочек
-    const displayStarsCount = activeTranslationsCount > 0 ? activeTranslationsCount - 1 : 0;
+    const haveMainRelation = () => {
+        // есть ли в списке связей связь с основным словом
+        return related_pk.includes(translation.pk)
+    }
+
+    const countRelatedWords = related_pk ? related_pk.length : 0;
+    console.log(translation)
+    // console.log(related_pk, pk, form, related_pk, transcription, translations, synonyms, meanings)
+
+    // Если есть связь с основным словом, то вычитаем 1 для отображения звёздочек
+    const displaySmallStar = haveMainRelation() ? countRelatedWords - 1 : countRelatedWords;
 
     return (
         <div className="dark-nav mb-2 p-3">
@@ -52,7 +61,7 @@ function WordTranslation({ text, translation, showSection2, setShowSection2, act
                     {form}
                 </small>
                 <div style={{ marginLeft: "auto", display: "flex", alignItems: "center" }}>
-                    {[...Array(displayStarsCount)].map((_, index) => (
+                    {[...Array(displaySmallStar)].map((_, index) => (
                         <div className="px-1" key={index}><SVG name="fill_star_small" /></div> // Дополнительные звезды
                     ))}
                     {isRelatedWord ? (
