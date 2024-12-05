@@ -24,7 +24,7 @@ function InfoCard() {
         }
         
         // Если контент загружен, отрисовываем 
-        return <h4 className="book-text text-center py-2 mb-0 h4_main_block_new_words_today">+{new_words_today}</h4>;
+        return new_words_today;
     };
     
 
@@ -34,12 +34,13 @@ function InfoCard() {
                 <Link to={"/word-list"}>
                     <div className="card card-btn position-relative main-block">
                         
-                            <>
-                                <span className="ps-2 span_main_block text-secondary" id="wordsToLearn">Всего слов</span>
-                                <h4 className="book-text text-center py-2 mb-0 h4_main_block">{getContentOrLoading(learning_words)}</h4>
-                                {renderNewWordsToday(new_words_today)}
-                            </>
-                        
+                        <div>
+                            <span className="ps-2 span_main_block text-secondary" id="wordsToLearn">Всего слов</span>
+                            <h4 className="book-text text-center py-2 mb-0 h4_main_block">{getContentOrLoading(learning_words)}</h4>
+                            
+                        </div>
+                        <span className="badge_new_words_today">+ {renderNewWordsToday(new_words_today)}</span>
+                            
                     </div>
                 </Link>
             </div>
