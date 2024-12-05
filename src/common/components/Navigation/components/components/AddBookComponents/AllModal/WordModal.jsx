@@ -19,11 +19,39 @@ function WordModal() {
         dispatch(fetchWordPost(word));
         dispatch(cleanStateWord());
         dispatch(toggleWordBlock());
-      };
+    };
+
+    const isEnglishText = (text) => {
+        const englishRegex = /^[a-zA-Z\s]*$/; // Проверяет, что текст содержит только латиницу и пробелы
+        return englishRegex.test(text);
+    };
 
     const onSubmit = async () => {
         setLoading(true);
-        handleWordSerch(textArea)
+
+        const inputElement = document.getElementById("text_word_EN");
+
+        if (isEnglishText(textArea)) {
+           // Закрытие модалки с вводом слова
+            const currentModal = document.getElementById("AddBookModalWord");
+            if (currentModal) {
+                currentModal.classList.remove("show");
+                currentModal.style.display = "none";
+                document.body.classList.remove("modal-open");
+                document.querySelector(".modal-backdrop").remove();
+            }
+            
+            handleWordSerch(textArea)
+        } else {
+            // Если текст не на английском, добавляем класс анимации
+            inputElement.classList.add("textENAnimation");
+
+            // Удаляем класс после завершения анимации
+            setTimeout(() => {
+                inputElement.classList.remove("textENAnimation");
+            }, 500);
+        }
+
         setLoading(false)
     };
 
@@ -34,7 +62,7 @@ function WordModal() {
                 <input
                     className="form-control form-control-lg py-3"
                     placeholder="Hello..."
-                    id="exampleFormControlTextarea1"
+                    id="text_word_EN"
                     rows="3"
                     onChange={(e) => onTextChange(e.target.value)}
                     value={textArea}

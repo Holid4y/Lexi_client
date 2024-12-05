@@ -26,7 +26,7 @@ function BaseModal({ childComponent, ariaLabelledby, title, idName, file }) {
             <div className="modal-dialog">
                 <div className="modal-content rounded-4 shadow">
                     <div className="modal-header">
-                        <button className='btn btn-sm d-flex align-items-center px-0' data-bs-target="#AddBookModal" data-bs-toggle="modal">
+                        <button className='btn btn-sm d-flex align-items-center px-0' data-bs-target={idName} data-bs-toggle="modal">
                             <SVG name="arrow_left" />
                             <span className="ps-2">Назад</span>
                         </button>
@@ -39,7 +39,6 @@ function BaseModal({ childComponent, ariaLabelledby, title, idName, file }) {
                         {childComponent}
                         
 
-                        
                     </div>
                 </div>
             </div>
