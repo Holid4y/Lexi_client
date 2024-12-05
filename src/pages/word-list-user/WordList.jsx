@@ -84,7 +84,7 @@ function WordList() {
         setFilter={setFilter}
         setValue={setValue}
       />
-      {loading ? (
+      {loading & words == null ? (
         <Loading />
       ) : (
         <main className="container pb-5 mb-3">

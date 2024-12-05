@@ -185,7 +185,13 @@ a {
     right: 18px;
     bottom: -4px;
 }
-
+.h4_main_block_new_words_today {
+    position: absolute;
+    right: -10px;
+    bottom: 45px;
+    color: #5ab45d;
+    font-size: 30px;
+}
 .hover-text-opacity .span_hover {
     opacity: 0.4;
     transition: opacity 0.5s ease;

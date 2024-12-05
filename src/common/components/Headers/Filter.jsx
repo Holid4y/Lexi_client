@@ -140,7 +140,7 @@ const Filter = ({ setOrder, setDirection, setFilter, setValue }) => {
                     </h2>
                     <div id="lvl" className="accordion-collapse collapse">
                         <div className="accordion-body">
-                            <input type="range" className="form-range w-100" min="0" max={levels.length} value={selectedLevel} id="customRange2" onChange={handleLevelChange} />
+                            <input type="range" className="form-range w-100" min="0" max={levels?.length} value={selectedLevel} id="customRange2" onChange={handleLevelChange} />
                         </div>
                     </div>
                 </div>
