@@ -5,7 +5,7 @@ import SVG from "../../../common/components/Icons/SVG";
 import Loading from "../../../common/components/Treatment/Loading";
 
 function InfoCard() {
-    const { learning_words, upload_books, loading } = useSelector((state) => state.home);
+    const { learning_words, upload_books, new_words_today, loading } = useSelector((state) => state.home);
 
     const getContentOrLoading = (content) => {
         // Проверяем, загружен ли контент
@@ -17,6 +17,16 @@ function InfoCard() {
         // Если контент загружен, возвращаем его
         return content;
     };
+    const renderNewWordsToday = (content) => {
+        
+        if (!content | content == 0) {
+            return 
+        }
+        
+        // Если контент загружен, отрисовываем 
+        return <h4 className="book-text text-center py-2 mb-0 h4_main_block_new_words_today">+{new_words_today}</h4>;
+    };
+    
 
     return (
         <div className="row mb-3 g-3">
@@ -27,7 +37,7 @@ function InfoCard() {
                             <>
                                 <span className="ps-2 span_main_block text-secondary" id="wordsToLearn">Всего слов</span>
                                 <h4 className="book-text text-center py-2 mb-0 h4_main_block">{getContentOrLoading(learning_words)}</h4>
-                                
+                                {renderNewWordsToday(new_words_today)}
                             </>
                         
                     </div>
